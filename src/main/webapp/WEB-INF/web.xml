@@ -10,7 +10,7 @@
 
 
   <!-- FILTER CONFIGURATION BEGIN -->
-  <filter>
+  <!--<filter>
     <filter-name>setCharacterEncoding</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
     <init-param>
@@ -25,26 +25,18 @@
   <filter-mapping>
     <filter-name>setCharacterEncoding</filter-name>
     <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping>-->
 
 
 
 
-
+<!--
   <servlet>
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:springmvc.xml</param-value>
-      <!--
-       指明了配置文件的文件名，不使用默认配置文件名，而使用springMVC.xml配置文件。
-      其中<param-value>*.xml</param-value> 这里可以使用多种写法
-      1、不写,使用默认值:/WEB-INF/<servlet-name>-servlet.xml
-      2、<param-value>/WEB-INF/classes/springMVC.xml</param-value>
-      3、<param-value>classpath:springMVC-mvc.xml</param-value>
-      4、多个值用逗号分隔
-       -->
     </init-param>
 
     <load-on-startup>1</load-on-startup>
@@ -52,23 +44,9 @@
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
     <url-pattern>*.do</url-pattern>
-    <!--Servlet拦截匹配规则 <url-pattern>*.form</url-pattern>会拦截*.form结尾的请求 -->
-    <!--
-      当映射为@RequestMapping("/user/add")时，为例：
-     1、拦截*.do、*.htm， 例如：/user/add.do
-     这是最传统的方式，最简单也最实用。不会导致静态文件（jpg,js,css）被拦截。
-     2、拦截/，例如：/user/add
-     可以实现现在很流行的REST风格。很多互联网类型的应用很喜欢这种风格的URL。
-     弊端：会导致静态文件（jpg,js,css）被拦截后不能正常显示。想实现REST风格，事情就是麻烦一些。后面有解决办法还算简单。
-     3、拦截/*，这是一个错误的方式，请求可以走到Action中，但转到jsp时再次被拦截，不能访问到jsp。
-      -->
   </servlet-mapping>
-  <!-- SPRING MVC CORE SERVLET CONFIGURATION END -->
 
-
-  <!-- 像js,static,gif等静态文件，需要配置为默认的servlet,
-              如果你的DispatcherServlet拦截"/"，为了实现REST风格，拦截了所有的请求，
-              那么同时对*.js,*.jpg等静态文件的访问也就被拦截了。 -->
+    -->
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.js</url-pattern>
@@ -106,16 +84,5 @@
     <url-pattern>*.html</url-pattern>
   </servlet-mapping>
 
-
-  <!-- 支持session scope的Spring bean -->
-  <listener>
-    <listener-class>
-      org.springframework.web.context.request.RequestContextListener
-    </listener-class>
-  </listener>
-
-  <listener>
-    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-  </listener>
 
 </web-app>
