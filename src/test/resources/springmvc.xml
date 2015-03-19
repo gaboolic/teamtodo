@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+    <!-- 采用spring_beans.xml方式配置数据源 -->
+    <import resource="spring_beans.xml"/>
+
+    <!-- 自动扫描的包名 ,扫描指定的包中的类上的注解-->
+    <context:component-scan base-package="tk.gbl"/>
+
+    <mvc:annotation-driven>
+        <!-- 解决返回json乱码问题，string默认编码不是UTF-8 -->
+        <mvc:message-converters register-defaults="true">
+            <bean class="tk.gbl.web.CustomStringHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <mvc:interceptors><!-- 拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <!-- 拦截匹配的URL，如果是REST风格的url，则静态资源也会被拦截！ -->
+            <bean class="tk.gbl.web.filter.AdminInterceptor"/>
+        </mvc:interceptor>
+      <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <bean class="tk.gbl.web.filter.LoginInterceptor"/>
+      </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- freemarker -->
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/views/"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="number_format">0.##########</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">ignore</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- 针对freemarker的视图配置 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"/>
+        <!-- 开启缓存 -->
+        <property name="prefix" value=""/>
+        <!-- 前缀 -->
+        <property name="suffix" value=".ftl"/>
+        <!-- 后缀 -->
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <!-- 页面的contentType -->
+        <property name="requestContextAttribute" value="request"/>
+        <!--  这样就能像jsp一样直接用request -->
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <!-- 这个好像是springMVC的标签，就像struts2有标签一样 -->
+        <property name="exposeRequestAttributes" value="true"/>
+        <!-- 加上这两个就可以${request.xxx} ${session.xxx}这样获取request和session中的对象 -->
+        <property name="exposeSessionAttributes" value="true"/>
+    </bean>
+
+    <!--支持文件上传  -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="104857600"/>
+        <property name="maxInMemorySize" value="4096"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+</beans>
