@@ -7,6 +7,7 @@ import tk.gbl.anno.ValidField;
 import tk.gbl.constants.ResultType;
 import tk.gbl.pojo.request.AddTaskRequest;
 import tk.gbl.pojo.request.DeleteTaskRequest;
+import tk.gbl.pojo.request.ShowTaskRequest;
 import tk.gbl.pojo.request.UpdateTaskRequest;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.service.TaskService;
@@ -42,5 +43,11 @@ public class TaskController {
   @ResponseBody
   public String update(@ValidField UpdateTaskRequest request) {
     return taskService.updateTask(request).toString();
+  }
+
+  @RequestMapping("show")
+  @ResponseBody
+  public String show(@ValidField ShowTaskRequest request) {
+    return taskService.showTask(request).toString();
   }
 }

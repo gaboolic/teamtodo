@@ -1,6 +1,8 @@
 package tk.gbl.entity;
 
-import java.util.Date;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 任务
@@ -10,11 +12,13 @@ import java.util.Date;
  *
  * @author Tian.Dong
  */
+@Entity
+@Table(name = "task")
 public class Task extends BaseEntity {
-  /**
-   * 主键
-   */
-  Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", unique = true, nullable = false)
+  private Integer id;
 
   /**
    * 级别
@@ -24,36 +28,122 @@ public class Task extends BaseEntity {
    * 10 紧急不重要
    * 11 紧急重要
    */
+  @Column(name = "level")
   Integer level;
 
   /**
    * 类型
-   * 收纳箱
-   * 日程
-   * 看板
+   * 收纳箱 0
+   * 日程   1
+   * 看板   2
    */
+  @Column(name = "type")
   Integer type;
 
   /**
    * 所属日期
    */
-  Date date;
-
-  Date startDate;
-
-  Date endDate;
+  @Column(name = "date")
+  String date;
 
   /**
    * 所属用户
    */
-  Integer userId;
+  @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_id")
+  User user;
 
   /**
    * 负责人
    */
-  Integer owner;
+  @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+  @JoinColumn(name = "owner_id")
+  User owner;
 
+  @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<TaskJoin> taskJoins = new HashSet<TaskJoin>();
+
+  /**
+   * 标题
+   */
+  @Column(name = "title")
   String title;
 
+  /**
+   * 备注 内容
+   */
+  @Column(name = "content")
   String content;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getLevel() {
+    return level;
+  }
+
+  public void setLevel(Integer level) {
+    this.level = level;
+  }
+
+  public Integer getType() {
+    return type;
+  }
+
+  public void setType(Integer type) {
+    this.type = type;
+  }
+
+  public String getDate() {
+    return date;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public User getOwner() {
+    return owner;
+  }
+
+  public void setOwner(User owner) {
+    this.owner = owner;
+  }
+
+  public Set<TaskJoin> getTaskJoins() {
+    return taskJoins;
+  }
+
+  public void setTaskJoins(Set<TaskJoin> taskJoins) {
+    this.taskJoins = taskJoins;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
 }

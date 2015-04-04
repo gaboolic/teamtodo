@@ -2,8 +2,6 @@
 <html>
 <meta charset="utf-8"/>
 <head>
- <script src="../lib/zepto.js"></script>
-  <script src="../js/board.js"></script>
 
   <style type="text/css">
    div {
@@ -40,9 +38,9 @@
 <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 <br/>
 
-<p id="drag1" draggable="true">这是一段可移动的段落。请把该段落拖入上面的矩形。</p>
+<p id="drag1" draggable="true" ondragstart="drag(event)">这是一段可移动的段落。请把该段落拖入</p>
 
-<p id="drag2" draggable="true">dddd2。</p>
+<p id="drag2" draggable="true" ondragstart="drag(event)">dddd2。</p>
 
 </body>
 </html>

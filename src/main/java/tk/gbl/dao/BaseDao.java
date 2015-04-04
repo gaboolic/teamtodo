@@ -2,61 +2,27 @@ package tk.gbl.dao;
 
 import java.util.List;
 
-public interface BaseDao<Entry> {
-	/**
-	 * 根据ID查找实体
-	 * @param id
-	 * @return
-	 */
-	Entry get(int id);
-	
-	/**
-	 * 根据主键字段查找实体
-	 * @param str
-	 * @return
-	 */
-	Entry get(String str);
-	
-	/**
-	 * 全部列表
-	 * @return
-	 */
-	List<Entry> getAll();
+/**
+ * Date: 2014/7/31
+ * Time: 13:37
+ *
+ * @author Tian.Dong
+ */
+public interface BaseDao<Entity> {
 
-	/**
-	 * 插入实体
-	 * @param e
-	 * @return
-	 */
-	boolean save(Entry e);
+  public Entity get(int id);
 
-	/**
-	 * 删除实体
-	 * @param e
-	 * @return
-	 */
-	boolean delete(Entry e);
+  public List<Entity> getAll();
 
-	/**
-	 * 根据ID删除实体
-	 * @param id
-	 * @return
-	 */
-	boolean delete(int id);
-	
-	/**
-	 * 根据主键删除实体
-	 * @param str
-	 * @return
-	 */
-	boolean delete(String str);
-	
-	boolean deleteAll();
+  public boolean save(Entity entity);
 
-	/**
-	 * 更新
-	 * @param e
-	 * @return
-	 */
-	boolean update(Entry e);
+  public boolean update(Entity entity);
+
+  public boolean delete(Entity entity);
+
+  public List<Entity> find(String sql, Object... obj);
+  
+  public List<Entity> findByPage(Integer page, Integer size, String sql, Object... obj);
+  
+  public boolean exec(String sql, Object... obj);
 }
