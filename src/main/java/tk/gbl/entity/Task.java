@@ -49,14 +49,14 @@ public class Task extends BaseEntity {
   /**
    * 所属用户
    */
-  @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+  @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   User user;
 
   /**
    * 负责人
    */
-  @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+  @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
   @JoinColumn(name = "owner_id")
   User owner;
 
@@ -146,4 +146,5 @@ public class Task extends BaseEntity {
   public void setContent(String content) {
     this.content = content;
   }
+
 }

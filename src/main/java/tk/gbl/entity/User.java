@@ -16,8 +16,33 @@ public class User extends BaseEntity {
   @Column(name = "id", unique = true, nullable = false)
   private Integer id;
 
-
+  @Column(name = "sso_id")
   private String ssoId;
 
+  @Column(name = "token")
   private String token;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public String getSsoId() {
+    return ssoId;
+  }
+
+  public void setSsoId(String ssoId) {
+    this.ssoId = ssoId;
+  }
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
 }

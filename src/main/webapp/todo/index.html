@@ -1,6 +1,8 @@
 <html>
 <head>
-<style>
+  <meta charset="utf-8"/>
+
+  <style>
 body{
 margin: 0px;
 }
@@ -8,5 +10,61 @@ margin: 0px;
 </head>
 <body>
 todo
+
+调用http://localhost/task/show.do?type=1&date=2015-04-01
+<br>
+返回<br>
+{
+"code": "0",
+"desc": "成功",
+"message": "",
+"taskList": [
+{
+"attribute": {},
+"content": "不紧急不重要",
+"date": "2015-04-01",
+"id": 2,
+"level": 0,
+"title": "不紧急不重要1 ",
+"type": 1
+},
+{
+"attribute": {},
+"content": "不紧急不重要2",
+"date": "2015-04-01",
+"id": 3,
+"level": 0,
+"title": "不紧急不重要2",
+"type": 1
+},
+{
+"attribute": {},
+"content": "不紧急重要",
+"date": "2015-04-01",
+"id": 4,
+"level": 1,
+"title": "不紧急重要1 ",
+"type": 1
+},
+{
+"attribute": {},
+"content": "紧急不重要",
+"date": "2015-04-01",
+"id": 5,
+"level": 2,
+"title": "紧急不重要1 ",
+"type": 1
+},
+{
+"attribute": {},
+"content": "紧急重要",
+"date": "2015-04-01",
+"id": 6,
+"level": 3,
+"title": "紧急重要1 ",
+"type": 1
+}
+]
+}
 </body>
 </html>

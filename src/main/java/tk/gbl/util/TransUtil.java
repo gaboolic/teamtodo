@@ -4,6 +4,9 @@ import tk.gbl.util.log.LoggerUtil;
 
 import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 把entity对象数据填充到pojo对象
@@ -37,7 +40,11 @@ public class TransUtil {
         if (fromField.getType().equals(Integer.class)
             || fromField.getType().equals(Double.class)
             || fromField.getType().equals(String.class)
-            || fromField.getType().equals(Date.class)) {
+            || fromField.getType().equals(Date.class)
+            || fromField.getType().equals(Set.class)
+            || fromField.getType().equals(List.class)
+            || fromField.getType().equals(Map.class)
+            ) {
           //基本类型 或者String，直接赋值
           field.set(to, fromFieldValue);
         } else {

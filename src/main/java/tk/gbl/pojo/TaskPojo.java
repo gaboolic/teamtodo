@@ -1,7 +1,5 @@
 package tk.gbl.pojo;
 
-import java.util.Date;
-
 /**
  * 任务
  *
@@ -11,10 +9,7 @@ import java.util.Date;
  * @author Tian.Dong
  */
 public class TaskPojo extends BasePojo {
-  /**
-   * 主键
-   */
-  Integer id;
+  private Integer id;
 
   /**
    * 级别
@@ -28,32 +23,74 @@ public class TaskPojo extends BasePojo {
 
   /**
    * 类型
-   * 收纳箱
-   * 日程
-   * 看板
+   * 收纳箱 0
+   * 日程   1
+   * 看板   2
    */
   Integer type;
 
   /**
    * 所属日期
    */
-  Date date;
+  String date;
 
-  Date startDate;
-
-  Date endDate;
 
   /**
-   * 所属用户
+   * 标题
    */
-  Integer userId;
-
-  /**
-   * 负责人
-   */
-  Integer owner;
-
   String title;
 
+  /**
+   * 备注 内容
+   */
   String content;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getLevel() {
+    return level;
+  }
+
+  public void setLevel(Integer level) {
+    this.level = level;
+  }
+
+  public Integer getType() {
+    return type;
+  }
+
+  public void setType(Integer type) {
+    this.type = type;
+  }
+
+  public String getDate() {
+    return date;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
+  }
+
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
 }
