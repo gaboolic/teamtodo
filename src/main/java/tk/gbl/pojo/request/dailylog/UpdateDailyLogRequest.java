@@ -1,4 +1,6 @@
-package tk.gbl.pojo.request;
+package tk.gbl.pojo.request.dailylog;
+
+import tk.gbl.pojo.request.BaseRequest;
 
 /**
  * Date: 2015/4/6

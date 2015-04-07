@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tk.gbl.anno.ValidField;
 import tk.gbl.constants.ResultType;
-import tk.gbl.pojo.request.AddDailyLogRequest;
-import tk.gbl.pojo.request.DeleteDailyLogRequest;
-import tk.gbl.pojo.request.UpdateDailyLogRequest;
+import tk.gbl.pojo.request.dailylog.AddDailyLogRequest;
+import tk.gbl.pojo.request.dailylog.DeleteDailyLogRequest;
+import tk.gbl.pojo.request.dailylog.UpdateDailyLogRequest;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.service.DailyLogService;
 
@@ -22,8 +22,6 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("dailyLog")
 public class DailyLogController {
-
-
 
   @Resource
   DailyLogService dailyLogService;

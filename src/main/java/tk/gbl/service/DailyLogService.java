@@ -2,8 +2,8 @@ package tk.gbl.service;
 
 import org.springframework.stereotype.Service;
 import tk.gbl.dao.DailyLogDao;
-import tk.gbl.pojo.request.AddDailyLogRequest;
-import tk.gbl.pojo.request.UpdateDailyLogRequest;
+import tk.gbl.pojo.request.dailylog.AddDailyLogRequest;
+import tk.gbl.pojo.request.dailylog.UpdateDailyLogRequest;
 import tk.gbl.pojo.response.BaseResponse;
 
 /**

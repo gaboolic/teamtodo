@@ -1,6 +1,7 @@
 package tk.gbl.pojo.request;
 
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -16,6 +17,7 @@ import java.util.Date;
  *
  * @author Tian.Dong
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseRequest implements Validator {
   @Override
   public boolean supports(Class<?> clazz) {

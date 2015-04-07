@@ -75,6 +75,12 @@ public class Task extends BaseEntity {
   @Column(name = "content")
   String content;
 
+  /**
+   * 状态
+   */
+  @Column(name = "status")
+  String status;
+
   public Integer getId() {
     return id;
   }
@@ -147,4 +153,11 @@ public class Task extends BaseEntity {
     this.content = content;
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
 }

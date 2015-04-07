@@ -1,6 +1,7 @@
-package tk.gbl.pojo.request;
+package tk.gbl.pojo.request.task;
 
 import tk.gbl.anno.ValidField;
+import tk.gbl.pojo.request.BaseRequest;
 
 import java.util.Date;
 

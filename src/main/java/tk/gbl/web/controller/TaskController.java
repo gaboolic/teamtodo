@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tk.gbl.anno.ValidField;
 import tk.gbl.constants.ResultType;
-import tk.gbl.pojo.request.AddTaskRequest;
-import tk.gbl.pojo.request.DeleteTaskRequest;
-import tk.gbl.pojo.request.ShowTaskRequest;
-import tk.gbl.pojo.request.UpdateTaskRequest;
+import tk.gbl.pojo.request.task.AddTaskRequest;
+import tk.gbl.pojo.request.task.DeleteTaskRequest;
+import tk.gbl.pojo.request.task.ShowTaskRequest;
+import tk.gbl.pojo.request.task.UpdateTaskRequest;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.service.TaskService;
 
@@ -45,6 +45,9 @@ public class TaskController {
     return taskService.updateTask(request).toString();
   }
 
+  /**
+   * 修改状态 完成 未完成
+   */
   @RequestMapping("changeStatus")
   @ResponseBody
   public String changeStatus(){

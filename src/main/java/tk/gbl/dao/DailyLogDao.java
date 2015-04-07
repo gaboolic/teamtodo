@@ -1,5 +1,6 @@
 package tk.gbl.dao;
 
+import org.springframework.stereotype.Repository;
 import tk.gbl.entity.log.DailyLog;
 
 /**
@@ -8,5 +9,6 @@ import tk.gbl.entity.log.DailyLog;
  *
  * @author Tian.Dong
  */
+@Repository
 public class DailyLogDao extends SuperDao<DailyLog> {
 }
