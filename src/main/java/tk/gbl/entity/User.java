@@ -19,8 +19,13 @@ public class User extends BaseEntity {
   @Column(name = "sso_id")
   private String ssoId;
 
+  /**
+   * 单点登录token
+   */
   @Column(name = "token")
   private String token;
+
+  private Team team;
 
   public Integer getId() {
     return id;

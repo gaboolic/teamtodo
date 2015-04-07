@@ -2,8 +2,6 @@ package tk.gbl.pojo.request;
 
 import tk.gbl.anno.ValidField;
 
-import java.util.Date;
-
 /**
  * Date: 2015/4/1
  * Time: 14:32
@@ -34,11 +32,11 @@ public class AddTaskRequest extends BaseRequest {
   /**
    * 所属日期
    */
-  Date date;
+  String date;
 
-  Date startDate;
+  String startDate;
 
-  Date endDate;
+  String endDate;
 
   /**
    * 所属用户
@@ -74,30 +72,6 @@ public class AddTaskRequest extends BaseRequest {
     this.type = type;
   }
 
-  public Date getDate() {
-    return date;
-  }
-
-  public void setDate(Date date) {
-    this.date = date;
-  }
-
-  public Date getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(Date startDate) {
-    this.startDate = startDate;
-  }
-
-  public Date getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-  }
-
   public Integer getUserId() {
     return userId;
   }
@@ -128,5 +102,29 @@ public class AddTaskRequest extends BaseRequest {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public String getDate() {
+    return date;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
+  }
+
+  public String getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
+  }
+
+  public String getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(String endDate) {
+    this.endDate = endDate;
   }
 }

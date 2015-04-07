@@ -1,6 +1,4 @@
-package tk.gbl.entity.team;
-
-import tk.gbl.entity.BaseEntity;
+package tk.gbl.entity;
 
 /**
  * 团队/同事

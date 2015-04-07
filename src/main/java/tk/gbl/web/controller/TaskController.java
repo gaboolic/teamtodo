@@ -45,6 +45,19 @@ public class TaskController {
     return taskService.updateTask(request).toString();
   }
 
+  @RequestMapping("changeStatus")
+  @ResponseBody
+  public String changeStatus(){
+    return "";
+  }
+
+  /**
+   * 修改负责人 参与人
+   */
+  public String updateOwner(){
+    return "";
+  }
+
   @RequestMapping("show")
   @ResponseBody
   public String show(@ValidField ShowTaskRequest request) {

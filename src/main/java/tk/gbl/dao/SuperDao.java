@@ -68,6 +68,7 @@ public class SuperDao<Entity> extends HibernateDaoSupport implements BaseDao<Ent
     }
   }
 
+
   @Override
   public List<Entity> find(String sql, Object... obj) {
     return (List<Entity>) this.getHibernateTemplate().find(sql, obj);

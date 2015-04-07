@@ -31,11 +31,22 @@ public class TaskService {
 
   public BaseResponse addTask(AddTaskRequest request) {
     BaseResponse response = new BaseResponse(ResultType.SUCCESS);
+    Task task = new Task();
+    task.setLevel(request.getLevel());
+    task.setType(request.getType());
+    task.setDate(request.getDate());
+
+    task.setTitle(request.getTitle());
+    task.setContent(request.getContent());
+    taskDao.save(task);
     return response;
   }
 
   public BaseResponse deleteTask(DeleteTaskRequest request) {
     BaseResponse response = new BaseResponse(ResultType.SUCCESS);
+    Task task = new Task();
+    task.setId(request.getId());
+    taskDao.delete(task);
     return response;
   }
 
