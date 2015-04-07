@@ -1,0 +1,30 @@
+<script>
+  function createDateCal(year, month) {
+    var startDate = new Date();
+    startDate.setYear(year);
+    startDate.setMonth(month - 1);
+    startDate.setDate(1);
+    startDate.setDate(startDate.getDate() - startDate.getDay());
+
+    var endDate = new Date();
+    endDate.setYear(year);
+    endDate.setMonth(month);
+    endDate.setDate(0);
+
+    var cal = [
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ];
+    for (var i = 0; i < 42; i++) {
+      var d = new Date();
+      d.setTime(startDate.getTime());
+      cal[Math.floor(i / 7)][i % 7] = d;
+      startDate.setDate(startDate.getDate() + 1);
+    }
+    return cal;
+  }
+</script>
