@@ -19,12 +19,20 @@ public class User extends BaseEntity {
   @Column(name = "sso_id")
   private String ssoId;
 
+  @Column(name = "username")
+  private String username;
+
+  @Column(name = "password")
+  private String password;
+
   /**
    * 单点登录token
    */
   @Column(name = "token")
   private String token;
 
+  @ManyToOne(targetEntity = Team.class, fetch = FetchType.LAZY)
+  @JoinColumn(name = "team_id")
   private Team team;
 
   public Integer getId() {
@@ -49,5 +57,29 @@ public class User extends BaseEntity {
 
   public void setToken(String token) {
     this.token = token;
+  }
+
+  public Team getTeam() {
+    return team;
+  }
+
+  public void setTeam(Team team) {
+    this.team = team;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }

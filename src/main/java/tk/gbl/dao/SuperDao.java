@@ -74,6 +74,11 @@ public class SuperDao<Entity> extends HibernateDaoSupport implements BaseDao<Ent
     return (List<Entity>) this.getHibernateTemplate().find(sql, obj);
   }
 
+
+  public List findSql(String sql, Object... obj) {
+    return this.getHibernateTemplate().find(sql, obj);
+  }
+
   public Entity findFirst(String sql, Object... obj) {
     List<Entity> list = (List<Entity>) this.getHibernateTemplate().find(sql, obj);
     if(list!=null && list.size()>0) {

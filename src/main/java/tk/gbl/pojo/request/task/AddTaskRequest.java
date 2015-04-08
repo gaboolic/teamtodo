@@ -23,9 +23,9 @@ public class AddTaskRequest extends BaseRequest {
 
   /**
    * 类型
-   * 收纳箱
-   * 日程
-   * 看板
+   * 收纳箱 0
+   * 日程   1
+   * 看板   2
    */
   @ValidField
   Integer type;

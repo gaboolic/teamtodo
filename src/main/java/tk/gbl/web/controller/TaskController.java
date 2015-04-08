@@ -5,14 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tk.gbl.anno.ValidField;
 import tk.gbl.constants.ResultType;
-import tk.gbl.pojo.request.task.AddTaskRequest;
-import tk.gbl.pojo.request.task.DeleteTaskRequest;
-import tk.gbl.pojo.request.task.ShowTaskRequest;
-import tk.gbl.pojo.request.task.UpdateTaskRequest;
+import tk.gbl.pojo.request.task.*;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.service.TaskService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * Date: 2015/3/31
@@ -46,6 +44,24 @@ public class TaskController {
   }
 
   /**
+   * 返回讨论、详情
+   * 返回评论和创建人参与人
+   * @param request
+   * @return
+   */
+  @RequestMapping("detail")
+  @ResponseBody
+  public String detail(@ValidField DetailTaskRequest request) {
+    return taskService.detailTask(request).toString();
+  }
+
+  @RequestMapping("reply")
+  @ResponseBody
+  public String reply(@ValidField ReplyTaskRequest request,HttpSession session) {
+    return taskService.replyTask(request,session).toString();
+  }
+
+  /**
    * 修改状态 完成 未完成
    */
   @RequestMapping("changeStatus")
@@ -61,9 +77,23 @@ public class TaskController {
     return "";
   }
 
+  /**
+   * 返回收纳箱 日程任务
+   * @return
+   */
   @RequestMapping("show")
   @ResponseBody
-  public String show(@ValidField ShowTaskRequest request) {
+  public String show(@ValidField ShowTaskRequest request,HttpSession session) {
     return taskService.showTask(request).toString();
+  }
+
+  /**
+   * 返回日期
+   * @return
+   */
+  @RequestMapping("showStar")
+  @ResponseBody
+  public String showStar(@ValidField ShowStarRequest request,HttpSession session) {
+    return taskService.showStar(request,session).toString();
   }
 }

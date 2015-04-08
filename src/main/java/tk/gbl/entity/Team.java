@@ -1,5 +1,7 @@
 package tk.gbl.entity;
 
+import javax.persistence.*;
+
 /**
  * 团队/同事
  *
@@ -8,9 +10,19 @@ package tk.gbl.entity;
  *
  * @author Tian.Dong
  */
+@Entity
+@Table(name = "team")
 public class Team extends BaseEntity {
-  /**
-   * 主键
-   */
-  Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", unique = true, nullable = false)
+  private Integer id;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 }

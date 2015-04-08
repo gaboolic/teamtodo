@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 任务
+ * 任务(日程、收纳箱、看板的任务模型)
  *
  * Date: 2015/3/31
  * Time: 22:47
@@ -47,7 +47,7 @@ public class Task extends BaseEntity {
   String date;
 
   /**
-   * 所属用户
+   * 所属用户(创建人)
    */
   @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
@@ -60,6 +60,9 @@ public class Task extends BaseEntity {
   @JoinColumn(name = "owner_id")
   User owner;
 
+  /**
+   * 参与人
+   */
   @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<TaskJoin> taskJoins = new HashSet<TaskJoin>();
 
@@ -80,6 +83,18 @@ public class Task extends BaseEntity {
    */
   @Column(name = "status")
   String status;
+
+  /**
+   * 开始时间
+   */
+  @Column(name = "start_time")
+  String startTime;
+
+  /**
+   * 结束时间
+   */
+  @Column(name = "end_time")
+  String endTime;
 
   public Integer getId() {
     return id;
@@ -159,5 +174,21 @@ public class Task extends BaseEntity {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  public String getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
+  }
+
+  public String getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
   }
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="/lib/jquery.js"></script>
+</head>
+<body>
+<script>
+  var taskReply = {};
+  taskReply.taskId=3;
+  taskReply.content = "评论";
+
+
+    $.post("/task/add.do", task,function(response){
+        response = $.parseJSON(response);
+        if (response.code == 0) {
+          alert("add reply success");
+        }
+    });
+</script>
+</body>
+</html>

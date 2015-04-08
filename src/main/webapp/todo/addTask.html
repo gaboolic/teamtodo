@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="/lib/jquery.js"></script>
+</head>
+<body>
+<script>
+  var task = {};
+  task.level = 1;
+  task.type = 1;
+  task.date = "2015-04-08";
+  task.title = "明天星期四";
+  task.content = "备注 上放水电费";
+
+  for (var level = 0; level < 4; level++) {
+    task.level=level;
+    $.post("/task/add.do", task, function (response) {
+          response = $.parseJSON(response);
+          if (response.code == 0) {
+            alert("add success");
+          }
+        }
+    );
+  }
+</script>
+</body>
+</html>
