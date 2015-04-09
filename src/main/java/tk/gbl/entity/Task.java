@@ -67,7 +67,7 @@ public class Task extends BaseEntity {
   private Set<TaskJoin> taskJoins = new HashSet<TaskJoin>();
 
   /**
-   * 参与人
+   * 评论
    */
   @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<TaskReply> taskReplys = new HashSet<TaskReply>();

@@ -30,4 +30,11 @@ public class TaskDao extends SuperDao<Task> {
     Hibernate.initialize(task.getTaskJoins());
     return task;
   }
+
+//  public Task get(int id) {
+//    Session session = this.getSessionFactory().getCurrentSession();
+//    Task task = (Task) session.get(Task.class, id);
+//    System.out.println(task.getUser().getId());
+//    return task;
+//  }
 }

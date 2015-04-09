@@ -29,13 +29,13 @@ public class TaskController {
     return taskService.addTask(request).toString();
   }
 
-  @RequestMapping("delete")
+  @RequestMapping("delete") //
   @ResponseBody
-  public String delete(@ValidField DeleteTaskRequest request) {
-    return taskService.deleteTask(request).toString();
+  public String delete(@ValidField DeleteTaskRequest request,HttpSession session) {
+    return taskService.deleteTask(request,session).toString();
   }
 
-  @RequestMapping("update")
+  @RequestMapping("update") //
   @ResponseBody
   public String update(@ValidField UpdateTaskRequest request,HttpSession session) {
     return taskService.updateTask(request,session).toString();

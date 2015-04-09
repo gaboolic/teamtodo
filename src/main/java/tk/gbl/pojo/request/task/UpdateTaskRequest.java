@@ -30,7 +30,6 @@ public class UpdateTaskRequest extends BaseRequest {
    * 日程
    * 看板
    */
-  @ValidField
   Integer type;
 
   /**
@@ -41,11 +40,9 @@ public class UpdateTaskRequest extends BaseRequest {
 
 
 
-  @ValidField
   String title;
 
 
-  @ValidField
   String content;
 
   String status;

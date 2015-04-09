@@ -41,6 +41,15 @@ public class User extends BaseEntity {
   @JoinColumn(name = "team_id")
   private Team team;
 
+  /**
+   * 日志权限
+   * -1 仅自己
+   * 0 任何人
+   * 其他如 4,5,6
+   */
+  @Column(name = "auth")
+  String auth;
+
   public Integer getId() {
     return id;
   }

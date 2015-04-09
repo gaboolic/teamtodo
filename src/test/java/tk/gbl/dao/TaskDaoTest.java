@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import tk.gbl.entity.Task;
+import tk.gbl.pojo.request.task.DeleteTaskRequest;
 import tk.gbl.pojo.request.task.DetailTaskRequest;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.service.TaskService;
@@ -39,6 +41,19 @@ public class TaskDaoTest {
     request.setId(2);
     BaseResponse response = taskService.detailTask(request);
     System.out.println(response);
+  }
+
+  @Test
+  public void testDelete(){
+    DeleteTaskRequest request = new DeleteTaskRequest();
+    request.setId(18);
+    taskService.deleteTask(request,null);
+  }
+
+  @Test
+  public void testGet(){
+    Task task = taskDao.get(2);
+    System.out.println(task);
   }
 
 }
