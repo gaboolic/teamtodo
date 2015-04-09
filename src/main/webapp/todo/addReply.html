@@ -8,16 +8,15 @@
 <body>
 <script>
   var taskReply = {};
-  taskReply.taskId=3;
-  taskReply.content = "评论";
+  taskReply.taskId = 3;
+  taskReply.content = "春田花花";
 
-
-    $.post("/task/add.do", task,function(response){
-        response = $.parseJSON(response);
-        if (response.code == 0) {
-          alert("add reply success");
-        }
-    });
+  $.post("/task/reply.do", taskReply, function (response) {
+    response = $.parseJSON(response);
+    if (response.code == 0) {
+      alert("add reply success");
+    }
+  });
 </script>
 </body>
 </html>

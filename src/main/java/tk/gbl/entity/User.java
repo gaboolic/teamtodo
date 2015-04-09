@@ -19,6 +19,12 @@ public class User extends BaseEntity {
   @Column(name = "sso_id")
   private String ssoId;
 
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "head_image")
+  private String headImage;
+
   @Column(name = "username")
   private String username;
 
@@ -81,5 +87,21 @@ public class User extends BaseEntity {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getHeadImage() {
+    return headImage;
+  }
+
+  public void setHeadImage(String headImage) {
+    this.headImage = headImage;
   }
 }

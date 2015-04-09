@@ -12,7 +12,8 @@ import java.util.Date;
  * @author Tian.Dong
  */
 public class UpdateTaskRequest extends BaseRequest {
-
+  @ValidField
+  Integer id;
   /**
    * 级别
    * 紧急 重要
@@ -37,19 +38,7 @@ public class UpdateTaskRequest extends BaseRequest {
    */
   Date date;
 
-  Date startDate;
 
-  Date endDate;
-
-  /**
-   * 所属用户
-   */
-  Integer userId;
-
-  /**
-   * 负责人
-   */
-  Integer owner;
 
 
   @ValidField
@@ -58,4 +47,62 @@ public class UpdateTaskRequest extends BaseRequest {
 
   @ValidField
   String content;
+
+  String status;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getLevel() {
+    return level;
+  }
+
+  public void setLevel(Integer level) {
+    this.level = level;
+  }
+
+  public Integer getType() {
+    return type;
+  }
+
+  public void setType(Integer type) {
+    this.type = type;
+  }
+
+  public Date getDate() {
+    return date;
+  }
+
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
 }

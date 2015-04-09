@@ -32,6 +32,18 @@ public class TaskReply {
   User user;
 
   /**
+   * 评论人name
+   */
+  @Column(name = "name")
+  private String name;
+
+  /**
+   * 评论人头像
+   */
+  @Column(name = "head_image")
+  private String headImage;
+
+  /**
    * 评论的内容
    */
   @Column(name = "content")
@@ -82,5 +94,21 @@ public class TaskReply {
 
   public void setCreateTime(Date createTime) {
     this.createTime = createTime;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getHeadImage() {
+    return headImage;
+  }
+
+  public void setHeadImage(String headImage) {
+    this.headImage = headImage;
   }
 }

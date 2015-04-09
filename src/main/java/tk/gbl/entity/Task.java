@@ -6,7 +6,7 @@ import java.util.Set;
 
 /**
  * 任务(日程、收纳箱、看板的任务模型)
- *
+ * <p/>
  * Date: 2015/3/31
  * Time: 22:47
  *
@@ -67,6 +67,12 @@ public class Task extends BaseEntity {
   private Set<TaskJoin> taskJoins = new HashSet<TaskJoin>();
 
   /**
+   * 参与人
+   */
+  @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<TaskReply> taskReplys = new HashSet<TaskReply>();
+
+  /**
    * 标题
    */
   @Column(name = "title")
@@ -109,7 +115,8 @@ public class Task extends BaseEntity {
   }
 
   public void setLevel(Integer level) {
-    this.level = level;
+    if (level != null)
+      this.level = level;
   }
 
   public Integer getType() {
@@ -117,7 +124,8 @@ public class Task extends BaseEntity {
   }
 
   public void setType(Integer type) {
-    this.type = type;
+    if (type != null)
+      this.type = type;
   }
 
   public String getDate() {
@@ -125,7 +133,8 @@ public class Task extends BaseEntity {
   }
 
   public void setDate(String date) {
-    this.date = date;
+    if (date != null)
+      this.date = date;
   }
 
   public User getUser() {
@@ -133,7 +142,8 @@ public class Task extends BaseEntity {
   }
 
   public void setUser(User user) {
-    this.user = user;
+    if (user != null)
+      this.user = user;
   }
 
   public User getOwner() {
@@ -157,7 +167,8 @@ public class Task extends BaseEntity {
   }
 
   public void setTitle(String title) {
-    this.title = title;
+    if (title != null)
+      this.title = title;
   }
 
   public String getContent() {
@@ -165,7 +176,8 @@ public class Task extends BaseEntity {
   }
 
   public void setContent(String content) {
-    this.content = content;
+    if (content != null)
+      this.content = content;
   }
 
   public String getStatus() {
@@ -173,7 +185,8 @@ public class Task extends BaseEntity {
   }
 
   public void setStatus(String status) {
-    this.status = status;
+    if (status != null)
+      this.status = status;
   }
 
   public String getStartTime() {
@@ -190,5 +203,13 @@ public class Task extends BaseEntity {
 
   public void setEndTime(String endTime) {
     this.endTime = endTime;
+  }
+
+  public Set<TaskReply> getTaskReplys() {
+    return taskReplys;
+  }
+
+  public void setTaskReplys(Set<TaskReply> taskReplys) {
+    this.taskReplys = taskReplys;
   }
 }

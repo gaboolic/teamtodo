@@ -3,6 +3,7 @@ package tk.gbl.util;
 import tk.gbl.util.log.LoggerUtil;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,17 +34,21 @@ public class TransUtil {
     try {
       for (Field field : to.getClass().getDeclaredFields()) {
         field.setAccessible(true);
-        Field fromField = from.getClass().getDeclaredField(field.getName());
-        fromField.setAccessible(true);
+        //Field fromField = from.getClass().getDeclaredField(field.getName());
+        Method getFromFieldMethod = from.getClass().getMethod("get"+ upFirst(field.getName()));
+        //fromField.setAccessible(true);
         // fromFieldValue，相当于from.getFromField();
-        Object fromFieldValue = fromField.get(from);
-        if (fromField.getType().equals(Integer.class)
-            || fromField.getType().equals(Double.class)
-            || fromField.getType().equals(String.class)
-            || fromField.getType().equals(Date.class)
-            || fromField.getType().equals(Set.class)
-            || fromField.getType().equals(List.class)
-            || fromField.getType().equals(Map.class)
+        Object fromFieldValue = getFromFieldMethod.invoke(from);
+        if(fromFieldValue == null) {
+          continue;
+        }
+        if (fromFieldValue.getClass().equals(Integer.class)
+            || fromFieldValue.getClass().equals(Double.class)
+            || fromFieldValue.getClass().equals(String.class)
+            || fromFieldValue.getClass().equals(Date.class)
+            || fromFieldValue.getClass().equals(Set.class)
+            || fromFieldValue.getClass().equals(List.class)
+            || fromFieldValue.getClass().equals(Map.class)
             ) {
           //基本类型 或者String，直接赋值
           field.set(to, fromFieldValue);
@@ -58,6 +63,9 @@ public class TransUtil {
     }
   }
 
+  private static String upFirst(String name) {
+    return name.substring(0,1).toUpperCase()+name.substring(1);
+  }
 
 
   public static <T> T gen(Object from, Class<T> clazz) {

@@ -4,9 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tk.gbl.anno.ValidField;
-import tk.gbl.constants.ResultType;
 import tk.gbl.pojo.request.task.*;
-import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.service.TaskService;
 
 import javax.annotation.Resource;
@@ -25,7 +23,7 @@ public class TaskController {
   @Resource
   TaskService taskService;
 
-  @RequestMapping("add")
+  @RequestMapping("add") //
   @ResponseBody
   public String add(@ValidField AddTaskRequest request) {
     return taskService.addTask(request).toString();
@@ -34,13 +32,13 @@ public class TaskController {
   @RequestMapping("delete")
   @ResponseBody
   public String delete(@ValidField DeleteTaskRequest request) {
-    return new BaseResponse(ResultType.SUCCESS).toString();
+    return taskService.deleteTask(request).toString();
   }
 
   @RequestMapping("update")
   @ResponseBody
-  public String update(@ValidField UpdateTaskRequest request) {
-    return taskService.updateTask(request).toString();
+  public String update(@ValidField UpdateTaskRequest request,HttpSession session) {
+    return taskService.updateTask(request,session).toString();
   }
 
   /**
@@ -49,13 +47,13 @@ public class TaskController {
    * @param request
    * @return
    */
-  @RequestMapping("detail")
+  @RequestMapping("detail")//
   @ResponseBody
   public String detail(@ValidField DetailTaskRequest request) {
     return taskService.detailTask(request).toString();
   }
 
-  @RequestMapping("reply")
+  @RequestMapping("reply")//
   @ResponseBody
   public String reply(@ValidField ReplyTaskRequest request,HttpSession session) {
     return taskService.replyTask(request,session).toString();
@@ -64,11 +62,11 @@ public class TaskController {
   /**
    * 修改状态 完成 未完成
    */
-  @RequestMapping("changeStatus")
-  @ResponseBody
-  public String changeStatus(){
-    return "";
-  }
+//  @RequestMapping("changeStatus")
+//  @ResponseBody
+//  public String changeStatus(@ValidField ChangeTaskStatusRequest request,HttpSession session){
+//    return "";
+//  }
 
   /**
    * 修改负责人 参与人
@@ -81,7 +79,7 @@ public class TaskController {
    * 返回收纳箱 日程任务
    * @return
    */
-  @RequestMapping("show")
+  @RequestMapping("show")//
   @ResponseBody
   public String show(@ValidField ShowTaskRequest request,HttpSession session) {
     return taskService.showTask(request).toString();
@@ -91,7 +89,7 @@ public class TaskController {
    * 返回日期
    * @return
    */
-  @RequestMapping("showStar")
+  @RequestMapping("showStar")//
   @ResponseBody
   public String showStar(@ValidField ShowStarRequest request,HttpSession session) {
     return taskService.showStar(request,session).toString();

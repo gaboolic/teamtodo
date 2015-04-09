@@ -4,6 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import tk.gbl.pojo.request.task.DetailTaskRequest;
+import tk.gbl.pojo.response.BaseResponse;
+import tk.gbl.service.TaskService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,10 +24,21 @@ public class TaskDaoTest {
   @Resource
   TaskDao taskDao;
 
+  @Resource
+  TaskService taskService;
+
   @Test
   public void test(){
     List task = taskDao.find("SELECT distinct date FROM Task");
     System.out.println("****"+task);
+  }
+
+  @Test
+  public void testTaskDetail(){
+    DetailTaskRequest request = new DetailTaskRequest();
+    request.setId(2);
+    BaseResponse response = taskService.detailTask(request);
+    System.out.println(response);
   }
 
 }

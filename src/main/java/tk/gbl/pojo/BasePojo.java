@@ -14,9 +14,16 @@ import java.util.Map;
  * @author Tian.Dong
  */
 public class BasePojo {
-  private Map<String, Object> attribute = new HashMap<String, Object>();
+  private Map<String, Object> attribute;
 
   public void put(String key, Object value) {
+    if (attribute == null) {
+      synchronized (BasePojo.class) {
+        if (attribute == null) {
+          attribute = new HashMap<String, Object>();
+        }
+      }
+    }
     attribute.put(key, value);
   }
 
