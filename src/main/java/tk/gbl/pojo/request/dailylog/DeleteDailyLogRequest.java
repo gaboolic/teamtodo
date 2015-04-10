@@ -1,6 +1,6 @@
 package tk.gbl.pojo.request.dailylog;
 
-import tk.gbl.pojo.request.BaseRequest;
+import tk.gbl.pojo.request.BaseIdRequest;
 
 /**
  * Date: 2015/4/6
@@ -8,5 +8,5 @@ import tk.gbl.pojo.request.BaseRequest;
  *
  * @author Tian.Dong
  */
-public class DeleteDailyLogRequest extends BaseRequest {
+public class DeleteDailyLogRequest extends BaseIdRequest {
 }

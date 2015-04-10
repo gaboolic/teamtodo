@@ -2,6 +2,9 @@ package tk.gbl.pojo.response;
 
 import tk.gbl.constants.ResultType;
 import tk.gbl.pojo.DailyLogPojo;
+import tk.gbl.pojo.DailyLogVisitPojo;
+
+import java.util.List;
 
 /**
  * Date: 2015/4/9
@@ -13,6 +16,8 @@ public class DetailDailyLogResponse extends BaseResponse {
   DailyLogPojo dailyLog;
 
   Integer isHave;
+
+  List<DailyLogVisitPojo> visitList;
 
   public DetailDailyLogResponse(ResultType type) {
     super(type);
@@ -32,5 +37,13 @@ public class DetailDailyLogResponse extends BaseResponse {
 
   public void setIsHave(Integer isHave) {
     this.isHave = isHave;
+  }
+
+  public List<DailyLogVisitPojo> getVisitList() {
+    return visitList;
+  }
+
+  public void setVisitList(List<DailyLogVisitPojo> visitList) {
+    this.visitList = visitList;
   }
 }

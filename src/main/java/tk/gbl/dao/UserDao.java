@@ -11,4 +11,9 @@ import tk.gbl.entity.User;
  */
 @Repository
 public class UserDao extends SuperDao<User> {
+  public void updateAuth(User user) {
+    User dbUser = this.get(user.getId());
+    dbUser.setAuth(user.getAuth());
+    this.update(dbUser);
+  }
 }

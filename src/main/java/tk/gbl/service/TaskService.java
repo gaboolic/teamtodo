@@ -53,12 +53,12 @@ public class TaskService {
   }
 
   public BaseResponse deleteTask(DeleteTaskRequest request, HttpSession session) {
-    //User user = (User)session.getAttribute("user");
+    User user = (User)session.getAttribute("user");
     BaseResponse response = new BaseResponse(ResultType.SUCCESS);
     Task task = taskDao.get(request.getId());
-//    if(!task.getUser().getId().equals(user.getId())){
-//      return new BaseResponse(ResultType.NO_AUTH);
-//    }
+    if(!task.getUser().getId().equals(user.getId())){
+      return new BaseResponse(ResultType.NO_AUTH);
+    }
     taskDao.delete(task);
     return response;
   }

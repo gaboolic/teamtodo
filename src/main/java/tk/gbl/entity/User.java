@@ -113,4 +113,12 @@ public class User extends BaseEntity {
   public void setHeadImage(String headImage) {
     this.headImage = headImage;
   }
+
+  public String getAuth() {
+    return auth;
+  }
+
+  public void setAuth(String auth) {
+    this.auth = auth;
+  }
 }

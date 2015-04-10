@@ -4,10 +4,12 @@ import tk.gbl.entity.BaseEntity;
 import tk.gbl.entity.User;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 日志
- *
+ * <p/>
  * Date: 2015/3/31
  * Time: 21:50
  *
@@ -46,6 +48,12 @@ public class DailyLog extends BaseEntity {
   @Column(name = "content")
   String content;
 
+  /**
+   * 访问列表
+   */
+  @OneToMany(mappedBy = "dailyLog", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<DailyLogVisit> visits = new HashSet<DailyLogVisit>();
+
   public Integer getId() {
     return id;
   }
@@ -75,7 +83,8 @@ public class DailyLog extends BaseEntity {
   }
 
   public void setTitle(String title) {
-    this.title = title;
+    if (title != null)
+      this.title = title;
   }
 
   public String getContent() {
@@ -83,6 +92,15 @@ public class DailyLog extends BaseEntity {
   }
 
   public void setContent(String content) {
-    this.content = content;
+    if (content != null)
+      this.content = content;
+  }
+
+  public Set<DailyLogVisit> getVisits() {
+    return visits;
+  }
+
+  public void setVisits(Set<DailyLogVisit> visits) {
+    this.visits = visits;
   }
 }

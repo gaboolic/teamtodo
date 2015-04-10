@@ -11,6 +11,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 修改参与人负责人未完成
+ *
  * Date: 2015/3/31
  * Time: 21:41
  *
