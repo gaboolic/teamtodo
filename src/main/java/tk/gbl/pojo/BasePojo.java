@@ -14,6 +14,8 @@ import java.util.Map;
  * @author Tian.Dong
  */
 public class BasePojo {
+  private Integer id;
+
   private Map<String, Object> attribute;
 
   public void put(String key, Object value) {
@@ -37,6 +39,14 @@ public class BasePojo {
 
   public void setAttribute(Map<String, Object> attribute) {
     this.attribute = attribute;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   @Override

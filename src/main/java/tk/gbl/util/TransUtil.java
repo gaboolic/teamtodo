@@ -1,5 +1,6 @@
 package tk.gbl.util;
 
+import tk.gbl.pojo.BasePojo;
 import tk.gbl.util.log.LoggerUtil;
 
 import java.lang.reflect.Field;
@@ -32,7 +33,14 @@ public class TransUtil {
       return;
     }
     try {
-      for (Field field : to.getClass().getDeclaredFields()) {
+      try {
+        if(BasePojo.class.isAssignableFrom(to.getClass())) {
+          Method setToIdMethod = to.getClass().getMethod("setId", Integer.class);
+          Method getFromIdMethod = from.getClass().getMethod("getId");
+          setToIdMethod.invoke(to, getFromIdMethod.invoke(from));
+        }
+      }catch (Exception e){}
+      for (Field field : to.getClass().getDeclaredFields() ) {
         field.setAccessible(true);
         //Field fromField = from.getClass().getDeclaredField(field.getName());
         Method getFromFieldMethod = from.getClass().getMethod("get"+ upFirst(field.getName()));

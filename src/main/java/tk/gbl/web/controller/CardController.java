@@ -44,7 +44,7 @@ public class CardController {
     return cardService.delete(request).toString();
   }
 
-  @RequestMapping("update")
+  @RequestMapping("update") //
   @ResponseBody
   public String update(@ValidField UpdateCardRequest request) {
     return cardService.updateCard(request).toString();
