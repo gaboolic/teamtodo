@@ -31,6 +31,9 @@ public class User extends BaseEntity {
   @Column(name = "password")
   private String password;
 
+  @Column(name = "type")
+  private String type;
+
   /**
    * 单点登录token
    */
@@ -120,5 +123,13 @@ public class User extends BaseEntity {
 
   public void setAuth(String auth) {
     this.auth = auth;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 }

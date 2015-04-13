@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import tk.gbl.entity.Task;
 import tk.gbl.entity.User;
-import tk.gbl.pojo.request.task.ShowStarRequest;
+import tk.gbl.pojo.request.ShowStarRequest;
 
 import java.util.List;
 

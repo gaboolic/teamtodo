@@ -5,13 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tk.gbl.anno.ValidField;
 import tk.gbl.pojo.request.dailylog.*;
-import tk.gbl.pojo.request.task.ShowStarRequest;
+import tk.gbl.pojo.request.ShowStarRequest;
 import tk.gbl.service.DailyLogService;
 
 import javax.annotation.Resource;
 
 /**
  * 艾特功能未完成
+ * 评论功能未完成
  *
  * Date: 2015/4/1
  * Time: 15:04
@@ -52,6 +53,12 @@ public class DailyLogController {
   @ResponseBody
   public String detail(@ValidField DetailDailyLogRequest request) {
     return dailyLogService.detailDailyLog(request).toString();
+  }
+
+  @RequestMapping("reply")
+  @ResponseBody
+  public String reply(@ValidField ReplyDailyLogRequest request) {
+    return dailyLogService.replyDailyLog(request).toString();
   }
 
   /**

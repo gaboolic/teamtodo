@@ -29,6 +29,8 @@ public class AddDailyLogRequest extends BaseRequest{
   @ValidField
   String content;
 
+  String at;
+
   public String getDate() {
     return date;
   }
@@ -51,5 +53,13 @@ public class AddDailyLogRequest extends BaseRequest{
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public String getAt() {
+    return at;
+  }
+
+  public void setAt(String at) {
+    this.at = at;
   }
 }

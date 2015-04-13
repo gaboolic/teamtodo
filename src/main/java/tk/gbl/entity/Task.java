@@ -91,6 +91,13 @@ public class Task extends BaseEntity {
   String status;
 
   /**
+   * 如果是卡片上的任务
+   * 则有负责人 参与人 开始时间 结束时间
+   */
+  @Column(name="card_id")
+  Integer cardId;
+
+  /**
    * 开始时间
    */
   @Column(name = "start_time")
@@ -101,6 +108,12 @@ public class Task extends BaseEntity {
    */
   @Column(name = "end_time")
   String endTime;
+
+  /**
+   * 序号
+   */
+  @Column(name="seq_no")
+  private Integer seqNo;
 
   public Integer getId() {
     return id;
@@ -211,5 +224,21 @@ public class Task extends BaseEntity {
 
   public void setTaskReplys(Set<TaskReply> taskReplys) {
     this.taskReplys = taskReplys;
+  }
+
+  public Integer getCardId() {
+    return cardId;
+  }
+
+  public void setCardId(Integer cardId) {
+    this.cardId = cardId;
+  }
+
+  public Integer getSeqNo() {
+    return seqNo;
+  }
+
+  public void setSeqNo(Integer seqNo) {
+    this.seqNo = seqNo;
   }
 }

@@ -1,6 +1,4 @@
-package tk.gbl.pojo.request.task;
-
-import tk.gbl.pojo.request.BaseRequest;
+package tk.gbl.pojo.request;
 
 /**
  * Date: 2015/4/8

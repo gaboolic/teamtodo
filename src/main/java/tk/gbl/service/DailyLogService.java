@@ -3,16 +3,16 @@ package tk.gbl.service;
 import org.springframework.stereotype.Service;
 import tk.gbl.constants.Resp;
 import tk.gbl.constants.ResultType;
-import tk.gbl.dao.DailyLogDao;
-import tk.gbl.dao.DailyLogVisitDao;
-import tk.gbl.dao.UserDao;
+import tk.gbl.dao.*;
 import tk.gbl.entity.User;
 import tk.gbl.entity.log.DailyLog;
+import tk.gbl.entity.log.DailyLogAt;
+import tk.gbl.entity.log.DailyLogReply;
 import tk.gbl.entity.log.DailyLogVisit;
 import tk.gbl.pojo.DailyLogPojo;
 import tk.gbl.pojo.DailyLogVisitPojo;
+import tk.gbl.pojo.request.ShowStarRequest;
 import tk.gbl.pojo.request.dailylog.*;
-import tk.gbl.pojo.request.task.ShowStarRequest;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.pojo.response.DetailDailyLogResponse;
 import tk.gbl.pojo.response.ShowStarResponse;
@@ -20,9 +20,7 @@ import tk.gbl.util.TransUtil;
 import tk.gbl.util.UserInfo;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Date: 2015/4/6
@@ -39,7 +37,16 @@ public class DailyLogService {
   DailyLogVisitDao dailyLogVisitDao;
 
   @Resource
+  DailyLogReplyDao dailyLogReplyDao;
+
+  @Resource
+  DailyLogAtDao dailyLogAtDao;
+
+  @Resource
   UserDao userDao;
+
+  @Resource
+  MessageService messageService;
 
   public BaseResponse addDailyLog(AddDailyLogRequest request) {
     DailyLog dailyLog = new DailyLog();
@@ -48,6 +55,37 @@ public class DailyLogService {
     dailyLog.setContent(request.getContent());
     dailyLog.setUser(UserInfo.getUser());
     dailyLogDao.save(dailyLog);
+    if (request.getAt() != null && request.getAt().length() > 0) {
+      String[] idStrList = request.getAt().split(",");
+      Set<Integer> idSet = new HashSet<Integer>();
+      for (String idStr : idStrList) {
+        if (idStr == null || idStr.length() == 0) {
+          continue;
+        }
+        int id;
+        try {
+          id = Integer.parseInt(idStr);
+        } catch (Exception e) {
+          continue;
+        }
+        idSet.add(id);
+      }
+      //to do 艾特消息
+      for (int id : idSet) {
+        User atUser = userDao.get(id);
+        if (atUser == null) {
+          continue;
+        }
+        DailyLogAt dailyLogAt = new DailyLogAt();
+        dailyLogAt.setDailyLog(dailyLog);
+        dailyLogAt.setName(atUser.getName());
+        dailyLogAt.setCreateTime(new Date());
+        dailyLogAt.setHeadImage(atUser.getHeadImage());
+        dailyLogAt.setUser(atUser);
+        dailyLogAtDao.save(dailyLogAt);
+        messageService.atMessage(id);
+      }
+    }
     BaseResponse response = new BaseResponse(ResultType.SUCCESS);
     return response;
   }
@@ -94,8 +132,8 @@ public class DailyLogService {
     if (dailyLog == null) {
       response.setIsHave(0);
     } else {
-      DailyLogVisit dailyLogVisit = dailyLogVisitDao.getByDailyLogAndUser(dailyLog,UserInfo.getUser());
-      if(dailyLogVisit == null) {
+      DailyLogVisit dailyLogVisit = dailyLogVisitDao.getByDailyLogAndUser(dailyLog, UserInfo.getUser());
+      if (dailyLogVisit == null) {
         dailyLogVisit = new DailyLogVisit();
       }
       User user = UserInfo.getUser();
@@ -107,7 +145,7 @@ public class DailyLogService {
       dailyLogVisitDao.saveOrUpdate(dailyLogVisit);
 
       List<DailyLogVisitPojo> visits = new ArrayList<DailyLogVisitPojo>();
-      for(DailyLogVisit dbDailyLogVisit:dailyLog.getVisits()) {
+      for (DailyLogVisit dbDailyLogVisit : dailyLog.getVisits()) {
         DailyLogVisitPojo dailyLogVisitPojo = new DailyLogVisitPojo();
         dailyLogVisitPojo.setHeadImage(dbDailyLogVisit.getUser().getHeadImage());
         dailyLogVisitPojo.setCreateTime(dbDailyLogVisit.getCreateTime());
@@ -126,6 +164,23 @@ public class DailyLogService {
     User user = UserInfo.getUser();
     user.setAuth(request.getAuth());
     userDao.updateAuth(user);
+    return Resp.success;
+  }
+
+  public BaseResponse replyDailyLog(ReplyDailyLogRequest request) {
+    User user = UserInfo.getUser();
+    DailyLogReply dailyLogReply = new DailyLogReply();
+    dailyLogReply.setContent(request.getContent());
+    DailyLog dailyLog = new DailyLog();
+    dailyLog.setId(request.getId());
+    DailyLogReply reply = new DailyLogReply();
+    reply.setDailyLog(dailyLog);
+    reply.setContent(request.getContent());
+    reply.setCreateTime(new Date());
+    reply.setUser(user);
+    reply.setName(user.getName());
+    reply.setHeadImage(user.getHeadImage());
+    dailyLogReplyDao.save(reply);
     return Resp.success;
   }
 }

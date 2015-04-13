@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tk.gbl.CustomMockHttpSession;
 import tk.gbl.entity.User;
 import tk.gbl.pojo.request.dailylog.*;
-import tk.gbl.pojo.request.task.ShowStarRequest;
+import tk.gbl.pojo.request.ShowStarRequest;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.util.UserInfo;
 
@@ -45,6 +45,7 @@ public class DailyLogServiceTest {
     request.setDate("2015-04-08");
     request.setTitle("我这一天啥都没干");
     request.setContent("真是日了狗了");
+    request.setAt("2,3");
     BaseResponse response = dailyLogService.addDailyLog(request);
     System.out.println(response);
   }
@@ -80,6 +81,15 @@ public class DailyLogServiceTest {
     DetailDailyLogRequest request = new DetailDailyLogRequest();
     request.setDate("2015-04-09");
     BaseResponse response = dailyLogService.detailDailyLog(request);
+    System.out.println(response);
+  }
+
+  @Test
+  public void testReply() {
+    ReplyDailyLogRequest request = new ReplyDailyLogRequest();
+    request.setId(5);
+    request.setContent("评了个论的");
+    BaseResponse response = dailyLogService.replyDailyLog(request);
     System.out.println(response);
   }
 
