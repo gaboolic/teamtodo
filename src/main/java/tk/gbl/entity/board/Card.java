@@ -49,7 +49,7 @@ public class Card extends BaseEntity {
   /**
    * 序号
    */
-  @Column(name="seq_no")
+  @Column(name = "seq_no")
   private Integer seqNo;
 
   public Integer getId() {
@@ -65,7 +65,8 @@ public class Card extends BaseEntity {
   }
 
   public void setName(String name) {
-    this.name = name;
+    if (name != null)
+      this.name = name;
   }
 
   public User getUser() {

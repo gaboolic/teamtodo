@@ -40,6 +40,8 @@ public class Board {
 
   /**
    * 权限
+   * -1 仅自己
+   * 0 任何人
    */
   @Column(name = "auth")
   private String auth;
@@ -57,7 +59,8 @@ public class Board {
   }
 
   public void setName(String name) {
-    this.name = name;
+    if (name != null)
+      this.name = name;
   }
 
   public User getUser() {
@@ -81,6 +84,7 @@ public class Board {
   }
 
   public void setAuth(String auth) {
-    this.auth = auth;
+    if (auth != null)
+      this.auth = auth;
   }
 }

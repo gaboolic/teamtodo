@@ -1,19 +1,14 @@
-package tk.gbl.pojo.request.board;
-
-import tk.gbl.anno.ValidField;
-import tk.gbl.pojo.request.BaseRequest;
+package tk.gbl.pojo;
 
 /**
- * Date: 2015/4/6
- * Time: 10:16
+ * Date: 2015/4/13
+ * Time: 14:10
  *
  * @author Tian.Dong
  */
-public class AddBoardRequest extends BaseRequest{
-  @ValidField
+public class BoardPojo extends BasePojo {
   private String name;
 
-  @ValidField
   private String auth;
 
   public String getName() {

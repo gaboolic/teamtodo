@@ -11,8 +11,7 @@ import tk.gbl.service.DailyLogService;
 import javax.annotation.Resource;
 
 /**
- * 艾特功能未完成
- * 评论功能未完成
+ * 艾特、回复通知功能未完成
  *
  * Date: 2015/4/1
  * Time: 15:04
@@ -55,7 +54,7 @@ public class DailyLogController {
     return dailyLogService.detailDailyLog(request).toString();
   }
 
-  @RequestMapping("reply")
+  @RequestMapping("reply") //
   @ResponseBody
   public String reply(@ValidField ReplyDailyLogRequest request) {
     return dailyLogService.replyDailyLog(request).toString();

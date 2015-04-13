@@ -3,23 +3,13 @@ package tk.gbl.pojo.request.card;
 import tk.gbl.pojo.request.BaseRequest;
 
 /**
- * Date: 2015/4/6
- * Time: 10:16
+ * Date: 2015/4/13
+ * Time: 14:17
  *
  * @author Tian.Dong
  */
-public class AddCardRequest extends BaseRequest {
-
+public class AllCardRequest extends BaseRequest {
   private Integer boardId;
-  private String name;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
 
   public Integer getBoardId() {
     return boardId;
