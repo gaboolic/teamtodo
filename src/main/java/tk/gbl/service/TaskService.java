@@ -1,11 +1,12 @@
 package tk.gbl.service;
 
 import org.springframework.stereotype.Service;
+import tk.gbl.constants.Resp;
 import tk.gbl.constants.ResultType;
 import tk.gbl.dao.TaskDao;
 import tk.gbl.dao.TaskReplyDao;
+import tk.gbl.dao.UserDao;
 import tk.gbl.entity.Task;
-import tk.gbl.entity.TaskJoin;
 import tk.gbl.entity.TaskReply;
 import tk.gbl.entity.User;
 import tk.gbl.pojo.TaskPojo;
@@ -21,9 +22,7 @@ import tk.gbl.util.TransUtil;
 import tk.gbl.util.UserInfo;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Date: 2015/4/1
@@ -36,6 +35,9 @@ public class TaskService {
 
   @Resource
   TaskDao taskDao;
+
+  @Resource
+  UserDao userDao;
 
   @Resource
   TaskReplyDao taskReplyDao;
@@ -103,17 +105,23 @@ public class TaskService {
     return response;
   }
 
-
+//
   public BaseResponse detailTask(DetailTaskRequest request) {
     DetailTaskResponse response = new DetailTaskResponse(ResultType.SUCCESS);
     Task dbTask = taskDao.getDetail(request.getId());
     TaskPojo task = TransUtil.gen(dbTask, TaskPojo.class);
     UserPojo user = TransUtil.gen(dbTask.getUser(),UserPojo.class);
     List<UserPojo> userJoinList = new ArrayList<UserPojo>();
-    for(TaskJoin taskJoin:dbTask.getTaskJoins()) {
+//    for(TaskJoin taskJoin:dbTask.getTaskJoins()) {
+//      UserPojo join = new UserPojo();
+//      join.setName(taskJoin.getJoinUser().getName());
+//      join.setHeadImage(taskJoin.getJoinUser().getHeadImage());
+//      userJoinList.add(join);
+//    }
+    for(User taskJoin:dbTask.getTaskJoins()) {
       UserPojo join = new UserPojo();
-      join.setName(taskJoin.getJoinUser().getName());
-      join.setHeadImage(taskJoin.getJoinUser().getHeadImage());
+      join.setName(taskJoin.getName());
+      join.setHeadImage(taskJoin.getHeadImage());
       userJoinList.add(join);
     }
     List<TaskReplyPojo> taskReplyPojoList = new ArrayList<TaskReplyPojo>();
@@ -157,6 +165,21 @@ public class TaskService {
   }
 
   public BaseResponse assignTask(AssignTaskRequest request) {
-    return null;
+    User user = UserInfo.getUser();
+    Task task = taskDao.get(request.getId());
+    if(!task.getUser().getId().equals(user.getId())){
+      return new BaseResponse(ResultType.NO_AUTH);
+    }
+    User owner = userDao.get(request.getOwnerId());
+    task.setOwner(owner);
+    Set<User> joins = new HashSet<User>();
+    for(Integer id:request.getJoinIds()){
+      User joinUser = new User();
+      joinUser.setId(id);
+      joins.add(joinUser);
+    }
+    task.setTaskJoins(joins);
+    taskDao.update(task);
+    return Resp.success;
   }
 }

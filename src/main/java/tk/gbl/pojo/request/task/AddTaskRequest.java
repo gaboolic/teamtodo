@@ -39,10 +39,6 @@ public class AddTaskRequest extends BaseRequest {
 
   String endDate;
 
-  /**
-   * 所属用户
-   */
-  Integer userId;
 
   /**
    * 负责人
@@ -71,14 +67,6 @@ public class AddTaskRequest extends BaseRequest {
 
   public void setType(Integer type) {
     this.type = type;
-  }
-
-  public Integer getUserId() {
-    return userId;
-  }
-
-  public void setUserId(Integer userId) {
-    this.userId = userId;
   }
 
   public Integer getOwner() {

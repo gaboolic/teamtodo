@@ -60,11 +60,21 @@ public class Task extends BaseEntity {
   @JoinColumn(name = "owner_id")
   User owner;
 
+//  /**
+//   * 参与人
+//   */
+//  @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//  private Set<TaskJoin> taskJoins = new HashSet<TaskJoin>();
+
   /**
    * 参与人
    */
-  @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private Set<TaskJoin> taskJoins = new HashSet<TaskJoin>();
+
+  @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+  @JoinTable(name = "task_join",
+      joinColumns = { @JoinColumn(name = "task_id") },
+      inverseJoinColumns = { @JoinColumn(name = "user_id") })
+  private Set<User> taskJoins = new HashSet<User>();
 
   /**
    * 评论
@@ -86,9 +96,12 @@ public class Task extends BaseEntity {
 
   /**
    * 状态
+   *
+   * 0未完成
+   * 1完成
    */
   @Column(name = "status")
-  String status;
+  String status = "0";
 
   /**
    * 如果是卡片上的任务
@@ -167,13 +180,13 @@ public class Task extends BaseEntity {
     this.owner = owner;
   }
 
-  public Set<TaskJoin> getTaskJoins() {
-    return taskJoins;
-  }
-
-  public void setTaskJoins(Set<TaskJoin> taskJoins) {
-    this.taskJoins = taskJoins;
-  }
+//  public Set<TaskJoin> getTaskJoins() {
+//    return taskJoins;
+//  }
+//
+//  public void setTaskJoins(Set<TaskJoin> taskJoins) {
+//    this.taskJoins = taskJoins;
+//  }
 
   public String getTitle() {
     return title;
@@ -240,5 +253,13 @@ public class Task extends BaseEntity {
 
   public void setSeqNo(Integer seqNo) {
     this.seqNo = seqNo;
+  }
+
+  public Set<User> getTaskJoins() {
+    return taskJoins;
+  }
+
+  public void setTaskJoins(Set<User> taskJoins) {
+    this.taskJoins = taskJoins;
   }
 }

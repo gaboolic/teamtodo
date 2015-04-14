@@ -5,6 +5,7 @@ import tk.gbl.util.log.LoggerUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,7 @@ public class TransUtil {
             || fromFieldValue.getClass().equals(Double.class)
             || fromFieldValue.getClass().equals(String.class)
             || fromFieldValue.getClass().equals(Date.class)
+            || fromFieldValue.getClass().equals(Timestamp.class)
             || fromFieldValue.getClass().equals(Set.class)
             || fromFieldValue.getClass().equals(List.class)
             || fromFieldValue.getClass().equals(Map.class)
