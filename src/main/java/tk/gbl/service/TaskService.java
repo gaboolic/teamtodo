@@ -18,9 +18,9 @@ import tk.gbl.pojo.response.DetailTaskResponse;
 import tk.gbl.pojo.response.ShowStarResponse;
 import tk.gbl.pojo.response.ShowTaskResponse;
 import tk.gbl.util.TransUtil;
+import tk.gbl.util.UserInfo;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,8 +53,8 @@ public class TaskService {
     return response;
   }
 
-  public BaseResponse deleteTask(DeleteTaskRequest request, HttpSession session) {
-    User user = (User)session.getAttribute("user");
+  public BaseResponse deleteTask(DeleteTaskRequest request) {
+    User user = UserInfo.getUser();
     BaseResponse response = new BaseResponse(ResultType.SUCCESS);
     Task task = taskDao.get(request.getId());
     if(!task.getUser().getId().equals(user.getId())){
@@ -64,8 +64,8 @@ public class TaskService {
     return response;
   }
 
-  public BaseResponse updateTask(UpdateTaskRequest request,HttpSession session) {
-    User user = (User) session.getAttribute("user");
+  public BaseResponse updateTask(UpdateTaskRequest request) {
+    User user = UserInfo.getUser();
     Task task = taskDao.get(request.getId());
     if(!task.getUser().getId().equals(user.getId())){
       return new BaseResponse(ResultType.NO_AUTH);
@@ -128,16 +128,16 @@ public class TaskService {
     return response;
   }
 
-  public BaseResponse showStar(ShowStarRequest request, HttpSession session) {
-    User user = (User) session.getAttribute("user");
+  public BaseResponse showStar(ShowStarRequest request) {
+    User user = UserInfo.getUser();
     List<String> dateList = taskDao.findDistinctDateOfUser(request, user);
     ShowStarResponse response = new ShowStarResponse(ResultType.SUCCESS);
     response.setDateList(dateList);
     return response;
   }
 
-  public BaseResponse replyTask(ReplyTaskRequest request, HttpSession session) {
-    User user = (User) session.getAttribute("user");
+  public BaseResponse replyTask(ReplyTaskRequest request) {
+    User user = UserInfo.getUser();
     TaskReply reply = new TaskReply();
     Task task = new Task();
     task.setId(request.getTaskId());
@@ -154,5 +154,9 @@ public class TaskService {
     }
     BaseResponse response = new BaseResponse(ResultType.SUCCESS);
     return response;
+  }
+
+  public BaseResponse assignTask(AssignTaskRequest request) {
+    return null;
   }
 }

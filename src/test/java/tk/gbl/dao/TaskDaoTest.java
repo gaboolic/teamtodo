@@ -47,7 +47,7 @@ public class TaskDaoTest {
   public void testDelete(){
     DeleteTaskRequest request = new DeleteTaskRequest();
     request.setId(18);
-    taskService.deleteTask(request,null);
+    taskService.deleteTask(request);
   }
 
   @Test

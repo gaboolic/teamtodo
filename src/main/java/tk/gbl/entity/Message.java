@@ -24,4 +24,12 @@ public class Message extends BaseEntity {
   @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   User user;
+
+  /**
+   * 类型
+   * task
+   * board
+   * log
+   */
+  String type;
 }

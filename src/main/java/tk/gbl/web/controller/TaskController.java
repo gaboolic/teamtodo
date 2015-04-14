@@ -9,7 +9,6 @@ import tk.gbl.pojo.request.task.*;
 import tk.gbl.service.TaskService;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 /**
  * 修改参与人负责人未完成
@@ -34,14 +33,14 @@ public class TaskController {
 
   @RequestMapping("delete") //
   @ResponseBody
-  public String delete(@ValidField DeleteTaskRequest request,HttpSession session) {
-    return taskService.deleteTask(request,session).toString();
+  public String delete(@ValidField DeleteTaskRequest request) {
+    return taskService.deleteTask(request).toString();
   }
 
-  @RequestMapping("update") //
+  @RequestMapping("update") //修改 改状态
   @ResponseBody
-  public String update(@ValidField UpdateTaskRequest request,HttpSession session) {
-    return taskService.updateTask(request,session).toString();
+  public String update(@ValidField UpdateTaskRequest request) {
+    return taskService.updateTask(request).toString();
   }
 
   /**
@@ -58,24 +57,20 @@ public class TaskController {
 
   @RequestMapping("reply")//
   @ResponseBody
-  public String reply(@ValidField ReplyTaskRequest request,HttpSession session) {
-    return taskService.replyTask(request,session).toString();
+  public String reply(@ValidField ReplyTaskRequest request) {
+    return taskService.replyTask(request).toString();
   }
 
-  /**
-   * 修改状态 完成 未完成
-   */
-//  @RequestMapping("changeStatus")
-//  @ResponseBody
-//  public String changeStatus(@ValidField ChangeTaskStatusRequest request,HttpSession session){
-//    return "";
-//  }
+
 
   /**
-   * 修改负责人 参与人
+   * 修改负责人
+   * 参与人
    */
-  public String updateOwner(){
-    return "";
+  @RequestMapping("assign")//
+  @ResponseBody
+  public String assign(AssignTaskRequest request){
+    return taskService.assignTask(request).toString();
   }
 
   /**
@@ -84,7 +79,7 @@ public class TaskController {
    */
   @RequestMapping("show")//
   @ResponseBody
-  public String show(@ValidField ShowTaskRequest request,HttpSession session) {
+  public String show(@ValidField ShowTaskRequest request) {
     return taskService.showTask(request).toString();
   }
 
@@ -94,7 +89,7 @@ public class TaskController {
    */
   @RequestMapping("showStar")//
   @ResponseBody
-  public String showStar(@ValidField ShowStarRequest request,HttpSession session) {
-    return taskService.showStar(request,session).toString();
+  public String showStar(@ValidField ShowStarRequest request) {
+    return taskService.showStar(request).toString();
   }
 }
