@@ -11,6 +11,7 @@ import tk.gbl.entity.User;
 import tk.gbl.pojo.request.task.AddTaskRequest;
 import tk.gbl.pojo.request.task.AssignTaskRequest;
 import tk.gbl.pojo.request.task.DetailTaskRequest;
+import tk.gbl.pojo.request.task.ShowTaskRequest;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.util.UserInfo;
 
@@ -79,6 +80,14 @@ public class TaskServiceTest {
     request.setJoinIds(joinIds);
 
     BaseResponse response = taskService.assignTask(request);
+    System.out.println(response);
+  }
+
+  @Test
+  public void testShowAcceptTask(){
+    ShowTaskRequest request = new ShowTaskRequest();
+    request.setType(0);
+    BaseResponse response = taskService.showTask(request);
     System.out.println(response);
   }
 }

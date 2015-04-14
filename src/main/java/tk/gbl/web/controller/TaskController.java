@@ -69,7 +69,7 @@ public class TaskController {
    */
   @RequestMapping("assign")//
   @ResponseBody
-  public String assign(AssignTaskRequest request){
+  public String assign(@ValidField AssignTaskRequest request){
     return taskService.assignTask(request).toString();
   }
 
