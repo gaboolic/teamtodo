@@ -75,4 +75,6 @@ public class DailyLogController {
   public String changeAuth(@ValidField ChangeAuthRequest request) {
     return dailyLogService.changeAuth(request).toString();
   }
+
+
 }

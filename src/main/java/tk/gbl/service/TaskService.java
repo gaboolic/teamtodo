@@ -170,6 +170,11 @@ public class TaskService {
     return response;
   }
 
+  /**
+   * 下发任务
+   * @param request
+   * @return
+   */
   public BaseResponse assignTask(AssignTaskRequest request) {
     User user = UserInfo.getUser();
     Task task = taskDao.get(request.getId());
@@ -189,6 +194,7 @@ public class TaskService {
       }
       task.setTaskJoins(joins);
     }
+    task.setDownAccept(1);//设置下发为1
     taskDao.update(task);
     return Resp.success;
   }

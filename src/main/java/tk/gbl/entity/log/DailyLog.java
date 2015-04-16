@@ -1,6 +1,7 @@
 package tk.gbl.entity.log;
 
 import tk.gbl.entity.BaseEntity;
+import tk.gbl.entity.Team;
 import tk.gbl.entity.User;
 
 import javax.persistence.*;
@@ -37,6 +38,13 @@ public class DailyLog extends BaseEntity {
   User user;
 
   /**
+   * 用户所属Team
+   */
+  @ManyToOne(targetEntity = Team.class, fetch = FetchType.LAZY)
+  @JoinColumn(name = "team_id")
+  Team team;
+
+  /**
    * 标题
    */
   @Column(name = "title")
@@ -47,6 +55,12 @@ public class DailyLog extends BaseEntity {
    */
   @Column(name = "content")
   String content;
+
+  /**
+   * 阅读量
+   */
+  @Column(name = "view_count")
+  Integer viewCount;
 
   /**
    * 访问列表
@@ -102,5 +116,21 @@ public class DailyLog extends BaseEntity {
 
   public void setVisits(Set<DailyLogVisit> visits) {
     this.visits = visits;
+  }
+
+  public Integer getViewCount() {
+    return viewCount;
+  }
+
+  public void setViewCount(Integer viewCount) {
+    this.viewCount = viewCount;
+  }
+
+  public Team getTeam() {
+    return team;
+  }
+
+  public void setTeam(Team team) {
+    this.team = team;
   }
 }

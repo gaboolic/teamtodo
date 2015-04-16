@@ -128,6 +128,14 @@ public class Task extends BaseEntity {
   @Column(name="seq_no")
   private Integer seqNo;
 
+  /**
+   * 是否下发
+   * 1 下发
+   * 0 未下发
+   */
+  @Column(name="down_accept")
+  private Integer downAccept = 0;
+
   public Integer getId() {
     return id;
   }
@@ -180,13 +188,13 @@ public class Task extends BaseEntity {
     this.owner = owner;
   }
 
-//  public Set<TaskJoin> getTaskJoins() {
-//    return taskJoins;
-//  }
-//
-//  public void setTaskJoins(Set<TaskJoin> taskJoins) {
-//    this.taskJoins = taskJoins;
-//  }
+  public Integer getDownAccept() {
+    return downAccept;
+  }
+
+  public void setDownAccept(Integer downAccept) {
+    this.downAccept = downAccept;
+  }
 
   public String getTitle() {
     return title;

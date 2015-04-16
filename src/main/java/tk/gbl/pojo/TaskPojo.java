@@ -19,7 +19,7 @@ public class TaskPojo extends BasePojo {
    * 10 紧急不重要
    * 11 紧急重要
    */
-  Integer level;
+  private Integer level;
 
   /**
    * 类型
@@ -27,23 +27,25 @@ public class TaskPojo extends BasePojo {
    * 日程   1
    * 看板   2
    */
-  Integer type;
+  private Integer type;
 
   /**
    * 所属日期
    */
-  String date;
+  private String date;
 
 
   /**
    * 标题
    */
-  String title;
+  private String title;
 
   /**
    * 备注 内容
    */
-  String content;
+  private String content;
+
+  private Integer downAccept = 0;
 
   public Integer getId() {
     return id;
@@ -92,5 +94,13 @@ public class TaskPojo extends BasePojo {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public Integer getDownAccept() {
+    return downAccept;
+  }
+
+  public void setDownAccept(Integer downAccept) {
+    this.downAccept = downAccept;
   }
 }

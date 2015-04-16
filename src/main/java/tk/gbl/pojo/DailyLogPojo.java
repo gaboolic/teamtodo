@@ -25,6 +25,11 @@ public class DailyLogPojo extends BasePojo {
    */
   String content;
 
+  /**
+   * 访问次数
+   */
+  Integer viewCount;
+
   public String getDate() {
     return date;
   }
@@ -47,5 +52,13 @@ public class DailyLogPojo extends BasePojo {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public Integer getViewCount() {
+    return viewCount;
+  }
+
+  public void setViewCount(Integer viewCount) {
+    this.viewCount = viewCount;
   }
 }

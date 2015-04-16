@@ -3,9 +3,11 @@ package tk.gbl.dao;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import tk.gbl.entity.Team;
 import tk.gbl.entity.User;
 import tk.gbl.entity.log.DailyLog;
 import tk.gbl.pojo.request.ShowStarRequest;
+import tk.gbl.pojo.request.team.ShowOtherDailyLogRequest;
 
 import java.util.List;
 
@@ -30,5 +32,24 @@ public class DailyLogDao extends SuperDao<DailyLog> {
     return (DailyLog) query.list().get(0);
 //    DailyLog dailyLog = this.findFirst("from DailyLog d where d.date = ?",date);
 //    return dailyLog;
+  }
+
+  public List<DailyLog> showOtherDailyLog(ShowOtherDailyLogRequest request) {
+    String sql = "from DailyLog d where d.user.id = ? and d.date like ?";
+    return find(sql,request.getUserId(),request.getYearMonth()+"%");
+  }
+
+  public List<DailyLog> showHotDiscusOfTeam(User user) {
+    Session session = this.getSessionFactory().getCurrentSession();
+    String sql = "from DailyLog dl where dl.team = ? and dl.user != ?";
+    Query query = session.createQuery(sql);
+    query.setParameter(0,user.getTeam());
+    query.setParameter(1,user);
+    query.setFirstResult(0).setMaxResults(30);
+    return query.list();
+  }
+
+  public List<DailyLog> showAtMeDailyLog(User user) {
+    return null;
   }
 }

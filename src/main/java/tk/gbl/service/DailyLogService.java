@@ -54,6 +54,7 @@ public class DailyLogService {
     dailyLog.setTitle(request.getTitle());
     dailyLog.setContent(request.getContent());
     dailyLog.setUser(UserInfo.getUser());
+    dailyLog.setTeam(UserInfo.getUser().getTeam());
     dailyLogDao.save(dailyLog);
     if (request.getAt() != null && request.getAt().length() > 0) {
       String[] idStrList = request.getAt().split(",");
@@ -136,6 +137,9 @@ public class DailyLogService {
       if (dailyLogVisit == null) {
         dailyLogVisit = new DailyLogVisit();
       }
+      dailyLog.setViewCount(dailyLog.getViewCount()+1);
+      dailyLogDao.update(dailyLog);
+
       User user = UserInfo.getUser();
       dailyLogVisit.setUser(user);
       dailyLogVisit.setDailyLog(dailyLog);
