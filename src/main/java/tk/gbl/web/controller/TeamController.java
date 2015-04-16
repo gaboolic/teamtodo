@@ -32,14 +32,14 @@ public class TeamController {
   }
 
   //公司动态 热门讨论列表
-  @RequestMapping(value = "showHotDailyLog", method = RequestMethod.GET)
+  @RequestMapping(value = "showHotDailyLog", method = RequestMethod.GET) //
   @ResponseBody
   public String showHotDailyLog() {
     return teamService.showHotDiscus().toString();
   }
 
   //艾特我的日志列表
-  @RequestMapping(value = "showAtMeDailyLog", method = RequestMethod.GET)
+  @RequestMapping(value = "showAtMeDailyLog", method = RequestMethod.GET) //
   @ResponseBody
   public String showAtMeDailyLog() {
     return teamService.showAtMeDailyLog().toString();

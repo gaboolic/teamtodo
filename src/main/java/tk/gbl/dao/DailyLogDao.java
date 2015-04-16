@@ -50,6 +50,7 @@ public class DailyLogDao extends SuperDao<DailyLog> {
   }
 
   public List<DailyLog> showAtMeDailyLog(User user) {
-    return null;
+    String sql = "from DailyLog dl where dl.id in (select dla.dailyLog.id from DailyLogAt dla where dla.user = ? )";
+    return find(sql,user);
   }
 }

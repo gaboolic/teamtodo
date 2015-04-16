@@ -10,10 +10,7 @@ import tk.gbl.entity.log.DailyLog;
 import tk.gbl.pojo.DailyLogPojo;
 import tk.gbl.pojo.UserPojo;
 import tk.gbl.pojo.request.team.ShowOtherDailyLogRequest;
-import tk.gbl.pojo.response.BaseResponse;
-import tk.gbl.pojo.response.MyColleaguesResponse;
-import tk.gbl.pojo.response.ShowHotDiscusResponse;
-import tk.gbl.pojo.response.ShowOtherDailyLogResponse;
+import tk.gbl.pojo.response.*;
 import tk.gbl.util.TransUtil;
 import tk.gbl.util.UserInfo;
 
@@ -87,7 +84,13 @@ public class TeamService {
   }
 
   public BaseResponse showAtMeDailyLog() {
-    dailyLogDao.showAtMeDailyLog(UserInfo.getUser());
-    return null;
+    List<DailyLog> dailyLogs = dailyLogDao.showAtMeDailyLog(UserInfo.getUser());
+    List<DailyLogPojo> dailyLogPojoList = new ArrayList<DailyLogPojo>();
+    for(DailyLog dbDailyLog:dailyLogs) {
+      dailyLogPojoList.add(TransUtil.gen(dbDailyLog,DailyLogPojo.class));
+    }
+    ShowAtMeDailyLogResponse response = new ShowAtMeDailyLogResponse(ResultType.SUCCESS);
+    response.setDailyLogList(dailyLogPojoList);
+    return response;
   }
 }

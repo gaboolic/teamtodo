@@ -63,6 +63,7 @@ public class TeamServiceTest {
 
   @Test
   public void testShowAtMeDailyLog(){
-
+    BaseResponse response = teamService.showAtMeDailyLog();
+    System.out.println(response);
   }
 }
