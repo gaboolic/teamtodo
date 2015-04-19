@@ -13,7 +13,7 @@ import tk.gbl.service.BoardService;
 
 import javax.annotation.Resource;
 
-/**
+/**4
  * Date: 2015/4/1
  * Time: 15:04
  *
