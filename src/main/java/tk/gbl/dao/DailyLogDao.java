@@ -29,7 +29,10 @@ public class DailyLogDao extends SuperDao<DailyLog> {
     String sql = "from DailyLog d where d.date = ?";
     Query query = session.createQuery(sql);
     query.setParameter(0, date);
-    return (DailyLog) query.list().get(0);
+    if(query.list()!=null && query.list().size()>0) {
+      return (DailyLog) query.list().get(0);
+    }
+    return null;
 //    DailyLog dailyLog = this.findFirst("from DailyLog d where d.date = ?",date);
 //    return dailyLog;
   }

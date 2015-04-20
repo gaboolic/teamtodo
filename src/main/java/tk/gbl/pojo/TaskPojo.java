@@ -47,6 +47,7 @@ public class TaskPojo extends BasePojo {
 
   private Integer downAccept = 0;
 
+
   public Integer getId() {
     return id;
   }

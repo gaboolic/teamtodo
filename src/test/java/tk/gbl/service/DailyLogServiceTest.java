@@ -85,6 +85,14 @@ public class DailyLogServiceTest {
   }
 
   @Test
+  public void testDetail2() {
+    DetailDailyLogRequest request = new DetailDailyLogRequest();
+    request.setDate("2015-04-22");
+    BaseResponse response = dailyLogService.detailDailyLog(request);
+    System.out.println(response);
+  }
+
+  @Test
   public void testReply() {
     ReplyDailyLogRequest request = new ReplyDailyLogRequest();
     request.setId(5);
