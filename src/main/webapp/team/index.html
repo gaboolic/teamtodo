@@ -1,12 +1,338 @@
+<!DOCTYPE html>
 <html>
-<head>
-<style>
-body{
-margin: 0px;
-}
-</style>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <title>同事</title>
+  <link href="/css/team.css" type="text/css" rel="stylesheet">
+  <script src="/jslib/fat.js"></script>
+  <script src="/jslib/angular.min.js"></script>
+  <script src="/js/ngDraggable.js"></script>
 </head>
-<body>
-team
+<body ng-app="app" ng-controller="teamController">
+<div class="top" ng-controller="commonController">
+  <img class="top-logo" src="/images/logo_03.png">
+
+  <div class="top-right">
+    <ul>
+      <a href="/todo/index.html">
+        <li><img src="/images/rc1.png">
+
+          <p>日程</p></li>
+      </a>
+      <a href="/log/index.html">
+        <li><img src="/images/rz1.png">
+
+          <p>日志</p></li>
+      </a>
+      <a href="/board/index.html">
+        <li><img src="/images/kb1.png">
+
+          <p>看板</p></li>
+      </a>
+      <a href="/team/index.html">
+        <li class="currentBox"><img src="/images/ts2.png">
+
+          <p>同事</p></li>
+      </a>
+    </ul>
+    <div class="userDetail">
+      <img class="head" src={{self.headImage}}>
+
+      <div class="user">
+        <p>{{self.name}}</p>
+        <img src="/images/take_06.png">
+        <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
+
+      </div>
+      <p class="out">退出</p>
+    </div>
+  </div>
+  <div class="topNotice" ng-show="isShowMessage">
+    <div class="topNoticeBox">
+      <header>通知</header>
+      <!--<p class="noNotice">当前没有新消息</p>-->
+      <ul class="mainBox">
+        <li class="oneNotice" ng-repeat="item in messageList">
+          <p>{{item.desc}}</p>
+
+          <p class="detailNotice">
+            {{item.createTime}}
+            {{item.fullDesc}}
+          <ul>
+            <li ng-click="ignoreMessage(item)">忽略</li>
+            <li><a ng-href="{{item.link}}">查看</a></li>
+          </ul>
+          <div style="clear: both"></div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main">
+<div class="left">
+  <ul>
+    <li ng-class='{"on":showDiaryList && listType==1}' ng-click="showHotDailyLog()"><span class="text">公司动态</span></li>
+    <li ng-class='{"on":showDiaryList && listType==2}' ng-click="showAtMeDailyLog()"><span class="text">@我的日志</span>
+    </li>
+    <li ng-class='{"on":!showDiaryList}' ng-click="showOtherDailyLog()"><span class="text">同事的日志</span></li>
+  </ul>
+</div>
+<div class="mid">
+<!--==================================================中间同事日志列表部分-->
+<div class="midLeft">
+  <!--***********************************************@我的日志、公司动态-->
+  <div class="diaryList" ng-if="showDiaryList">
+    <header ng-if="listType==2">提交给我的日志</header>
+    <header ng-if="listType==1">热门讨论</header>
+    <div class="bottom">
+      <ul>
+        <li ng-class='{"on":diary.on}' ng-click="showDiaryDetail(diary)" ng-repeat="diary in diaryList">
+          <div class="diary">
+            <div class="detail">
+              <img src={{diary.headImage}}>
+
+              <div class="diaryBox">
+                <p>{{diary.title}}</p>
+
+                <div class="name">{{diary.username}}发布了新评论</div>
+                <div class="diaryTime">{{diary.date}}</div>
+              </div>
+            </div>
+          </div>
+          <img ng-show="diary.star==1" src="/images/star_03.png" ng-class='{"star":diary.star==1}'>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--***********************************************同事日志-->
+  <div class="workmate" ng-if="!showDiaryList">
+    <header>同事列表</header>
+    <div class="ulHeader">
+      <!--<div class="department"><span><img src="/images/left_03.png"> </span> <span>国际站销售部</span></div>-->
+      <div class="company" ng-click="initOrg()"><span>直属公司</span> <span> <img src="/images/bobo_03.png"> </span>
+      </div>
+    </div>
+    <!--=======================部门列表-->
+    <ul class="companyList">
+      <li ng-repeat="department in departments" ng-click="refreshDepartment(department)">
+        <div class="diary">
+          {{department.name}}
+        </div>
+        <span>·</span>
+      </li>
+    </ul>
+    <!--=======================员工列表-->
+    <ul class="memberList">
+      <li ng-class='{"on":member.on}' ng-repeat="member in members" ng-click="at(member)">
+        <div class="diary">
+          <div class="detail">
+            <img src={{member.headImage}}>
+            {{member.name}}
+          </div>
+        </div>
+        <img ng-show="member.type==1 || member.type==2" src="/images/star_03.png" class="star">
+      </li>
+    </ul>
+  </div>
+</div>
+<!--==================================================右边日志详情部分-->
+<div class="midRight" ng-show="showDiaryList">
+  <header>此日志基于<span>{{diary.username}}</span><span>{{diary.date}}</span>的工作日志<span>隐藏日志原文</span></header>
+  <div class="diaryDetail">
+    <p ng-bind="diary.title"></p>
+
+    <div class="content" ng-bind-html="diary.content"></div>
+    <div class="fujian" ng-show="fileList.length>0">
+      附件：<span ng-repeat="item in fileList"><a ng-href="{{item.path}}">{{item.name}}</a></span>
+    </div>
+  </div>
+  <div class="discuss">
+    <div class="discussContent">
+      <textarea placeholder="写下讨论内容，按Ctrl+Enter发送" ng-model="replyContent"></textarea>
+      <ul>
+        <li ng-click="cancelReply()">取消</li>
+        <li ng-click="submitReply()">提交</li>
+      </ul>
+    </div>
+    <div class="visit">
+      <!--<div class="more"><img src="/images/more_03.png"></div>-->
+      <p class="title">最近访问({{peopleList.length}})</p>
+
+      <div class="peopleList">
+        <div class="people" ng-repeat="person in peopleList">
+          <img src={{person.headImage}}>
+
+          <div class="name">
+            <p>{{person.name}}</p>
+
+            <p>{{person.createTime}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="talkList">
+      <ul>
+        <li ng-repeat="reply in replyList">
+          <img src={{reply.headImage}} class="headImg">
+
+          <div class="contentBox">
+            <div class="san"><img src="/images/sanjiao_03.png"></div>
+            <div class="rightBox">
+              <div class="talk">{{reply.content}}</div>
+              <div class="time">
+                <p>{{reply.name}}</p>
+
+                <div class="reply">
+                  {{reply.createTime}}
+                  <span ng-click="replyOther(reply)">回复</span></div>
+              </div>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--==================================================右边同事日志详情部分-->
+<div ng-show="!showDiaryList">
+  <div class="workmateRight" ng-show="isShowOtherDiaryDetail">
+    <header>
+      <div class="back" ng-click="returnDiaryList()">< 返回</div>
+      <!--<ul>-->
+      <!--<li class="current">周四07</li>-->
+      <!--<li>周四07</li>-->
+      <!--<li>周四07</li>-->
+      <!--<li>周四07</li>-->
+      <!--<li>周四07</li>-->
+      <!--<li>周四07</li>-->
+      <!--<li>周四07</li>-->
+      <!--<li>周四07</li>-->
+      <!--</ul>-->
+      <!--<div class="next">下一页</div>-->
+    </header>
+    <div class="diaryDetail">
+      <p ng-bind="diary.title"></p>
+
+      <div class="content" ng-bind-html="diary.content"></div>
+      <div class="fujian" ng-show="fileList.length > 0">附件：<span ng-repeat="item in fileList"><a ng-href="{{item.path}}">{{item.name}}</a></span>
+
+        <p>来自于<span>{{diary.username}}</span><span>{{diary.date}}</span>的日志</p>
+      </div>
+    </div>
+    <div class="discuss">
+      <div class="discussContent">
+        <textarea placeholder="写下讨论内容，按Ctrl+Enter发送" ng-model="otherReplyContent"></textarea>
+        <ul>
+          <li ng-click="cancelOtherReply()">取消</li>
+          <li ng-click="submitOtherReply()">提交</li>
+        </ul>
+      </div>
+      <div class="visit">
+        <!--<div class="more"><img src="/images/more_03.png"></div>-->
+        <p class="title">最近访问({{peopleList.length}})</p>
+
+        <div class="peopleList">
+          <div class="people" ng-repeat="person in peopleList">
+            <img src={{person.headImage}}>
+
+            <div class="name">
+              <p>{{person.name}}</p>
+
+              <p>{{person.createTime}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="talkList">
+        <ul>
+          <li ng-repeat="reply in replyList">
+            <img ng-src="{{reply.headImage}}" class="headImg">
+
+            <div class="contentBox">
+              <div class="san"><img src="/images/sanjiao_03.png"></div>
+              <div class="rightBox">
+                <div class="talk">{{reply.content}}</div>
+                <div class="time">
+                  <p>{{reply.name}}</p>
+
+                  <div class="reply">
+                    {{reply.createTime}}
+                    <span ng-click="otherReplyOther(reply)">回复</span></div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--==================================================右边日志列表部分-->
+  <div class="rightDiary" ng-if="!isShowOtherDiaryDetail">
+    <header>
+      <div class="selectList">
+        <div class="select">
+          <input placeholder="请选择年" ng-model="currentYear" ng-click="showSelectYear()" readonly>
+          <img src="/images/bo_03.png" ng-click="showSelectYear()">
+
+          <div class="optionList" ng-if="isSelectYearShow">
+            <ul>
+              <li ng-click="selectYear(year)" ng-repeat="year in yearList">{{year}}</li>
+              <!--<li>22</li>-->
+            </ul>
+          </div>
+        </div>
+        <div class="select">
+          <input placeholder="请选择月" ng-model="currentMonth" ng-click="showSelectMonth()" readonly>
+          <img src="/images/bo_03.png" ng-click="showSelectMonth()">
+
+          <div class="optionList" ng-if="isSelectMonthShow">
+            <ul>
+              <li ng-click="selectMonth(month)" ng-repeat="month in monthList">{{month}}</li>
+              <!--<li>22</li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p>共<span>{{otherDailyLogCount}}</span>篇日志</p>
+    </header>
+    <div class="list">
+      <ul>
+        <li ng-repeat="day in dayList">
+          <span class="time" ng-if="day<10">{{currentYear+"-"+currentMonth+"-0"+day}}</span>
+          <span class="time" ng-if="day>=10">{{currentYear+"-"+currentMonth+"-"+day}}</span>
+          <!--<span class="time">星期四</span>-->
+          <!--<span class="listNotice">未写工作日志</span>-->
+          <span class="diaryTitle" ng-if='day<10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day]==null'>未写工作日志</span>
+                    <span class="diaryTitle"
+                          ng-click='showOtherDiaryDetail(otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day])'
+                          ng-if='day<10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day]!=null'>{{otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day].title}}</span>
+          <span class="diaryTitle" ng-if='day>=10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day]==null'>未写工作日志</span>
+                    <span class="diaryTitle"
+                          ng-click='showOtherDiaryDetail(otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day])'
+                          ng-if='day>=10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day]!=null'>{{otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day].title}}</span>
+
+          <span class="rightTime" ng-if='day<10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day]==null'><img
+              src="/images/wen_03.png"></span>
+          <span class="rightTime" ng-if='day<10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day]!=null'><img
+              src="/images/wen_03.png"> 提交时间：{{otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day].date}}</span>
+          <span class="rightTime" ng-if='day>=10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day]==null'><img
+              src="/images/wen_03.png"></span>
+          <span class="rightTime" ng-if='day>=10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day]!=null'><img
+              src="/images/wen_03.png"> 提交时间：{{otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day].date}}</span>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/team.js"></script>
 </body>
 </html>

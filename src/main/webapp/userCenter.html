@@ -1,0 +1,54 @@
+<header>
+    <div class="message" ng-click="returnMessage()">
+        <img src="/images/message_03.png">
+        <div ng-show="message.length>0" class="messageCount">{{messageList.length}}</div>
+    </div>
+  <span>个人中心</span>
+</header>
+<div class="top">
+  <img ng-src="{{self.headImage}}">
+  {{self.name}}
+</div>
+<ul class="go">
+  <a href="/todo/m/index.html#/">
+    <li>
+      <img src="/images/x_03.gif" class="leftImg">
+
+      <div class="text">收纳盒
+        <img src="/images/rr_08.gif">
+      </div>
+    </li>
+  </a>
+
+  <a href="/todo/m/index.html#/todo">
+    <li>
+      <img src="/images/rc_06.gif" class="leftImg">
+
+      <div class="text">日程
+        <img src="/images/rr_08.gif">
+      </div>
+    </li>
+  </a>
+
+  <a href="/log/m/index.html#/">
+    <li>
+      <img src="/images/rz_09.gif" class="leftImg">
+
+      <div class="text">日志
+        <img src="/images/rr_08.gif">
+      </div>
+    </li>
+  </a>
+
+  <a href="/team/m/index.html#/">
+    <li>
+      <img src="/images/ts_13.gif" class="leftImg">
+
+      <div class="text">同事
+        <img src="/images/rr_08.gif">
+      </div>
+    </li>
+  </a>
+</ul>
+
+</div>

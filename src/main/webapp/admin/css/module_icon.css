@@ -1,0 +1,36 @@
+@charset "utf-8";
+/** CSS Document 
+ * 图标样式文件
+ * 文件负责：Nathan
+ * 2014年8月
+ **/
+
+.ic:before {
+	content: " ";
+	display: inline-block;
+	width: 27px;
+	height: 27px;
+	background: url(../images/bg_icon.png) no-repeat;
+}
+.ic-user:before {background-position: -32px -52px;}
+.active .ic-user:before {background-position: -2px -52px;}
+.ic-job:before {background-position: -32px -102px;}
+.active .ic-job:before {background-position: -2px -102px;}
+.ic-active:before {background-position: -32px -152px;}
+.active .ic-active:before {background-position: -2px -152px;}
+.ic-unit:before {background-position: -32px -202px;}
+.active .ic-unit:before {background-position: -2px -202px;}
+.ic-stuff:before {background-position: -32px -252px;}
+.active .ic-stuff:before {background-position: -2px -252px;}
+.ic-stars:before {background-position: -32px -302px;}
+.active .ic-stars:before {background-position: -2px -302px;}
+
+.ic-add:before {background-position: -1px -2px;}
+.ic-home:before {background-position: -32px -2px;}
+.ic-user-name:before {background-position: -62px -3px;}
+.ic-user-pwd:before {background-position: -62px -53px;}
+.ic-user-eye:before {background-position: -62px -103px;}
+.ic-arrow-down:before {background-position: -62px -151px;}
+.ic-arrow-down-w:before {background-position: -62px -201px;}
+.ic-close:before {background-position: -61px -250px;}
+.ic-search:before {background-position: -62px -300px;}

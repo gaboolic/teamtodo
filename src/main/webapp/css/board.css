@@ -1,0 +1,1377 @@
+@charset "utf-8";
+/*全局控制*/
+html {
+    font-size: 62.5%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    height: 100%;
+    font-family:  "Microsoft YaHei", "Open Sans",sans-serif;
+    -webkit-font-smoothing: antialiased !important;
+}
+/*滚动条整体*/
+::-webkit-scrollbar{
+    width:14px; /*滚动条宽度*/
+}
+/*滚动条按钮*/
+::-webkit-scrollbar-button {
+
+}
+::-webkit-scrollbar-track{
+    background-color:#F3F3F3;  /*滑道全部*/
+}
+::-webkit-scrollbar-track-piece{
+    background-color:#F3F3F3;  /*滑道*/
+    -webkit-border-radius:4px; /*滑道圆角宽度*/
+}
+::-webkit-scrollbar-thumb{
+    background-color:#F3F3F3; /*滑动条表面*/
+    border:solid 1px #C0C0C0; /*滑动条边框*/
+    border-radius:4px;  /*滑动条圆角宽度*/
+}
+/*横竖滚动条交角*/
+::-webkit-scrollbar-corner {
+    background-color: #F3F3F3;
+}
+/*横竖滚动条交角图案*/
+::-webkit-resizer {
+    /*background-image: url(/public/img/resizer-inactive.png);*/
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+/*鼠标滑过滑动条*/
+::-webkit-scrollbar-thumb:hover{
+    background-color:#999999;
+}
+html, body {
+    height: 100%;
+    min-width: 1100px;
+    /*overflow-y: hidden;*/
+}
+.main{
+    min-width: 1100px;
+    min-height: 550px;
+
+}
+/*重置浏览器默认样式*/
+h1, h2, h3, h4, p, input, ul, li, dl, dt, dd, button, img, select, textarea, table, tr, td {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+    resize: none;
+    outline: none;
+}
+a{
+    text-decoration:none;
+}
+li:hover{
+    cursor: pointer;
+}
+.top{
+    width:100%;
+    height:82px;
+    background: #1b72a3;
+    position: relative;
+}
+.top .top-logo{
+    display: block;
+    margin-top: 30px;
+    float:left;
+    margin-left:25px;
+}
+.top .top-right{
+    float:right;
+}
+.top .top-right ul{
+    float:left;
+}
+.top .top-right ul li{
+    float:left;
+    display: block;
+    width:90px;
+    height:82px;
+    text-align: center;
+    color:#5dbcf2;
+}
+.top .top-right ul li img{
+    margin-top: 18px;
+}
+.top .top-right ul li:hover{
+    background:#085a89 ;
+}
+.top .top-right ul .currentBox{
+    background:#085a89 ;
+    color:#ffffff;
+}
+.top .top-right .userDetail{
+    float:left;
+    width: 288px;
+    height:44px;
+    margin-top: 22px;
+    padding-left: 20px;
+}
+.top .top-right .userDetail .head{
+    width:44px;
+    height:44px;
+    border-radius: 3px;
+    float: left;
+}
+.top .top-right .userDetail .user{
+    float:left;
+    color:#c2e3ff;
+    margin-left: 11px;
+}
+.top .top-right .userDetail .user img{
+    margin-top: 5px;
+    float:left;
+}
+.top .top-right .userDetail .user span{
+    display: block;
+    margin-top:5px;
+    width:18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 10px;
+    background: #f4a110;
+    float:left;
+    margin-left: 4px;
+    color:#ffffff;
+}
+.top .top-right .userDetail .user span:hover{
+    cursor: pointer;
+}
+.top .top-right .userDetail .out{
+    color:#5dbcf2;
+    float:left;
+    margin-left: 12px;
+}
+.top .top-right .userDetail .out:hover{
+    cursor: pointer;
+}
+.main{
+    position: absolute;
+    top:82px;
+    left:0;
+    right:0;
+    bottom: 0;
+    background: #f5f5f5;
+    z-index: 1;
+}
+.top .topNotice{
+    position: absolute;
+    z-index: 200;
+    right:10px;
+    top:86px;
+    width:260px;
+    min-height: 90px;
+    background: #ffffff;
+    box-shadow: 2px -2px 2px #eaecec inset;
+    border-radius: 5px;
+    /*font-family: "宋体";*/
+}
+.top .topNotice .topNoticeBox{
+    width:256px;
+    margin-left: 2px;
+    border-radius: 5px;
+    box-shadow: 2px -2px 2px #edefef;
+    text-align: center;
+}
+.top .topNotice .topNoticeBox .noNotice{
+    line-height: 50px;
+}
+.top .topNotice .topNoticeBox header{
+    height:30px;
+    background:#f4a110;
+    color:#ffffff;
+    line-height: 30px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-size: 16px;
+    padding-left: 10px;
+    text-align: left;
+}
+.top .topNotice .topNoticeBox .mainBox{
+    border-right:1px solid #e5e5e5;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: left;
+    max-height: 280px;
+}
+.top .topNotice .topNoticeBox .mainBox .oneNotice{
+    min-height:57px;
+    padding:10px 0px;
+    width:244px;
+    margin-left: 7px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 12px;
+    /*font-size: 13px;*/
+    /*background: #6999c2;*/
+}
+.top .topNotice .topNoticeBox .mainBox .oneNotice .detailNotice{
+
+    margin-top: 5px;
+    color:#999999;
+    line-height: 14px;
+}
+.top .topNotice .topNoticeBox .mainBox .oneNotice .detailNotice span{
+    color:#6999c2;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.top .topNotice .topNoticeBox .mainBox ul{
+    float:right;
+}
+.top .topNotice .topNoticeBox .mainBox ul li{
+    float:left;
+    display: block;
+    width:33px;
+    text-align: center;
+    color:#666666;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+}
+.top .topNotice .topNoticeBox .mainBox ul li:last-child{
+    color:#6999c2;
+}
+/*===============================左边收纳箱部分*/
+.main .left{
+    position:absolute;
+    width:24.89%;
+    left:0;
+    top:0;
+    bottom:0;
+    background: #e9ecf2;
+}
+.main .left .list{
+    float:left;
+    font-size: 18px;
+    color:#333333;
+    margin-top:27px;
+    margin-left: 22px;
+}
+.main .left .addBtn{
+    float:right;
+    width:80px;
+    height:34px;
+    line-height: 34px;
+    text-align: center;
+    background:#f4a110;
+    border-radius: 4px;
+    margin-top:18px;
+    margin-right: 15px;
+    color:#ffffff;
+    font-size: 16px;
+}
+.main .left .addBtn:hover{
+    cursor: pointer;
+}
+.main .left .addBtn span{
+    float: left;
+}
+.main .left .addBtn span:first-child{
+    font-size: 26px;
+    margin-left: 12px;
+    line-height: 39px;
+}
+.main .left ul{
+    width:94%;
+    float: right;
+    margin-top: 20px;
+    height: 85%;
+    overflow: auto;
+}
+.main .left ul li{
+    display: block;
+    height:60px;
+    width:100%;
+    margin-bottom: 7px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: #dbdfe6;
+}
+.main .left ul .on{
+    background: #ffffff;
+    box-shadow:0.1px 2px 2px #dddfdf;
+}
+.main .left ul li .text{
+    margin-left: 15px;
+    line-height: 35px;
+    color:#6999c2;
+    font-size: 16px;
+}
+.main .left ul li p:last-child{
+    color:#999999;
+    margin-left: 15px;
+    font-size: 12px;
+}
+/*===============================中间任务部分*/
+.main .mid{
+    position:absolute;
+    left:25%;
+    right:0;
+    background: #ffffff;
+    bottom: 0;
+    top:0;
+    box-sizing: border-box;
+}
+/******************************************卡片头部*/
+.main .mid .midTop{
+    position: relative;
+    width:100%;
+    height: 71px;
+    background: #f5f5f5;
+}
+.main .mid .midTop .addCard{
+    position: relative;
+    width:400px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid #e8e8e8;
+    color:#6999c2;
+    font-size: 16px;
+    background: #ffffff;
+    text-align: center;
+    left:0;
+    right:0;
+    margin:0 auto;
+    top:15px;
+}
+.main .mid .midTop .addCard:hover{
+    cursor: pointer;
+}
+.main .mid .midTop .addCardInput{
+    position: relative;
+    width:494px;
+    left:0;
+    right:0;
+    margin:0 auto;
+    top:15px;
+    background: #e5e5e5;
+}
+.main .mid .midTop .addCardInput input{
+    width:350px;
+    height: 40px;
+    line-height: 38px;
+    color:#6999c2;
+    font-size: 16px;
+    background: #ffffff;
+    border-radius: 15px;
+    border: 1px solid #e8e8e8;
+    padding-left: 20px;
+    padding-right: 20px;
+    float:left;
+}
+.main .mid .midTop .addCardInput .cancelInputBtn{
+    float:left;
+    width:44px;
+    height:28px;
+    line-height: 28px;
+    text-align: center;
+    margin-top:6px;
+    color:#666666;
+}
+.main .mid .midTop .addCardInput .cancelInputBtn:hover{
+    cursor: pointer;
+}
+.main .mid .midTop .addCardInput .setBtn:hover{
+    cursor: pointer;
+}
+.main .mid .midTop .addCardInput .setBtn{
+    float:left;
+    width:48px;
+    height:28px;
+    line-height: 28px;
+    border-radius: 3px;
+    background:#6999c2;
+    text-align: center;
+    margin-top:6px;
+    color:#ffffff;
+}
+.main .mid .midTop .set{
+    position: absolute;
+    width:80px;
+    text-align: center;
+    height: 34px;
+    line-height: 34px;
+    color:#ffffff;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #80add4;
+    top: 18px;
+    right:14px;
+}
+.main .mid .midTop .set:hover{
+    cursor: pointer;
+}
+/******************************************卡片*/
+.main .mid .cardDetail{
+    width:100%;
+    height:87%;
+}
+.main .mid .cards{
+    width:97%;
+    height:100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    /*background: #85bb2f;*/
+    padding-left: 27px;
+}
+.main .mid .cards .card{
+    display: inline-block;
+    width:260px;
+    min-height:400px;
+    height:95%;
+    background: #e9ecf2;
+    border-radius: 5px;
+    margin-right: 17px;
+    margin-top: 17px;
+    position: relative;
+    vertical-align: top;
+}
+.main .mid .cards .card:last-child{
+    min-height:92px;
+}
+.main .mid .cards .card:last-child{
+    height:92px;
+}
+.main .mid .cards .card .listBox .addDetail{
+    width:61px;
+    height:27px;
+    line-height: 22px;
+    margin-top:30px;
+    margin-left:80px;
+    font-size: 16px;
+    color:#6999c2;
+    padding-left: 33px;
+    background: url("../images/add_03.png") 0px 0px no-repeat #e9ecf2;
+    padding-top: 1px;
+    /*display: none;*/
+}
+.main .mid .cards .card .addTaskInput{
+    clear: both;
+    margin-top:7px;
+    margin-left:8px;
+    width:95%;
+    height:70px;
+}
+.main .mid .cards .card .addTaskInput input{
+    clear: both;
+    width:240px;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 5px;
+}
+.main .mid .cards .card .cardTop{
+    display: block;
+    clear:both;
+    height:50px;
+    width:100%;
+    position: relative;
+}
+.main .mid .cards .card .cardTop .editList{
+    width:93px;
+    height:53px;
+    position: absolute;
+    right:-15px;
+    bottom:-43px;
+    z-index: 10;
+    background: #ffffff;
+    box-shadow: inset 2px -2px 2px #e6e8e8 ;
+}
+.main .mid .cards .card .cardTop .editList ul{
+    width:91px;
+    height:51px;
+    border-top:1px solid #e5e5e5;
+    border-bottom:1px solid #e5e5e5;
+    box-shadow:2px -2px 2px #edefef ;
+}
+.main .mid .cards .card .cardTop .editList ul li{
+    display: block;
+    width:89px;
+    height:25px;
+    line-height: 25px;
+    text-align:center;
+    border-left:1px solid #e5e5e5;
+    border-right:1px solid #e5e5e5;
+}
+.main .mid .cards .card .cardTop .editList ul li:hover{
+    background: #6999c2;
+    color:#ffffff;
+}
+.main .mid .cards .card .cardTop span{
+    position: relative;
+    left:15px;
+    top:13px;
+    color:#666666;
+    font-size: 16px;
+}
+.main .mid .cards .card .cardTop img{
+    position: absolute;
+    right:15px;
+    top:12px;
+}
+.main .mid .cards .card .listBox{
+    /*position: absolute;*/
+    /*position: relative;*/
+    /*left:0;*/
+    /*right:0;*/
+    /*top:50px;*/
+    /*bottom: 0;*/
+    width: 100%;
+    height: 86%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    /*background: #e28b41;*/
+}
+.main .mid .cards .card .listBox ul{
+    /*height: 55%;*/
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+.main .mid .cards .card .listBox .addTask{
+    font-size: 16px;
+    color:#6999c2;
+    text-align: center;
+    line-height: 40px;
+}
+.main .mid .cards .card .listBox .addBox{
+    width:250px;
+}
+.main .mid .cards .card .listBox  .cancelBtn{
+    float:right;
+    width:48px;
+    height:28px;
+    line-height: 28px;
+    text-align: center;
+    margin-right: 8px;
+    margin-top: 8px;
+    color:#666666;
+}
+.main .mid .cards .card .listBox  .saveBtn{
+    float:right;
+    width:48px;
+    height:28px;
+    line-height: 28px;
+    text-align: center;
+    margin-right: 8px;
+    margin-top: 8px;
+    background: #6999c2;
+    border-radius: 3px;
+    color:#ffffff;
+}
+.main .mid .cards .card .listBox textarea{
+    width:230px;
+    height:57px;
+    background: #ffffff;
+    border-radius: 3px;
+    font-size: 14px;
+    color:#cccccc;
+    padding:10px;
+}
+.main .mid .cards .card .listBox ul{
+    width:96%;
+    margin-left: 2%;
+}
+.main .mid .cards .card .listBox ul li{
+    width:100%;
+    height:32px;
+    line-height: 32px;
+    margin-bottom: 1px;
+    border-radius: 3px;
+    background: #ffffff;
+}
+.main .mid .cards .card ul li:hover{
+    background: #f5f7fb;
+}
+.main .mid .cards .card ul li .checkBox{
+    background: url("../images/no_03.png") no-repeat scroll 0 10px #ffffff;
+    float: left;
+    height: 30px;
+    margin-left: 8px;
+    margin-right: 2px;
+    width: 18px;
+}
+.main .mid .cards .card ul li .done{
+    background: url("../images/on_06.png") no-repeat scroll 0 10px #ffffff;
+    float: left;
+    height: 30px;
+    margin-left: 8px;
+    margin-right: 2px;
+    width: 18px;
+}
+.main .mid .cards .card ul li .yes{
+    text-decoration: line-through;
+}
+.main .mid .cards .card ul li:hover .checkBox{
+    background: url("../images/no_03.png") no-repeat scroll 0 10px #f5f7fb;
+}
+.main .mid .cards .card ul li:hover .done{
+    background: url("../images/on_06.png") no-repeat scroll 0 10px #f5f7fb;
+}
+.main .mid .cards .card ul .selected .checkBox{
+    background: url("../images/on_06.png") no-repeat scroll 0 10px #ffffff;
+}
+.main .mid .cards .card ul .selected p{
+    color:#cccccc;
+}
+.main .mid .cards .card ul .selected:hover .checkBox{
+    background: url("../images/on_06.png") no-repeat scroll 0 10px #f5f7fb;
+}
+.main .mid .cards .card ul li p{
+    width:86%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color:#666666;
+}
+/*===============================设置*/
+.setUp{
+    width:100%;
+    height:100%;
+    min-height: 635px;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    position: absolute;
+    z-index: 20;
+    background: rgba(33,32,32,0.55);
+    font-family: "宋体";
+    /*text-align: center;*/
+}
+.setUp .setBoard{
+    width:450px;
+    height:256px;
+    border-radius: 5px;
+    background: #ffffff;
+    margin:0 auto;
+    margin-top: 17%;
+}
+.setUp .setBoard header{
+    width:100%;
+    height:44px;
+    background:#6999c2 ;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color:#ffffff;
+}
+.setUp .setBoard header p:first-child{
+    float:left;
+    font-size: 16px;
+    margin-left: 19px;
+    line-height: 44px;
+}
+.setUp .setBoard header p:last-child{
+    float:right;
+    font-size: 30px;
+    margin-right:20px;
+    line-height: 40px;
+}
+.setUp .setBoard header p:last-child:hover{
+    cursor: pointer;
+}
+.setUp .setBoard .boardName{
+    width:420px;
+    height:36px;
+    line-height: 36px;
+    color:#666666;
+    margin-left: 18px;
+    margin-top: 18px;
+    /*background: #85bb2f;*/
+    font-size: 15px;
+}
+.setUp .setBoard .boardName input{
+    width:335px;
+    height:36px;
+    border:1px solid #e5e5e5;
+    margin-left:9px;
+    padding-left: 10px;
+    background: #f8f8f8;
+    font-size: 15px;
+}
+.setUp .setBoard .boardPerson{
+    width:412px;
+    line-height: 36px;
+    color:#666666;
+    margin-left: 18px;
+    margin-top: 18px;
+    position: relative;
+    font-size: 15px;
+}
+.setUp .setBoard .boardPerson span{
+    /*看板归档*/
+    position: absolute;
+    left:285px;
+    top:0;
+    height:15px;
+    display: none;
+}
+.setUp .setBoard .boardPerson span img{
+    left: 69px;
+    margin-top: 10px;
+    position: absolute;
+    top:2px;
+}
+.setUp .setBoard .boardPerson .bkInput{
+    width:189px;
+    height:35px;
+    border:1px solid #e5e5e5;
+    margin-left:6px;
+    padding-left: 10px;
+    background: #f8f8f8;
+    /*float:left;*/
+    display: inline-block;
+    position: relative;
+}
+.setUp .setBoard .boardPerson .bkInput span{
+    display: block;
+    position: absolute;
+    left:177px;
+    width:21px;
+    height:33px;
+    background:url("../images/boj_03.png")no-repeat 0px 15px #f8f8f8;
+    z-index: 30;
+}
+.setUp .setBoard .boardPerson .bkInput span:hover{
+    cursor: pointer;
+}
+.setUp .setBoard .boardPerson .bkInput input{
+    height:33px;
+    line-height: 33px;
+    width:165px;
+    color:#666666;
+    background: #f8f8f8;
+}
+.setUp .setBoard .boardPerson .bkInput .option{
+    position: absolute;
+    width:197px;
+    height:50px;
+    z-index: 31;
+    top:35px;
+    left:-1px;
+}
+.setUp .setBoard .boardPerson .bkInput .option li{
+    display: block;
+    height:25px;
+    width:193px;
+    line-height: 25px;
+    border:1px solid #e5e5e5;
+    border-top: none;
+    font-size: 14px;
+    padding-left: 6px;
+}
+.setUp .setBoard .boardPerson .bkInput .option li:hover{
+    background:#1e90ff ;
+    color:#ffffff;
+    border:1px solid #1e90ff;
+    border-top: none;
+}
+.setUp .setBoard .boardBtn{
+    width:155px;
+    float:right;
+    margin-top: 43px;
+}
+.setUp .setBoard .boardBtn li{
+    float:left;
+    display: block;
+    width:75px;
+    height:34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 16px;
+}
+.setUp .setBoard .boardBtn li:first-child{
+    width:60px;
+}
+.setUp .setBoard .boardBtn li:last-child{
+    background: #80add4;
+    border-radius: 5px;
+    margin-rgiht:20px;
+    color:#ffffff;
+}
+.setUp .setBoard .boardBtn li:first-child{
+
+}
+/*===============================任务详细*/
+.taskDetail{
+    font-family: "宋体";
+    font-size: 12px;
+    width:100%;
+    height:100%;
+    min-height: 710px;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    position: absolute;
+    z-index: 20;
+    background: rgba(33,32,32,0.55);
+}
+.taskDetail .taskBox{
+    width:600px;
+    height:600px;
+    border-radius: 5px;
+    background: #ffffff;
+    margin:0 auto;
+    margin-top: 95px;
+}
+.taskDetail .taskBox header{
+    height:40px;
+    line-height: 40px;
+    color:#ffffff;
+    background: #6999c2;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.taskDetail .taskBox header .task{
+    float:left;
+    margin-left: 17px;
+    font-size: 15px;
+}
+.taskDetail .taskBox header .topUl{
+    float:right;
+    margin-right: 5px;
+}
+.taskDetail .taskBox header .topUl .topLi{
+    display: block;
+    float: left;
+    margin-left:20px ;
+    /*font-size: 14px;*/
+    padding-right:6px ;
+    height:40px;
+    font-size: 12px;
+    position: relative;
+}
+.taskDetail .taskBox header .topUl .topLi .click{
+    display: block;
+    width:9px;
+    height:40px;
+    float: right;
+    margin-left: 5px;
+    background: url("../images/bow_03.png") no-repeat 0 19px; ;
+}
+.taskDetail .taskBox header .topUl .topLi:last-child{
+    font-size: 20px;
+    line-height: 40px;
+    font-weight:bold;;
+}
+/*=======================================================同事列表*/
+.taskDetail .taskBox header .topUl .topLi .jiTou{
+    position: absolute;
+    top:40px;
+    left: 10px;
+    width:14px;
+    height:7px;
+    z-index: 200;
+    background:url("../images/backtop_03.png") no-repeat 0 0;
+}
+.taskDetail .taskBox header .topUl .topLi .menu{
+    position: absolute;
+    top:47px;
+    left:-90px;
+    width:210px;
+    min-height: 70px;
+    /*background: #e5e5e5;*/
+    z-index: 2002;
+    border-radius: 5px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .menuTop{
+    height:35px;
+    width: 100%;
+    background:#6999c2 ;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 14px;
+    line-height: 35px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .menuBottom{
+    height:35px;
+    width: 100%;
+    background:#e9ecf2 ;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    line-height: 35px;
+    color:#6999c2;
+    box-shadow:2px 2px 3px #cfd1d1;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person{
+    /*max-height: 271px;*/
+    width:208px;
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    background: #Ffffff;
+    color:#333333;
+    box-shadow:-3px 0px 3px #e8eaea;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .person-top{
+    font-size: 14px;
+    color:#6999c2;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow:2px 0px 3px #e8eaea;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .person-top div{
+    margin-left: 14px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .menuBottom div{
+    float:right;
+    margin-left: 3px;
+    margin-right: 10px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP{
+    width:100%;
+    box-shadow:3px 0px 4px #e8eaea;
+    max-height:235px;
+    overflow-y:auto ;
+    overflow-x:hidden ;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP li p:first-child{
+    float:left;
+    margin-left: 25px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP li p:last-child{
+    float:right;
+    margin-right: 15px;
+    width:14px;
+    height:14px;
+    background: url("../images/no_03.png") no-repeat;
+    margin-top: 12px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu  .person .listP ul{
+    width:100%;
+    min-height: 35px;
+    line-height: 35px;
+    color:#000000;
+}
+.taskDetail .taskBox header .topUl .topLi .menu  .person .listP .ulList{
+    border-bottom: 1px solid #e5e5e5;
+    width:195px;
+    margin-left:11px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP ul p:first-child{
+    float:left;
+    margin-left: 7px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP ul li p:first-child{
+    margin-left: 25px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP ul .point{
+    display: block;
+    float:left;
+    font-size: 18px;
+    /*font-weight: bold;*/
+    color:#999999;
+    line-height: 35px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP ul p:last-child{
+    float:right;
+    margin-right: 15px;
+    width:14px;
+    height:14px;
+    background: url("../images/no_03.png") no-repeat;
+    margin-top: 12px;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP .on p:last-child{
+    background: url("../images/on_06.png") no-repeat;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person .listP ul .on p:last-child{
+    background: url("../images/on_06.png") no-repeat;
+}
+.taskDetail .taskBox header .topUl .topLi .menu .person ul li{
+    height:35px;
+    line-height: 35px;
+}
+/*=======================================================起止时间*/
+.taskDetail .taskBox header .topUl .topLi .timeJ{
+    width:12px;
+    height:11px;
+    position: absolute;
+    top:35px;
+    z-index: 2012;
+    left:18px;
+    background: url("../images/toppng_03.png") no-repeat;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox{
+    width:359px;
+    height:238px;
+    border:1px solid #e5e5e5;
+    position: absolute;
+    top:44px;
+    background: #ffffff;
+    z-index: 2011;
+    left:-203px;
+    box-shadow: 3px 2px 4px #e8eaea;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox{
+    width:100%;
+    height:100%;
+    box-shadow: -3px -2px 4px #e8eaea;
+    color:#000000;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left{
+    float:left;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .timetime{
+    display: block;
+    width:109px;
+    height:32px;
+    line-height: 32px;
+    border:1px solid #cccccc;
+    margin-left: 6px;
+    border-radius: 3px;
+    padding-left: 5px;
+    background: #eeeeee;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left p{
+    margin-left: 6px;
+    font-size: 12px;
+    line-height: 25px;
+    margin-top: 11px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .longTime{
+    margin-left: 6px;
+    margin-top: 10px;
+    height: 17px;
+    margin-bottom: 10px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .longTime span{
+    display: block;
+    float: left;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .longTime span:first-child{
+    width:17px;
+    height:17px;
+    border:1px solid #a9a9a9;
+    border-radius:2px;
+    margin-right: 5px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .longTime .on{
+    background: url("../images/goupng_03.png") no-repeat 2px 2px;
+    background-size: 80% 70%;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .longTime span:last-child{
+    line-height: 19px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .timeBtn{
+    clear: both;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .timeBtn ul li{
+    float:left;
+    width:62px;
+    height:28px;
+    text-align: center;
+    line-height: 28px;
+    margin-left: 6px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .timeBtn ul li:first-child{
+    background: #6999c2;
+    color:#ffffff;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-left .timeBtn ul li:last-child{
+    background: #f0f0f0;
+    color:#555555;
+    border:1px solid #dddddd;
+}
+
+.taskDetail .taskBox .run{
+    height:14px;
+    margin-top:19px;
+    margin-left: 19px;
+}
+.taskDetail .taskBox .run span{
+    display: block;
+    float:left;
+    width:14px;
+    height:14px;
+    margin-top: 1px;
+    margin-right: 9px;
+    background: url("../images/no_03.png") no-repeat 0 0;
+}
+.taskDetail .taskBox .run .done{
+    background: url("../images/on_06.png") no-repeat 0 0;
+}
+.taskDetail .taskBox .run p{
+    float:left;
+    font-size: 12px;
+    color:#666666;
+}
+.taskDetail .taskBox textarea{
+    display: block;
+    width:363px;
+    height: 70px;
+    border:1px solid #e5e5e5;
+    background:#f6f6f6 ;
+    margin-left: 42px;
+    margin-top: 13px;
+    font-size: 12px;
+    color:#999999;
+    padding:10px 12px;
+}
+.taskDetail .taskBox .time{
+    margin-left: 40px;
+    margin-top: 13px;
+    color:#666666;
+}
+.taskDetail .taskBox .time span{
+    color:#6999c2;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+.taskDetail .taskBox .midNotice{
+    height:32px;
+    width:100%;
+    background: #e9ecf2;
+    text-align: center;
+    line-height: 32px;
+    color: #999999;
+    margin-top: 40px;
+}
+.taskDetail .taskBox .midNotice span{
+    margin-left: 6px;
+    margin-right: 6px;
+}
+.taskDetail .taskBox .discuss{
+    width:100%;
+    height:260px;
+    overflow-y:auto ;
+}
+.taskDetail .taskBox .discuss .peopleInput{
+    height:36px;
+    margin-top: 29px;
+}
+.taskDetail .taskBox .discuss .peopleInput img{
+    display: block;
+    float: left;
+    width:36px;
+    height:36px;
+    border-radius: 50%;
+    margin-left: 19px;
+    margin-right: 14px;
+}
+.taskDetail .taskBox .discuss .peopleInput input{
+    display: block;
+    float: left;
+    width:377px;
+    height:34px;
+    line-height:34px;
+    background: #f6f6f6;
+    border:1px solid #e5e5e5;
+    padding-left: 10px;
+}
+.taskDetail .taskBox .discuss .peopleInput ul{
+    float:right;
+    margin-right: 12px;
+    margin-top:4px ;
+}
+.taskDetail .taskBox .discuss .peopleInput ul li{
+    display: block;
+    float:left;
+    width:48px;
+    height:28px;
+    line-height: 28px;
+    text-align: center;
+    color:#666666;
+}
+.taskDetail .taskBox .discuss .peopleInput ul li:last-child{
+    color:#ffffff;
+    background: #6999c2;
+    border-radius: 5px;
+}
+.taskDetail .taskBox .discuss .discussContent{
+    height:42px;
+    margin-top: 29px;
+}
+.taskDetail .taskBox .discuss .discussContent img{
+    display: block;
+    float: left;
+    width:36px;
+    height:36px;
+    border-radius: 50%;
+    margin-left: 19px;
+    margin-right: 14px;
+}
+.taskDetail .taskBox .discuss .discussContent .contentDetail{
+    width:284px;
+    min-height:30px;
+    background:#e9ecf2 ;
+    border-radius: 5px;
+    padding:6px 13px;
+    float:left;
+    position: relative;
+}
+.taskDetail .taskBox .discuss .discussContent .contentDetail .bk{
+    position: absolute;
+    left: -9px;
+    top:4px;
+    height:13px;
+    width:10px;
+    background:url("../images/sanjiao_03.png") no-repeat 0px  0px ;
+}
+.taskDetail .taskBox .discuss .discussContent .contentDetail p{
+    color:#666666;
+}
+.taskDetail .taskBox .discuss .discussContent .contentDetail .personName p:first-child{
+    float:left;
+    margin-top: 2px;
+    color:#999999;
+}
+.taskDetail .taskBox .discuss .discussContent .contentDetail .personName p:last-child{
+    float:right;
+    margin-top: 2px;
+    color:#999999;
+}
+/*===========================================日历*/
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right{
+    float:right;
+    width:180px;
+    margin-right: 5px;
+    /*background: #666666;*/
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date{
+    width:177px;
+    height:185px;
+    border:1px solid #dddddd;
+    border-radius: 5px;
+    margin-top: 7px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop{
+    height:20px;
+    width:100%;
+    line-height: 25px;
+    margin-top: 5px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop span{
+    float:left;
+    margin-left: 10px;
+    margin-right: 9px;
+    color:#aaaaaa;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .month{
+    float:left;
+    width:59px;
+    height: 20px;
+    line-height: 20px;
+    border:1px solid #dddddd;
+    position: relative;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .month .monthList{
+    position: absolute;
+    width:100%;
+    top:20px;
+    left: -1px;
+    height:85px;
+    overflow-y:auto;
+    border:1px solid #e5e5e5;
+    /*display: none;*/
+    z-index: 100;
+    background: #ffffff;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .month .monthList li{
+    display: block;
+    width:100%;
+    text-align: center;
+    height: 17px;
+    line-height: 17px;
+    color: #686868;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .month .monthList li:hover{
+    background: #3499ee;
+    color:#ffffff;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .month input{
+    float:left;
+    width:43px;
+    height:18px;
+    text-align: center;
+    color:#555555;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .year input{
+    float:left;
+    width:38px;
+    height:18px;
+    text-align: center;
+    color:#555555;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .date-img{
+    width:12px;
+    float:right;
+    line-height: 15px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .date-img img{
+    margin-right: 6px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .year{
+    float:left;
+    width:52px;
+    height: 20px;
+    line-height: 20px;
+    border:1px solid #dddddd;
+    margin-left: 2px;
+    position: relative;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .year .yearList{
+    position: absolute;
+    width:100%;
+    top:20px;
+    left: -1px;
+    height:85px;
+    overflow-y:auto;
+    border:1px solid #e5e5e5;
+    z-index: 100;
+    background: #ffffff;
+    /*display: none;*/
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .year .yearList li{
+    display: block;
+    width:100%;
+    text-align: center;
+    height: 17px;
+    line-height: 17px;
+    color:#686868;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date .dateTop .year .yearList li:hover{
+    background: #3499ee;
+    color:#ffffff;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date table{
+    width:96%;
+    color: #333333;
+    margin-left: 2%;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date table thead{
+    color:#333333;
+    font-size: 16px;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date table td,.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date table th{
+    height:22px;
+    width:22px;
+    border-radius: 3px;
+    line-height: 21px;
+    text-align: center;
+    /*margin-left: 5px;*/
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date table td:hover{
+    background: #bfbcd3;
+}
+.taskDetail .taskBox header .topUl .topLi .timeBox .shadowBox .time-right .date table .today{
+    background: #357ebd;
+    color:#ffffff;
+}
+/*===============================媒体部分*/
+@media screen and (max-width: 1200px) {
+    .main .left .storageBox ul li .detail{
+        width:60%;
+    }
+}

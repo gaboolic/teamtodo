@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="/css/calendar.css" rel="stylesheet" type="text/css">
+    <link href="/css/index.css" rel="stylesheet" type="text/css">
+
+    <script src="/lib/fat.js"></script>
+    <script src="/lib/angular.min.js"></script>
+    <script src="/lib/zepto.js"></script>
+</head>
+<body ng-app="todoApp" ng-controller="todoController">
+<div class="box">
+    <input ng-model="acceptTaskTitle">
+    <div class="addBtn" ng-click="saveAcceptTask()">添加</div>
+    <ul>
+        <li ng-repeat="item in acceptList" ng-click="editTask(item)">
+            {{item.title}}
+        </li>
+    </ul>
+</div>
+<div class="richeng">
+    <div class="ha">
+        <p>重要紧急</p>
+
+        <div class="btn" ng-click="addTask(3)">+</div>
+        <ul id="taskUl3">
+            <li ng-repeat="item in taskList | levelFilter:3" ng-click="editTask(item)">
+                {{item.content+item.date+item.title}}
+            </li>
+        </ul>
+    </div>
+    <div class="ha">
+        <p>重要不紧急</p>
+
+        <div class="btn" ng-click="addTask(2)">+</div>
+        <ul id="taskUl2">
+            <li ng-repeat="item in taskList | levelFilter:2" ng-click="editTask(item)">
+                {{item.content+item.date+item.title}}
+            </li>
+        </ul>
+    </div>
+    <div class="ha">
+        <p>紧急不重要</p>
+
+        <div class="btn" ng-click="addTask(1)">+</div>
+        <ul id="taskUl1">
+            <li ng-repeat="item in taskList | levelFilter:1" ng-click="editTask(item)">
+                {{item.content+item.date+item.title}}
+            </li>
+        </ul>
+    </div>
+    <div class="ha">
+        <p>不重要不紧急</p>
+
+        <div class="btn" ng-click="addTask(0)">+</div>
+        <ul id="taskUl0">
+            <li ng-repeat="item in taskList | levelFilter:0" ng-click="editTask(item)">
+                {{item.content+item.date+item.title}}
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="addTask" ng-show="isTaskShow">
+    <form>
+        标题：<input ng-model="title" id="title" width="150px"></br>
+        备注：<textarea ng-model="content"></textarea></br>
+        <div class="" ng-click="save()">保存</div>
+        <div class="" ng-click="cancel()">取消</div>
+    </form>
+</div>
+<div class="edit" ng-show="isEditShow">
+    <form>
+        标题：<input ng-model="editTitle" id="editTitle" width="150px"></br>
+        备注：<textarea ng-model="editContent"></textarea></br>
+        <div class="" ng-click="saveEdit()">保存</div>
+        <div class="" ng-click="editCancel()">取消</div>
+        <ul class="taolun">
+            <li ng-click="discussClick()">讨论</li>
+            <li ng-click="detailClick()">详情</li>
+        </ul>
+        <div class="discuss" ng-show="isDiscussShow">
+            <textarea ng-model="replyContent"></textarea>
+            <div class="transfer" ng-click="transfer()">发送</div>
+            <ul>
+                <li ng-repeat = "discussItem in taskDetail.replyList">{{discussItem.name+discussItem.content+discussItem.createTime}}</li>
+            </ul>
+        </div>
+        <div class="detail" ng-show="!isDiscussShow">详情
+            <div>
+                <span>创建人：</span>
+                <span ng-bind="taskDetail.user.name"></span>
+                <span>创建时间：</span>
+                <span ng-bind="taskDetail.task.date"></span>
+            </div>
+            <div>
+                <p>接收人：</p>
+                <ul>
+                    <li ng-repeat="person in taskDetail.joinList">{{person.name}}</li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<!--<div id="calendar"></div>-->
+<div class="calendar">
+    <div class="top"><span id="left" ng-click="calLeft()"> &lt; </span><span id="year"                                                                           ng-bind="currentDate.getYear()+1900"></span><span>年</span>
+        <span id="month" ng-bind="currentDate.getMonth()+1"></span>
+        <span>月</span> <span id="right" ng-click="calRight()"> &gt; </span></div>
+    <table>
+        <thead>
+        <tr>
+            <th>日</th>
+            <th>一</th>
+            <th>二</th>
+            <th>三</th>
+            <th>四</th>
+            <th>五</th>
+            <th>六</th>
+        </tr>
+        </thead>
+        <tbody id="calendarBody">
+        <tr ng-repeat="column in cal">
+            <td ng-repeat="day in column">
+                <div ng-if="isCurrentDate(day)" class="current" data-date="{{day}}" ng-click="changeDate(day)">{{day.getDate()}}</div>
+                <div ng-if="!isCurrentDate(day)" data-date="{{day}}" ng-click="changeDate(day)">{{day.getDate()}}</div>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<script>
+    angular.module("todoApp", [], function ($httpProvider) {
+                // Use x-www-form-urlencoded Content-Type
+                $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+                /**
+                 * The workhorse; converts an object to x-www-form-urlencoded serialization.
+                 * @param {Object} obj
+                 * @return {String}
+                 */
+                var param = function (obj) {
+                    var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+
+                    for (name in obj) {
+                        value = obj[name];
+
+                        if (value instanceof Array) {
+                            for (i = 0; i < value.length; ++i) {
+                                subValue = value[i];
+                                fullSubName = name + '[' + i + ']';
+                                innerObj = {};
+                                innerObj[fullSubName] = subValue;
+                                query += param(innerObj) + '&';
+                            }
+                        }
+                        else if (value instanceof Object) {
+                            for (subName in value) {
+                                subValue = value[subName];
+                                fullSubName = name + '[' + subName + ']';
+                                innerObj = {};
+                                innerObj[fullSubName] = subValue;
+                                query += param(innerObj) + '&';
+                            }
+                        }
+                        else if (value !== undefined && value !== null)
+                            query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+                    }
+
+                    return query.length ? query.substr(0, query.length - 1) : query;
+                };
+
+                // Override $http service's default transformRequest
+                $httpProvider.defaults.transformRequest = [function (data) {
+                    return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+                }];
+            }
+    )
+            .filter('levelFilter', function () {//过滤0123
+                return function (list, level) {
+                    if (list == undefined) {
+                        return;
+                    }
+                    var arr = [];
+                    for (var i = 0; i < list.length; i++) {
+                        if (list[i].level == level) {
+                            arr.push(list[i]);
+                        }
+                    }
+                    return arr;
+                }
+            })
+            .controller("todoController", function ($scope, $http) {
+                $scope.isTaskShow = false;
+                $scope.isEditShow = false;
+                $scope.isDiscussShow = true;
+                $scope.currentDate = new Date();//日历
+                fillTask();
+                $http.get("/task/show.do?type=0")//收纳箱
+                        .success(function (response) {
+                            $scope.acceptList = response.taskList;
+                        });
+
+                $scope.discussClick = function(){//切换讨论与详情选项卡
+                    $scope.isDiscussShow = true;
+                };
+                $scope.detailClick = function(){//切换讨论与详情选项卡
+                    $scope.isDiscussShow = false;
+                };
+                $scope.transfer = function(){
+                    var reply={};
+                    reply.taskId = $scope.id;
+                    reply.content = $scope.replyContent;
+                    $http.post("/task/reply.do", reply)
+                            .success(function (data) {
+                                $scope.taskDetail.replyList.push(reply);
+
+                            })
+                };
+                $scope.editTask = function(task){//编辑任务及收纳箱
+                    $scope.isEditShow = true;
+                    $scope.editTitle = task.title;
+                    $scope.editContent = task.content;
+                    $scope.id = task.id;
+                    $scope.currentEditTask = task;
+                    $http.get("/task/detail.do?id="+task.id)//收纳箱
+                            .success(function (response) {
+                                $scope.taskDetail = response;
+                            });
+                };
+                $scope.saveEdit = function(){//保存编辑任务及收纳箱
+                    $scope.isEditShow = false;
+                    var task = {};
+                    task.id = $scope.id;
+                    task.title = $scope.editTitle;
+                    task.content = $scope.editContent;
+                    $http.post("/task/update.do", task)
+                            .success(function (data) {
+                                $scope.currentEditTask.title = $scope.editTitle;
+                                $scope.currentEditTask.content = $scope.editContent;
+                                $scope.currentEditTask=null;
+                            })
+                };
+                $scope.addTask = function (level) {//添加任务
+                    $scope.isTaskShow = true;
+                    $scope.level = level;
+
+                };
+                $scope.save = function () {//保存了
+                    $scope.isTaskShow = false;
+                    var task = {};
+                    task.type = 1;
+                    task.level = $scope.level;
+                    task.date = $scope.currentDate.format("yyyy-MM-dd");
+                    task.title = $scope.title;
+                    task.content = $scope.content;
+
+                    $http.post("/task/add.do", task)
+                            .success(function (data) {
+                                $scope.taskList.push(task);
+                                $scope.title = null;
+                                $scope.content = null;
+                            })
+                };
+                $scope.saveAcceptTask = function () {//保存添加的收纳箱收纳箱任务
+                    console.log(":::::"+$scope.acceptTaskTitle);
+                    var task = {};
+                    task.type = 0;
+                    task.title = $scope.acceptTaskTitle;
+                    $http.post("/task/add.do", task)
+                            .success(function (data) {
+                                var task = {};
+                                task.title = $scope.acceptTaskTitle;
+                                $scope.acceptList.push(task);
+                            })
+                };
+                $scope.cancel = function (level) {
+                    $scope.isTaskShow = false;
+                };
+
+
+                $scope.cal = createDateCal();
+                function createDateCal() {
+                    var startDate = new Date();
+                    startDate.setYear($scope.currentDate.getYear() + 1900);
+                    startDate.setMonth($scope.currentDate.getMonth());
+                    startDate.setDate(1);
+                    startDate.setDate(startDate.getDate() - startDate.getDay());
+
+                    var cal = [
+                        [],
+                        [],
+                        [],
+                        [],
+                        [],
+                        []
+                    ];
+                    for (var i = 0; i < 42; i++) {
+                        var d = new Date();
+                        d.setTime(startDate.getTime());
+                        cal[Math.floor(i / 7)][i % 7] = d;
+                        startDate.setDate(startDate.getDate() + 1);
+                    }
+                    return cal;
+                }
+
+                $scope.calLeft = function () {//向左一月
+                    $scope.currentDate.setDate(1);
+                    $scope.currentDate.setMonth($scope.currentDate.getMonth() - 1);
+                    $scope.cal = createDateCal();
+                };
+                $scope.calRight = function () {//向右一月
+                    $scope.currentDate.setDate(1);
+                    $scope.currentDate.setMonth($scope.currentDate.getMonth() + 1);
+                    $scope.cal = createDateCal();
+                };
+                $scope.changeDate = function (date) {//更改当前日期
+                    $scope.currentDate = date;
+                    fillTask();
+                    $scope.cal = createDateCal();
+
+                };
+                $scope.isCurrentDate = function (date) {
+                   return $scope.currentDate.format("yyyy-MM-dd") == date.format("yyyy-MM-dd");
+                };
+                function fillTask() {
+                    var date = new Date();
+                    date.setTime($scope.currentDate.getTime());
+
+                    $http.get("/task/show.do?type=1&date=" + date.format("yyyy-MM-dd"))
+                            .success(function (response) {
+                                $scope.taskList = response.taskList;
+
+                                console.log($scope.taskList)
+                            });
+
+                }
+            });
+
+</script>
+<!--<script src="/js/calendar.js"></script>-->
+
+</body>
+</html>

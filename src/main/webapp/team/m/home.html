@@ -1,0 +1,22 @@
+<div class="top1">
+    <a href="/indexApp.html"><img src="/images/aa_08.png"></a>
+  <span>同事</span>
+</div>
+<ul class="chooseCard">
+  <li ng-class='{"on":showDiaryList && listType==1}' ng-click="showHotDailyLog()">公司动态<span>|</span></li>
+  <li ng-class='{"on":showDiaryList && listType==2}' ng-click="showAtMeDailyLog()">@我的日志</li>
+  <a href="#otherDiary"><li ng-class='{"on":!showDiaryList}' ng-click="showOtherDailyLog()"><span>|</span>同事的日志</li></a>
+</ul>
+<ul class="message">
+  <li ng-click="jumpToOtherDiaryDetail(item)" ng-repeat="item in diaryList">
+    <a href="#otherDiaryDetail/{{item.id}}">
+
+    <div class="left"><img ng-src="{{item.headImage}}"></div>
+    <div class="right">
+      <p class="title"><span>{{item.username}}</span><span>{{item.date}}</span></p>
+
+      <p class="content"><img src="/images/text_03.png"><span>{{item.title}}</span></p>
+    </div>
+    </a>
+  </li>
+</ul>

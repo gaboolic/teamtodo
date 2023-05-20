@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+
+    <title>同事</title>
+    <link href="/css/team.css" type="text/css" rel="stylesheet">
+    <script src="/jslib/fat.js"></script>
+    <script src="/jslib/angular.min.js"></script>
+    <script src="/js/ngDraggable.js"></script>
+</head>
+<body ng-app="app" ng-controller="teamController">
+<div class="top" ng-controller="commonController">
+    <img class="top-logo" src="/images/logo_03.png">
+
+    <div class="top-right">
+        <ul>
+            <a href="/todo/index.html">
+                <li><img src="/images/rc1.png">
+
+                    <p>日程</p></li>
+            </a>
+            <a href="/log/index.html">
+                <li><img src="/images/rz1.png">
+
+                    <p>日志</p></li>
+            </a>
+            <a href="/board/index.html">
+                <li><img src="/images/kb1.png">
+
+                    <p>看板</p></li>
+            </a>
+            <a href="/team/index.html">
+                <li class="currentBox"><img src="/images/ts2.png">
+
+                    <p>同事</p></li>
+            </a>
+        </ul>
+        <div class="userDetail">
+            <img class="head" src={{self.headImage}}>
+
+            <div class="user" ng-click="showMessage()">
+                <p>{{self.name}}</p>
+                <img src="/images/take_06.png"> <span>3</span>
+            </div>
+            <p class="out">退出</p>
+        </div>
+    </div>
+    <div ng-show="isShowMessage" class="topNotice">
+        <div class="topNoticeBox">
+            <header>通知</header>
+            <!--<p class="noNotice">当前没有新消息</p>-->
+            <ul class="mainBox">
+                <li class="oneNotice">
+                    <p>9:00开会</p>
+
+                    <p class="detailNotice">3分钟前<span>小刘</span>给<span>张图</span>指派一条看板任务</p>
+                    <ul>
+                        <li>忽略</li>
+                        <li>查看</li>
+                    </ul>
+                </li>
+                <li class="oneNotice">
+                    <p>9:00开会</p>
+
+                    <p class="detailNotice">3分钟前<span>小刘</span>给<span>张图</span>指派一条看板任务</p>
+                    <ul>
+                        <li>忽略</li>
+                        <li>查看</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="left">
+        <div ng-click="showHotDailyLog()">公司动态</div>
+        <div ng-click="showAtMeDailyLog()">@我的日志</div>
+        <div ng-click="showOtherDailyLog()">同事的日志</div>
+    </div>
+
+    <div class="mid">
+        <div ng-if="showDiaryList">
+            <div ng-if="listType==1">
+                热门讨论
+            </div>
+            <div ng-if="listType==2">
+                提交给我的
+            </div>
+
+            <div>
+                <ul>
+                    <li ng-click="showDiaryDetail(diary)" ng-repeat="diary in diaryList">
+                        {{diary.headImage}} {{diary.title}}
+                        {{diary.username}}发布了新日志
+                        {{diary.date}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div ng-if="!showDiaryList">
+            同事列表选择
+
+            <div id="at">
+                <button ng-click="initOrg()"> <</button>
+                <ul>
+                    <li ng-repeat="department in departments" ng-click="refreshDepartment(department)">
+                        {{department.name}}
+                    </li>
+                </ul>
+                <ul>
+                    <li ng-repeat="member in members" ng-click="at(member)">{{member.name}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="right" style="float: right;left:55%;position:relative;">
+        <div ng-show="showDiaryList">diary详情
+            <div class="diaryDetail" ng-show="diary!=null">
+                <div class="diaryBody">
+                    <div class="diaryBodyTop"><span ng-bind="diary.title"></span><span
+                            ng-click="deleteDiary()">删除日志</span>
+                    </div>
+                    <div class="diaryBodyContent" ng-bind="diary.content"></div>
+                    <div class="appendix"><span>附件：</span><span>我是附件我是附件</span></div>
+                </div>
+                <div class="visit">
+                    <p class="visitText">最近访问<span>({{peopleList.length}})</span></p>
+                    <ul>
+                        <li ng-repeat="person in peopleList">
+                            <img src="/images/tou_03.png">
+                            <div class="message">
+                                <p>{{person.name}}</p>
+                                <p>{{person.createTime}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                评论列表
+                <div class="reply">
+                    <ul>
+                        <li ng-repeat="reply in replyList">
+                            <img src={{reply.headImage}}>
+                            <div class="message">
+                                <p>{{reply.content}}</p>
+                                <p>{{reply.createTime}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <input ng-model="replyContent"/>
+                    <input type="button" style="width: 30px" ng-click="submitReply()"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div ng-if="!showDiaryList">
+            <div ng-if="!isShowOtherDiaryDetail" class="hahaha">列表选择
+                <div class="selectBox">
+                    <div class="selectHead" ng-click="showSelectYear()">
+                        <input ng-model="currentYear" readonly placeholder="请输入年份">
+                        <img src="/images/bo_03.png">
+                    </div>
+                    <ul ng-if="isSelectYearShow">
+                        <li ng-click="selectYear(year)" ng-repeat="year in yearList">{{year}}</li>
+                    </ul>
+                </div>
+                <div class="selectBox">
+                    <div class="selectHead" ng-click="showSelectMonth()">
+                        <input ng-model="currentMonth" readonly placeholder="请输入月份">
+                        <img src="/images/bo_03.png">
+                    </div>
+                    <ul ng-if="isSelectMonthShow">
+                        <li ng-click="selectMonth(month)" ng-repeat="month in monthList">{{month}}</li>
+
+                    </ul>
+                </div>
+
+                <ul>
+                    <li ng-repeat="day in dayList">
+                        <div ng-if="day<10">{{currentYear+"-"+currentMonth+"-0"+day}}</div>
+                        <div ng-if="day>10">{{currentYear+"-"+currentMonth+"-"+day}}</div>
+                        {{day}}
+                        <div ng-if='day<10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day]==null'>未写工作日志
+                        </div>
+                        <div ng-click='showOtherDiaryDetail(otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day])'
+                             ng-if='day<10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day]!=null'>
+                            {{otherDailyLogMap[currentYear+"-"+currentMonth+"-0"+day]}}
+                        </div>
+                        <div ng-if='day>10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day]==null'>未写工作日志</div>
+                        <div ng-click='showOtherDiaryDetail(otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day])'
+                             ng-if='day>10 && otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day]!=null'>
+                            {{otherDailyLogMap[currentYear+"-"+currentMonth+"-"+day]}}
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="isShowOtherDiaryDetail">某个同事日志详情
+                <div class="diaryDetail" ng-show="diary!=null">
+                    <div class="diaryBody">
+                        <div class="diaryBodyTop"><span ng-bind="diary.title"></span><span
+                                ng-click="deleteDiary()">删除日志</span>
+                        </div>
+                        <div class="diaryBodyContent" ng-bind="diary.content"></div>
+                        <div class="appendix"><span>附件：</span><span>我是附件我是附件</span></div>
+                    </div>
+                    <div class="visit">
+                        <p class="visitText">最近访问<span>({{peopleList.length}})</span></p>
+                        <ul>
+                            <li ng-repeat="person in peopleList">
+                                <img src="/images/tou_03.png">
+
+                                <div class="message">
+                                    <p>{{person.name}}</p>
+
+                                    <p>{{person.createTime}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="reply">
+                        <ul>
+                            <li ng-repeat="reply in replyList">
+                                <img src="/images/tou_03.png">
+
+                                <div class="message">
+                                    <p>{{reply.content}}</p>
+
+                                    <p>2014-05-02 12:23</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <input type="text" ng-model="otherReplyContent"/>
+                        <input style="width: 30px" type="button" ng-click="submitOtherReply()"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="/js/common.js"></script>
+<script src="/js/team.js"></script>
+</body>
+</html>

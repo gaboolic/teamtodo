@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="/css/calendar.css" rel="stylesheet" type="text/css">
+    <link href="/css/index.css" rel="stylesheet" type="text/css">
+    <script src="/jslib/fat.js"></script>
+    <script src="/jslib/angular.min.js"></script>
+    <script src="/jslib/zepto.js"></script>
+</head>
+<body ng-app="todoApp" ng-controller="todoController">
+<!--//左边看板分类-->
+    <div>
+         <div class="addBtn" ng-click="addBoard()">新建看板</div>
+        <ul>
+            <li ng-repeat="item in boardList" ng-click="changeBoard(item)">{{item.name}}</li>
+        </ul>
+    </div>
+<!--//新建看板-->
+   <div class="addBoard" ng-show="isAddBoardShow">
+       <p>哈哈，要新建看板了</p>
+        <input ng-model="boardName">
+       <div class="addBtn" ng-click="saveBoard()">确定</div>
+   </div>
+<!--//编辑卡片-->
+<div class="editCard" ng-show="isEditCardShow">
+    <p>要编辑卡片了</p>
+    名称：<input ng-model="cardName">
+    <div class="addBtn" ng-click="saveCardEdit()">确定</div>
+    <div class="addBtn" ng-click="cancelCardEdit()">取消</div>
+</div>
+<!--//右边，对应分类的看板们-->
+    <div class="board">
+        <ul>
+            <li class="card" ng-repeat="card in cardList">{{card.name}}
+                 <ul>
+                     <li ng-repeat="task in card.taskList">{{task.title}}</li>
+                     <div ng-click="addTask(card)" ng-show="card.id!=cardId || !isAddTaskShow">新建任务</div>
+                 </ul>
+
+                <div ng-if="card.id==cardId && isAddTaskShow">
+                    <textarea ng-model="card.taskContent"></textarea>
+                    <div class="newBtn" ng-click="cancelTask()">取消</div>
+                    <div class="newBtn" ng-click="saveTask(card)">保存</div>
+                </div>
+                <div class="addBtn" ng-click="editCard(card)">编辑</div>
+                <div class="addBtn" ng-click="deleteCard(card)">删除</div>
+            </li>
+            <li>
+                <div ng-click="addCard()" ng-show="isBtnShow">新建卡片</div>
+                <div class="addNewCard" ng-show="isAddCardShow">
+                    <input ng-model="newCardName" ></br>
+                    <div class="newBtn" ng-click="cancelCard()">取消</div>
+                    <div class="newBtn" ng-click="saveCard()">保存</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+<!--<script>-->
+<!--angular.module("todoApp", [], function ($httpProvider) {-->
+            <!--$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';-->
+            <!--var param = function (obj) {-->
+                <!--var query = '', name, value, fullSubName, subName, subValue, innerObj, i;-->
+
+                <!--for (name in obj) {-->
+                    <!--value = obj[name];-->
+
+                    <!--if (value instanceof Array) {-->
+                        <!--for (i = 0; i < value.length; ++i) {-->
+                            <!--subValue = value[i];-->
+                            <!--fullSubName = name + '[' + i + ']';-->
+                            <!--innerObj = {};-->
+                            <!--innerObj[fullSubName] = subValue;-->
+                            <!--query += param(innerObj) + '&';-->
+                        <!--}-->
+                    <!--}-->
+                    <!--else if (value instanceof Object) {-->
+                        <!--for (subName in value) {-->
+                            <!--subValue = value[subName];-->
+                            <!--fullSubName = name + '[' + subName + ']';-->
+                            <!--innerObj = {};-->
+                            <!--innerObj[fullSubName] = subValue;-->
+                            <!--query += param(innerObj) + '&';-->
+                        <!--}-->
+                    <!--}-->
+                    <!--else if (value !== undefined && value !== null)-->
+                        <!--query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';-->
+                <!--}-->
+
+                <!--return query.length ? query.substr(0, query.length - 1) : query;-->
+            <!--};-->
+
+            <!--// Override $http service's default transformRequest-->
+            <!--$httpProvider.defaults.transformRequest = [function (data) {-->
+                <!--return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;-->
+            <!--}];-->
+        <!--}-->
+<!--)-->
+        <!--.controller("todoController", function ($scope, $http) {-->
+            <!--$scope.isAddBoardShow = false;-->
+            <!--$scope.isAddCardShow = false;-->
+            <!--$scope.isBtnShow = true;-->
+            <!--$scope.isEditCardShow = false;-->
+            <!--$scope.isAddTaskShow = false;-->
+            <!--$http.get("/board/all.do")//看板分类列表-->
+                    <!--.success(function (response) {-->
+                        <!--$scope.boardList = response.boardList;-->
+                    <!--});-->
+
+            <!--$scope.changeBoard = function(board){//返回相对应分类的看板的卡片-->
+                <!--$scope.boardId = board.id;-->
+                <!--$http.get("/board/card/all.do?boardId="+board.id)//看板分类列表-->
+                        <!--.success(function (response) {-->
+                            <!--$scope.cardList = response.cardList;-->
+                        <!--});-->
+            <!--};-->
+
+            <!--$scope.addBoard = function(){//添加看板-->
+                <!--$scope.isAddBoardShow = true;-->
+
+            <!--};-->
+            <!--$scope.saveBoard = function(){//保存看板-->
+                <!--$scope.isAddBoardShow = false;-->
+                <!--var board={};-->
+                <!--board.name = $scope.boardName;-->
+                <!--$http.post("/board/add.do",board)//-->
+                        <!--.success(function (response) {-->
+                            <!--board.id = response.id;-->
+                            <!--$scope.boardList.push(board);-->
+                        <!--});-->
+            <!--};-->
+            <!--$scope.addCard = function(){//添加卡片-->
+                <!--$scope.isBtnShow = false;-->
+                <!--$scope.isAddCardShow = true;-->
+
+            <!--};-->
+            <!--$scope.saveCard= function(){//保存新加的卡片-->
+                <!--$scope.isBtnShow = true;-->
+                <!--$scope.isAddCardShow = false;-->
+                <!--var card={};-->
+                <!--card.name = $scope.newCardName;-->
+                <!--card.boardId = $scope.boardId;-->
+                <!--$http.post("/board/card/add.do",card)-->
+                        <!--.success(function (response) {-->
+                            <!--card.id = response.id;-->
+                            <!--$scope.cardList.push(card);-->
+                        <!--});-->
+            <!--};-->
+            <!--$scope.cancelCard = function(){//取消新建卡片-->
+                <!--$scope.isBtnShow = true;-->
+                <!--$scope.isAddCardShow = false;-->
+                <!--$scope.newCardName=null;-->
+            <!--};-->
+            <!--$scope.addTask = function(card){//添加任务-->
+
+                <!--$scope.cardId = card.id;-->
+                <!--$scope.isAddTaskShow = true;-->
+
+            <!--};-->
+            <!--$scope.saveTask= function(card){//保存新加的任务-->
+                <!--console.log("taskCOntent:"+card.taskContent);-->
+                <!--var task={};-->
+                <!--task.title = card.taskContent;-->
+                <!--task.cardId = $scope.cardId;-->
+                <!--task.type = 2;-->
+
+
+                <!--$http.post("/task/add.do",task)-->
+                        <!--.success(function (response) {-->
+                            <!--task.id=response.id;-->
+                            <!--card.taskList.push(task);-->
+
+                            <!--$scope.isAddTaskShow = false;-->
+                        <!--});-->
+            <!--};-->
+            <!--$scope.editCard = function(card){//编辑卡片-->
+                <!--$scope.isEditCardShow = true;-->
+                <!--$scope.cardName = card.name;-->
+                <!--$scope.cardId = card.id;-->
+                <!--$scope.currentCard = card;-->
+            <!--};-->
+            <!--$scope.saveCardEdit = function(){//保存被编辑的卡片-->
+                <!--console.log($scope.cardName)-->
+                <!--$scope.isEditCardShow = false;-->
+                <!--var card = {};-->
+                <!--card.name = $scope.cardName;-->
+                <!--card.id = $scope.cardId;-->
+                <!--$http.post("/board/card/update.do", card)-->
+                        <!--.success(function (data) {-->
+                            <!--$scope.currentCard.name = $scope.cardName;-->
+
+                        <!--})-->
+            <!--};-->
+            <!--$scope.cancelCardEdit = function(){//取消编辑的卡片-->
+                <!--$scope.isEditCardShow = false;-->
+
+            <!--};-->
+            <!--$scope.deleteCard = function(card){//删除的卡片-->
+                <!--$http.post("/board/card/delete.do?id="+card.id)-->
+                        <!--.success(function (data) {-->
+                            <!--for(var i=0;i<$scope.cardList.length;i++) {-->
+                                <!--var item = $scope.cardList[i];-->
+                                <!--if(item.id==card.id){-->
+                                    <!--$scope.cardList.splice(i,1);-->
+                                <!--}-->
+                            <!--}-->
+
+
+
+                        <!--})-->
+
+            <!--};-->
+        <!--});-->
+
+<!--</script>-->
+<!--<script src="/js/calendar.js"></script>-->
+
+<script src="/js/board.js"></script>
+</body>
+</html>

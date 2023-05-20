@@ -1,0 +1,156 @@
+<!-------------------------------04编辑任务 详情-->
+<div ng-show="!isSelectShow && !isIssuedShow">
+    <div class="top2" >
+        <div class="topLeft" ng-click="returnTaskList()"><img src="/images/ll_03.png"><span>返回</span></div>
+        <div class="topRight"><span ng-click="showDelete()"><img src="/images/delete_03.png"></span></div>
+        <span class="edit">编辑任务</span>
+    </div>
+    <div class="mainBox2">
+        <div class="title2"><input ng-model="taskDetail.task.title" placeholder="请填写任务标题"></div>
+        <div class="content2">
+            <textarea ng-model="taskDetail.task.content" placeholder="请填写任务内容"></textarea>
+        </div>
+        <ul class="mainBox2Choose">
+            <li>
+                <img src="/images/xxl_03.png">
+
+                <div class="contentRight" ng-click="selectTaskType()">
+                    <span class="leftSpan">象限</span>
+                    <img src="/images/go_07.png">
+                    <span class="rightSpan" ng-if="taskDetail.task.level==0">不重要不紧急</span>
+                    <span class="rightSpan" ng-if="taskDetail.task.level==1">紧急但不重要</span>
+                    <span class="rightSpan" ng-if="taskDetail.task.level==2">重要但不紧急</span>
+                    <span class="rightSpan" ng-if="taskDetail.task.level==3">重要且紧急</span>
+                </div>
+            </li>
+            <li class="on">
+                <img src="/images/gkl_03.png">
+
+                <div class="contentRight" ng-click="toggleTaskAuth()">
+                    <span class="leftSpan">公开</span>
+                    <img ng-show="!isTaskPublic" src="/images/hbk_08.png" class="grey">
+                    <img ng-show="isTaskPublic" src="/images/click_03.png" class="click">
+                </div>
+            </li>
+        </ul>
+        <div class="transfer3">
+            <img src="/images/xfl_03.png">
+
+            <div class="contentRight" ng-click="goIssued()">
+                <span class="text3">下发</span>
+                <img src="/images/go_07.png">
+            </div>
+        </div>
+        <div class="chooseList" ng-show="taskDetail.joinList.length>0">
+        <!--<p><span>已选部门：</span><span>技术研发部</span></p>-->
+        <p><span>已选同事：</span>
+          <span ng-repeat="item in taskDetail.joinList">{{item.name}} </span>
+        </p>
+        </div>
+        <ul class="change">
+            <li ng-click="showReplyList()" ng-class='{"on":isReplyListShow}'>讨论</li>
+            <li ng-click="showDetail()" ng-class='{"on":!isReplyListShow}'>详情</li>
+        </ul>
+        <!--*******详情-->
+        <div class="detail" ng-show="!isReplyListShow">
+            <div class="create">
+                <span class="create1">创建人</span>
+
+                <div class="creatRight">
+                    <img ng-src="{{taskDetail.user.headImage}}">
+                    <span class="name">{{taskDetail.user.name}}</span>
+                    <span class="date">{{taskDetail.task.date}}</span>
+                </div>
+            </div>
+            <div class="receiveList">
+                <span class="receivePerson">接收人</span>
+                <ul>
+                    <li ng-repeat="item in taskDetail.joinList">
+                        <img ng-src="{{item.headImage}}">
+                        <span>{{item.name}}</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="discuss">
+            <ul class="message7" ng-show="isReplyListShow">
+                <li ng-repeat="item in taskDetail.replyList">
+                    <div class="left"><img ng-src="{{item.headImage}}"></div>
+                    <div class="right">
+                        <p class="title"><span>{{item.name}}</span><span>{{item.createTime}}</span></p>
+
+                        <p class="content"><span>{{item.content}}</span></p>
+                    </div>
+                </li>
+            </ul>
+            <div class="talk">
+                <input ng-model="replyContent" placeholder="说点什么吧">
+
+                <div ng-click="transfer()" class="commit">提交</div>
+            </div>
+        </div>
+        <div ng-click="saveEdit()" class="save">保存</div>
+    </div>
+    <div class="delete" ng-show="isDeleteShow">
+        <div class="deleteBox">
+            <p>您要删除该任务吗？</p>
+            <ul class="btn">
+                <li ng-click="cancel()">取消</li>
+                <li ng-click="deleteTask()">确定</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- 象限 -->
+<div class="addSelect" ng-show="isSelectShow">
+    <div class="top2">
+        <div class="topLeft" ng-click="returnEdit()"><img src="/images/ll_03.png"><span>返回</span></div>
+        <span class="edit">选择象限</span>
+    </div>
+    <ul class="choice">
+        <li ng-click="selectLevel(3)">重要且紧急</li>
+        <li ng-click="selectLevel(2)">重要但不紧急</li>
+        <li ng-click="selectLevel(1)">紧急但不重要</li>
+        <li ng-click="selectLevel(0)">不重要不紧急</li>
+    </ul>
+</div>
+
+<div ng-show="isIssuedShow">
+    <div class="top2">
+        <div class="topLeft" ng-click="returnEdit()"><img src="/images/ll_03.png"><span>返回</span></div>
+        <div class="topRight" ng-click="returnEditEnter()"><span> 完成</span></div>
+        <span></span>
+    </div>
+    <div class="topCheck">
+        <p ng-click="initOrg()">同事</p>
+
+        <div ng-click="toggleSelectAll()" class="topCheckRight" ng-class='{"check":isSelectAll}'>
+            全选
+            <div></div>
+        </div>
+    </div>
+    <div class="mainBox4">
+        <ul class="ulList3">
+            <li ng-click="refreshDepartment(department)" ng-repeat="department in departments">
+              <span>{{department.name}}</span>
+              <img src="/images/go_07.png">
+            </li>
+        </ul>
+
+        <ul class="ulList5">
+            <li ng-click="join(member)" ng-repeat="member in members" ng-class='{"check":member.on}'>
+                <img src="/images/tt.png" class="head5">
+
+                <div class="right">
+                    <span>{{member.name}}</span>
+                    <img ng-show="member.type == 1 || member.type == 2" src="/images/wstr_06.png" class="star">
+
+                    <div class="gou"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

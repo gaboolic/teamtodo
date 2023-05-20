@@ -16,6 +16,7 @@ import tk.gbl.pojo.request.card.AllCardRequest;
 import tk.gbl.pojo.request.card.DeleteCardRequest;
 import tk.gbl.pojo.request.card.UpdateCardRequest;
 import tk.gbl.pojo.response.AllCardResponse;
+import tk.gbl.pojo.response.BaseIdResponse;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.util.TransUtil;
 import tk.gbl.util.UserInfo;
@@ -70,7 +71,9 @@ public class CardService {
     card.setBoard(board);
     card.setSeqNo(cardDao.getMaxOfBoard(board)+1000000);
     cardDao.save(card);
-    return Resp.success;
+    BaseIdResponse response = new BaseIdResponse(ResultType.SUCCESS);
+    response.setId(card.getId());
+    return response;
   }
 
   public BaseResponse delete(DeleteCardRequest request) {

@@ -14,10 +14,7 @@ import tk.gbl.pojo.TaskReplyPojo;
 import tk.gbl.pojo.UserPojo;
 import tk.gbl.pojo.request.ShowStarRequest;
 import tk.gbl.pojo.request.task.*;
-import tk.gbl.pojo.response.BaseResponse;
-import tk.gbl.pojo.response.DetailTaskResponse;
-import tk.gbl.pojo.response.ShowStarResponse;
-import tk.gbl.pojo.response.ShowTaskResponse;
+import tk.gbl.pojo.response.*;
 import tk.gbl.util.TransUtil;
 import tk.gbl.util.UserInfo;
 
@@ -43,7 +40,7 @@ public class TaskService {
   TaskReplyDao taskReplyDao;
 
   public BaseResponse addTask(AddTaskRequest request) {
-    BaseResponse response = new BaseResponse(ResultType.SUCCESS);
+    BaseIdResponse response = new BaseIdResponse(ResultType.SUCCESS);
     Task task = new Task();
     task.setLevel(request.getLevel());
     task.setType(request.getType());
@@ -53,6 +50,7 @@ public class TaskService {
     task.setTitle(request.getTitle());
     task.setContent(request.getContent());
     taskDao.save(task);
+    response.setId(task.getId());
     return response;
   }
 
@@ -166,7 +164,8 @@ public class TaskService {
       BaseResponse response = new BaseResponse(ResultType.ERROR);
       return response;
     }
-    BaseResponse response = new BaseResponse(ResultType.SUCCESS);
+    BaseIdResponse response = new BaseIdResponse(ResultType.SUCCESS);
+    response.setId(reply.getId());
     return response;
   }
 

@@ -1,0 +1,32 @@
+<div class="top1">
+    <a href="/indexApp.html">
+        <div class="topLeft"><img src="/images/h_05.png"></div>
+    </a>
+
+  <div class="topRight"><a href="#calendar"><img src="/images/rz_05.png"></a></div>
+    <span>我的日志</span>
+</div>
+<div class="mainBox">
+    <div class="list" ng-repeat="diary in diaryList" ng-click="showDiaryDetail(diary)">
+        <a href="#myDiaryDetail/{{diary.date}}">
+            <p>{{diary.date}}</p>
+
+            <div class="box">
+                <div class="title">{{diary.title}}</div>
+                <div class="content" ng-bind-html="diary.content"></div>
+            </div>
+        </a>
+    </div>
+    <!--<div class="list">-->
+    <!--<p>5月5日</p>-->
+    <!--<div class="box">-->
+    <!--<div class="title">充实的一天</div>-->
+    <!--<div class="content">今天完成了最工作，充实的一天，赞一个！哈哈哈哈</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+</div>
+<div class="bottom1">
+    <div class="bottom1Left" ng-class='{"gray":isGray()}' ng-click="createDiary()">新建日志</div>
+    <div class="bottom1Left"><a href="#auth">谁能看我日志</a></div>
+</div>

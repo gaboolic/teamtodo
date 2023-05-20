@@ -1,0 +1,66 @@
+*{
+    margin:0;
+    padding:0
+}
+body,html{
+    font-family:  "Microsoft YaHei", "Open Sans",sans-serif;
+    font-size: 14px;
+}
+.calendar{
+    margin:0 auto;
+    width:256px;
+    height:273px;
+    border: 1px solid #dde1e7;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+.calendar .top{
+    height:38px;
+    line-height: 38px;
+    background: #e6e9ef;
+}
+.calendar .top span:first-child{
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right:10px;
+    color:#50505e;
+}
+.calendar .top span:first-child:hover{
+    cursor: pointer;
+}
+.calendar .top span:last-child:hover{
+    cursor: pointer;
+}
+.calendar .top span:last-child{
+    font-weight: bold;
+    margin-left: 10px;
+    color:#50505e;
+}
+.calendar table{
+    width:100%;
+    height:217px;
+}
+.calendar table thead th{
+    height:31px;
+    line-height: 31px;
+    text-align: center;
+}
+.calendar table tbody{
+    height:31px;
+    line-height: 31px;
+    text-align: center;
+}
+.calendar table tbody div{
+    width:32px;
+    height:32px;
+    border-radius: 5px;
+    /*background: #67a3c7;*/
+}
+.calendar table tbody div:not(.current):hover{
+    background: #e3e3e3;
+    cursor: pointer;
+}
+.calendar table tbody .current{
+    background: #67A3C7;
+    color:#ffffff;
+}

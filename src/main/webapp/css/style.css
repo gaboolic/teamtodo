@@ -1,0 +1,234 @@
+
+/* PAGES
+============================================================================= */
+.page-home {
+    background: #00D0BC;
+    color: #00907c;
+}
+
+.page-about {
+    background: #E59400;
+    color: #a55400;
+}
+
+.page-contact {
+    background: #ffa6bb;
+    color: #9e0000;
+}
+
+/* ANIMATIONS
+============================================================================= */
+
+.page.ng-leave {
+    z-index: 9999;
+    animation: fadeOut 0.2s both ease-in;
+
+}
+
+.page.ng-enter {
+    z-index: 8888;
+    animation: fadeIn 0.2s both ease-in;
+}
+
+/* page specific animations ------------------------ */
+
+.page-home.ng-leave {
+    animation: slideOutLeft 0.5s both ease-in;
+}
+.page-home.ng-enter {
+    animation: slideInLeft 0.5s both ease-in;
+}
+
+/*.page-about.ng-leave {*/
+    /*animation: slideOutLeft 0.5s both ease-in;*/
+/*}*/
+/*.page-about.ng-enter {*/
+    /*animation: slideInRight 0.5s both ease-in;*/
+/*}*/
+
+/*.page-contact.ng-leave {*/
+    /*animation: slideOutLeft 0.5s both ease-in;*/
+/*}*/
+/*.page-contact.ng-enter {*/
+    /*animation: slideInRight 0.5s both ease-in;*/
+/*}*/
+
+
+
+
+/* slide in from the right */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@-moz-keyframes slideInRight {
+    from {
+        -moz-transform: translateX(100%);
+    }
+    to {
+        -moz-transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes slideInRight {
+    from {
+        -webkit-transform: translateX(100%);
+    }
+    to {
+        -webkit-transform: translateX(0);
+    }
+}
+
+/* slide in from the right */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@-moz-keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* slide in from the bottom */
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@-moz-keyframes slideInUp {
+    from {
+        -moz-transform: translateY(100%);
+    }
+    to {
+        -moz-transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes slideInUp {
+    from {
+        -webkit-transform: translateY(100%);
+    }
+    to {
+        -webkit-transform: translateY(0);
+    }
+}
+
+/* slide in from the bottom */
+@keyframes slideOutLeft {
+    from {
+        -webkit-transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@-moz-keyframes slideOutLeft {
+    from {
+        -webkit-transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes slideOutLeft {
+    from {
+        -webkit-transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* slide in from the bottom */
+@keyframes slideOutRight {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@-moz-keyframes slideOutRight {
+    to {
+        -moz-transform: translateX(100%);
+    }
+}
+
+@-webkit-keyframes slideOutRight {
+    to {
+        -webkit-transform: translateX(100%);
+    }
+}
+
+/* rotate out newspaper */
+@-webkit-keyframes rotateOutNewspaper {
+    to {
+        -webkit-transform: translateZ(-3000px) rotateZ(360deg);
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes rotateOutNewspaper {
+    to {
+        -moz-transform: translateZ(-3000px) rotateZ(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes rotateOutNewspaper {
+    to {
+        transform: translateZ(-3000px) rotateZ(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /*初始状态 透明度为0*/
+    }
+    50% {
+        opacity: 0.8; /*中间状态 透明度为0*/
+    }
+    100% {
+        opacity: 1; /*结尾状态 透明度为1*/
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1; /*初始状态 透明度为0*/
+    }
+    50% {
+        opacity: 0.2; /*中间状态 透明度为0*/
+    }
+    100% {
+        opacity: 0; /*结尾状态 透明度为1*/
+    }
+}

@@ -11,6 +11,7 @@ import tk.gbl.pojo.request.board.AddBoardRequest;
 import tk.gbl.pojo.request.board.DeleteBoardRequest;
 import tk.gbl.pojo.request.board.UpdateBoardRequest;
 import tk.gbl.pojo.response.AllBoardResponse;
+import tk.gbl.pojo.response.BaseIdResponse;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.util.TransUtil;
 import tk.gbl.util.UserInfo;
@@ -38,7 +39,9 @@ public class BoardService {
     board.setUser(user);
     board.setTeam(user.getTeam());
     boardDao.save(board);
-    return Resp.success;
+    BaseIdResponse response = new BaseIdResponse(ResultType.SUCCESS);
+    response.setId(board.getId());
+    return response;
   }
 
   public BaseResponse updateBoard(UpdateBoardRequest request) {

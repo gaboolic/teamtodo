@@ -13,6 +13,7 @@ import tk.gbl.pojo.DailyLogPojo;
 import tk.gbl.pojo.DailyLogVisitPojo;
 import tk.gbl.pojo.request.ShowStarRequest;
 import tk.gbl.pojo.request.dailylog.*;
+import tk.gbl.pojo.response.BaseIdResponse;
 import tk.gbl.pojo.response.BaseResponse;
 import tk.gbl.pojo.response.DetailDailyLogResponse;
 import tk.gbl.pojo.response.ShowStarResponse;
@@ -87,7 +88,8 @@ public class DailyLogService {
         messageService.atMessage(id);
       }
     }
-    BaseResponse response = new BaseResponse(ResultType.SUCCESS);
+    BaseIdResponse response = new BaseIdResponse(ResultType.SUCCESS);
+    response.setId(dailyLog.getId());
     return response;
   }
 

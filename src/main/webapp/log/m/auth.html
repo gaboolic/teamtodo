@@ -1,0 +1,76 @@
+<!--*****************************谁能看我的日志-->
+<div ng-show="isAuthPageShow">
+  <div class="top2">
+    <div class="topLeft"><a href="#myDiary"><img src="/images/ll_03.png"><span>返回</span></a></div>
+    <div class="topRight" ng-click="saveAuth()"><span> 完成</span></div>
+    <span>谁能看我日志</span>
+  </div>
+  <ul class="ulList4">
+    <li class="click" ng-click="toggleTaskAuthPublic()">
+      <span>允许任何人</span>
+      <img src="/images/click_03.png" ng-show="isTaskPublic">
+      <img src="/images/hbk_08.png" ng-show="!isTaskPublic">
+    </li>
+    <li ng-click="toggleTaskAuthPrivate()">
+      <span>仅自己</span>
+      <img src="/images/click_03.png" ng-show="isTaskPrivate">
+      <img src="/images/hbk_08.png" ng-show="!isTaskPrivate">
+    </li>
+    <li ng-click="returnCustom()" class="custom"><span>自定义</span><img src="/images/go_07.png"></li>
+  </ul>
+</div>
+
+<!--=========================访问列表-->
+<div ng-show="isAuthListShow">
+  <div class="top2">
+    <div class="topLeft" ng-click="returnAuth()"><img src="/images/ll_03.png"><span>返回</span></div>
+    <span class="mid">可以查看的同事</span>
+    <div class="topRight" ng-click="returnAuthSet()"><span>设置</span></div>
+
+  </div>
+  <ul class="ulList6">
+    <li ng-repeat="item in authUserList">
+      <img src="/images/tt.png" class="head6">
+      <span class="name6">{{item.name}}</span>
+      <span class="date6">{{item.createTime}}</span>
+    </li>
+
+  </ul>
+</div>
+
+<div ng-show="isIssuedShow">
+  <div class="top2">
+    <div class="topLeft" ng-click="returnAuth()"><img src="/images/ll_03.png"><span>返回</span></div>
+    <div class="topRight" ng-click="returnAuthEnter()"><span> 完成</span></div>
+    <span></span>
+  </div>
+  <div class="topCheck">
+    <p ng-click="initOrg()">同事</p>
+
+    <div ng-click="toggleSelectAll()" class="topCheckRight" ng-class='{"check":isSelectAll}'>
+      全选
+      <div></div>
+    </div>
+  </div>
+  <div class="mainBox4">
+    <ul class="ulList3">
+      <li ng-click="refreshDepartment(department)" ng-repeat="department in departments">
+        <span>{{department.name}}</span>
+        <img src="/images/go_07.png">
+      </li>
+    </ul>
+
+    <ul class="ulList5">
+      <li ng-click="join(member)" ng-repeat="member in members" ng-class='{"check":member.on}'>
+        <img src="/images/tt.png" class="head5">
+
+        <div class="right">
+          <span>{{member.name}}</span>
+          <img ng-show="member.type == 1 || member.type == 2" src="/images/wstr_06.png" class="star">
+
+          <div class="gou"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

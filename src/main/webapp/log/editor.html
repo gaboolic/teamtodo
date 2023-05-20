@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>angular-editor</title>
+  <!-- styles -->
+  <link rel="stylesheet" href="/css/simditor.css"/>
+  <link rel="stylesheet" href="/css/simditor-mention.css"/>
+  <!-- opensource libs -->
+  <script src="/lib/jquery.min.js"></script>
+  <script src="/lib/angular.min.js"></script>
+
+  <script type="text/javascript" src="/lib/simditor/module.js"></script>
+  <script type="text/javascript" src="/lib/simditor/hotkeys.js"></script>
+  <script type="text/javascript" src="/lib/simditor/uploader.js"></script>
+  <script type="text/javascript" src="/lib/simditor/simditor.js"></script>
+  <script type="text/javascript" src="/lib/simditor/simditor-mention.js"></script>
+  <script type="text/javascript" src="/lib/simditor/upload.js"></script>
+  <script type="text/javascript" src="/lib/simditor/myatbutton.js"></script>
+
+  <script src="/js/angular-editor.js"></script>
+
+
+</head>
+<body>
+<h2>angular-editor demo</h2>
+
+<div class="container" ng-controller="mainController">
+  <div style="margin: 20px">
+    <h4>the editor's value:</h4>
+    <!--<div>{{editor}}</div>-->
+    <div id="at">
+      <button ng-click="initOrg()"> <</button>
+      <ul>
+        <li ng-repeat="department in departments" ng-click="refreshDepartment(department)">{{department.name}}</li>
+      </ul>
+      <ul>
+        <li ng-repeat="member in members" ng-click="at(member)">{{member.name}}</li>
+      </ul>
+    </div>
+  </div>
+  <div simditor ng-model="editor" placeholder="some placeholder"></div>
+  <div class="btn-group">
+    <button ng-click="clearEditor()">CLEAR</button>
+  </div>
+
+
+</div>
+
+
+<script>
+  (function (window) {
+    'use strict';
+    var angular = window.angular, appName = 'app';
+
+    angular
+        .module(appName, [
+          'simditor'
+        ])
+        .controller('mainController', function ($scope, $http) {
+          $scope.editor = '';
+
+          $scope.clearEditor = function () {
+            $scope.editor = '';
+          };
+          $scope.initOrg = function () {
+            $http.get("/team/myColleagues.do").success(function (data) {
+
+              console.log(data)
+              $scope.members = data.members;
+              $scope.departments = data.departments;
+            });
+          };
+          $scope.initOrg();
+          $scope.refreshDepartment = function (department) {
+            console.log("aaaaa"+$scope.simditor)
+            $scope.simditor.focus();
+
+            $http.get("/team/myColleagues.do?depId=" + department.id).success(function (data) {
+
+              console.log(data)
+              $scope.members = data.members;
+              $scope.departments = data.departments;
+            });
+          };
+          var atMemberIdList = new Array();
+          $scope.atMemberList = new Array();
+          $scope.at = function (member) {
+            $scope.simditor.focus();
+
+            if (atMemberIdList.indexOf(member.id) <= 0) {
+              atMemberIdList.push(member.id);
+              $scope.atMemberList.push(member);
+            }
+          }
+        });
+
+  }(window));
+</script>
+</body>
+</html>

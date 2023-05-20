@@ -1,0 +1,90 @@
+<!-------------------------------01日程-->
+<div class="top1">
+  <div class="topLeft"><a href="/indexApp.html"><img src="/images/aa_08.png"></a></div>
+  <div class="topRight"><a href="#calendar"><img src="/images/rz_05.png"></a></div>
+  <span>{{currentDate}} 日程</span>
+</div>
+<div class="mainBox1">
+  <div class="task">
+    <div ng-class='{"taskTop":true,"cut":!isListOneShow}' ng-click="showListOne()">
+      重要且紧急
+      <img src="/images/cgo3_03.png" class="out">
+      <img src="/images/cgo2_03.png" class="cut">
+    </div>
+    <ul class="taskUl" ng-show="isListOneShow">
+      <li ng-repeat="item in taskList | levelFilter:3" ng-click="editTask(item)">
+        <a href="#edit/{{item.id}}">
+
+          <p class="content"><span>·</span><span>{{item.title}}</span></p>
+
+          <div class="transfer" ng-show="item.downAccept == 1" data-test="{{item.downAccept}}">
+            <img src="/images/sc_03.png">
+            <span >下发给{{item.joinNames}}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="task">
+    <div ng-class='{"taskTop":true,"cut":!isListTwoShow}' ng-click="showListTwo()">
+      重要但不紧急
+      <img src="/images/cgo3_03.png" class="out">
+      <img src="/images/cgo2_03.png" class="cut">
+    </div>
+    <ul class="taskUl" ng-show="isListTwoShow">
+      <li ng-repeat="item in taskList | levelFilter:2" ng-click="editTask(item)">
+        <a href="#edit/{{item.id}}">
+
+          <p class="content"><span>·</span><span>{{item.title}}</span></p>
+
+          <div class="transfer" ng-show="item.downAccept == 1"  data-test="{{item.downAccept}}">
+            <img src="/images/sc_03.png">
+            <span >下发给{{item.joinNames}}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="task">
+    <div ng-class='{"taskTop":true,"cut":!isListThreeShow}' ng-click="showListThree()">
+      紧急但不重要
+      <img src="/images/cgo3_03.png" class="out">
+      <img src="/images/cgo2_03.png" class="cut">
+    </div>
+    <ul class="taskUl" ng-show="isListThreeShow">
+      <li ng-repeat="item in taskList | levelFilter:1" ng-click="editTask(item)">
+        <a href="#edit/{{item.id}}">
+
+          <p class="content"><span>·</span><span>{{item.title}}</span></p>
+
+          <div class="transfer" ng-show="item.downAccept == 1"  data-test="{{item.downAccept}}">
+            <img src="/images/sc_03.png">
+            <span >下发给{{item.joinNames}}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="task">
+    <div ng-class='{"taskTop":true,"cut":!isListFourShow}' ng-click="showListFour()">
+      不重要不紧急
+      <img src="/images/cgo3_03.png" class="out">
+      <img src="/images/cgo2_03.png" class="cut">
+    </div>
+    <ul class="taskUl" ng-show="isListFourShow">
+      <li ng-repeat="item in taskList | levelFilter:0" ng-click="editTask(item)">
+        <a href="#edit/{{item.id}}">
+
+          <p class="content"><span>·</span><span>{{item.title}}</span></p>
+
+          <div class="transfer" ng-show="item.downAccept == 1">
+            <img src="/images/sc_03.png">
+            <span >下发给{{item.joinNames}}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+<div ng-click="createNewTask()" class="createBtn">新建任务</div>

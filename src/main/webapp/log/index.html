@@ -1,12 +1,223 @@
+<!DOCTYPE html>
 <html>
-<head>
-<style>
-body{
-margin: 0px;
-}
-</style>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+
+
+  <title>日志</title>
+  <link href="/css/log.css" type="text/css" rel="stylesheet">
+  <link href="/css/calendar.css" rel="stylesheet" type="text/css">
+  <script src="/jslib/fat.js"></script>
+  <script src="/jslib/angular.min.js"></script>
+  <script src="/js/ngDraggable.js"></script>
 </head>
-<body>
-log
+<body ng-app="app" ng-controller="diaryController">
+<div class="top" ng-controller="commonController">
+  <img class="top-logo" src="/images/logo_03.png">
+  <div class="top-right">
+    <ul>
+      <a href="/todo/index.html">
+        <li><img src="/images/rc1.png">
+          <p>日程</p></li>
+      </a>
+      <a href="/log/index.html">
+        <li class="currentBox"><img src="/images/rz2.png">
+          <p>日志</p></li>
+      </a>
+      <a href="/board/index.html">
+        <li ><img src="/images/kb1.png">
+          <p>看板</p></li>
+      </a>
+      <a href="/team/index.html">
+        <li><img src="/images/ts1.png">
+          <p>同事</p></li>
+      </a>
+    </ul>
+    <div class="userDetail">
+      <img class="head" src={{self.headImage}}>
+
+      <div class="user">
+        <p>{{self.name}}</p>
+        <img src="/images/take_06.png">
+        <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
+
+      </div>
+      <p class="out">退出</p>
+    </div>
+  </div>
+  <div class="topNotice" ng-show="isShowMessage">
+    <div class="topNoticeBox">
+      <header>通知</header>
+      <!--<p class="noNotice">当前没有新消息</p>-->
+      <ul class="mainBox">
+        <li class="oneNotice" ng-repeat="item in messageList">
+          <p>{{item.desc}}</p>
+
+          <p class="detailNotice">
+            {{item.createTime}}
+            {{item.fullDesc}}
+          <ul>
+            <li ng-click="ignoreMessage(item)">忽略</li>
+            <li><a ng-href="{{item.link}}">查看</a></li>
+          </ul>
+           <div style="clear: both"></div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <div class="left">
+    <ul>
+      <li class="on"><a href="index.html"><img src="/images/hehe_03.png"> <span class="text">工作日志</span><span class="count">1</span></a></li>
+      <li><a href="setauth.html"><img src="/images/eye_03.png"><span class="text">谁能看我日志</span></a></li>
+    </ul>
+  </div>
+  <div class="mid">
+    <!--*****************************************工作日志-->
+    <div class="workDiary">
+      <div class="mid-left">
+        <div class="notice" ng-if="diary==null"
+             ng-show="isDiaryDetailShow && isShowNewAdd()">
+          <p>您还没日志哦~</p>
+
+          <p>点击右上角“新增日志”吧</p>
+        </div>
+        <div class="notice" ng-if="diary==null"
+             ng-show="isDiaryDetailShow && !isShowNewAdd()">
+          <p>别急，还是留到那天再写吧~</p>
+        </div>
+        <!--============================日记列表-->
+        <div class="diaryList" ng-show="!isDiaryDetailShow">
+          <div class="diary" ng-repeat="diary in diaryList" ng-click="showDiaryDetail(diary)">
+            <div class="diaryDate"><p>{{diary.month}}</p>
+
+              <p>{{diary.day}}</p></div>
+            <div class="diaryBox">
+              <div class="diaryBoxTop"><span>{{diary.title}}</span></div>
+              <div class="diaryContent" ng-bind-html="diary.content"></div>
+              <div class="name">
+                <img src="/images/link_03.png">
+                <span>{{diary.fileCount}}</span>
+                <span ng-show="diary.atNames.length>0">@{{diary.atNames}}</span>
+              </div>
+            </div>
+          </div>
+          <!--<div class="suppleDiary">-->
+          <!--<div class="diaryDate"><p>四月</p><p>04</p></div>-->
+          <!--<div class="diaryBox">-->
+          <!--<div class="diaryBoxTop"><span>点击补写</span></div>-->
+          <!--<div class="diaryContent">这一天还没写工作日志，点击补写吧</div>-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--<div class="diary">-->
+          <!--<div class="diaryDate"><p>四月</p><p>04</p></div>-->
+          <!--<div class="diaryBox">-->
+          <!--<div class="diaryBoxTop"><span>今天的工作总结</span></div>-->
+          <!--<div class="diaryContent">今天的工作任务全部完成，明天的计划正在筹划中</div>-->
+          <!--<div class="name"><img src="/images/link_03.png"> <span>1</span><span>@张图</span></div>-->
+          <!--</div>-->
+          <!--</div>-->
+        </div>
+        <!--***********************日记详情-->
+        <div class="diaryDetail" ng-if="diary!=null" ng-show="isDiaryDetailShow">
+          <div class="diaryBody">
+            <div class="diaryBodyTop"><span ng-bind="diary.title"></span><span ng-click="deleteDiary()">删除日志</span>
+            </div>
+            <div class="diaryBodyContent" ng-bind-html="diaryContent"></div>
+            <div class="diaryAtList" ng-show="diary.atNames.length>0">@{{diary.atNames}}</div>
+            <div class="appendix" ng-show="fileList.length>0">
+              <span>附件：</span>
+             <span ng-repeat = "item in fileList"> <a ng-href="{{item.path}}">{{item.name}}</a></span>
+            </div>
+          </div>
+          <div class="visit">
+            <p class="visitText">最近访问<span>({{peopleList.length}})</span></p>
+            <ul>
+              <li ng-repeat="person in peopleList">
+                <img src={{person.headImage}}>
+
+                <div class="message">
+                  <p>{{person.name}}</p>
+
+                  <p>{{person.createTime}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="discuss" ng-repeat="reply in replyList">
+                <!--<div class="peopleInput">-->
+                    <!--<img src={{self.headImage}}>-->
+                    <!--<input ng-model="replyContent" placeholder="说点什么吧">-->
+                    <!--<ul>-->
+                        <!--<li ng-click="cancelReply()">取消</li>-->
+                        <!--<li ng-click="submitReply()">提交</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <div class="discussContent" >
+                    <img src={{reply.headImage}}>
+                    <div class="contentDetail">
+                        <div class="bk"></div>
+                        <p>{{reply.content}}</p>
+                        <div class="personName">
+                            <p>{{reply.name}}</p>
+                            <p>{{reply.createTime}}</p>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+
+
+        </div>
+      </div>
+      <div class="mid-right">
+        <a href="add.html"><div class="addDiary" ng-if="isShowNewCreate()">新增日志</div></a>
+        <a href="add.html"><div class="fillDiary" ng-if="isShowNewAdd()">补写日志</div></a>
+        <a href="update.html"><div class="editDiary" ng-if="diary!=null">编辑日志</div></a>
+        <a href="index.html"><div class="return">返回</div></a>
+        <div class="calendar">
+          <div class="top"><span id="left" ng-click="calLeft()"> &lt; </span><span id="year"
+                                                                                  ng-bind="currentDate.getYear()+1900"></span><span>年</span>
+            <span id="month" ng-bind="currentDate.getMonth()+1"></span>
+            <span>月</span> <span id="right" ng-click="calRight()"> &gt; </span></div>
+          <table>
+            <thead>
+            <tr>
+              <th>日</th>
+              <th>一</th>
+              <th>二</th>
+              <th>三</th>
+              <th>四</th>
+              <th>五</th>
+              <th>六</th>
+            </tr>
+            </thead>
+            <tbody id="calendarBody">
+            <tr ng-repeat="column in cal">
+              <td ng-repeat="day in column">
+                <div ng-class='{"current":isCurrentDate(day),"star":isStarDate(day)}' data-date="{{day}}" ng-click="changeDate(day)">
+                  {{day.getDate()}}
+                </div>
+                <!--<div ng-if="!isCurrentDate(day)" data-date="{{day}}" ng-click="changeDate(day)">{{day.getDate()}}</div>-->
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--***********************************************谁有看我日志-->
+
+
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/diary.js"></script>
 </body>
 </html>

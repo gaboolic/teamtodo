@@ -1,0 +1,35 @@
+<div class="top2">
+  <div class="topLeft">
+    <a href="#">
+      <img src="/images/ll_03.png">
+
+      <span>返回</span>
+    </a>
+  </div>
+  <span class="mid">同事的日志</span>
+</div>
+
+<div class="mainBox4">
+  <ul class="ulList3">
+
+    <li ng-repeat="department in departments" ng-click="refreshDepartment(department)">
+      <span>{{department.name}}</span><img src="//images/rr_08.gif">
+    </li>
+  </ul>
+
+  <ul class="ulList5">
+    <li ng-repeat="member in members">
+      <a href="#otherDiaryList/{{member.id}}/{{member.name}}">
+        <img ng-src="{{member.headImage}}" class="head5">
+
+        <div class="right">
+          <span>{{member.name}}</span>
+          <img src="/images/wstr_06.png" class="star" ng-show="member.type==1 || member.type==2">
+
+          <div class="gou"></div>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+</div>

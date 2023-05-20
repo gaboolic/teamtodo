@@ -1,0 +1,98 @@
+<div class="addMain" ng-show="!isSelectShow && !isIssuedShow">
+  <div class="top2">
+    <div ng-click="returnTodoList()" class="topLeft"><img src="/images/ll_03.png"><span>返回</span></div>
+    <div class="topRight" ng-click="addTask()"><span>发布</span></div>
+    <span>创建任务</span>
+  </div>
+  <div class="mainBox2">
+    <div class="title2"><input placeholder="请填写任务标题" ng-model="title"></div>
+    <div class="content2">
+      <textarea placeholder="请填写任务内容" ng-model="content"></textarea>
+    </div>
+    <ul class="mainBox2Choose">
+      <li>
+        <img src="/images/xxl_03.png">
+
+        <div class="contentRight" ng-click="selectTaskType()">
+          <span class="leftSpan">象限</span>
+          <img src="/images/go_07.png">
+          <span class="rightSpan">{{taskLevelText}}</span>
+        </div>
+      </li>
+      <li class="on">
+        <img src="/images/gkl_03.png">
+
+        <div class="contentRight" ng-click="toggleTaskAuth()">
+          <span class="leftSpan">公开</span>
+          <img ng-show="!isTaskPublic" src="/images/hbk_08.png" class="grey">
+          <img ng-show="isTaskPublic" src="/images/click_03.png" class="click">
+        </div>
+      </li>
+    </ul>
+    <div class="transfer3">
+      <img src="/images/xfl_03.png">
+
+      <div class="contentRight" ng-click="goIssued()">
+        <span class="text3">下发</span>
+        <img src="/images/go_07.png">
+      </div>
+    </div>
+    <div class="chooseList">
+      <!--<p><span>已选部门：</span><span>技术研发部</span></p>-->
+
+      <p><span>已选同事：</span>
+        <span ng-repeat="item in joinList">{{item.name}}、</span>
+        <!--<span>张庭、小刘、赵羊</span>-->
+      </p>
+    </div>
+  </div>
+</div>
+<div class="addSelect" ng-show="isSelectShow">
+  <div class="top2">
+    <div class="topLeft" ng-click="returnAdd()"><img src="/images/ll_03.png"><span>返回</span></div>
+    <span>选择象限</span>
+  </div>
+  <ul class="choice">
+    <li ng-click="selectLevel(3)">重要且紧急</li>
+    <li ng-click="selectLevel(2)">重要但不紧急</li>
+    <li ng-click="selectLevel(1)">紧急但不重要</li>
+    <li ng-click="selectLevel(0)">不重要不紧急</li>
+  </ul>
+</div>
+
+<div ng-show="isIssuedShow">
+  <div class="top2">
+    <div class="topLeft" ng-click="returnAdd()"><img src="/images/ll_03.png"><span>返回</span></div>
+    <div class="topRight"><span> 完成</span></div>
+    <span></span>
+  </div>
+  <div class="topCheck">
+    <p>同事</p>
+
+    <div ng-click="toggleSelectAll()" class="topCheckRight" ng-class='{"check":isSelectAll}'>
+      全选
+    </div>
+  </div>
+  <div class="mainBox4">
+    <ul class="ulList3">
+      <li ng-click="refreshDepartment(department)" ng-repeat="department in departments">
+        <span>{{department.name}}</span>
+        <img src="/images/go_07.png">
+      </li>
+    </ul>
+
+    <ul class="ulList5">
+      <li ng-click="join(member)" ng-repeat="member in members" ng-class='{"check":member.on}'>
+        <img src="/images/tt.png" class="head5">
+
+        <div class="right">
+          <span>{{member.name}}</span>
+          <img src="/images/wstr_06.png" class="star">
+
+          <div class="gou"></div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>

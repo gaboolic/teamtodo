@@ -1,0 +1,652 @@
+@charset "utf-8";
+/* CSS Document */
+
+/***********上方的页面***************/
+.head-part {
+	background: #69C2EC;
+	height: 55px;
+	position: relative;
+	color: #FFF;
+}
+.head-part .title {
+	width: 400px;
+	float: left;
+	position: relative;
+	height: 39px;
+}
+.head-part .title span {
+	position: absolute;
+	bottom: 0;
+	left: 25px;
+}
+.head-part .title h2 {
+	font-size: 12px;
+	font-weight: 500;
+	position: absolute;
+	bottom: 0;
+	left: 65px;
+}
+.head-part .title strong {
+	font-size: 18px;
+	margin-right: 85px;
+}
+
+.head-part ul.first-box {
+	float: right;
+	margin-right: 20px;
+}
+.head-part ul.first-box > li {
+	display: inline;
+	float: left;
+	position: relative;
+	margin-left: 30px;
+	height: 55px;
+}
+.head-part ul.first-box > li:first-child {
+	margin-left: 0;
+}
+.head-part ul.first-box > li.first {
+	cursor: pointer;
+	width: 35px;
+	text-align: center;
+}
+.head-part ul.first-box > li.first:hover {
+	background: #92D0EE;
+}
+.head-part ul.first-box > li.first span:before {
+	margin-top: 16px;
+}
+.head-part ul.first-box > li.first .sec-box {
+	width: 70px;
+	position: absolute;
+	top: 56px;
+	right: 0;
+	font-size: 12px;
+	padding: 15px 0;
+	background: #92D0EE;
+	
+	display: none;
+}
+.head-part ul.first-box > li.first:hover .sec-box {
+	display: block;
+}
+.head-part ul.first-box > li.first .sec-box a {
+	color: #FFF;
+}
+.head-part ul.first-box > li.first .sec-box li {
+	margin-top: 10px;
+	padding: 2px 0;
+}
+.head-part ul.first-box > li.first .sec-box li:first-child {
+	margin-top: 0;
+}
+.head-part ul.first-box > li.first .sec-box li:hover {
+	background: #FFF;
+}
+.head-part ul.first-box > li.first .sec-box li:hover a {
+	color: #69C2EC;
+}
+
+.head-part ul.first-box > li.first span:before {
+	margin-top: 16px;
+}
+
+.head-part ul li.label h2 {
+	font-family: "Myriad Pro";
+	font-size: 13px;
+	margin-top: 12px;
+}
+.head-part ul li.label p {
+	font-size: 8px;
+}
+/*********************正文公用代码部分***************/
+
+iframe {
+	padding-left: 215px;
+	width: 100%;
+	box-sizing: border-box;
+	min-height: 600px;
+}
+
+/****用到的label标签*****/
+.container label {
+	color: #0A0A0A;
+	font-size: 12px;
+}
+.container label.lb {
+	width: 60px;
+	line-height: 14px;
+	font-size: 10px;
+}
+/*******input text的样式*****/
+.container input {
+	width: 235px;
+	border: 0;
+	margin-top: 25px;
+	background: #F2F2F2;
+	/* color: #9a9999; */
+	color: #585858;
+	line-height: 25px;
+	padding-left: 5px;
+}
+.container input.wrong {
+	border: 1px solid #D00;
+	outline: 1px solid #C00;
+}
+.container input[readonly="readonly"] {
+	color: #585858;
+}
+.container input.name-kind {
+	width: 240px;
+	padding: 0;
+	color: #585858;
+	margin: 30px -29px 23px 0;
+}
+
+.container a {
+	color: #0a0a0a;
+}
+.container a:hover {
+	color: #83cbef;
+}
+/******textarea处为了label与textarea顶部水平对齐而采用的麻烦的方法*****/
+.container section.special {
+	width: 100%;
+	margin: 2px 0px 8px 0;
+	position: relative;
+	padding: 0;
+}
+.special label {
+	position: absolute;
+	top: 10px;
+	left: 0;
+}
+.special textarea {
+	width: 240px;
+	background: #f2f2f2;
+	padding: 0;
+	resize: none;
+	border: none;
+	margin: 0 0 0 66px;
+}
+/********底部添加按钮的样式*******/
+.container button#btnadd,
+.container input[type='button'].btnadd {
+	width: 70px;
+	line-height: 24px;
+	background: #69c2ec;
+	color: #fff;
+	float: right;
+	border: none;
+	margin: 2px -10px 23px 0;
+	cursor: pointer;
+}
+.container button#btnadd:hover,
+.container input[type='button'].btnadd:hover {
+	background: #4DB8EA;
+}
+/*******搜索部分******/
+.container .search-part {
+	margin: 24px 0 24px 0;
+}
+.search-part input.search {
+	width: 110px;
+	margin: 1px;
+	line-height: 25px;
+}
+.search-part button {
+	border: none;
+	height: 25px;
+	width: 25px;
+	background: #69C2EC;
+}
+.search-part button:hover {
+	background: #4DB8EA;
+}
+.search-part form {
+	position: relative;
+}
+.search-part form button {
+	position: absolute;
+	left: 120px;
+	top: 1px;
+}
+/**************************个人信息部分******************/
+.container .basinfo {
+	width: 360px;
+	display: none;
+}
+.container .edit {
+	width: 360px;
+}
+.edit .comment {
+	width: 144px;
+	border: 1px solid #dcdcdc;
+	float: right;
+	margin: 30px 107px 0 0 ;
+}
+.lb-comment {
+	margin-top: 35px;
+}
+.edit .comment ul {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+.edit .comment ul li {
+	display: block;
+	float: left;
+	width: 44px;
+	padding: 0 3px 0 0;
+	margin: 0;
+	height: 20px;
+	border-right: 1px solid #dcdcdc;
+	background: #B6E1F4;
+}
+.edit .comment ul li.blue {
+	background: #69C2EC;
+}
+.edit .comment ul li.wrong {
+	border: 1px solid #D00;
+}
+.edit button.btn-update {
+	border: none;
+	width: 120px;
+	line-height: 28px;
+	text-align: center;
+	color: #fff;
+	background: #69c2ec;
+	margin: 30px 0 0 110px;
+}
+.edit button.btn-update:hover {
+	background: #4DB8EA;
+}
+/*********************岗位管理**************/
+/*****模板添加部分****/
+.container .modadd , .kinds{
+	width: 295px;
+	display: none;
+}
+.container input[type="checkbox"] {
+	width: 12px;
+	height: 12px;
+}
+/*****类型管理部分****/
+.container .kindmanage {
+	display: none;
+}
+/*******公用表格******/
+.container .retable {
+	border: 1px solid #d2d2d2;
+	overflow: auto;
+	width: 715px;
+}
+.container .retable ul {
+	overflow: auto;
+	height: 26px;
+	margin: 0 7px 20px 7px;
+	padding: 0;
+}
+.container .retable ul li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	text-align: left;
+	display: inline;
+	width: 175px;
+	color: #242323;
+}
+.container .retable ul.reth li {
+	color: #282727;
+}
+.retable input {
+	width: 9px;
+	height: 9px;
+	border: 1px solid #e6e6e6;
+	padding: 0;
+	margin: 0 18px 0 0;
+}
+.container .retable ul {
+	margin: 15px 0 0 7px;
+}
+.container .retable ul.reth {
+	border-bottom: 1px solid #d2d2d2;
+	height: 20px;
+	margin: 6px;
+}
+.container .retable ul li.all {
+	color: #83cbef;
+}
+.container .retable ul li.shanchu {
+	color: #0a0a0a;
+}
+.container .retable ul li a {
+	display: block;
+	color: #0a0a0a;
+	margin: 0;
+	padding: 0;
+	width: 28px;
+	float: left;
+}
+.container .retable ul li a:hover {
+	color: #83cbef;
+}
+.retable ul li a.delete {
+	float: right;
+	margin-right:94px;
+}
+.retable ul li a.edit {
+	padding-right: 7px;
+}
+/**********岗位类型添加*********/
+.container .kinds {
+	margin: 48px 0 0 0;
+}
+/********岗位模块管理*******/
+.container .modmanage {
+	margin: 72px 0;
+}
+/********活动管理***********/
+/****活动添加****/
+.container .acadd {
+	width: 300px;
+	margin: 35px 0 0 0;
+	display: none;
+}
+.container .acadd input.inpost {
+	margin: 3px -29px 8px 0;
+}
+.container .acadd section {
+	margin-top: 44px;
+}
+/*******活动管理****/
+.container .acmanage {
+	margin: 71px 0;
+	display: none;
+}
+.container .acmanage .retable li {
+	width: 140px;
+}
+.container .acmanage .retable li a.delete {
+	margin-right: 62px;
+}
+/********单位管理******/
+.container .unit-stuff .retable li {
+	width: 140px;
+}
+.container .unit-stuff .retable li a {
+	padding: 0;
+	width: 60px;
+}
+.container .unit-stuff .retable ul li {
+	color: #242323;
+}
+.container .unit-stuff .retable ul.reth li {
+	color: #282727;
+}
+.container .unit-stuff .retable ul .ope {
+	color: #0a0a0a;
+}
+/*******星星等级管理******/
+/****等级添加****/
+.container .staradd {
+	width: 360px;
+	display: none;
+}
+.container .staradd input.star {
+	margin: 2px -29px 23px 0;
+}
+.container .staradd label.aft {
+	color: #9fd3ee;
+}
+.container .staradd button#btnadd {
+	margin-right: 50px;
+}
+/********弹出层样式*******/
+/* .container .popup {
+	width: 425px;
+	left: 0;
+	margin-top: 130px;
+	border: 1px solid #b7b7b7;
+	-moz-box-shadow: 0px 1px 1px #909090;
+	-webkit-box-shadow: 0px 1px 1px #909090;
+	box-shadow: 0px 1px 1px #909090;
+	border-radius: 3px;
+}
+.popup .pop-head {
+	height: 40px;
+	border-bottom: 1px solid #b7b7b7; 
+}
+.popup .pop-head h1 {
+	font-size: 14px;
+	color: #0a0a0a;
+	line-height:38px;
+	margin-left: 30px;
+	width: 260px;
+	float: left;
+}
+.popup .pop-head button.close {
+	float: right;
+	margin: 4px 7px 0;
+	font-size: 14px;
+	line-height: 26px;
+	padding: 0 5px 0 5px;
+	background: #fff;
+	border-radius: 60%;
+	border: 2px solid #BABABA;
+	-moz-box-shadow: 1px 1px 3px #BABABA;
+	-webkit-box-shadow: 1px 1px 3px #BABABA;
+	box-shadow: 1px 2px 3px #BABABA;
+	cursor: pointer;
+}
+.popup .pop-content {
+	width: 340px;
+	margin: 0 40px 0 40px;
+	overflow: auto;
+}
+.popup .pop-content button#btnadd {
+	margin-right: 30px;
+} */
+/************活动修改弹出框*************/
+.container .pop-content input.inpost {
+	margin: 3px -29px 8px 0;
+}
+.container .pop-content section {
+	margin-top: 44px;
+}
+/********冻结修改框******/
+.container .pop-content .aft {
+	width: 20px;
+	color: #9fd3ee;
+	padding-right: 13px;
+}
+.container .pop-content .special {
+	margin: 17px 0 8px 0;
+}
+.container .pop-content button#btnadd {
+	margin-right: 50px;
+}
+/**********星星等级修改弹出框***************/
+.container .center {
+	margin: 20px auto;
+}
+.container .pop-content input.star {
+	margin-top: 2px;
+}
+.userTop{
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
+}
+.userTop span{
+    color:#555555;
+}
+.userTop span:nth-child(2){
+    margin-right: 100px;
+}
+.unit-stuff .listLogin{
+   margin-top: 15px;
+    width: 75%;
+}
+.unit-stuff table td{
+    border-bottom:1px solid #c8c8c8;
+    border-left:1px solid #c8c8c8;
+   text-align: center;
+    height: 30px;
+    line-height: 30px;
+    color: #555555;
+}
+.unit-stuff table tr:nth-child(1) td{
+    border-top:1px solid #c8c8c8;
+}
+.unit-stuff table td:last-child{
+    border-right:1px solid #c8c8c8;
+}
+
+/*=================================中间同事列表*/
+.unit-stuff{
+    height: 100%;
+}
+.unit-stuff .left{
+    width:348px;
+    height:100%;
+    background:#555555;
+    float: left;
+}
+.unit-stuff .workmate{
+    overflow-y:auto;
+    overflow-x:hidden;
+    height:100%;
+}
+.unit-stuff .workmate header{
+    height:60px;
+    line-height: 60px;
+    color:#ffffff;
+    border-bottom: 1px solid #666666;
+    font-size: 16px;
+    padding-left: 44px;
+    /*width:330px;*/
+}
+.unit-stuff .workmate .ulHeader{
+    font-size: 16px;
+    color:#ffffff;
+    height:50px;
+    border-bottom: 1px solid #666666;
+}
+.unit-stuff .workmate .ulHeader .department span{
+    display: block;
+    float: left;
+    line-height: 50px;
+}
+.unit-stuff .workmate .ulHeader .department span:first-child{
+    margin-left: 17px;
+    margin-top: 3px;
+    margin-right: 10px;
+}
+.unit-stuff .workmate .ulHeader .company{
+    clear:both;
+    display: block;
+}
+.unit-stuff .workmate .ulHeader .company span{
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-top: 23px;
+}
+.unit-stuff .workmate .ulHeader .company span:first-child{
+    margin-left: 44px;
+    margin-top: 1px;
+    margin-right: 10px;
+}
+.unit-stuff .memberList li .diary .detail{
+    line-height: 51px;
+    color:#ffffff;
+}
+.unit-stuff .memberList li .diary .detail img{
+    border-radius: 50%;
+    float: left;
+    margin-top: 4px;
+    margin-right: 10px;
+}
+.unit-stuff .memberList .on .diary .detail{
+    color:#000000;
+}
+.unit-stuff .companyList li .diary {
+    line-height: 51px;
+    color:#ffffff;
+    border-bottom: 1px solid #666666;
+}
+.unit-stuff .companyList li span{
+    float:right;
+    font-size: 14px;
+    line-height: 51px;
+    color:#ffffff;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.unit-stuff .companyList li{
+    height:53px;
+     padding: 0;
+     margin-right: 0;
+}
+.unit-stuff .companyList li .star{
+    float:right;
+    margin-top: 18px;
+    margin-right: 1px;
+}
+.unit-stuff .companyList li .diary{
+     clear: both;
+    float:right;
+    width:305px;
+    margin-left:3px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.unit-stuff .memberList li{
+    height:53px;
+    padding: 0;
+    margin-right: 0;
+}
+.unit-stuff .memberList li .star{
+    float:right;
+    margin-top: 18px;
+    margin-right: 1px;
+}
+.unit-stuff .memberList li .diary{
+    clear: both;
+    float:right;
+    width:305px;
+    margin-left:3px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom: 1px solid #666666;
+}
+.unit-stuff .right{
+    /*width:348px;*/
+    height:100%;
+    overflow-y:auto;
+    overflow-x:hidden;
+    float: left;
+}
+.unit-stuff .right .rightTitle{
+    width: 130px;
+    text-align: center;
+    border-bottom: 1px solid #d3d3d3;
+    color:#555555;
+    line-height: 30px;
+    margin-top: 15px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+.unit-stuff .right table{
+    margin-left: 10px;
+    margin-top: 10px;
+    max-width: 670px;
+}
+.unit-stuff .right table tr td{
+    min-width: 90px;
+}
+/*.unit-stuff .right table tr td:first-child{*/
+    /*width: 120px;*/
+/*}*/

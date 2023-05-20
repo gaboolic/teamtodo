@@ -1,0 +1,72 @@
+<!--*****************************查看我的日志详情-->
+<div ng-show="isDetailShow">
+
+<div class="top2">
+  <div class="topLeft"><a href="#myDiary"><img src="/images/ll_03.png"><span>返回</span></a></div>
+  <div class="topRight" ng-click="returnEdit()"><span>编辑</span></div>
+  <span>我的日志</span>
+</div>
+<div class="mainBox3" ng-show="diary!=null">
+  <div class="box">
+    <div class="title" ng-bind="diary.title"></div>
+    <div class="content" ng-bind-html="diaryContent"></div>
+  </div>
+  <div class="read">
+    <div class="readCount">阅读量：{{peopleList.length}}</div>
+    <div class="readDate" ng-bind="diary.date"></div>
+  </div>
+  <!--<div class="diaryImg">-->
+    <!--<span>图片：</span>-->
+    <!--<img src="/images/ci_03.png">-->
+    <!--<img src="/images/ci_03.png">-->
+  <!--</div>-->
+  <ul class="ulList3">
+    <li ng-click="goVisitList()"><span>最近访问（{{peopleList.length}}）</span><img src="/images/go_07.png"></li>
+    <li ng-click="goReplyList()"><span>评论（{{replyList.length}}）</span><img src="/images/go_07.png"></li>
+  </ul>
+</div>
+
+  <div class="mainBox3" ng-show="diary==null">
+<div ng-click="createDiary()">
+  <div ng-show="isShowNewAdd()">点击补写</div>
+  <div ng-show="!isShowNewAdd()">还是等到那天再写吧</div>
+
+</div>
+    </div>
+  </div>
+
+<!--=========================评论-->
+<div ng-show="isReplyShow">
+  <div class="top2">
+    <div class="topLeft" ng-click="goMainDiaryDetail()"><img src="/images/ll_03.png"><span>返回</span></div>
+    <span class="mid">评论</span>
+  </div>
+  <ul class="message7">
+    <li ng-repeat="item in replyList">
+      <div class="left"><img ng-src="{{item.headImage}}"></div>
+      <div class="right">
+        <p class="title"><span>{{item.name}}</span><span>{{item.createTime}}</span></p>
+        <p class="content"><span>{{item.content}}</span></p>
+      </div>
+    </li>
+  </ul>
+  <div class="bottom7">
+    <input placeholder="说点什么吧" ng-model="otherReplyContent">
+    <div class="commit" ng-click="submitOtherReply()">提交</div>
+  </div>
+</div>
+<!--=========================访问列表-->
+<div ng-show="isVisitShow">
+  <div class="top2">
+    <div class="topLeft" ng-click="goMainDiaryDetail()"><img src="/images/ll_03.png"><span>返回</span></div>
+    <span class="mid">{{diary.username}}的日志</span>
+  </div>
+  <ul class="ulList6">
+    <li ng-repeat="item in peopleList">
+      <img src="/images/tt.png" class="head6">
+      <span class="name6">{{item.name}}</span>
+      <span class="date6">{{item.createTime}}</span>
+    </li>
+
+  </ul>
+</div>

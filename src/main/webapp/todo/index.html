@@ -1,70 +1,403 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8"/>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
 
-  <style>
-body{
-margin: 0px;
-}
-</style>
+  <title>日程</title>
+  <link href="/css/task.css" type="text/css" rel="stylesheet">
+  <link href="/css/calendar.css" rel="stylesheet" type="text/css">
+  <script src="/jslib/fat.js"></script>
+  <script src="/jslib/angular/angular.min.js"></script>
+  <script src="/jslib/angular/angular-animate.js"></script>
+  <script src="/js/ngDraggable.js"></script>
 </head>
-<body>
-todo
+<body ng-app="app" ng-controller="todoController">
+<div class="top" ng-controller="commonController">
+  <img class="top-logo" src="/images/logo_03.png">
 
-调用http://localhost/task/show.do?type=1&date=2015-04-01
-<br>
-返回<br>
-{
-"code": "0",
-"desc": "成功",
-"message": "",
-"taskList": [
-{
-"attribute": {},
-"content": "不紧急不重要",
-"date": "2015-04-01",
-"id": 2,
-"level": 0,
-"title": "不紧急不重要1 ",
-"type": 1
-},
-{
-"attribute": {},
-"content": "不紧急不重要2",
-"date": "2015-04-01",
-"id": 3,
-"level": 0,
-"title": "不紧急不重要2",
-"type": 1
-},
-{
-"attribute": {},
-"content": "不紧急重要",
-"date": "2015-04-01",
-"id": 4,
-"level": 1,
-"title": "不紧急重要1 ",
-"type": 1
-},
-{
-"attribute": {},
-"content": "紧急不重要",
-"date": "2015-04-01",
-"id": 5,
-"level": 2,
-"title": "紧急不重要1 ",
-"type": 1
-},
-{
-"attribute": {},
-"content": "紧急重要",
-"date": "2015-04-01",
-"id": 6,
-"level": 3,
-"title": "紧急重要1 ",
-"type": 1
-}
-]
-}
+  <div class="top-right">
+    <ul>
+      <a href="/todo/index.html">
+        <li class="currentBox"><img src="/images/rc2.png">
+
+          <p>日程</p></li>
+      </a>
+      <a href="/log/index.html">
+        <li><img src="/images/rz1.png">
+
+          <p>日志</p></li>
+      </a>
+      <a href="/board/index.html">
+        <li><img src="/images/kb1.png">
+
+          <p>看板</p></li>
+      </a>
+      <a href="/team/index.html">
+        <li><img src="/images/ts1.png">
+
+          <p>同事</p></li>
+      </a>
+    </ul>
+    <div class="userDetail">
+      <img class="head" src={{self.headImage}}>
+
+      <div class="user">
+        <p>{{self.name}}</p>
+        <img src="/images/take_06.png">
+        <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
+      </div>
+      <p class="out">退出</p>
+    </div>
+  </div>
+  <div class="topNotice" ng-show="isShowMessage">
+    <div class="topNoticeBox">
+      <header>通知</header>
+      <!--<p class="noNotice">当前没有新消息</p>-->
+      <ul class="mainBox">
+        <li class="oneNotice" ng-repeat="item in messageList">
+          <p>{{item.desc}}</p>
+
+          <p class="detailNotice">
+            {{item.createTime}}
+            {{item.fullDesc}}
+
+            <!--<span>{{item.fromUserName}}</span>-->
+            <!--给-->
+            <!--<span>{{item.toUserName}}</span>指派一条{{item.typeName}}任务</p>-->
+          <ul>
+            <li ng-click="ignoreMessage(item)">忽略</li>
+            <li><a ng-href="{{item.link}}">查看</a></li>
+          </ul>
+          <div style="clear: both"></div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main">
+<div class="left">
+  <div class="storageBox">
+    <div class="storageBox-top">
+      <img src="/images/b_03.png"> <span>收纳箱</span>
+    </div>
+    <div class="systemBox">
+      <input placeholder="在此输入任务，敲击回车保存" ng-model="acceptTaskTitle">
+
+      <div class="saveBtn" ng-click="saveAcceptTask()">保存</div>
+    </div>
+    <div class="clear"></div>
+    <ul ng-drop="true" ng-drop-success="onDropCompleteAccept($data,$event)">
+      <li ng-drag="true" ng-drag-data="item" data-allow-transform="true" ng-repeat="item in acceptList"
+          ng-click="editTask(item)">
+        <img class="head" src={{item.headImage}}>
+
+        <div class="detail">
+          <p class="title">{{item.title}}</p>
+
+          <p class="name">{{item.username}}</p>
+        </div>
+        <img ng-show="item.downAccept==1" class="issued" src="/images/b_03.png">
+      </li>
+    </ul>
+
+  </div>
+</div>
+<div class="mid">
+  <div class="task">
+    <div class="task-top">
+      <p class="p1">重要且紧急</p>
+
+      <div class="add1" ng-click="addTask(3)">+</div>
+    </div>
+    <ul ng-drop="true" ng-drop-success="onDropCompleteTodo($data,3,$event)">
+      <!---->
+      <li ng-drag="true" ng-drag-data="item" data-allow-transform="true" ng-repeat="item in taskList | levelFilter:3"
+          ng-click="editTask(item)">
+        <div ng-click="toggleTaskStatus(item,$event)" ng-class='{"yes":isDoneTask(item),"no":!isDoneTask(item)}'></div>
+        <p ng-class='{"done":isDoneTask(item),"delay":isDelayTask(item)}'>{{item.title}}</p>
+        <img ng-show="item.downAccept==1" class="xiafa" src="/images/b_03.png">
+      </li>
+    </ul>
+  </div>
+  <div class="task">
+    <div class="task-top">
+      <p class="p2">重要但不紧急</p>
+
+      <div class="add2" ng-click="addTask(2)">+</div>
+    </div>
+    <ul ng-drop="true" ng-drop-success="onDropCompleteTodo($data,2,$event)">
+      <li ng-drag="true" ng-drag-data="item" ng-repeat="item in taskList | levelFilter:2" ng-click="editTask(item)">
+        <div ng-click="toggleTaskStatus(item,$event)" ng-class='{"yes":isDoneTask(item),"no":!isDoneTask(item)}'></div>
+        <p ng-class='{"done":isDoneTask(item),"delay":isDelayTask(item)}'>{{item.title}}</p>
+        <img ng-show="item.downAccept==1" class="xiafa" src="/images/b_03.png">
+      </li>
+    </ul>
+  </div>
+  <div class="task">
+    <div class="task-top">
+      <p class="p3">紧急但不重要</p>
+
+      <div class="add3" ng-click="addTask(1)">+</div>
+    </div>
+    <ul ng-drop="true" ng-drop-success="onDropCompleteTodo($data,1,$event)">
+      <li ng-drag="true" ng-drag-data="item" ng-repeat="item in taskList | levelFilter:1" ng-click="editTask(item)">
+        <div ng-click="toggleTaskStatus(item,$event)" ng-class='{"yes":isDoneTask(item),"no":!isDoneTask(item)}'></div>
+        <p ng-class='{"done":isDoneTask(item),"delay":isDelayTask(item)}'>{{item.title}}</p>
+        <img ng-show="item.downAccept==1" class="xiafa" src="/images/b_03.png">
+      </li>
+    </ul>
+  </div>
+  <div class="task">
+    <div class="task-top">
+      <p class="p4">不重要不紧急</p>
+
+      <div class="add4" ng-click="addTask(0)">+</div>
+    </div>
+    <ul ng-drop="true" ng-drop-success="onDropCompleteTodo($data,0,$event)">
+      <li ng-drag="true" ng-drag-data="item" ng-repeat="item in taskList | levelFilter:0" ng-click="editTask(item)">
+        <div ng-click="toggleTaskStatus(item,$event)" ng-class='{"yes":isDoneTask(item),"no":!isDoneTask(item)}'></div>
+        <p ng-class='{"done":isDoneTask(item),"delay":isDelayTask(item)}'>{{item.title}}</p>
+        <img ng-show="item.downAccept==1" class="xiafa" src="/images/b_03.png">
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="right">
+  <div class="calendar">
+    <div class="top"><span id="left" ng-click="calLeft()"> &lt; </span><span id="year"
+                                                                             ng-bind="currentDate.getYear()+1900"></span><span>年</span>
+      <span id="month" ng-bind="currentDate.getMonth()+1"></span>
+      <span>月</span> <span id="right" ng-click="calRight()"> &gt; </span></div>
+    <table>
+      <thead>
+      <tr>
+        <th>日</th>
+        <th>一</th>
+        <th>二</th>
+        <th>三</th>
+        <th>四</th>
+        <th>五</th>
+        <th>六</th>
+      </tr>
+      </thead>
+      <tbody id="calendarBody">
+      <tr ng-repeat="column in cal">
+        <td ng-repeat="day in column">
+          <div ng-class='{"current":isCurrentDate(day),"star":isStarDate(day)}' data-date="{{day}}"
+               ng-click="changeDate(day)">
+            {{day.getDate()}}
+          </div>
+          <!--<div ng-if="!isCurrentDate(day)" data-date="{{day}}" ng-click="changeDate(day)">{{day.getDate()}}</div>-->
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--**********************创建任务-->
+<div class="establish" ng-show="isTaskShow">
+  <div class="task-top">
+    <p>新建任务</p>
+    <ul>
+      <li><img src="/images/t_03.png" ng-click="showAddTaskDown()">
+
+        <div class="xia-notice" ng-show="isAddTaskDownShow">
+          <div>下发</div>
+          <div></div>
+        </div>
+        <div ng-show="isAddTeamListShow">
+          <div class="jiTou"></div>
+          <div class="menu">
+            <div class="menuTop">同事列表</div>
+            <div class="person">
+              <div class="person-top">
+                <div ng-click="initOrg()">直属公司</div>
+              </div>
+              <ul class="listP">
+                <ul>
+                  <p ng-click="refreshDepartment(department)" ng-repeat="department in departments"><span class="point">·</span>{{department.name}}
+                  </p>
+
+                  <p></p>
+                </ul>
+
+                <div class="ulList"></div>
+                <li ng-click="join(member)" ng-repeat="member in members" ng-class='{"on":member.on}'>
+                  <p>{{member.name}}</p>
+
+                  <p></p>
+                </li>
+
+              </ul>
+            </div>
+            <div class="menuBottom">
+              <div>
+                <div ng-click="selectAll()">全选</div>
+                <div ng-click="clearJoin()">清除</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><img src="/images/s_03.png" ng-click="showAddTaskAuth()">
+
+        <div class="notice" ng-show="isAddTaskAuthShow">
+          <div ng-click="addTaskPublic()">公开</div>
+          <div ng-click="addTaskPrivate()">秘密</div>
+          <div></div>
+        </div>
+      </li>
+      <li class="close" ng-click="cancel()">×</li>
+    </ul>
+  </div>
+  <span>标题</span><input class="title" ng-model="title"></br>
+  <span class="detail">备注</span><textarea ng-model="content"></textarea>
+
+  <div class="clear"></div>
+  <div class="establish-btn" ng-click="save()">创建</div>
+</div>
+<!--***********************编辑任务-->
+<div class="editor" ng-show="isEditShow">
+  <div class="task-top">
+    <p> 编辑任务</p>
+    <ul>
+      <li><img src="/images/t_03.png" ng-click="editDownShow()">
+
+        <div class="xia-notice" ng-show="isDownShow">
+          <div ng-click="downAccept()">下发</div>
+          <div></div>
+        </div>
+        <div ng-show="isEditTeamListShow">
+
+          <div class="jiTou"></div>
+          <div class="menu">
+            <div class="menuTop">同事列表</div>
+            <div class="person">
+              <div class="person-top">
+                <div ng-click="initOrgEdit()">直属公司</div>
+              </div>
+              <ul class="listP">
+                <ul>
+                  <p ng-click="refreshDepartmentEdit(department)" ng-repeat="department in departmentsEdit"><span
+                      class="point">·</span>{{department.name}}</p>
+
+                  <p></p>
+                </ul>
+
+                <div class="ulList"></div>
+                <li ng-click="joinEdit(member)" ng-repeat="member in membersEdit" ng-class='{"on":member.onEdit}'>
+                  <p>{{member.name}}</p>
+
+                  <p></p>
+                </li>
+
+              </ul>
+            </div>
+            <div class="menuBottom">
+              <div>
+                <div ng-click="selectAllEdit()">全选</div>
+                <div ng-click="clearJoinEdit()">清除</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><img src="/images/s_03.png" ng-click="authShow()">
+
+        <div class="notice" ng-show="isAuthShow">
+          <div ng-click="authPublic()">公开</div>
+          <div ng-click="authPrivate()">秘密</div>
+          <div></div>
+        </div>
+      </li>
+      <li><img src="/images/del_03.png" ng-click="deleteBtnShow()">
+
+        <div class="delete" ng-show="isDeleteShow">
+          <div ng-click="deleteTask()">删除</div>
+          <div></div>
+        </div>
+      </li>
+      <li class="close" ng-click="saveEdit()">×</li>
+    </ul>
+  </div>
+  <div class="editor-main">
+    <span>标题</span><input class="title" ng-model="editTitle"></br>
+    <span class="detail">备注</span><textarea ng-model="editContent"></textarea>
+
+    <div class="clear">
+
+    </div>
+    <div>
+      <ul class="select">
+        <li ng-class='{"on":isDiscussShow}' ng-click="discussClick()">讨论</li>
+        <li ng-class='{"on":!isDiscussShow}' ng-click="detailClick()">详情</li>
+      </ul>
+      <div class="discuss" ng-show="isDiscussShow">
+        <textarea placeholder="写下讨论内容，按Ctrl+Enter发送" ng-model="replyContent"></textarea>
+
+        <div class="btn">
+          <div class="remove" ng-click="cancelReply()">取消</div>
+          <div class="transmit" ng-click="transfer()">发送</div>
+        </div>
+        <div class="discuss-list">
+          <div ng-repeat="discussItem in taskDetail.replyList">
+            <img src={{discussItem.headImage}}>
+
+            <div class="discuss-detail">
+              <div class="sanjiao"></div>
+              <p>{{discussItem.content}}</p>
+
+              <div class="name">{{discussItem.name}}</div>
+              <div class="date">{{discussItem.createTime}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details" ng-show="!isDiscussShow">
+        <div class="creater">
+          <div class="people">
+            <p>创建人:</p>
+            <img src={{taskDetail.user.headImage}}>
+
+            <p ng-bind="taskDetail.user.name"></p>
+          </div>
+          <div class="creatTime">
+            <p>创建时间:</p>
+
+            <p ng-bind="taskDetail.task.date"></p>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <div class="receiveList">
+          <p class="receivePerson">接收人：</p>
+          <ul>
+            <li ng-repeat="person in taskDetail.joinList">
+              <img src={{taskDetail.user.headImage}}>
+
+              <p>{{person.name}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 下发 -->
+  <div id="at" style="display: none">
+    <button ng-click="initOrg()"> <</button>
+    <ul>
+      <li ng-repeat="department in departments" ng-click="refreshDepartment(department)">{{department.name}}</li>
+    </ul>
+    <ul>
+      <li ng-repeat="member in members" ng-click="at(member)">{{member.name}}</li>
+    </ul>
+  </div>
+</div>
+</div>
+<!--<script src="/js/common.js"></script>-->
+<script src="/js/task.js"></script>
 </body>
 </html>

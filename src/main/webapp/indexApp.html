@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+
+  <!-- CSS -->
+  <!-- load bootstrap (bootswatch version) -->
+  <link rel="stylesheet" href="/css/style.css">
+    <link href="/css/userCenter.css" type="text/css" rel="stylesheet">
+
+  <!-- JS -->
+  <!-- load angular, ngRoute, ngAnimate -->
+  <script src="/jslib/angular.min.js"></script>
+  <script src="/jslib/angular-route.js"></script>
+  <script src="/jslib/angular-animate.js"></script>
+  <script src="/js/m/index.js"></script>
+
+</head>
+
+<!-- apply our angular app -->
+<body ng-app="animateApp">
+
+
+<!-- inject our views using ng-view -->
+<!-- each angular controller applies a different class here -->
+<div class="main {{ pageClass }}" ng-view></div>
+
+<!--<div id="about">-->
+<!--<p>A demo on Angular Animations: ng-view</p>-->
+<!--<p>View the <a href="http://scotch.io/tutorials/javascript/animating-angularjs-apps-ngview">Scotch.io Tutorial</a></p>-->
+<!--</div>-->
+
+</body>
+</html>

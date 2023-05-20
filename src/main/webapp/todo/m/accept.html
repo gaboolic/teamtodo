@@ -1,0 +1,36 @@
+<!--==============收纳箱-->
+<header>
+    <a href="/indexApp.html">
+        <!--<img src="/images/aa_08.png">-->
+    </a>
+  <span>收纳箱</span>
+</header>
+<div class="top">
+  <div class="topBox">
+    <input placeholder="在此输入任务点击保存" ng-model="acceptTaskTitle">
+
+    <div class="save" ng-click="saveAcceptTask()">保存</div>
+  </div>
+</div>
+<div class="mainBody">
+  <ul>
+    <li ng-repeat="item in acceptList" ng-click="editTask(item)">
+      <a href="#edit/{{item.id}}">
+
+        <div class="left"><img src={{item.headImage}}></div>
+        <div class="right">
+          <p class="title" ng-show="item.up==1">
+            <img src="/images/sc_03.png">
+            下发给{{item.joinNames}}的任务
+          </p>
+          <p class="title" ng-show="item.up!=1">
+            <img src="/images/x_03.gif">
+            来自{{item.username}}的任务
+          </p>
+          <p class="content"><span>·</span><span>{{item.title}}</span></p>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+

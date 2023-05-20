@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+
+  <title>日志</title>
+  <link href="/css/log.css" type="text/css" rel="stylesheet">
+  <link href="/css/calendar.css" rel="stylesheet" type="text/css">
+  <script src="/jslib/fat.js"></script>
+  <script src="/jslib/angular.min.js"></script>
+
+  <script src="/js/ngDraggable.js"></script>
+
+</head>
+<body ng-app="app" ng-controller="diaryController">
+<div class="top" ng-controller="commonController">
+  <img class="top-logo" src="/images/logo_03.png">
+
+  <div class="top-right">
+    <ul>
+      <a href="/todo/index.html">
+        <li><img src="/images/rc1.png">
+
+          <p>日程</p></li>
+      </a>
+      <a href="/log/index.html">
+        <li class="currentBox"><img src="/images/rz2.png">
+
+          <p>日志</p></li>
+      </a>
+      <a href="/board/index.html">
+        <li><img src="/images/kb1.png">
+
+          <p>看板</p></li>
+      </a>
+      <a href="/team/index.html">
+        <li><img src="/images/ts1.png">
+
+          <p>同事</p></li>
+      </a>
+    </ul>
+    <div class="userDetail">
+      <img class="head" src={{self.headImage}}>
+
+      <div class="user">
+        <p>{{self.name}}</p>
+        <img src="/images/take_06.png">
+        <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
+
+      </div>
+      <p class="out">退出</p>
+    </div>
+  </div>
+  <div class="topNotice" ng-show="isShowMessage">
+    <div class="topNoticeBox">
+      <header>通知</header>
+      <!--<p class="noNotice">当前没有新消息</p>-->
+      <ul class="mainBox">
+        <li class="oneNotice" ng-repeat="item in messageList">
+          <p>{{item.desc}}</p>
+
+          <p class="detailNotice">
+            {{item.createTime}}
+            {{item.fullDesc}}
+          <ul>
+            <li ng-click="ignoreMessage(item)">忽略</li>
+            <li><a ng-href="{{item.link}}">查看</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <div class="left">
+    <ul>
+      <li><a href="index.html"><img src="/images/hehe_03.png"> <span class="text">工作日志</span><span
+          class="count">1</span></a></li>
+      <li class="on"><img src="/images/eye_03.png"><span class="text">谁能看我日志</span></li>
+    </ul>
+  </div>
+  <div class="mid2">
+
+
+    <!--***********************************************谁有看我日志-->
+    <div class="power">
+      <div class="powerTop">
+        <p>谁能看我日志</p>
+
+        <div class="saveBtn" ng-click="saveAuth()">保存</div>
+      </div>
+      <ul class="powerWho">
+        <li ng-class='{"current":authShow==0}' ng-click="changeAuthShow(0)">允许任何人</li>
+        <li ng-class='{"current":authShow!=0&&authShow!=-1}' ng-click="changeAuthShow(2)">自定义
+          <div class="personList" ng-show="isPersonLiseShow">
+
+            <div class="jiTou"></div>
+            <div class="menu">
+              <div class="menuTop">同事列表</div>
+              <div class="person">
+                <div class="person-top">
+                  <div ng-click="initOrg()">直属公司</div>
+                </div>
+                <ul class="listP">
+                  <ul>
+                    <p ng-click="refreshDepartment(department,$event)" ng-repeat="department in departments"><span
+                        class="point">·</span>{{department.name}}</p>
+
+                    <p></p>
+                  </ul>
+
+                  <div class="ulList"></div>
+                  <li ng-click="join(member,$event)" ng-repeat="member in members" ng-class='{"on":member.on}'>
+                    <p>{{member.name}}</p>
+
+                    <p></p>
+                  </li>
+                </ul>
+              </div>
+              <div class="menuBottom">
+                <div>
+                  <div ng-click="selectAll($event)">全选</div>
+                  <div ng-click="clearJoin($event)">清除</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </li>
+        <li ng-class='{"current":authShow==-1}' ng-click="changeAuthShow(-1)">仅自己</li>
+      </ul>
+      <div class="visit" ng-show="authShow!=0 && authShow!=-1">
+        <p class="visitText">允许查看的同事<span>({{authUserList.length}})</span></p>
+        <ul>
+          <li ng-repeat ="item in authUserList">
+            <img ng-src="{{item.headImage}}">
+
+            <div class="message">
+              <p>{{item.name}}</p>
+
+              <p></p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+      <!--<div class="personList" ng-show="isPersonLiseShow">-->
+
+      <!--<div class="jiTou"></div>-->
+      <!--<div class="menu">-->
+      <!--<div class="menuTop">同事列表</div>-->
+      <!--<div class="person">-->
+      <!--<div class="person-top">-->
+      <!--<div>直属公司</div>-->
+      <!--</div>-->
+      <!--<ul class="listP">-->
+      <!--<ul>-->
+      <!--<p><span class="point">·</span>哈哈</p>-->
+      <!--<p><span class="point">·</span>哈哈</p>-->
+      <!--<p><span class="point">·</span>哈哈</p>-->
+      <!--<p ng-click="joinDep(department,$event)"></p>-->
+      <!--</ul>-->
+
+      <!--<div class="ulList"></div>-->
+      <!--<li ng-class="{'on':member.on}" ng-repeat="member in members" ng-click="join(member)">-->
+      <!--<p>恍如隔世</p>-->
+
+      <!--<p></p>-->
+      <!--</li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--<div class="menuBottom">-->
+      <!--<div>-->
+      <!--<div>全选</div>-->
+      <!--<div>清除</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/diary.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!-- 同事日志列表-->
+<div class="top2">
+  <a href="#otherDiary">
+     <div class="topLeft"><img src="/images/ll_03.png"><span>返回</span></div>
+  </a>
+  <span class="mid">{{username}}的日志</span>
+</div>
+<div class="top3">
+  <p ng-click="prev()"><span>{{prevYear}}年{{prevMonth}}月</span>
+
+  <div ng-click="prev()" class="prev"><img src="/images/ll_03.gif"></div>
+  </p>
+  <span class="center">{{currentYear}}年{{currentMonth}}月</span>
+
+  <p class="rightMonth" ng-click="next()">
+    <span>{{nextYear}}年{{nextMonth}}月
+    </span>
+
+  <div ng-click="next()" class="next"><img src="/images/rl_05.gif"></div>
+  </p>
+
+</div>
+<p class="total">共{{otherDailyLogList.length}}篇日志</p>
+
+<ul class="mainContent">
+
+  <li ng-repeat="diary in otherDailyLogList">
+    <a href="#otherDiaryDetail/{{diary.id}}">
+
+      <p class="time">{{diary.date}}</p>
+
+      <div class="detail">
+        <div class="diaryTitle">{{diary.title}}</div>
+        <div class="diaryContent" ng-bind-html="diary.content"></div>
+      </div>
+    </a>
+  </li>
+  <!--<li>-->
+  <!--<p class="time">5月5日</p>-->
+
+  <!--<div class="detail">-->
+  <!--<div class="diaryTitle">今天过年的很开心</div>-->
+  <!--<div class="diaryContent"><p>今天过年的很开心天过年的很年的很开的很开心咩哈哈哈哈哈哈</p></div>-->
+  <!--</div>-->
+  <!--</li>-->
+  <!--<li>-->
+  <!--<p class="time">5月5日</p>-->
+
+  <!--<div class="detail">-->
+  <!--<div class="diaryTitle">今天过年的很开心</div>-->
+  <!--<div class="diaryContent"><p>今天过年的很开心天过年的很年的很开的很开心咩哈哈哈哈哈哈</p></div>-->
+  <!--</div>-->
+  <!--</li>-->
+</ul>

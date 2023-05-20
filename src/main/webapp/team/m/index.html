@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+  <title>同事手机</title>
+  <link href="/css/tsApp.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- JS -->
+  <!-- load angular, ngRoute, ngAnimate -->
+  <script src="/jslib/angular.min.js"></script>
+  <script src="/jslib/angular-route.js"></script>
+  <script src="/jslib/angular-animate.js"></script>
+  <script src="/jslib/fat.js"></script>
+  <script src="/js/m/team.js"></script>
+
+</head>
+
+<!-- apply our angular app -->
+<body ng-app="animateApp">
+
+
+<!-- inject our views using ng-view -->
+<!-- each angular controller applies a different class here -->
+<div class="main page {{ pageClass }}" ng-view></div>
+
+<!--<div id="about">-->
+<!--<p>A demo on Angular Animations: ng-view</p>-->
+<!--<p>View the <a href="http://scotch.io/tutorials/javascript/animating-angularjs-apps-ngview">Scotch.io Tutorial</a></p>-->
+<!--</div>-->
+
+</body>
+</html>

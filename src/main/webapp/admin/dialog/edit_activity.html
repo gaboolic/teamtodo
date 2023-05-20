@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="acadd">
+		<label class="lb" for="acname">活动名称：</label>
+		<input type="text" id="acname" class="name-kind first-child">
+		<label class="lb" for="acpost">活动海报：</label>
+		<input type="text" id="acpost" class="name-kind inpost for-file-addr">
+		<input class="btnadd to-for-file" type="button" value="选择图片">
+		<input type="file" style="display: none;" class="for-file" />
+		<section class="special">
+			<label for="acBrief" class="slb">活动描述：</label>
+			<textarea rows="5" cols="1" id="acBrief"></textarea>
+		</section>
+		<button id="btnadd">添加</button>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".wd-dialog .to-for-file").click(function() {
+		var thisParent = $(this).parent();
+		thisParent.find(".for-file").click();
+	});
+	$(".wd-dialog .for-file").change(function() {
+		var thisVal = $(this).val();
+		$(this).parent().find(".for-file-addr").val(thisVal);
+	});
+});
+</script>

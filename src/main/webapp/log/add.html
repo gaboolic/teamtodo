@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  
+  <title>日志</title>
+  <link rel="stylesheet" href="/css/simditor.css"/>
+  <link rel="stylesheet" href="/css/simditor-mention.css"/>
+
+  <link href="/css/log.css" type="text/css" rel="stylesheet">
+  <link href="/css/calendar.css" rel="stylesheet" type="text/css">
+  <script src="/jslib/fat.js"></script>
+
+
+  <script src="/jslib/jquery.min.js"></script>
+  <script src="/jslib/angular.min.js"></script>
+
+  <script type="text/javascript" src="/jslib/simditor/module.js"></script>
+  <script type="text/javascript" src="/jslib/simditor/hotkeys.js"></script>
+  <script type="text/javascript" src="/jslib/simditor/uploader.js"></script>
+  <script type="text/javascript" src="/jslib/simditor/simditor.js"></script>
+  <script type="text/javascript" src="/jslib/simditor/simditor-mention.js"></script>
+  <script type="text/javascript" src="/jslib/simditor/upload.js"></script>
+  <script type="text/javascript" src="/jslib/simditor/myatbutton.js"></script>
+
+  <script src="/js/angular-editor.js"></script>
+</head>
+<body ng-app="app" ng-controller="mainController">
+<div class="top" ng-controller="commonController">
+  <img class="top-logo" src="/images/logo_03.png">
+  <div class="top-right">
+    <ul>
+      <a href="/todo/index.html">
+        <li><img src="/images/rc1.png">
+          <p>日程</p></li>
+      </a>
+      <a href="/log/index.html">
+        <li class="currentBox"><img src="/images/rz2.png">
+          <p>日志</p></li>
+      </a>
+      <a href="/board/index.html">
+        <li ><img src="/images/kb1.png">
+          <p>看板</p></li>
+      </a>
+      <a href="/team/index.html">
+        <li><img src="/images/ts1.png">
+          <p>同事</p></li>
+      </a>
+    </ul>
+    <div class="userDetail">
+      <img class="head" src={{self.headImage}}>
+      <div class="user">
+        <p>{{self.name}}</p>
+        <img src="/images/take_06.png">
+        <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
+
+      </div>
+      <p class="out">退出</p>
+    </div>
+  </div>
+  <div class="topNotice" ng-show="isShowMessage">
+    <div class="topNoticeBox">
+      <header>通知</header>
+      <!--<p class="noNotice">当前没有新消息</p>-->
+      <ul class="mainBox">
+        <li class="oneNotice" ng-repeat="item in messageList">
+          <p>{{item.desc}}</p>
+
+          <p class="detailNotice">
+            {{item.createTime}}
+            {{item.fullDesc}}
+          <ul>
+            <li ng-click="ignoreMessage(item)">忽略</li>
+            <li><a ng-href="{{item.link}}">查看</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <div class="left">
+    <ul>
+      <li class="on"><a href="index.html"><img src="/images/hehe_03.png"> <span class="text">工作日志</span><span class="count">1</span></a></li>
+      <li><a href="setauth.html"><img src="/images/eye_03.png"><span class="text">谁能看我日志</span></a></li>
+    </ul>
+  </div>
+  <div class="mid" style="text-align:left" >
+    <!--*****************************************工作日志-->
+    <div class="mid-body">
+
+      <!--<div>{{editor}}</div>-->
+
+
+    <div class="editTitleArea">
+        <div id="at" style="display: none">
+            <!--<button ng-click="initOrg()"> <</button>-->
+            <!--<ul>-->
+                <!--<li ng-repeat="department in departments" ng-click="refreshDepartment(department)">{{department.name}}</li>-->
+            <!--</ul>-->
+            <!--<ul>-->
+                <!--<li ng-repeat="member in members" ng-click="at(member)">{{member.name}}</li>-->
+            <!--</ul>-->
+
+            <div class="menu">
+                <div class="menuTop">同事列表</div>
+                <div class="person">
+                    <div class="person-top">
+                        <div ng-click="initOrg()">直属公司</div>
+                    </div>
+                    <ul class="listP">
+                        <ul>
+                            <p ng-repeat="department in departments" ng-click="refreshDepartment(department)"><span class="point">·</span>{{department.name}}</p>
+                            <p></p>
+                        </ul>
+
+                        <div class="ulList"></div>
+                        <li class="on">
+                            <p>恍如隔世</p>
+                            <p></p>
+                        </li>
+                        <li ng-repeat="member in members" ng-click="at(member)">
+                            <p>{{member.name}}</p>
+                            <p></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menuBottom">
+                    <div>
+                        <div>全选</div>
+                        <div>清除</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!--<textarea>222222</textarea>-->
+       <textarea  ng-model="currDiary.title" class="editTitle" placeholder="工作日志"></textarea>
+      <div class="infoMore">
+        <span class="atList">
+          <div ng-if="currDiary.atList.length>0">
+          <span class="icon">@</span>
+          <span ng-repeat="item in currDiary.atList" class="userName">{{item.name}}</span>
+          </div>
+        </span>
+        <span class="date" ng-model="currDiary.date">{{currDiary.date}}</span>
+      </div>
+    </div>
+    <div simditor ng-model="currDiary.content" placeholder="some placeholder">
+    </div>
+    </div>
+      <div class="right">
+          <div class="finish" ng-click="addDiary()">完成</div>
+          <div class="finish" ng-click="autoFinish()">自动生成</div>
+          <div class="return">返回</div>
+      </div>
+  </div>
+  <!--<div class="right">-->
+      <!--<div class="finish">完成</div>-->
+      <!--<div class="finish">自动生成</div>-->
+      <!--<div class="return">返回</div>-->
+  <!--</div>-->
+</div>
+<script src="/js/diaryEditor.js"></script>
+</body>
+</html>

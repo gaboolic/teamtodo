@@ -1,0 +1,117 @@
+@charset "utf-8";
+/* CSS Document */
+
+.title {
+	height: 215px;
+	background: #69C2EC;
+	text-align: center;
+}
+.title h1 {
+	margin: 0 auto;
+	padding-top: 135px;
+	color: #FFF;
+	font-size: 30px;
+}
+.login-part {
+	width: 265px;
+	margin: 0 auto;
+	text-align: center;
+	display: block;
+	padding-top: 20px;
+}
+.login-part .ic-input-box {
+	height: 45px;
+	font-size: 12px;
+	border: 1px solid #E0E0E1;
+	margin-top: 20px;
+	position: relative;
+	display: block;
+}
+.login-part .ic-input-box .ic:before {
+	position: absolute;
+	top: 50%;
+	left: 8px;
+	margin-top: -14px;
+}
+.login-part .ic-input-box input[type=text],
+.login-part .ic-input-box input[type=password] {
+	color: #bfbfbf;
+	width: 86%;
+	position: absolute;
+	right: 0;
+	height: 23px;
+	line-height: 23px;
+	margin-top: 11px;
+	outline: none;
+}
+
+.select-box {
+	position: relative;
+	font-size: 12px;
+}
+.select-box .ic-input-box .select {
+	width: 45px;
+	height: 45px;
+	display: inline-block;
+	border-left: 1px solid #E0E0E1;
+	position: absolute;
+	right: 0;
+	top: 0;
+	cursor: pointer;
+}
+.select-box .ic-input-box .select.ic:before {
+	left: 50%;
+	margin-left: -14px;
+}
+.select-box ul {
+	display: none;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	top: 45px;
+	z-index: 5;
+}
+.select-box:hover ul {
+	display: block;
+}
+.select-box ul li {
+	line-height: 45px;
+	color: #FFF;
+	background: #69C2EC;
+	cursor: pointer;
+	text-align: left;
+	padding-left: 14%;
+}
+.select-box ul li:hover {
+	background: #4DB8EA;
+}
+
+.code-box {
+	margin-top: 20px;
+}
+.code-box .ic-input-box {
+	width: 113px;
+	float: left;
+	margin-top: 0;
+}
+.code-box .ic-input-box input[type=text] {
+	width: 100%;
+	padding-left: 40px;
+	box-sizing: border-box;
+}
+.code-box .code {
+	border: 1px solid #e1e1e0;
+	float: right;
+}
+.login-part .btn {
+	background: #69c2ed;
+	color: #fff;
+	text-align: center;
+	line-height: 45px;
+	width: 100%;
+	font-size: 18px;
+	padding: 0;
+	margin: 20px 0;
+	cursor: pointer;
+	border: 0;
+}

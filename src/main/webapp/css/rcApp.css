@@ -1,0 +1,987 @@
+@charset "utf-8";
+/*全局控制*/
+html {
+    /*font-size: 62.5%;*/
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    height: 100%;
+    /*font-family: "Open Sans", "Microsoft YaHei", sans-serif;*/
+    -webkit-font-smoothing: antialiased !important;
+}
+html, body {
+    height: 100%;
+    min-width: 100%;
+}
+.main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #f5f6f7;
+}
+/*重置浏览器默认样式*/
+h1, h2, h3, h4, p, input, ul, li, dl, dt, dd, button, img, select, textarea, table, tr, td {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+    resize: none;
+    outline: none;
+}
+a{
+    text-decoration:none;
+}
+/***************************收纳箱*/
+.main header{
+    width:100%;
+    height: 44px;
+    background: #568cc3;
+    text-align: center;
+    color:#ffffff;
+    font-size: 16px;
+    /*padding-top: 34px;*/
+    position: relative;
+}
+.main header span{
+    position: absolute;
+    width: 80px;
+    display: block;
+    left:0;
+    right: 0;
+    margin:0 auto;
+    top:14px;
+}
+.main header a{
+    display: block;
+    width: 60px;
+    height: 100%;
+    z-index: 10;
+    background: url("/images/aa_08.png") no-repeat 14px 14px;
+    background-size: 20px 14px;
+}
+/*.main header img{*/
+/*display: block;*/
+/*width:20px;*/
+/*height: 14px;*/
+/*float: left;*/
+/*margin-top: 34px;*/
+/*margin-left: 14px;*/
+/*z-index: 9;*/
+/*}*/
+.main .top{
+    height:48px;
+    width: 100%;
+    background: #f5f6f7;
+    padding-top: 12px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .top .topBox{
+    width:92%;
+    height:36px;
+    border:1px solid #e5e5e5;
+    border-radius: 5px;
+    margin:0 auto;
+
+}
+.main .top input{
+    float: left;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 2%;
+    width:81%;
+    background: #ffffff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.main .top .save{
+    float: left;
+    height: 36px;
+    line-height: 36px;
+    width:17%;
+    text-align: center;
+    background: #568cc3;
+    color: #ffffff;
+    font-size: 13px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.main .mainBody{
+    position: absolute;
+    top:124px;
+    bottom: 0;
+    width:100%;
+    overflow-y: auto;
+}
+.main .mainBody ul li{
+    display: block;
+    width: 100%;
+    height:79px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #ffffff;
+}
+.main .mainBody ul li .left{
+    float:left;
+    margin-left: 4%;
+}
+.main .mainBody ul li .left img{
+    width:28px;
+    height:28px;
+    border-radius: 5px;
+    margin-top: 11px;
+
+}
+.main .mainBody ul li .right{
+    float:left;
+    width: 85%;
+}
+.main .mainBody ul li .right img{
+    width:15px;
+    height: 12px;
+    margin-right: 5px;
+}
+.main .mainBody ul li .right .title{
+    font-size: 14px;
+    color:#999999;
+    margin-top: 20px;
+    margin-left: 11px;
+    width: 93%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .mainBody ul li .right .content span:first-child{
+    font-size: 20px;
+    font-weight: bold;
+    color: #bbbbbb;
+    /*letter-spacing: -5px;*/
+    float: left;
+    margin-left: 8px;
+    margin-right: 10px;
+}
+.main .mainBody ul li .right .content span:last-child{
+    margin-left: -10px;
+    color:#333333;
+    float: left;
+    width: 87%;
+    /*background: #e28b41;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .mainBody ul li .right .content{
+    font-size: 15px;
+    line-height: 30px;
+}
+/***************************01日程*/
+.main .top1{
+    position: relative;
+    top: 0;
+    width: 100%;
+    height:44px;
+    background:#568cc3 ;
+    text-align: center;
+    font-size: 16px;
+    color:#ffffff;
+}
+.main .top1 span{
+    display: block;
+    padding-top:14px;
+}
+.main .topLeft{
+    position: absolute;
+    top:14px;
+    left: 12px;
+}
+.main a{
+    color:#ffffff;
+}
+.main .topLeft img{
+    width:20px;
+    height:14px;
+}
+.main .topRight{
+    position: absolute;
+    width:40px;
+    height: 17px;
+    top:16px;
+    right: 12px;
+}
+.main .topRight img{
+    width:19px;
+    height:17px;
+}
+.main .mainBox1{
+    position: absolute;
+    width: 100%;
+    top:64px;
+    bottom: 44px;
+    overflow-y: auto;
+}
+.main .mainBox1 .task{
+    margin-top:12px;
+    background: #ffffff;
+}
+.main .mainBox1 .task .taskTop{
+    height: 48px;
+    line-height: 48px;
+    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+    font-size: 15px;
+    color:#568cc3;
+    padding-left: 11px;
+}
+.main .mainBox1 .task .taskTop img{
+    float: right;
+    width:16px;
+    height: 16px;
+    margin-top: 16px;
+    margin-right: 12px;
+}
+.main .mainBox1 .task .taskTop .cut{
+    display: none;
+}
+.main .mainBox1 .task .cut .cut{
+    display: block;
+}
+.main .mainBox1 .task .cut .out{
+    display: none;
+}
+.main .mainBox1 .task .taskUl li{
+    min-height:48px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .mainBox1 .task .taskUl li p{
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .mainBox1 .task .taskUl li p span:first-child{
+    font-size: 20px;
+    font-weight: bold;
+    color:#bbbbbb;
+    line-height: 45px;
+    margin-right: 5px;
+}
+.main .mainBox1 .task .taskUl li p span:last-child{
+    width: 93%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .mainBox1 .task .taskUl li p span{
+    /*float:left;*/
+    line-height: 48px;
+    color:#333333;
+    font-size: 15px;
+}
+.main .mainBox1 .task .taskUl li .transfer{
+    position: relative;
+    top:-10px;
+    width: 90%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+.main .mainBox1 .task .taskUl li .transfer img{
+    width:15px;
+    height: 12px;
+}
+.main .mainBox1 .task .taskUl li .transfer span{
+    color:#999999;
+    font-size: 13px;
+}
+/***************************023创建任务*/
+.main .top2{
+    position: relative;
+    top: 0;
+    width: 100%;
+    height:44px;
+    background:#568cc3 ;
+    text-align: center;
+    font-size: 16px;
+    color:#ffffff;
+}
+.main .top2 .text{
+    display: block;
+    padding-top:14px;
+}
+.main .top2 .topLeft img{
+    width:10px;
+    height: 19px;
+    float: left;
+}
+.main .top2 .topLeft span{
+    float: left;
+    padding-top: 0px;
+    line-height: 17px;
+    margin-left: 5px;
+}
+.main .top2 .topRight span{
+    line-height: 17px;
+    padding-top: 0px;
+
+}
+.main .top2 .topRight span img{
+    width: 16px;
+    height: 18px;
+}
+.main .top2 .edit{
+    display: block;
+    padding-top:14px;
+    width: 70px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+}
+.main .mainBox2{
+    position: absolute;
+    top:64px;
+    bottom: 0;
+    width:100%;
+    background: #f5f6f7;
+    overflow-y: auto;
+}
+.main .mainBox2 .title2{
+    width:100%;
+    height: 44px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .mainBox2 .title2 input{
+    width:92%;
+    height: 44px;
+    padding-left: 4%;
+    padding-right: 4%;
+    color:#333333;
+    font-size: 15px;
+}
+.main .mainBox2 .content2{
+    width:100%;
+    height: 100px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .mainBox2 .content2 textarea{
+    width:92%;
+    height: 90px;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color:#333333;
+    font-size: 15px;
+    line-height: 20px;
+}
+.main .mainBox2 .mainBox2Choose{
+    margin-top: 12px;
+    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+}
+.main .mainBox2 .mainBox2Choose li{
+    height: 44px;
+    line-height: 44px;
+    background: #ffffff;
+}
+.main .mainBox2 .mainBox2Choose li:first-child img{
+    width:18px;
+    height: 18px;
+    float: left;
+    margin-left: 18px;
+    margin-top: 13px;
+}
+.main .mainBox2 .mainBox2Choose li:last-child img{
+    width:20px;
+    height: 22px;
+    float: left;
+    margin-left: 17px;
+    margin-top: 11px;
+}
+.main .mainBox2 .contentRight{
+    float: right;
+    width: 86.5%;
+    height: 100%;
+}
+.main .mainBox2 .mainBox2Choose li:first-child .contentRight{
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .mainBox2 .mainBox2Choose li .contentRight .leftSpan{
+    float:left;
+    font-size: 15px;
+    color:#222222;
+}
+.main .mainBox2 .mainBox2Choose li .contentRight .rightSpan{
+    float:right;
+    font-size: 13px;
+    color:#999999;
+}
+.main .mainBox2 .mainBox2Choose li:first-child .contentRight img{
+    float:right;
+    margin:0;
+    padding: 0;
+    width: 10px;
+    height: 16px;
+    margin-top: 14px;
+    margin-left:3px;
+    margin-right: 12px;
+}
+.main .mainBox2 .mainBox2Choose li:last-child .contentRight img{
+    float:right;
+    margin:0;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    margin-top: 10px;
+    margin-left:3px;
+    margin-right: 12px;
+}
+.main .mainBox2 .mainBox2Choose li .click{
+    display: none;
+}
+.main .mainBox2 .mainBox2Choose .on .click{
+    display: block;
+}
+.main .mainBox2 .mainBox2Choose .on .grey{
+    /*display: none;*/
+}
+.main .mainBox2 .transfer3{
+    margin-top: 12px;
+    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+    height: 44px;
+    line-height: 44px;
+    background: #ffffff;
+}
+.main .mainBox2 .transfer3 img{
+    width:23px;
+    height: 20px;
+    float: left;
+    margin-left: 16px;
+    margin-top: 12px;
+}
+.main .mainBox2 .transfer3 .text3{
+    float: left;
+    font-size: 15px;
+    color:#222222;
+}
+.main .mainBox2 .transfer3 .contentRight img{
+    float:right;
+    margin:0;
+    padding: 0;
+    width: 10px;
+    height: 16px;
+    margin-top: 14px;
+    margin-left:3px;
+    margin-right: 12px;
+}
+/*========================================-04编辑任务 详情*/
+.main .mainBox2 .chooseList{
+    width: 96%;
+    height: 50px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 4%;
+}
+.main .mainBox2 .chooseList p{
+    line-height: 25px;
+}
+.main .mainBox2 .chooseList p span:first-child{
+    font-size: 13px;
+    color: #999999;
+}
+.main .mainBox2 .chooseList p span:last-child{
+    font-size: 13px;
+    color: #333333;
+}
+.main .mainBox2 .change{
+    width:150px;
+    height:32px;
+    margin:0 auto;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border:2px solid #6999c2;
+    border-radius: 5px;
+}
+.main .mainBox2 .change li{
+    float: left;
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    width: 50%;
+    color:#6999c2;
+    font-size: 13px;
+}
+.main .mainBox2 .change li:first-child{
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+.main .mainBox2 .change li:last-child{
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+.main .mainBox2 .change .on{
+    background: #6999c2;
+    color:#ffffff;
+}
+.main .mainBox2 .create{
+    width: 100%;
+    height:48px;
+    line-height: 48px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    background: #ffffff;
+}
+.main .mainBox2 .create .create1{
+    float: left;
+    font-size: 13px;
+    color:#999999;
+    margin-left: 11px;
+}
+.main .mainBox2 .create .createRight{
+    float: right;
+    width:82% ;
+}
+.main .mainBox2 .create img{
+    float: left;
+    font-size: 13px;
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-left:12px;
+}
+.main .mainBox2 .create .name{
+    float: left;
+    font-size: 13px;
+    color:#333333;
+    margin-left: 12px;
+}
+.main .mainBox2 .create .date{
+    float: right;
+    font-size: 12px;
+    color:#999999;
+    margin-right: 12px;
+}
+.main .mainBox2 .receiveList{
+    min-height: 48px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 70px;
+    overflow: hidden;
+}
+.main .mainBox2 .receiveList .receivePerson{
+    float:left;
+    font-size: 13px;
+    color:#999999;
+    margin-left: 11px;
+    line-height: 48px;
+}
+.main .mainBox2 .receiveList ul{
+    width: 82%;
+    min-height: 48px;
+    overflow: hidden;
+    float: left;
+    /*background: #568cc3;*/
+}
+.main .mainBox2 .receiveList ul li{
+    width: 110px;
+    float: left;
+    display: block;
+    margin-left: 0%;
+    margin-right: 10%;
+}
+.main .mainBox2 .receiveList ul li img{
+    float: left;
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-left:12px;
+}
+.main .mainBox2 .receiveList ul li span{
+    float: left;
+    margin-left:5px;
+    font-size: 13px;
+    color: #333333;
+    line-height: 48px;
+}
+.main .mainBox2 .save{
+    width:100%;
+    height: 44px;
+    color:#ffffff;
+    font-size:16px;
+    letter-spacing: 2px;
+    line-height: 44px;
+    text-align: center;
+    background:#568cc3;
+    position: fixed;
+    bottom: 0;
+}
+/*///编辑讨论*/
+.main .mainBox2 .discuss .talk{
+    height: 48px;
+    line-height: 48px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom:70px;
+}
+.main .mainBox2 .discuss .talk input{
+    float:left;
+    height:48px;
+    line-height: 48px;
+    width:78%;
+    background: #ffffff;
+    font-size: 15px;
+    padding-left: 2%;
+}
+.main .mainBox2 .discuss .talk .commit{
+    float:left;
+    height:48px;
+    width: 20%;
+    line-height: 48px;
+    background: #568cc3;
+    color:#ffffff;
+    text-align: center;
+}
+
+.main .message7{
+    width: 100%;
+    overflow: hidden;
+}
+.main .message7 li{
+    clear: both;
+    display: block;
+    width: 100%;
+    min-height:70px;
+    border-top: 1px solid #e5e5e5;
+    background: #ffffff;
+    overflow: hidden;
+}
+.main .message7 li .left{
+    float:left;
+    margin-left: 4%;
+}
+.main .message7 li .left img{
+    width:28px;
+    height:28px;
+    border-radius: 5px;
+    margin-top: 11px;
+}
+.main .message7 li .right{
+    float:left;
+    width: 82%;
+}
+.main .message7 li .right img{
+    width:15px;
+    height: 12px;
+    margin-right: 5px;
+}
+.main .message7 li .right .title{
+    font-size: 13px;
+    color:#999999;
+    margin-top:15px;
+    margin-left: 11px;
+    width: 93%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .message7 li .right .title span:first-child{
+    float:left;
+}
+.main .message7 li .right .title span:last-child{
+    float:right;
+}
+.main .message7 li .right .content span{
+    margin-left: -10px;
+    color:#333333;
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+}
+.main .message7 li .right .content{
+    font-size: 15px;
+    margin-left: 20px;
+    /*line-height: 28px;*/
+    margin-top: 8px;
+}
+.main .delete{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background:rgba(55,55,55,0.45) ;
+}
+.main .delete .deleteBox{
+    position: absolute;
+    width: 270px;
+    height:155px;
+    background: #ffffff;
+    top:37%;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    border-radius: 5px;
+    text-align: center;
+}
+.main .delete .deleteBox .btn{
+    height:45px;
+    border-top: 1px solid #e5e5e5;
+    line-height: 45px;
+    margin-top: 35px;
+}
+.main .delete .deleteBox .btn li{
+    float: left;
+    display: block;
+    width: 49%;
+    height:45px;
+    text-align: center;
+    color:#568cc3;
+    letter-spacing: 2px;
+}
+.main .delete .deleteBox .btn li:first-child{
+    border-right:1px solid #e5e5e5 ;
+    color:#333333;
+}
+.main .delete .deleteBox p{
+    margin-top:54px;
+    font-size:15px;
+    color:#000000;
+    font-weight:bold;
+}
+/******************************象限选择*/
+.main .choice{
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 12px;
+}
+.main .choice li{
+    height: 43px;
+    line-height: 43px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    color: #222222;
+    padding-left: 4%;
+}
+/******************************日历*/
+.main .week{
+    height: 20px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    width: 98%;
+    margin-left: 1%;
+}
+.main .mainBox3{
+    position: absolute;
+    top:85px;
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto;
+}
+.main .week li{
+    display: block;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    width: 14.28%;
+    font-size: 12px;
+    color: #070707;
+}
+.main .calendar{
+    width: 98%;
+    margin-top: 2%;
+    margin-left: 1%;
+}
+.main .calendar tbody tr td{
+    width: 14.28%;
+    text-align: center;
+    height:33px;
+    line-height: 33px;
+    font-size: 11px;
+    font-weight: bold;
+}
+.main .calendar tbody tr td span{
+    display: block;
+    width: 25px;
+    line-height: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin:0 auto;
+}
+.main .calendar tbody tr td .today{
+    background: #67a3c7;
+    color:#ffffff;
+}
+.main .calendar tbody tr .sunday{
+    color:#e82728;
+}
+.main .calendar tbody tr .nextMonth{
+    color:#a6a6a6;
+}
+/*===========================谁能看我日志之自定义列表00*/
+.main .topCheck{
+    width:100%;
+    height:40px;
+    line-height:40px;
+    font-size: 15px;
+    color:#666666;
+    background:#f5f6f7 ;
+}
+.main .topCheck p{
+    float:left;
+    margin-left: 13px;
+}
+.main .topCheck .topCheckRight{
+    float: right;
+    width: 63px;
+    margin-right:13px ;
+    border-radius: 50%;
+
+}
+.main .topCheck .topCheckRight div{
+    float: right;
+    width: 22px;
+    height: 22px;
+    margin-top: 10px;
+    border-radius: 50%;
+    background: url("../images/hbk_08.png") no-repeat #f5f6f7;
+    background-size:22px 22px;
+}
+.main .topCheck .check div{
+    float: right;
+    width: 22px;
+    height: 22px;
+    margin-top: 10px;
+    border-radius: 50%;
+    background: url("../images/click_03.png") no-repeat;
+    background-size:22px 22px;
+}
+
+.main .mainBox4 .ulList5{
+    width:100%;
+    margin-top: 12px;
+    border-top: 1px solid #e5e5e5;
+}
+.main .mainBox4 .ulList5 li{
+    height:58px;
+    width: 100%;
+    background: #ffffff;
+}
+.main .mainBox4 .ulList5 li .head5{
+    float:left;
+    width: 28px;
+    height: 28px;
+    margin-left:12px;
+    margin-top: 15px;
+    border-radius: 3px;
+}
+.main .mainBox4 .ulList5 li .right{
+    float: right;
+    border-bottom: 1px solid #e5e5e5;
+    height: 57px;
+    line-height: 57px;
+    width: 82%;
+}
+.main .mainBox4 .ulList5 li .right span{
+    float: left;
+    margin-left: 5px;
+}
+.main .mainBox4 .ulList5 li .right .star{
+    float: left;
+    margin-left: 5px;
+    width: 18px;
+    height: 16px;
+    margin-top: 20px;
+}
+.main .mainBox4 .ulList5 li .right .gou{
+    width:22px;
+    height: 22px;
+    margin-top: 19px;
+    float:right;
+    margin-right:13px ;
+    background: url("../images/hbk_08.png") no-repeat 0px 0px;
+    background-size:22px 22px;
+}
+.main .mainBox4 .ulList5 .check .right .gou{
+    background: url("../images/click_03.png") no-repeat 0px 0px;
+    background-size:22px 22px;
+}
+
+.main .ulList3{
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    background: #ffffff;
+
+}
+.main .ulList3 li{
+    height:44px;
+    line-height: 44px;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .ulList3 li span{
+    float:left;
+    margin-left: 11px;
+    color:#333333;
+    font-size: 15px;
+}
+.main .ulList3 li img{
+    float:right;
+    width:10px;
+    height: 17px;
+    margin-right: 12px;
+    margin-top: 14px;
+}
+
+.main .bottomBtn{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #ffffff;
+    font-size: 16px;
+    background: #568cc3;
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+}
+.main .bottomBtn .btnLeft{
+    float: left;
+    height: 30px;
+    width: 49.5%;
+    border-right: 1px solid #81a8da;
+    text-align: center;
+}
+.main .bottomBtn .btnRight{
+    float: left;
+    height: 30px;
+    width: 50%;
+    text-align: center;
+}
+
+.main .createBtn{
+    height: 44px;
+    width: 100%;
+    line-height: 44px;
+    text-align: center;
+    font-size: 16px;
+    background: #568cc3;
+    color: #ffffff;
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+}
+

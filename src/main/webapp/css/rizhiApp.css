@@ -1,0 +1,661 @@
+
+/*全局控制*/
+html {
+    /*font-size: 62.5%;*/
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    height: 100%;
+    /*font-family: "Open Sans", "Microsoft YaHei", sans-serif;*/
+    -webkit-font-smoothing: antialiased !important;
+}
+html, body {
+    width:100%;
+    height: 100%;
+    /*max-width: 667px;*/
+}
+/*重置浏览器默认样式*/
+h1, h2, h3, h4, p, input, ul, li, dl, dt, dd, button, img, select, textarea, table, tr, td {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+    resize: none;
+    outline: none;
+}
+a{
+    text-decoration:none;
+}
+li:hover{
+    cursor: pointer;
+}
+.main{
+    width:100%;
+    height: 100%;
+    background: #f5f6f7;
+    position: relative;
+}
+/*===========================日志列表00*/
+.main .top1{
+    position: relative;
+    top: 0;
+    width: 100%;
+    height:44px;
+    background:#568cc3 ;
+    text-align: center;
+    font-size: 16px;
+    color:#ffffff;
+}
+.main .top1 span{
+    display: block;
+    padding-top:14px;
+}
+.main .topLeft{
+    position: absolute;
+    top:14px;
+    left: 12px;
+}
+.main .topLeft a{
+    color: #ffffff;
+}
+.main .topLeft img{
+    width:20px;
+    height:14px;
+}
+.main .topRight{
+    position: absolute;
+    top:14px;
+    right: 12px;
+}
+.main .topRight a{
+    color: #ffffff;
+}
+.main .topRight img{
+    width:19px;
+    height:17px;
+}
+.main .bottom1{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height:44px;
+    background:#568cc3 ;
+}
+.main .bottom1 .bottom1Left{
+    float:left;
+    width:49.5%;
+    height:44px;
+    line-height: 44px;
+    text-align:center;
+    color:#ffffff;
+    font-size: 15px;
+}
+.main .bottom1  .gray{
+    background: #cccccc;
+}
+.main .bottom1 .bottom1Left a{
+    color: #ffffff;
+}
+.main .bottom1 .bottom1Left:first-child{
+    border-right: 1px solid #82b2e2;
+}
+.main .mainBox{
+    position: absolute;
+    top:64px;
+    bottom: 44px;
+    width:100%;
+    overflow-y: auto;
+}
+.main .mainBox .list{
+    width:92%;
+    margin-left: 4%;
+    margin-top: 5px;
+}
+.main .mainBox .list a{
+    color:#333333;
+}
+.main .mainBox .list p{
+    font-size: 14px;
+    line-height: 28px;
+}
+.main .mainBox .list .box{
+   width:100%;
+    height: 105px;
+    border:1px solid #e5e5e5;
+    border-radius: 3px;
+    background: #ffffff;
+    overflow: hidden;
+}
+.main .mainBox .list .box .title{
+    height:44px;
+    line-height: 44px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    color:#568cc3;
+    padding-left: 4%;
+    padding-right: 4%;
+    /*font-family: "宋体";*/
+}
+.main .mainBox .list .box .content{
+    font-size: 14px;
+    color: #666666;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 4%;
+    padding-right: 4%;
+    /*line-height: 20px;*/
+    overflow: hidden;
+    /*font-family: "宋体";*/
+}
+/*===========================创建及编辑日志00*/
+.main .top2{
+    position: relative;
+    top: 0;
+    width: 100%;
+    height:44px;
+    background:#568cc3 ;
+    text-align: center;
+    font-size: 16px;
+    color:#ffffff;
+}
+.main .top2 .topLeft img{
+    width:10px;
+    height: 19px;
+    float: left;
+}
+.main .top2 .topLeft span{
+    float: left;
+    padding-top: 0px;
+    line-height: 17px;
+    margin-left: 5px;
+}
+.main .top2 .topRight span{
+    line-height: 17px;
+    padding-top: 0px;
+}
+.main .top2 span{
+    display: block;
+    padding-top:14px;
+}
+.main .mainBox2{
+    position: absolute;
+    top:64px;
+    bottom: 0;
+    width:100%;
+    background: #f5f6f7;
+}
+.main .mainBox2 .title2{
+    width:100%;
+    height: 44px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .mainBox2 .title2 input{
+    width:92%;
+    height: 44px;
+    padding-left: 4%;
+    padding-right: 4%;
+    color:#333333;
+    font-size: 15px;
+}
+.main .mainBox2 .content2{
+    width:100%;
+    height: 121px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .mainBox2 .content2 textarea{
+    width:92%;
+    height: 111px;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color:#333333;
+    font-size: 15px;
+    line-height: 20px;
+}
+.main .mainBox2 .button{
+    height:45px;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+    background: #ffffff;
+}
+.main .mainBox2 .button .buttonLeft{
+    float:left;
+    margin-top: 10px;
+    margin-left: 12px;
+}
+.main .mainBox2 .button .buttonLeft img{
+    width:23px;
+    height:23px;
+}
+.main .mainBox2 .button .buttonRight{
+    float:left;
+    font-size: 23px;
+    margin-left: 36px;
+    /*margin-top: 10px;*/
+    line-height: 40px;
+    color:#999999;
+}
+.main .mainBox2 .button .delete{
+    float: right;
+    margin-right: 12px;
+    margin-top: 10px;
+}
+.main .mainBox2 .button .delete img{
+    width:20px;
+    height: 22px;
+}
+/*===========================查看我的日志详情00*/
+.main .mainBox3{
+    position: absolute;
+    top:64px;
+    bottom: 0;
+    width:100%;
+    background: #f5f6f7;
+}
+.main .mainBox3 .box{
+    background: #ffffff;
+}
+.main .mainBox3 .title{
+    font-size: 16px;
+    color:#333333;
+    padding-top: 10px;
+    margin-left: 13px;
+    line-height: 25px;
+    background: #ffffff;
+}
+.main .mainBox3 .content{
+    font-size: 14px;
+    color:#666666;
+    margin-top: 5px;
+    margin-left: 13px;
+    line-height: 25px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 12px;
+    background: #ffffff;
+}
+.main .mainBox3 .read{
+    width:100%;
+    height: 44px;
+    line-height: 44px;
+    color:#999999;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 13px;
+    background: #ffffff;
+}
+.main .mainBox3 .read .readCount{
+    float:left;
+    margin-left: 13px;
+}
+.main .mainBox3 .read .readDate{
+    float:right;
+    margin-right: 13px;
+}
+.main .mainBox3 .diaryImg{
+    width: 100%;
+    height:76px;
+    line-height: 76px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    background: #ffffff;
+}
+.main .mainBox3 .diaryImg span{
+    color:#999999;
+    margin-left: 13px;
+    font-size: 13px;
+    float: left;
+}
+.main .mainBox3 .diaryImg img{
+    width:50px;
+    height: 50px;
+    border:1px solid #e5e5e5;
+    margin-left: 12px;
+    margin-top: 13px;
+    float: left;
+}
+.main .ulList3{
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    background: #ffffff;
+
+}
+.main .ulList3 li{
+    height:44px;
+    line-height: 44px;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .ulList3 li span{
+    float:left;
+    margin-left: 11px;
+    color:#333333;
+    font-size: 15px;
+}
+.main .ulList3 li img{
+    float:right;
+    width:10px;
+    height: 17px;
+    margin-right: 12px;
+    margin-top: 14px;
+}
+/*===========================谁能看我日志00*/
+.main .ulList4{
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    background: #ffffff;
+    margin-top: 12px;
+}
+.main .ulList4 li{
+    height:44px;
+    line-height: 44px;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .ulList4 li span{
+    float:left;
+    margin-left: 11px;
+    color:#333333;
+    font-size: 15px;
+}
+.main .ulList4 li img{
+    float:right;
+    width:22px;
+    height: 22px;
+    margin-right: 12px;
+    margin-top: 14px;
+}
+.main .ulList4 .custom img{
+    width:10px;
+    height: 17px;
+}
+/*===========================谁能看我日志之自定义列表00*/
+.main .topCheck{
+    width:100%;
+    height:40px;
+    line-height:40px;
+    font-size: 15px;
+    color:#666666;
+}
+.main .topCheck p{
+    float:left;
+    margin-left: 13px;
+}
+.main .topCheck .topCheckRight{
+    float: right;
+    width: 63px;
+    margin-right:13px ;
+    background: url("../images/hbk_08.png") no-repeat 41px 10px;
+    background-size:22px 22px;
+}
+.main .topCheck .check{
+    background: url("../images/click_03.png") no-repeat 41px 10px;
+    background-size:22px 22px;
+}
+
+.main .mainBox4 .ulList5{
+    width:100%;
+    margin-top: 12px;
+    border-top: 1px solid #e5e5e5;
+}
+.main .mainBox4 .ulList5 li{
+    height:58px;
+    width: 100%;
+    background: #ffffff;
+}
+.main .mainBox4 .ulList5 li .head5{
+    float:left;
+    width: 28px;
+    height: 28px;
+    margin-left:12px;
+    margin-top: 15px;
+    border-radius: 3px;
+}
+.main .mainBox4 .ulList5 li .right{
+    float: right;
+    border-bottom: 1px solid #e5e5e5;
+    height: 57px;
+    line-height: 57px;
+    width: 82%;
+}
+.main .mainBox4 .ulList5 li .right span{
+    float: left;
+    margin-left: 5px;
+}
+.main .mainBox4 .ulList5 li .right .star{
+    float: left;
+    margin-left: 5px;
+    width: 18px;
+    height: 16px;
+    margin-top: 20px;
+}
+.main .mainBox4 .ulList5 li .right .gou{
+    width:22px;
+    height: 22px;
+    margin-top: 19px;
+    float:right;
+    margin-right:13px ;
+    background: url("../images/hbk_08.png") no-repeat 0px 0px;
+    background-size:22px 22px;
+}
+.main .mainBox4 .ulList5 .check .right .gou{
+    background: url("../images/click_03.png") no-repeat 0px 0px;
+    background-size:22px 22px;
+}
+/*=========================== 最近访问列表00*/
+.main .ulList6 {
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+    background: #ffffff;
+}
+.main .ulList6 li{
+    height: 49px;
+    line-height: 49px;
+    width: 96%;
+    margin-left: 4%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .ulList6 li .head6{
+    float:left;
+    margin-top: 10px;
+    border-radius: 3px;
+    width: 28px;
+    height: 28px;
+}
+.main .ulList6 li:last-child{
+    border-bottom: none;
+}
+.main .ulList6 li .name6{
+    float: left;
+    margin-left:11px;
+    color:#333333;
+}
+.main .ulList6 li .date6{
+    /*display: block;*/
+    float: right;
+    margin-right:11px;
+    color:#999999;
+    font-size: 10px;
+}
+/*===========================  评论*/
+.main .bottom7{
+    width: 100%;
+    height: 47px;
+    position: absolute;
+    bottom: 0;
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+}
+.main .bottom7 input{
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    width:78.5% ;
+    padding-left: 2%;
+    font-size: 13px;
+    color:#666666;
+}
+.main .bottom7 .commit{
+    float: right;
+    height: 44px;
+    line-height: 44px;
+    width:19.5% ;
+    background: #568cc3;
+    text-align: center;
+    color: #ffffff;
+    font-size: 15px;
+}
+.main .message7{
+    position: absolute;
+    width: 100%;
+    top:64px;
+    bottom: 47px;
+    /*height: 200px;*/
+    overflow-y: auto;
+}
+.main .message7 li{
+    display: block;
+    width: 100%;
+    height:79px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #ffffff;
+}
+.main .message7 li .left{
+    float:left;
+    margin-left: 4%;
+}
+.main .message7 li .left img{
+    width:28px;
+    height:28px;
+    border-radius: 5px;
+    margin-top: 11px;
+}
+.main .message7 li .right{
+    float:left;
+    width: 85%;
+}
+.main .message7 li .right img{
+    width:15px;
+    height: 12px;
+    margin-right: 5px;
+}
+.main .message7 li .right .title{
+    font-size: 13px;
+    color:#999999;
+    margin-top: 20px;
+    margin-left: 11px;
+    width: 93%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .message7 li .right .title span:first-child{
+    float:left;
+}
+.main .message7 li .right .title span:last-child{
+    float:right;
+}
+.main .message7 li .right .content span{
+    margin-left: -10px;
+    color:#333333;
+    float: left;
+    width: 87%;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .message7 li .right .content{
+    font-size: 15px;
+    margin-left: 20px;
+    line-height: 28px;
+}
+.main .bottomBtn{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #ffffff;
+    font-size: 16px;
+    background: #568cc3;
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+}
+.main .bottomBtn .btnLeft{
+    float: left;
+    height: 30px;
+    width: 49.5%;
+    border-right: 1px solid #81a8da;
+    text-align: center;
+}
+.main .bottomBtn .btnRight{
+    float: left;
+    height: 30px;
+    width: 50%;
+    text-align: center;
+}
+
+/******************************日历*/
+.main .week{
+    height: 20px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    width: 98%;
+    margin-left: 1%;
+}
+.main .mainBox3{
+    position: absolute;
+    top:85px;
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto;
+}
+.main .week li{
+    display: block;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    width: 14.28%;
+    font-size: 12px;
+    color: #070707;
+}
+.main .calendar{
+    width: 98%;
+    margin-top: 2%;
+    margin-left: 1%;
+}
+.main .calendar tbody tr td{
+    width: 14.28%;
+    text-align: center;
+    height:33px;
+    line-height: 33px;
+    font-size: 11px;
+    font-weight: bold;
+}
+.main .calendar tbody tr td span{
+    display: block;
+    width: 25px;
+    line-height: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin:0 auto;
+}
+.main .calendar tbody tr td .today{
+    background: #67a3c7;
+    color:#ffffff;
+}
+.main .calendar tbody tr .sunday{
+    color:#e82728;
+}
+.main .calendar tbody tr .nextMonth{
+    color:#a6a6a6;
+}
+.star {
+     text-decoration: underline;
+}
+/*******************/

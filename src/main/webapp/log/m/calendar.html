@@ -1,0 +1,102 @@
+<!--================日历-->
+<div class="top2">
+    <div class="topLeft" ng-click="returnList()"><img src="/images/ll_03.png"><span>返回</span></div>
+    <span class="text">选择日期</span>
+
+    <div class="topRight" ng-click="newCreate()" ng-show="isShowCreate()"><span>补写</span></div>
+    <div class="topRight" ng-click="returnTodo()" ng-show="isStar(currentDate)"><span>查看</span></div>
+</div>
+<ul class="week">
+    <li>七</li>
+    <li>一</li>
+    <li>二</li>
+    <li>三</li>
+    <li>四</li>
+    <li>五</li>
+    <li>六</li>
+</ul>
+<div class="mainBox3">
+    <table class="calendar">
+        <thead>
+        <tr>
+            <th colspan="7">{{currentDate.getMonth()+1}}月{{currentDate.getFullYear()}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="column in cal">
+            <td ng-click="selectDay(day)" ng-repeat="day in column"  ng-class='{"sunday":isSunday(day),"nextMonth":isNextMonth(day)}'>
+                <span ng-class='{"today":isToday(day),"star":isStar(day)}'>{{day.getDate()}}</span>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+    <!--<table class="calendar">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th colspan="7">五月2015</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+            <!--<td class="sunday nextMonth"><span>1</span></td>-->
+            <!--<td class="nextMonth"><span>2</span></td>-->
+            <!--<td class="nextMonth"><span>3</span></td>-->
+            <!--<td class="nextMonth"><span>4</span></td>-->
+            <!--<td><span>5</span></td>-->
+            <!--<td><span>6</span></td>-->
+            <!--<td class="sunday"><span>7</span></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="sunday"><span>8</span></td>-->
+            <!--<td><span>9</span></td>-->
+            <!--<td><span>10</span></td>-->
+            <!--<td><span>11</span></td>-->
+            <!--<td><span>12</span></td>-->
+            <!--<td><span>13</span></td>-->
+            <!--<td class="sunday"><span>14</span></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="sunday"><span>15</span></td>-->
+            <!--<td><span class="today">16</span></td>-->
+            <!--<td><span>18</span></td>-->
+            <!--<td><span>18</span></td>-->
+            <!--<td><span>17</span></td>-->
+            <!--<td><span>19</span></td>-->
+            <!--<td class="sunday"><span>12</span></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="sunday"><span>14</span></td>-->
+            <!--<td><span>11</span></td>-->
+            <!--<td><span>11</span></td>-->
+            <!--<td><span>22</span></td>-->
+            <!--<td><span>21</span></td>-->
+            <!--<td><span>23</span></td>-->
+            <!--<td class="sunday"><span>24</span></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="sunday"><span>25</span></td>-->
+            <!--<td><span>26</span></td>-->
+            <!--<td><span>27</span></td>-->
+            <!--<td><span>28</span></td>-->
+            <!--<td><span>29</span></td>-->
+            <!--<td><span>36</span></td>-->
+            <!--<td class="sunday"><span>31</span></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="sunday"><span>11</span></td>-->
+            <!--<td><span>22</span></td>-->
+            <!--<td><span>12</span></td>-->
+            <!--<td class="nextMonth"><span>17</span></td>-->
+            <!--<td class="nextMonth"><span>12</span></td>-->
+            <!--<td class="nextMonth"><span>13</span></td>-->
+            <!--<td class="nextMonth"><span>17</span></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+    <div class="bottomBtn">
+        <div ng-click="calLeft()" class="btnLeft">上一月</div>
+        <div ng-click="calRight()" class="btnRight">下一月</div>
+    </div>
+</div>

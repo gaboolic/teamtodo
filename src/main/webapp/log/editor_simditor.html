@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>html {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+  }</style>
+  <title>Kendo</title>
+  <link rel="stylesheet" type="text/css" href="/css/simditor.css" />
+  <link rel="stylesheet" type="text/css" href="/css/simditor-mention.css" />
+
+
+  <script type="text/javascript" src="/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/simditor/module.js"></script>
+  <script type="text/javascript" src="/lib/simditor/hotkeys.js"></script>
+  <script type="text/javascript" src="/lib/simditor/uploader.js"></script>
+
+
+  <script type="text/javascript" src="/lib/simditor/simditor.js"></script>
+  <script type="text/javascript" src="/lib/simditor/simditor-mention.js"></script>
+  <script type="text/javascript" src="/lib/simditor/upload.js"></script>
+
+
+</head>
+<body>
+<textarea id="editor" placeholder="这里输入内容" autofocus></textarea>
+
+<button id="submit">提交</button>
+<script>
+  toolbar = [ 'title', 'bold', 'italic', 'underline', 'strikethrough',
+    'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|',
+    'link', 'image','attachment','hr', '|', 'indent', 'outdent' ];
+
+
+  var editor = new Simditor({
+    textarea: $('#editor'),
+    placeholder: '这里输入文字...',
+    pasteImage: true,
+    toolbar: toolbar,
+    defaultImage: 'assets/images/image.png',
+    upload : {
+      url : '/upload/file.do', //文件上传的接口地址
+      params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+      fileKey: 'fileDataFileName', //服务器端获取文件数据的参数名
+      connectionCount: 3,
+      leaveConfirm: '正在上传文件'
+    },
+    mention:{
+      items:[
+        {
+          id:1,
+          name:"春雨",
+          pinyin:"chunyu",
+          abbr:"cy",
+          url:"http://www.example.com"
+        },
+        {
+          id:2,
+          name:"夏荷",
+          pinyin:"xiahe",
+          abbr:"xh"
+        },
+        {
+          id:3,
+          name:"秋叶",
+          pinyin:"qiuye",
+          abbr:"qy"
+        },
+        {
+          id:4,
+          name:"冬雪",
+          pinyin:"dongxue",
+          abbr:"dx"
+        }
+      ],
+      itemRenderer:function($itemEl,data){
+        $span = $('span',$itemEl)
+        $('<img>').insertBefore($span)
+        return $itemEl
+      },
+      linkRenderer:function($linkEl,data){
+        $linkEl.attr('href',"www.example.com/"+data.id);
+      }
+    }
+  });
+  $(editor).on("mention",function(e,el,data){
+    color = ( data.id%2==0? 'blue' : 'red' )
+    $(el).css('color',color);
+  });
+
+  $("#submit").click(function(){
+    console.log($('#editor').val())
+
+console.log(files)
+  })
+</script>
+</body>
+</html>

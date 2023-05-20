@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>日志</title>
+  <link href="/css/calendar.css" rel="stylesheet" type="text/css">
+  <link href="/css/dailylog.css" rel="stylesheet" type="text/css">
+
+  <script src="/lib/fat.js"></script>
+  <script src="/lib/angular.min.js"></script>
+  <script src="/lib/zepto.js"></script>
+</head>
+<body  ng-app="todoApp" ng-controller="todoController">
+<div class="detail" ng-if="diary!=null">
+  <span>题目:</span>
+  <div class="title" ng-bind="diary.title"></div>
+  <span>内容:</span>
+  <div class="content" ng-bind="diary.content"></div>
+  <p>访问列表</p>
+  <ul>
+    <li ng-repeat="person in peopleList"><span>姓名：</span>{{person.name}}</li>
+  </ul>
+  <div class="deleteBtn" ng-click="deleteDiary()">删除</div>
+
+</div>
+<div class="create" ng-show="isCreateShow">
+  <span>题目：</span><input ng-model="diaryTitle">
+  <span>正文：</span><textarea ng-model="diaryContent"></textarea>
+  <div class="editBtn" ng-click="saveDiary()">保存</div>
+  <div class="editBtn">取消</div>
+</div>
+<div ng-if="diary==null">你再这一天还没有日志</div>
+<div class="editBtn" ng-if="diary!=null">编辑</div>
+<div class="editBtn" ng-if="isShowNewCreate()" ng-click="create()">新建</div>
+<div class="editBtn" ng-if="isShowNewAdd()" ng-click="create()">补写</div>
+<div class="return">返回</div>
+
+<div class="calendar">
+  <div class="top"><span id="left" ng-click="calLeft()"> &lt; </span><span id="year"                                                                           ng-bind="currentDate.getYear()+1900"></span><span>年</span>
+    <span id="month" ng-bind="currentDate.getMonth()+1"></span>
+    <span>月</span> <span id="right" ng-click="calRight()"> &gt; </span></div>
+  <table>
+    <thead>
+    <tr>
+      <th>日</th>
+      <th>一</th>
+      <th>二</th>
+      <th>三</th>
+      <th>四</th>
+      <th>五</th>
+      <th>六</th>
+    </tr>
+    </thead>
+    <tbody id="calendarBody">
+    <tr ng-repeat="column in cal">
+      <td ng-repeat="day in column">
+        <div ng-if="isCurrentDate(day)" class="current" data-date="{{day}}" ng-click="changeDate(day)">{{day.getDate()}}</div>
+        <div ng-if="!isCurrentDate(day)" data-date="{{day}}" ng-click="changeDate(day)">{{day.getDate()}}</div>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+<script>
+  angular.module("todoApp", [], function ($httpProvider) {
+        // Use x-www-form-urlencoded Content-Type
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+        /**
+         * The workhorse; converts an object to x-www-form-urlencoded serialization.
+         * @param {Object} obj
+         * @return {String}
+         */
+        var param = function (obj) {
+          var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+
+          for (name in obj) {
+            value = obj[name];
+
+            if (value instanceof Array) {
+              for (i = 0; i < value.length; ++i) {
+                subValue = value[i];
+                fullSubName = name + '[' + i + ']';
+                innerObj = {};
+                innerObj[fullSubName] = subValue;
+                query += param(innerObj) + '&';
+              }
+            }
+            else if (value instanceof Object) {
+              for (subName in value) {
+                subValue = value[subName];
+                fullSubName = name + '[' + subName + ']';
+                innerObj = {};
+                innerObj[fullSubName] = subValue;
+                query += param(innerObj) + '&';
+              }
+            }
+            else if (value !== undefined && value !== null)
+              query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+          }
+
+          return query.length ? query.substr(0, query.length - 1) : query;
+        };
+
+        // Override $http service's default transformRequest
+        $httpProvider.defaults.transformRequest = [function (data) {
+          return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+        }];
+      }
+  )
+      .filter('levelFilter', function () {//过滤0123
+        return function (list, level) {
+          if (list == undefined) {
+            return;
+          }
+          var arr = [];
+          for (var i = 0; i < list.length; i++) {
+            if (list[i].level == level) {
+              arr.push(list[i]);
+            }
+          }
+          return arr;
+        }
+      })
+      .controller("todoController", function ($scope, $http) {
+        $scope.today = new Date();
+        $scope.currentDate = new Date();//日历
+        $scope.isCreateShow = false;
+        fillDailyLog();
+        $scope.cal = createDateCal();
+        function createDateCal() {
+          var startDate = new Date();
+          startDate.setYear($scope.currentDate.getYear() + 1900);
+          startDate.setMonth($scope.currentDate.getMonth());
+          startDate.setDate(1);
+          startDate.setDate(startDate.getDate() - startDate.getDay());
+
+          var cal = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+          ];
+          for (var i = 0; i < 42; i++) {
+            var d = new Date();
+            d.setTime(startDate.getTime());
+            cal[Math.floor(i / 7)][i % 7] = d;
+            startDate.setDate(startDate.getDate() + 1);
+          }
+          return cal;
+        }
+        $scope.isShowNewCreate = function(){//判断是新建还是补写
+          return $scope.diary==null && $scope.today.format("yyyy-MM-dd")==$scope.currentDate.format("yyyy-MM-dd");
+        };
+        $scope.isShowNewAdd = function(){//判断是新建还是补写
+          return $scope.diary==null && $scope.today.format("yyyy-MM-dd")!=$scope.currentDate.format("yyyy-MM-dd");
+        };
+        $scope.create = function(){
+          $scope.isCreateShow = true;
+
+        };
+        $scope.saveDiary = function(){
+          var diary = {};
+          diary.title = $scope.diaryTitle;
+          diary.content = $scope.diaryContent;
+          diary.date = $scope.currentDate.format("yyyy-MM-dd");
+          $http.post("/dailyLog/add.do", diary)
+              .success(function (data) {
+              })
+        };
+        $scope.deleteDiary=function(){//删除日志
+          $http.get("/dailyLog/delete.do?id="+$scope.diary.id)//收纳箱
+              .success(function (response) {
+                alert("删除了");
+                $scope.diary=null;
+              });
+        };
+        $scope.calLeft = function () {//向左一月
+          $scope.currentDate.setDate(1);
+          $scope.currentDate.setMonth($scope.currentDate.getMonth() - 1);
+          $scope.cal = createDateCal();
+        };
+        $scope.calRight = function () {//向右一月
+          $scope.currentDate.setDate(1);
+          $scope.currentDate.setMonth($scope.currentDate.getMonth() + 1);
+          $scope.cal = createDateCal();
+        };
+        $scope.changeDate = function (date) {//更改当前日期
+          $scope.currentDate = date;
+          fillDailyLog();
+          $scope.cal = createDateCal();
+
+        };
+        $scope.isCurrentDate = function (date) {
+          return $scope.currentDate.format("yyyy-MM-dd") == date.format("yyyy-MM-dd");
+        };
+        function fillDailyLog(){
+          $scope.diary = null;
+          $scope.peopleList = null;
+          $http.get("/dailyLog/detail.do?date="+$scope.currentDate.format("yyyy-MM-dd"))//收纳箱
+              .success(function (response) {
+                $scope.diary = response.dailyLog;
+                $scope.peopleList = response.visitList;
+              });
+        }
+      });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+@charset "utf-8";
+/*全局控制*/
+html {
+    /*font-size: 62.5%;*/
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    height: 100%;
+    /*font-family: "Open Sans", "Microsoft YaHei", sans-serif;*/
+    -webkit-font-smoothing: antialiased !important;
+}
+html, body {
+    height: 100%;
+    min-width: 100%;
+}
+.main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #f5f6f7;
+}
+/*重置浏览器默认样式*/
+h1, h2, h3, h4, p, input, ul, li, dl, dt, dd, button, img, select, textarea, table, tr, td {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+    resize: none;
+    outline: none;
+}
+a{
+    text-decoration:none;
+}/*===================公司动态*/
+.main .top1{
+    width:100%;
+    height: 44px;
+    background: #568cc3;
+    text-align: center;
+    color:#ffffff;
+    font-size: 16px;
+    /*padding-top: 34px;*/
+    position: relative;
+}
+.main .top1 span{
+    position: absolute;
+    width: 60px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 14px;
+}
+.main .top1 img{
+    width: 20px;
+    height: 14px;
+    float: left;
+    margin-top: 14px;
+    margin-left: 14px;
+}
+.main .chooseCard{
+    width: 100%;
+    height: 48px;
+    background: #ffffff;
+
+}
+.main .chooseCard li{
+    display: block;
+    width:33%;
+    height:46px;
+    line-height: 46px;
+    text-align: center;
+    font-size: 14px;
+    color: #333333;
+    float:left;
+}
+.main .chooseCard .on{
+    border-bottom: 2px solid #568cc3;
+}
+.main .chooseCard li:first-child span{
+    float: right;
+    margin-right: -3px;
+}
+.main .chooseCard li:last-child span{
+    float: left;
+    margin-left: -3px;
+}
+.main .message{
+    position:absolute;
+    width: 100%;
+    top:122px;
+    bottom: 0;
+    overflow-y: auto;
+}
+.main .message li{
+    display: block;
+    width: 100%;
+    height:79px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #ffffff;
+}
+.main .message li .left{
+    float:left;
+    margin-left: 4%;
+}
+.main .message li .left img{
+    width:28px;
+    height:28px;
+    border-radius: 5px;
+    margin-top: 11px;
+
+}
+.main .message li .right{
+    float:left;
+    width: 85%;
+}
+.main .message li .right img{
+    width:15px;
+    height: 12px;
+    margin-right: 5px;
+}
+.main .message li .right .title{
+    font-size: 13px;
+    color:#999999;
+    margin-top: 20px;
+    margin-left: 11px;
+    width: 93%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .message li .right .title span:first-child{
+    float:left;
+}
+.main .message li .right .title span:last-child{
+    float:right;
+    /*margin-right: 4%;*/
+}
+.main .message li .right .content img{
+    margin-left: -10px;
+    color:#568cc3;
+    float: left;
+    margin-top: 7px;
+}
+.main .message li .right .content span{
+    margin-left: 5px;
+    color:#333333;
+    float: left;
+    width: 87%;
+    font-size: 15px;
+    /*background: #e28b41;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .message li .right .content{
+    font-size: 15px;
+    /*width:90%;*/
+    margin-left: 20px;
+    line-height: 28px;
+    /*margin-top: 15px;*/
+    /*margin-left: 11px;*/
+}
+/*===========================同事日志类目00*/
+.main .top2{
+    position: relative;
+    top: 0;
+    width: 100%;
+    height:30px;
+    background:#568cc3 ;
+    text-align: center;
+    font-size: 16px;
+    color:#ffffff;
+    padding-top: 14px;
+}
+.main .top2 .topLeft{
+    height: 100%;
+    width: 80px;
+}
+.main .top2 a{
+    color:#ffffff;
+}
+.main .top2 .topLeft a{
+    display: block;
+    float: left;
+    width:80px;
+    height: 100%;
+    color: #ffffff;
+    z-index: 999;
+}
+.main .top2 .topLeft img{
+    width:10px;
+    height: 19px;
+    float: left;
+    margin-left: 10px;
+}
+.main .top2 .topLeft span{
+    float: left;
+    padding-top: 0px;
+    line-height: 17px;
+    margin-left: 5px;
+}
+.main .top2 .mid{
+    display: block;
+    min-width: 40px;
+    max-width: 140px;
+    position: absolute;
+    top:14px;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+}
+.main .ulList3{
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    background: #ffffff;
+
+}
+.main .ulList3 li{
+    height:44px;
+    line-height: 44px;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .ulList3 li span{
+    float:left;
+    margin-left: 11px;
+    color:#333333;
+    font-size: 15px;
+}
+.main .ulList3 li img{
+    float:right;
+    width:10px;
+    height: 17px;
+    margin-right: 12px;
+    margin-top: 14px;
+}
+.main .mainBox4 .ulList5{
+    width:100%;
+    margin-top: 12px;
+    border-top: 1px solid #e5e5e5;
+}
+.main .mainBox4 .ulList5 li{
+    height:58px;
+    width: 100%;
+    background: #ffffff;
+}
+.main .mainBox4 .ulList5 li a{
+    color:#333333;
+}
+.main .mainBox4 .ulList5 li .head5{
+    float:left;
+    width: 28px;
+    height: 28px;
+    margin-left:12px;
+    margin-top: 15px;
+    border-radius: 50%;
+}
+.main .mainBox4 .ulList5 li .right{
+    float: right;
+    border-bottom: 1px solid #e5e5e5;
+    height: 57px;
+    line-height: 57px;
+    width: 82%;
+}
+.main .mainBox4 .ulList5 li .right span{
+    float: left;
+    margin-left: 5px;
+}
+.main .mainBox4 .ulList5 li .right .star{
+    float: left;
+    margin-left: 5px;
+    width: 18px;
+    height: 16px;
+    margin-top: 20px;
+}
+.main .mainBox4 .ulList5 li .right .gou{
+    width:10px;
+    height: 17px;
+    margin-top: 19px;
+    float:right;
+    margin-right:13px ;
+    background: url("/images/rr_08.gif") no-repeat 0 0;
+    background-size:10px 17px;
+}
+/*8888888888888888同事的日志列表*/
+.main .top3{
+    position: relative;
+    height:44px;
+    line-height: 44px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+}
+.main .top3 p:first-child span{
+    position: relative;
+    float: left;
+    font-size: 13px;
+    letter-spacing: -1px;
+    -webkit-mask:-webkit-gradient(linear,100% 0%,50% 0%,from(rgba(0,0,0,0.9)),to(rgba(222,222,222,0)));
+}
+.main .top3 .rightMonth span{
+    position: relative;
+    float: right;
+    font-size: 13px;
+    letter-spacing: -1px;
+    -webkit-mask:-webkit-gradient(linear,0% 0%,50% 0%,from(rgba(0,0,0,0.9)),to(rgba(222,222,222,0)));
+}
+.main .top3 .center{
+    display: block;
+    /*float: left;*/
+    position: absolute;
+    /*width: 23%;*/
+    width: 90px;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    color: #333333;
+}
+.main .top3 .prev{
+    position: absolute;
+    width:26px;
+    height: 12px;
+    background: #ffffff;
+    left: 0;
+    top:15px;
+    z-index: 11;
+}
+.main .top3 .prev img{
+    width: 10px;
+    height: 13px;
+    float: right;
+}
+.main .top3 .next{
+    position: absolute;
+    width:26px;
+    height: 12px;
+    /*background: #ffffff;*/
+    right: 0;
+    top:15px;
+    z-index: 11;
+}
+.main .top3 .next img{
+    width: 10px;
+    height: 13px;
+    float: left;
+}
+.main .total{
+    float: right;
+    margin-right: 3%;
+    line-height: 35px;
+}
+.main .mainContent{
+    clear: both;
+    background: #f5f6f7;
+    /*position: relative;*/
+    position: absolute;
+    top:140px;
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto;
+
+}
+.main .mainContent li{
+   width: 92%;
+    margin-left: 4%;
+    margin-top: 8px;
+}
+.main .mainContent li .time{
+   color: #333333;
+    font-size: 13px;
+    line-height: 25px;
+}
+.main .mainContent li .detail{
+    width: 100%;
+    height: 103px;
+    border: 1px solid #e5e5e5;
+    background: #ffffff;
+
+}
+.main .mainContent li .detail .diaryTitle{
+    height: 43px;
+    line-height: 43px;
+    width: 96%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    color: #568cc3;
+}
+.main .mainContent li .detail .diaryContent{
+    width: 96%;
+    height: 58px;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 13px;
+    color: #666666;
+    line-height: 19px;
+    overflow:hidden;
+}
+.main .mainContent li .detail .diaryContent p{
+    height: 38px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+/*========================同事的日志详情*/
+.main .mainBox3{
+    position: absolute;
+    top:64px;
+    bottom: 0;
+    width:100%;
+    background: #f5f6f7;
+}
+.main .mainBox3 .box{
+    background: #ffffff;
+}
+.main .mainBox3 .title{
+    font-size: 16px;
+    color:#333333;
+    padding-top: 10px;
+    margin-left: 13px;
+    line-height: 25px;
+    background: #ffffff;
+}
+.main .mainBox3 .content{
+    font-size: 14px;
+    color:#666666;
+    margin-top: 5px;
+    margin-left: 13px;
+    line-height: 25px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 12px;
+    background: #ffffff;
+}
+.main .mainBox3 .read{
+    width:100%;
+    height: 44px;
+    line-height: 44px;
+    color:#999999;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 13px;
+    background: #ffffff;
+}
+.main .mainBox3 .read .readCount{
+    float:left;
+    margin-left: 13px;
+}
+.main .mainBox3 .read .readDate{
+    float:right;
+    margin-right: 13px;
+}
+.main .mainBox3 .diaryImg{
+    width: 100%;
+    height:76px;
+    line-height: 76px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    background: #ffffff;
+}
+.main .mainBox3 .diaryImg span{
+    color:#999999;
+    margin-left: 13px;
+    font-size: 13px;
+    float: left;
+}
+.main .mainBox3 .diaryImg img{
+    width:50px;
+    height: 50px;
+    border:1px solid #e5e5e5;
+    margin-left: 12px;
+    margin-top: 13px;
+    float: left;
+}
+.main .ulList3{
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    background: #ffffff;
+    margin-top: 10px;
+}
+.main .ulList3 li{
+    height:44px;
+    line-height: 44px;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .ulList3 li span{
+    float:left;
+    margin-left: 11px;
+    color:#333333;
+    font-size: 15px;
+}
+.main .ulList3 li img{
+    float:right;
+    width:10px;
+    height: 17px;
+    margin-right: 12px;
+    margin-top: 14px;
+}
+.main .bottom7{
+    width: 100%;
+    height: 47px;
+    position: absolute;
+    bottom: 0;
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+}
+.main .bottom7 input{
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    width:78.5% ;
+    padding-left: 2%;
+    font-size: 13px;
+    color:#666666;
+}
+.main .bottom7 .commit{
+    float: right;
+    height: 47px;
+    line-height: 47px;
+    width:19.5% ;
+    background: #568cc3;
+    text-align: center;
+    color: #ffffff;
+    font-size: 15px;
+}
+/*=========================== 最近访问列表00*/
+.main .ulList6 {
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+    background: #ffffff;
+}
+.main .ulList6 li{
+    height: 49px;
+    line-height: 49px;
+    width: 96%;
+    margin-left: 4%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.main .ulList6 li .head6{
+    float:left;
+    margin-top: 10px;
+    border-radius: 3px;
+    width: 28px;
+    height: 28px;
+}
+.main .ulList6 li:last-child{
+    border-bottom: none;
+}
+.main .ulList6 li .name6{
+    float: left;
+    margin-left:11px;
+    color:#333333;
+}
+.main .ulList6 li .date6{
+    /*display: block;*/
+    float: right;
+    margin-right:11px;
+    color:#999999;
+    font-size: 10px;
+}
+
+/*==================消息*/
+.main .message7{
+    position: absolute;
+    width: 100%;
+    top:64px;
+    bottom: 47px;
+    /*height: 200px;*/
+    overflow-y: auto;
+}
+.main .message7 li{
+    display: block;
+    width: 100%;
+    height:79px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #ffffff;
+}
+.main .message7 li .left{
+    float:left;
+    margin-left: 4%;
+}
+.main .message7 li .left img{
+    width:28px;
+    height:28px;
+    border-radius: 5px;
+    margin-top: 11px;
+}
+.main .message7 li .right{
+    float:left;
+    width: 85%;
+}
+.main .message7 li .right img{
+    width:15px;
+    height: 12px;
+    margin-right: 5px;
+}
+.main .message7 li .right .title{
+    font-size: 13px;
+    color:#999999;
+    margin-top: 20px;
+    margin-left: 11px;
+    width: 93%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .message7 li .right .title span:first-child{
+    float:left;
+}
+.main .message7 li .right .title span:last-child{
+    float:right;
+}
+.main .message7 li .right .content span{
+    margin-left: -10px;
+    color:#333333;
+    float: left;
+    width: 87%;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .message7 li .right .content{
+    font-size: 15px;
+    margin-left: 20px;
+    line-height: 28px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

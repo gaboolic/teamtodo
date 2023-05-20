@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html style="height: 95%">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/module_icon.css">
+<link rel="stylesheet" type="text/css" href="css/ser_dialog.css">
+<link rel="stylesheet" type="text/css" href="css/admin.css">
+<script type="text/javascript" src="js/lib/jquery.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/service/dialog.js"></script>
+    <script type="text/javascript" src="/jslib/angular.min.js"></script>
+<title>后台管理员登录页面</title>
+</head>
+<body style="height: 95%" ng-app="app" ng-controller="adminUserController">
+	<div class="container">
+		<section class="selector">
+			<ul>
+				<li name="stuffmanage">权限信息</li>
+			</ul>
+		</section>
+		<div class="unit-stuff" id="unitmanage">
+            <div class="left">
+                <div class="workmate" ng-if="!showDiaryList">
+                    <header class="aheader">同事列表</header>
+                    <div class="ulHeader">
+                        <div class="company" ng-click="initOrg()"><span>直属公司</span> <span> <img src="/images/bobo_03.png"> </span>
+                        </div>
+                    </div>
+                    <!--=======================部门列表-->
+                    <ul class="companyList">
+                        <li ng-repeat="department in departments" ng-click="refreshDepartment(department)">
+                            <div class="diary">
+                                {{department.name}}
+                            </div>
+                            <span>·</span>
+                        </li>
+                        <!--<li>-->
+                            <!--<div class="diary">-->
+                                <!--国际销售部-->
+                            <!--</div>-->
+                            <!--<span>·</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<div class="diary">-->
+                                <!--国际销售部-->
+                            <!--</div>-->
+                            <!--<span>·</span>-->
+                        <!--</li>-->
+                    </ul>
+                    <!--<!--=======================员工列表-->
+                    <ul class="memberList">
+                        <li ng-repeat="member in members" ng-click="at(member)">
+                            <div class="diary">
+                                <div class="detail">
+                                    <img src={{member.headImage}}>
+                                    {{member.name}}
+                                </div>
+                            </div>
+                            <img ng-show="member.type==1 && member.type==2" src="/images/star_03.png" class="star">
+                        </li>
+                        <!--<li >-->
+                            <!--<div class="diary">-->
+                                <!--<div class="detail">-->
+                                    <!--<img src="/images/tt.png">-->
+                                    <!--哈哈-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<img src="/images/star_03.png" class="star">-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<div class="diary">-->
+                                <!--<div class="detail">-->
+                                    <!--<img src="/images/tt.png">-->
+                                    <!--哈哈-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<img src="/images/star_03.png" class="star">-->
+                        <!--</li>-->
+
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="right">
+                <div class="rightTitle">日志可见的同事</div>
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>成员排序ID</td><td>头像</td><td>姓名</td><td>性别</td><td>部门名称</td><td>成员属性</td><td>操作</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+                    <tr>
+                        <td>007</td><td>头像</td><td>东方不败</td><td>男</td><td>哈哈部门国中名称</td><td>超级管理员</td><td>保佑哈哈</td>
+                    </tr>
+
+
+                </table>
+            </div>
+
+        </div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("li a.cold").dialog({
+		height: 350,
+		title: "冻结弹出框",
+		contentUrl: "dialog/stuffcold.html"
+	}); 
+});
+</script>
+<script src="/js/admin.js">
+</script>
+
+</html>

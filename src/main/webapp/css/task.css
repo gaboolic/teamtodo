@@ -1,0 +1,1215 @@
+@charset "utf-8";
+/*全局控制*/
+html {
+    font-size: 62.5%;
+}
+
+/*滚动条整体*/
+::-webkit-scrollbar {
+    width: 14px; /*滚动条宽度*/
+}
+
+/*滚动条按钮*/
+::-webkit-scrollbar-button {
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F3F3F3; /*滑道全部*/
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #F3F3F3; /*滑道*/
+    -webkit-border-radius: 4px; /*滑道圆角宽度*/
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #F3F3F3; /*滑动条表面*/
+    border: solid 1px #C0C0C0; /*滑动条边框*/
+    border-radius: 4px; /*滑动条圆角宽度*/
+}
+
+/*横竖滚动条交角*/
+::-webkit-scrollbar-corner {
+    background-color: #F3F3F3;
+}
+
+/*横竖滚动条交角图案*/
+::-webkit-resizer {
+    /*background-image: url(/public/img/resizer-inactive.png);*/
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+
+/*鼠标滑过滑动条*/
+::-webkit-scrollbar-thumb:hover {
+    background-color: #999999;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    height: 100%;
+    font-family: "Microsoft YaHei", "Open Sans", sans-serif;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+html, body {
+    height: 100%;
+    min-width: 1000px;
+}
+
+.main {
+    min-width: 1000px;
+    min-height: 400px;
+}
+
+/*重置浏览器默认样式*/
+h1, h2, h3, h4, p, input, ul, li, dl, dt, dd, button, img, select, textarea, table, tr, td {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+    resize: none;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.top {
+    width: 100%;
+    height: 82px;
+    background: #1b72a3;
+}
+
+.top .top-logo {
+    display: block;
+    margin-top: 30px;
+    float: left;
+    margin-left: 25px;
+}
+
+.top .top-right {
+    float: right;
+}
+
+.top .top-right ul {
+    float: left;
+}
+
+.top .top-right ul li {
+    float: left;
+    display: block;
+    width: 90px;
+    height: 82px;
+    text-align: center;
+    color: #5dbcf2;
+}
+
+.top .top-right ul li img {
+    margin-top: 18px;
+}
+
+.top .top-right ul li:hover {
+    background: #085a89;
+}
+
+.top .top-right ul .currentBox {
+    background: #085a89;
+    color: #ffffff;
+}
+
+.top .top-right .userDetail {
+    float: left;
+    width: 288px;
+    height: 44px;
+    margin-top: 22px;
+    padding-left: 20px;
+}
+
+.top .top-right .userDetail .head {
+    width: 44px;
+    height: 44px;
+    border-radius: 3px;
+    float: left;
+}
+
+.top .top-right .userDetail .user {
+    float: left;
+    color: #c2e3ff;
+    margin-left: 11px;
+}
+
+.top .top-right .userDetail .user span {
+    display: block;
+    margin-top: 5px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 10px;
+    background: #f4a110;
+    float: left;
+    margin-left: 4px;
+    color: #ffffff;
+}
+.top .top-right .userDetail .user span:hover{
+    cursor: pointer;
+}
+.top .top-right .userDetail .user img {
+    margin-top: 5px;
+    float: left;
+}
+
+.top .top-right .userDetail .out {
+    color: #5dbcf2;
+    float: left;
+    margin-left: 12px;
+}
+.top .top-right .userDetail .out:hover{
+    cursor: pointer;
+}
+.top .topNotice {
+    position: absolute;
+    z-index: 200;
+    right: 10px;
+    top: 86px;
+    width: 260px;
+    min-height: 90px;
+    background: #ffffff;
+    box-shadow: 2px -2px 2px #eaecec inset;
+    border-radius: 5px;
+    /*font-family: "宋体";*/
+}
+
+.top .topNotice .topNoticeBox {
+    width: 256px;
+    margin-left: 2px;
+    border-radius: 5px;
+    box-shadow: 2px -2px 2px #edefef;
+    text-align: center;
+}
+
+.top .topNotice .topNoticeBox .noNotice {
+    line-height: 50px;
+}
+
+.top .topNotice .topNoticeBox header {
+    height: 30px;
+    background: #f4a110;
+    color: #ffffff;
+    line-height: 30px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-size: 16px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.top .topNotice .topNoticeBox .mainBox {
+    border-right: 1px solid #e5e5e5;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: left;
+    max-height: 280px;
+}
+
+.top .topNotice .topNoticeBox .mainBox .oneNotice {
+    min-height: 57px;
+    padding: 10px 0px;
+    width: 244px;
+    margin-left: 7px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 12px;
+    /*font-size: 13px;*/
+    /*background: #6999c2;*/
+}
+
+.top .topNotice .topNoticeBox .mainBox .oneNotice .detailNotice {
+    margin-top: 5px;
+    color:#999999;
+    line-height: 14px;
+}
+
+.top .topNotice .topNoticeBox .mainBox .oneNotice .detailNotice span {
+    color: #6999c2;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.top .topNotice .topNoticeBox .mainBox ul {
+    float: right;
+}
+
+.top .topNotice .topNoticeBox .mainBox ul li {
+    float: left;
+    display: block;
+    width: 33px;
+    text-align: center;
+    color: #666666;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+}
+
+.top .topNotice .topNoticeBox .mainBox ul li:last-child {
+    color: #6999c2;
+}
+
+.main {
+    position: absolute;
+    top: 82px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+
+/*===============================左边收纳箱部分*/
+.main .left {
+    position: absolute;
+    width: 24.89%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #e9ecf2;
+}
+
+.main .left .storageBox {
+    position: absolute;
+    width: 94.21%;
+    top: 25px;
+    left: 10px;
+    bottom: 24px;
+    border: 1px solid #e5e5e5;
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.main .left .storageBox .storageBox-top {
+    position: absolute;
+    clear: both;
+    width: 76px;
+    height: 18px;
+    line-height: 18px;
+    top: 16px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.main .left .storageBox .storageBox-top span {
+    float: left;
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+.main .left .storageBox .storageBox-top img {
+    float: left;
+}
+
+.main .left .storageBox .systemBox {
+    width: 100%;
+    margin-top: 45px;
+}
+
+.main .left .storageBox .systemBox input {
+    width: 74%;
+    height: 28px;
+    line-height: 26px;
+    padding-left: 5px;
+    border: 1px solid #e5e5e5;
+    background: #f5f5f5;
+    margin-left: 2%;
+    float: left;
+}
+.main .left .storageBox .systemBox .saveBtn {
+    padding: 0;
+    width: 15%;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 5px;
+    border-radius: 5px;
+    background: #6999c2;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-left: 2.5%;
+    float: left;
+}
+.main .left .storageBox .systemBox .saveBtn:hover{
+    cursor: pointer;
+}
+.main .left .storageBox ul {
+    width: 97.5%;
+    margin-top: 18px;
+    padding-left: 8px;
+    clear: both;
+    height: 80%;
+    overflow-y: auto;
+}
+.main .left .storageBox ul li {
+    clear: both;
+    display: block;
+    width: 100%;
+    height: 53px;
+    border-bottom: 1px solid #eaeaea;
+}
+.main .left .storageBox ul li:hover {
+    background: #1b72a3;
+    cursor: pointer;
+}
+.main .left .storageBox ul li:first-child {
+    border-top: 1px solid #eaeaea;
+}
+.main .left .storageBox ul li .head {
+    float: left;
+    display: block;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    margin-top: 8px;
+    margin-left: 3px;
+}
+.main .left .storageBox ul li .detail {
+    float: left;
+    margin-left: 12px;
+    margin-top: 8px;
+    width: 69%;
+    overflow: hidden;
+}
+.main .left .storageBox ul li .detail .name {
+    float: left;
+    color: #999999;
+}
+
+.main .left .storageBox ul li .issued {
+    display: block;
+    float: right;
+    margin-right: 20px;
+    margin-top: 15px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.main .left .storageBox ul li .title {
+    overflow: hidden;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/*===============================中间任务部分*/
+.main .mid {
+    position: absolute;
+    left: 24.89%;
+    right: 288px;
+    background: #f5f5f5;
+    bottom: 0;
+    top: 0;
+    padding-top: 25px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 23px;
+    box-sizing: border-box;
+}
+.main .mid .task {
+    float: left;
+    width: 48%;
+    height: 48.9%;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    margin-left: 1%;
+    background: #e9ecf2;
+    overflow-x: hidden;
+}
+.main .mid .task ul {
+    overflow-x: hidden;
+}
+.main .mid .task:nth-child(1) {
+    margin-bottom: 1%;
+}
+.main .mid .task:nth-child(2) {
+    margin-bottom: 1%;
+}
+.main .mid .task .task-top {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+}
+.main .mid .task .task-top .p1 {
+    float: left;
+    margin-left: 10px;
+    color: #e77b76;
+}
+.main .mid .task .task-top div {
+    float: right;
+    width: 27px;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-radius: 15px;
+    font-size: 32px;
+    margin-top: 5px;
+    margin-right: 7px;
+    padding-left: -3px;
+}
+.main .mid .task .task-top .add1 {
+    color: #e77b76;
+}
+.main .mid .task .task-top .add1:hover{
+    cursor: pointer;
+}
+.main .mid .task .task-top .add2:hover{
+    cursor: pointer;
+}
+.main .mid .task .task-top .add3:hover{
+    cursor: pointer;
+}
+.main .mid .task .task-top .add4:hover{
+    cursor: pointer;
+}
+.main .mid .task .task-top .p2 {
+    float: left;
+    margin-left: 10px;
+    color: #ce994e;
+}
+.main .mid .task .task-top .add2 {
+    color: #6999c2;
+}
+.main .mid .task .task-top .p3 {
+    float: left;
+    margin-left: 10px;
+    color: #6999c2;
+}
+.main .mid .task .task-top .add3 {
+    color: #ce994e;
+}
+.main .mid .task .task-top .p4 {
+    float: left;
+    margin-left: 10px;
+    color: #85bb2f;
+}
+.main .mid .task .task-top .add4 {
+    color: #85bb2f;
+}
+.main .mid .task ul {
+    width: 98%;
+    height: 74%;
+    margin-left: 1%;
+    overflow-y: auto;
+}
+.main .mid .task ul li {
+    display: block;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 1px;
+    border-radius: 5px;
+    background: #ffffff;
+    z-index: 999999;
+    /*background: url(/images/no_03.png) no-repeat 10px 10px #ffffff;*/
+}
+.main .mid .task ul .delay {
+    color: #E57474;
+}
+.main .mid .task ul .done {
+    text-decoration: line-through;
+}
+.main .mid .task ul li .no {
+    width: 18px;
+    margin-left: 8px;
+    height: 30px;
+    background: url(/images/no_03.png) no-repeat 0px 10px #ffffff;
+    float: left;
+}
+.main .mid .task ul li .yes {
+    width: 18px;
+    margin-left: 8px;
+    height: 30px;
+    background: url(/images/on_06.png) no-repeat 0px 10px #ffffff;
+    float: left;
+}
+.main .mid .task ul .selected .no {
+    background: url(/images/on_06.png) no-repeat 0px 10px #ffffff;
+}
+.main .mid .task ul li:hover {
+    background: #f5f7fb;
+    cursor: pointer;
+}
+.main .mid .task ul li:hover .no {
+    cursor: pointer;
+    background: url(/images/no_03.png) no-repeat 0px 10px #f5f7fb;
+}
+.main .mid .task ul li:hover .yes {
+    cursor: pointer;
+    background: url(/images/on_06.png) no-repeat 0px 10px #f5f7fb;
+}
+.main .mid .task ul .selected:hover .no {
+    background: url(/images/on_06.png) no-repeat 0px 10px #f5f7fb;
+}
+.main .mid .task ul li p {
+    float: left;
+    margin-left: 3px;
+    color: #666666;
+    width: 81%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.main .mid .task ul li .xiafa {
+    display: block;
+    float: right;
+    margin-top: 8px;
+    margin-right: 10px;
+}
+.main .mid .task ul .selected {
+    background: #ffffff;
+    /*background: url(/images/on_06.png) no-repeat 10px 10px #ffffff;*/
+}
+.main .mid .task ul .selected p {
+    color: #cccccc;
+}
+/*===============================右边日历部分*/
+.main .right {
+    position: absolute;
+    right: 0;
+    width: 288px;
+}
+.clear {
+    clear: both;
+}
+/*===============================创建任务*/
+.establish {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 450px;
+    z-index: 100;
+    background: #ffffff;
+    box-shadow: 0px 0px 8px #464646;
+
+}
+.editor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 430px;
+    z-index: 100;
+    background: #ffffff;
+    box-shadow: 0px 0px 8px #464646;
+    height: 100%;
+}
+/*新建编辑头部公共部分*/
+.task-top {
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    background: #e9ecf2;
+}
+.task-top p {
+    float: left;
+    margin-left: 17px;
+    color: #666666;
+    font-size: 16px;
+}
+.task-top ul {
+    float: right;
+}
+.task-top ul li {
+    position: relative;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+}
+.notice {
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    bottom: 34px;
+    left: -12px;
+}
+.xia-notice, .delete {
+    position: absolute;
+    width: 40px;
+    height: 34px;
+    bottom: 34px;
+    left: -12px;
+}
+.xia-notice div:first-child, .delete div:first-child {
+    line-height: 26px;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(4, 4, 4, 0.45);
+    border-radius: 5px;
+}
+.delete div:nth-child(2) {
+    height: 7px;
+    background: url("/images/jian_03.png") no-repeat 12px 0px;
+}
+.xia-notice div:nth-child(2) {
+    height: 7px;
+    background: url("/images/jian_03.png") no-repeat 12px 0px;
+}
+.xia-notice div:nth-child(3) {
+    line-height: 26px;
+    background: url("/images/jian_03.png") no-repeat 12px 0px;
+}
+.notice div:first-child {
+    line-height: 26px;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(4, 4, 4, 0.45);
+    border-bottom: 1px solid #829baa;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.notice div:nth-child(2) {
+    line-height: 26px;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(4, 4, 4, 0.45);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.notice div:nth-child(3) {
+    height: 7px;
+    background: url("/images/jian_03.png") no-repeat 12px 0px;
+}
+.task-top ul li {
+    width: 42px;
+    line-height: 55px;
+}
+.task-top ul li:hover{
+    cursor: pointer;
+}
+.task-top ul .close {
+    background: #e77b76;
+    width: 50px;
+    line-height: 45px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 30px;
+}
+/*以上新建编辑头部公共部分*/
+.establish span {
+    color: #666666;
+    margin-left: 20px;
+}
+.establish .title {
+    width: 358px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 12px;
+    margin-left: 9px;
+    background: #f8f8f8;
+    color: #666666;
+}
+
+.establish .detail {
+    display: block;
+    margin-top: 60px;
+    float: left;
+}
+
+.establish textarea {
+    float: left;
+    width: 358px;
+    height: 121px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    margin-top: 12px;
+    margin-left: 9px;
+    background: #f8f8f8;
+    color: #666666;
+}
+
+.establish .establish-btn {
+    width: 76px;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    background: #6999c2;
+    border-radius: 5px;
+    margin-right: 15px;
+    margin-top: 17px;
+    color: #ffffff;
+    float: right;
+}
+
+/*以下编辑窗口*/
+
+.editor span {
+    color: #666666;
+    margin-left: 20px;
+}
+
+.editor .title {
+    width: 340px;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 12px;
+    margin-left: 9px;
+    background: #f8f8f8;
+    color: #666666;
+}
+
+.editor .detail {
+    display: block;
+    margin-top: 60px;
+    float: left;
+}
+
+.editor textarea {
+    float: left;
+    width: 340px;
+    height: 121px;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    margin-top: 12px;
+    margin-left: 9px;
+    background: #f8f8f8;
+    color: #666666;
+}
+
+.editor .select {
+    width: 372px;
+    height: 34px;
+    margin-left: 57px;
+    margin-top: 25px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.editor .select li {
+    display: block;
+    height: 33px;
+    line-height: 34px;
+    float: left;
+    width: 75px;
+    text-align: center;
+    color: #666666;
+    margin-right: 9px;
+    background: #f8f8f8;
+    border: 1px solid #e5e5e5;
+    border-bottom: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.editor .select .on {
+    background: #6999c2;
+    border: none;
+    color: #ffffff;
+}
+
+.editor .select li:hover {
+    cursor: pointer;
+}
+
+/*****************讨论*/
+.editor .discuss {
+    /*display:none;*/
+}
+
+.editor .discuss textarea {
+    width: 350px;
+    height: 116px;
+    background: #ffffff;
+    margin-left: 57px;
+    padding: 5px;
+}
+
+.editor .btn {
+    float: right;
+    margin-top: 9px;
+    margin-right: 15px;
+}
+
+.editor .btn .remove {
+    float: left;
+    width: 76px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background: #f8f8f8;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+.editor .btn .remove:hover{
+    cursor: pointer;
+}
+.editor .btn .transmit {
+    float: left;
+    width: 76px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 8px;
+    background: #6999c2;
+    border-radius: 3px;
+    color: #ffffff;
+}
+.editor .btn .transmit:hover{
+    cursor: pointer;
+}
+.editor .discuss .discuss-list {
+    margin-top: 33px;
+    float: right;
+    margin-right: 15px;
+}
+
+.editor .discuss .discuss-list img {
+    float: left;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.editor .discuss .discuss-list .discuss-detail {
+    float: left;
+    width: 290px;
+    min-height: 36px;
+    border-radius: 3px;
+    background: #e9ecf2;
+    position: relative;
+    padding: 5px 8px;
+    margin-bottom: 10px;
+}
+
+.editor .discuss .discuss-list .discuss-detail .sanjiao {
+    width: 9px;
+    height: 14px;
+    position: absolute;
+    background: url("/images/sanjiao_03.png") no-repeat;
+    left: -9px;
+    top: 3px;
+}
+
+.editor .discuss .discuss-list .discuss-detail p {
+    color: #666666;
+    margin-bottom: 3px;
+}
+
+.editor .discuss .discuss-list .discuss-detail .name {
+    float: left;
+    color: #999999;
+}
+
+.editor .discuss .discuss-list .discuss-detail .date {
+    float: right;
+    color: #999999;
+}
+/*****************详情*/
+.editor .editor-main {
+    height: 88%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.editor .details {
+
+}
+.editor .details .creater {
+    background: #e9ecf2;
+    position: relative;
+    left: 57px;
+    height: 87px;
+    width: 372px;
+    line-height: 87px;
+    border-radius: 0;
+}
+.editor .details .creater p {
+    float: left;
+    margin-right: 3px;
+}
+.editor .details .creater img {
+    display: block;
+    float: left;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-top: 25px;
+    margin-right: 10px;
+}
+.editor .details .creater .people {
+    float: left;
+    margin-left: 5px;
+}
+.editor .details .creater .creatTime {
+    float: right;
+    margin-right: 15px;
+}
+.editor .details .creater .creatTime p:last-child {
+    color: #999999;
+}
+.editor .receiveList {
+    margin-top: 16px;
+}
+.editor .receiveList .receivePerson {
+    float: left;
+    margin-left: 70px;
+    margin-top: 8px;
+}
+.editor .receiveList ul {
+    float: left;
+    width: 280px;
+}
+.editor .receiveList ul li {
+    float: left;
+    display: block;
+    list-style: none;
+    width: 140px;
+    margin-bottom: 18px;
+}
+.editor .receiveList ul li img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+}
+.editor .receiveList ul li p {
+    float: left;
+    margin-top: 8px;
+}
+/*===============================媒体部分*/
+@media screen and (max-width: 1400px) {
+    .main .mid .task ul li p {
+        width: 75%;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .main .left .storageBox ul li .detail {
+        width: 60%;
+    }
+
+    .main .mid .task ul li p {
+        width: 67%;
+    }
+}
+.editor.ng-hide-add, .editor.ng-hide-remove {
+    transition:all linear 0.5s;
+    display:block!important;
+}
+.editor.ng-hide-add.ng-hide-add-active,
+.editor.ng-hide-remove
+ {
+    animation: slideOutRight 0.5s both ease-in;
+    opacity:0;
+
+}
+.editor.ng-hide-add,
+.editor.ng-hide-remove.ng-hide-remove-active {
+    animation: slideInRight 0.5s both ease-in;
+    opacity:1;
+}
+
+.establish.ng-hide-add, .editor.ng-hide-remove {
+    transition:all linear 0.5s;
+    display:block!important;
+}
+.establish.ng-hide-add.ng-hide-add-active,
+.establish.ng-hide-remove
+{
+    animation: slideOutRight 0.5s both ease-in;
+    opacity:0;
+
+}
+.establish.ng-hide-add,
+.establish.ng-hide-remove.ng-hide-remove-active {
+    animation: slideInRight 0.5s both ease-in;
+    opacity:1;
+}
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0%);
+        opacity:1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity:0.5;
+    }
+}
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity:0.5;
+    }
+    to {
+        transform: translateX(0);
+        opacity:1;
+    }
+}
+#calendarBody .star {
+    text-decoration: underline;
+}
+/*=======================================================同事列表*/
+.task-top ul li .jiTou{
+    position: absolute;
+    top:50px;
+    left: 2px;
+    width:14px;
+    height:7px;
+    z-index: 200;
+    background:url("../images/backtop_03.png") no-repeat 0 0;
+}
+.task-top ul li .menu{
+    position: absolute;
+    top:57px;
+    left:-95px;
+    width:200px;
+    min-height: 70px;
+    /*background: #e5e5e5;*/
+    z-index: 2002;
+    border-radius: 5px;
+}
+.task-top ul li .menu .menuTop{
+    height:35px;
+    width: 100%;
+    background:#6999c2 ;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 14px;
+    line-height: 35px;
+    color: #ffffff;
+}
+.task-top ul li .menu .menuBottom{
+    clear:both;
+    height:35px;
+    width: 100%;
+    background:#e9ecf2 ;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    line-height: 35px;
+    color:#6999c2;
+    box-shadow:2px 2px 3px #cfd1d1;
+
+}
+.task-top ul li .menu .person{
+    /*max-height: 271px;*/
+    width:198px;
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    background: #Ffffff;
+    color:#333333;
+    box-shadow:-3px 0px 3px #e8eaea;
+    overflow:hidden;
+}
+.task-top ul li .menu .person .person-top{
+    font-size: 14px;
+    color:#6999c2;
+    height: 35px;
+    line-height: 35px;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow:2px 0px 3px #e8eaea;
+}
+.task-top ul li .menu .person .person-top div{
+    margin-left: 14px;
+}
+.task-top ul li .menu .menuBottom div{
+    float:right;
+    margin-left: 3px;
+    margin-right: 10px;
+}
+.task-top ul li .menu .menuBottom div:hover{
+    cursor: pointer;
+}
+.task-top ul li .menu .person .listP{
+    width:100%;
+    box-shadow:3px 0px 4px #e8eaea;
+    max-height:235px;
+    overflow-y:auto ;
+    overflow-x:hidden ;
+    background: #ffffff;
+}
+.task-top ul li .menu .person .listP li{
+    clear: both;
+    border-radius: 100%;
+    background: none;
+    margin-left: 5px;
+    width: 100%;
+    color:#000000;
+
+}
+.task-top ul li .menu .person .listP li:hover{
+    cursor: pointer;
+}
+.task-top ul li .menu .person .listP li p:first-child{
+    float:left;
+    margin-left: 25px;
+    font-size: 14px;
+}
+.task-top ul li .menu .person .listP li p:last-child{
+    float:right;
+    margin-right: 15px;
+    width:14px;
+    height:14px;
+    background: url("../images/no_03.png") no-repeat;
+    margin-top: 10px;
+}
+.task-top ul li .menu  .person .listP ul{
+    width:100%;
+    min-height: 35px;
+    line-height: 35px;
+    color:#000000;
+    overflow:hidden;
+}
+.task-top ul li .menu  .person .listP .ulList{
+    border-bottom: 1px solid #e5e5e5;
+    width:185px;
+    margin-left:11px;
+    overflow: hidden;
+}
+.task-top ul li .menu .person .listP ul p{
+    margin-left: 7px;
+    width: 98%;
+    text-align: left;
+    font-size: 14px;
+}
+.task-top ul li .menu .person .listP ul p:hover{
+    cursor: pointer;
+}
+.task-top ul li .menu .person .listP ul li p{
+    margin-left: 25px;
+}
+.task-top ul li .menu .person .listP ul .point{
+    display: block;
+    float:left;
+    font-size: 18px;
+    /*font-weight: bold;*/
+    color:#999999;
+    line-height: 35px;
+}
+.task-top ul li .menu .person .listP ul p:last-child{
+    /*float:right;*/
+    /*margin-right: 15px;*/
+    /*width:14px;*/
+    /*height:14px;*/
+    /*background: url("../images/no_03.png") no-repeat;*/
+    /*margin-top: 12px;*/
+}
+.task-top ul li .menu .person .listP .on p:last-child{
+    background: url("../images/on_06.png") no-repeat;
+}
+.task-top ul li .menu .person .listP ul .on p:last-child{
+    background: url("../images/on_06.png") no-repeat;
+}
+.task-top ul li .menu .person ul li{
+    height:32px;
+    line-height: 32px;
+}

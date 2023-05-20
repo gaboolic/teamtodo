@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>看板</title>
+    <link href="/css/board.css" type="text/css" rel="stylesheet">
+    <link href="/css/calendar.css" rel="stylesheet" type="text/css">
+    <script src="/lib/fat.js"></script>
+    <script src="/lib/angular.min.js"></script>
+</head>
+<body ng-app="todoApp" ng-controller="todoController">
+<div class="top">
+    <img class="top-logo" src="/images/logo_03.png">
+    <div class="top-right">
+        <ul>
+            <li><img src="/images/rc1.png"><p>日程</p> </li>
+            <li><img src="/images/rz1.png"><p>日志</p> </li>
+            <li class="currentBox"><img src="/images/kb2.png"><p>看板</p> </li>
+            <li><img src="/images/ts1.png"><p>同事</p> </li>
+        </ul>
+        <div class="userDetail">
+            <img class="head" src="/images/tt.png">
+            <div class="user">
+                <p>羊羊羊</p>
+                <img src="/images/take_06.png"> <span>3</span>
+            </div>
+            <p class="out">退出</p>
+        </div>
+    </div>
+    <div class="topNotice">
+        <div class="topNoticeBox">
+            <header>通知</header>
+            <!--<p class="noNotice">当前没有新消息</p>-->
+            <ul class="mainBox">
+                <li class="oneNotice">
+                    <p>9:00开会</p>
+                    <p class="detailNotice">3分钟前<span>小刘</span>给<span>张图</span>指派一条看板任务</p>
+                    <ul>
+                        <li>忽略</li>
+                        <li>查看</li>
+                    </ul>
+                </li>
+                <li class="oneNotice">
+                    <p>9:00开会</p>
+                    <p class="detailNotice">3分钟前<span>小刘</span>给<span>张图</span>指派一条看板任务</p>
+                    <ul>
+                        <li>忽略</li>
+                        <li>查看</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="left">
+        <p class="list">看板列表</p>
+        <div class="addBtn" ng-click="addBoard()"><span>+</span><span>新建</span></div>
+        <ul>
+            <li class="on" ng-repeat="item in boardList" ng-click="changeBoard(item)">
+                <p class="text">{{item.name}}</p>
+                <p ng-if="item.auth==-1">（私密）</p>
+                <p ng-if="item.auth==-0">（公开）</p>
+            </li>
+            <!--<li><p class="text">本周任务2</p><p>（公开）</p></li>-->
+            <!--<li><p class="text">本周任务3</p><p>（公开）</p></li>-->
+            <!--<li><p class="text">本周任务4</p><p>（公开）</p></li>-->
+        </ul>
+    </div>
+    <div class="mid">
+        <div class="midTop">
+            <!--<div class="addCard">新建卡片</div>-->
+            <div class="addCardInput">
+                <input placeholder="输入新建的卡片名称">
+                <div class="cancelInputBtn">取消</div>
+                <div class="setBtn">创建</div>
+            </div>
+            <div class="set">设置</div>
+        </div>
+        <div class="cardDetail">
+            <ul class="cards">
+                <li class="card" ng-repeat="card in cardList">
+                    <div class="cardTop">
+                        <span ng-click="test()">{{card.name}}</span><div ng-click="test()"><img src="/images/jianbo_03.png" style="display: block"></div>
+                        <div class="editList" ng-if="card.id==cardId && isListShow">
+                            <ul>
+                                <li ng-click="editCard(card)">修改卡片</li>
+                                <li>归档卡片</li>
+                                <li>复制卡片</li>
+                                <li ng-click="deleteCard(card)">删除卡片</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="listBox">
+                        <ul>
+                            <li ng-repeat="task in card.taskList" ng-click="editTask()"><span class="checkBox"></span><p>{{task.title}}</p></li>
+                            <li class="selected"><span class="checkBox"></span><p>kwkw</p></li>
+                            <p class="addTask" ng-click="addTask(card)" ng-show="card.id!=cardId || !isAddTaskShow">添加新任务</p>
+                            <div class="addBox" ng-if="card.id==cardId && isAddTaskShow">
+                                <textarea placeholder="请输入任务名称" ng-model="card.taskContent"></textarea>
+                                <div class="saveBtn" ng-click="saveTask(card)">保存</div>
+                                <div class="cancelBtn" ng-click="cancelTask()">取消</div>
+                            </div>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <div class="listBox">
+                        <div class="addDetail" ng-click="addCard()" ng-show="isBtnShow">
+                            新建卡片
+                        </div>
+                        <div class="addTaskInput" ng-show="isAddCardShow">
+                            <input placeholder="插入新卡片名称" ng-model="newCardName">
+                            <div class="saveBtn" ng-click="saveCard()">保存</div>
+                            <div class="cancelBtn" ng-click="cancelCard()">取消</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--设置页面、新建看板-->
+<div class="setUp" ng-show="isAddBoardShow">
+<div class="setBoard">
+<header>
+<p class="left">新建看板</p>
+<p class="right" ng-click="shutDown()">×</p>
+</header>
+<div class="boardName">看板名称<input placeholder="请输入看板名称" ng-model="boardName"></div>
+<div class="boardPerson">看板成员
+<div class="bkInput">
+<input>
+<span></span>
+<ul class="option">
+<li>仅自己可见（私人看板）</li>
+<li>所有人可见（公共看板）</li>
+</ul>
+</div>
+</div>
+<ul class="boardBtn">
+
+<li ng-click="saveBoard()">确定</li>
+</ul>
+</div>
+
+    <!--设置页面、新建看板-->
+    <!--<div class="setUp">-->
+        <!--<div class="setBoard">-->
+            <!--<header>-->
+                <!--<p class="left">看板设置</p>-->
+                <!--<p class="right">×</p>-->
+            <!--</header>-->
+            <!--<div class="boardName">看板名称<input placeholder="请输入看板名称"></div>-->
+            <!--<div class="boardPerson">看板成员-->
+                <!--<div class="bkInput">-->
+                    <!--<input>-->
+                    <!--<span></span>-->
+                    <!--<ul class="option">-->
+                        <!--<li>仅自己可见（私人看板）</li>-->
+                        <!--<li>所有人可见（公共看板）</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<span>看板归档<img src="/images/no_03.png"> </span>-->
+            <!--</div>-->
+            <!--<ul class="boardBtn">-->
+                <!--<li>删除</li>-->
+                <!--<li>确定</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+
+
+<!--设置页面、新建看板-->
+</div>
+    <div class="taskDetail" ng-show="isEditTaskShow">
+    <div class="taskBox">
+        <header>
+            <p class="task">任务</p>
+            <ul class="topUl">
+                <li class="topLi">负责人<span class="click"></span>
+                    <div class="jiTou"></div>
+                    <div class="menu">
+                        <div class="menuTop">同事列表</div>
+                        <div class="person">
+                            <div class="person-top"><div>直属公司</div></div>
+                            <ul class="listP">
+                                <ul>
+                                    <li class="on">
+                                        <p>张图</p>
+                                        <p></p>
+                                    </li>
+                                    <li class="on">
+                                        <p>张图</p>
+                                        <p></p>
+                                    </li>
+                                </ul>
+                                <ul class="on"><p><span class="point">·</span>技术部</p><p></p></ul>
+                                <ul><p><span class="point">·</span>技术部</p><p></p></ul>
+                                <ul><p><span class="point">·</span>技术部</p><p></p></ul>
+
+                                <div class="ulList"></div>
+                                <li>
+                                    <p>张图</p>
+                                    <p></p>
+                                </li>
+                                <li class="on">
+                                    <p>小红</p>
+                                    <p></p>
+                                </li>
+                                <li>
+                                    <p>小刘</p>
+                                    <p></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="menuBottom">
+                            <div>
+                                <div>全选</div>
+                                <div>清除</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="topLi">参与人<span class="click"></span></li>
+                <li class="topLi">起止时间<span class="click"></span>
+                    <div class="timeJ"></div>
+                    <div class="timeBox">
+                        <div class="shadowBox">
+
+                            <div class="time-left">
+                                <p>开始时间</p>
+                                <input placeholder="请选择开始时间" class="timetime">
+                                <p>结束时间</p>
+                                <input placeholder="请选择结束时间" class="timetime">
+                                <div class="longTime">
+                                    <span class="on"></span>
+                                    <span>长期</span>
+                                </div>
+                                <div class="timeBtn">
+                                    <ul>
+                                        <li>确定</li>
+                                        <li>取消</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="time-right">222</div>
+                        </div>
+                    </div>
+                </li>
+                <li class="topLi">删除</li>
+                <li class="topLi" ng-click="closeEditTask()">×</li>
+            </ul>
+        </header>
+        <div class="run">
+            <span></span>
+            <p>程序在后台运行</p>
+        </div>
+        <textarea placeholder="添加任务描述"></textarea>
+        <div class="time">负责人：<span>王武</span></div>
+        <div class="time">起止时间：<span>2015-03-20 22：00</span>至<span>2015-03-20 22：00</span></div>
+        <div class="time">参与人：<span>王武</span><span>张图</span><span>王武</span></div>
+        <div class="midNotice"><span>张图</span>创建了一个任务<span>2015-03-20 22：00</span></div>
+        <div class="discuss">
+            <div class="peopleInput">
+                <img src="/images/tou_03.png">
+                <input placeholder="说点什么吧">
+                <ul>
+                    <li>取消</li>
+                    <li>提交</li>
+                </ul>
+            </div>
+            <div class="discussContent">
+                <img src="/images/tou_03.png">
+                <div class="contentDetail">
+                    <div class="bk"></div>
+                    <p>好的，我会尽快处理请放心！v尽快处理请放心！尽快处理请放心！尽快处理请放心！尽快处理请放心！</p>
+                    <div class="personName">
+                        <p>张图</p>
+                        <p>2015-.3-52 12:30</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/board.js"></script>
+</body>
+</html>
