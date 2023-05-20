@@ -2,4 +2,4 @@
 
 代码写于2015年
 
-前端使用angularjs
+后端使用java spring，前端使用angularjs
