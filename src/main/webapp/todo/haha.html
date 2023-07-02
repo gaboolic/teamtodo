@@ -187,7 +187,7 @@
           $http.post("/task/add.do", task)
               .success(function (data) {
                 //$("#taskUl" + $scope.level).append("<li>" + task.content + task.date + task.title + "</li");
-                console.log($scope.taskList)
+                  console.log($scope.taskList);
                 var task = {};
                 task.level = $scope.level;
                 task.content = $scope.content;

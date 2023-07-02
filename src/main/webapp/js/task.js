@@ -64,7 +64,7 @@ app.controller("commonController", function ($scope, $http) {
     $scope.ignoreMessage = function (message) {
         $http.get("/message/ignore.do?id=" + message.id)
             .success(function () {
-                console.log("success")
+                console.log("success");
                 for (var i = 0; i < $scope.messageList.length; i++) {
                     if (message.id == $scope.messageList[i].id) {
                         $scope.messageList.splice(i, 1);
@@ -477,7 +477,7 @@ app.filter('levelFilter', function () {//过滤0123
 
             for (var i = 0; i < $scope.membersEdit.length; i++) {
                 if ($scope.taskDetail.joinList != null) {
-                    console.log("!-nul")
+                    console.log("!-nul");
                     for (var j = 0; j < $scope.taskDetail.joinList.length; j++) {
                         if ($scope.membersEdit[i].id == $scope.taskDetail.joinList[j].id) {
                             $scope.membersEdit[i].onEdit = true;
