@@ -176,8 +176,7 @@ app.controller("diaryController", function ($scope, $http, $sce) {
             .success(function (response) {
                 $scope.starList = response.dateList;
             });
-    };
-
+    }
     $scope.showDiaryDetail = function (diary) {
         localStorage.diaryCurrentDate = diary.date;
         var dateStr = diary.date;
