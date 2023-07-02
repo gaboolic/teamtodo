@@ -45,7 +45,7 @@
 
       <div class="user">
         <p>{{self.name}}</p>
-        <img src="/images/take_06.png">
+        <img ng-click="showMessage()" src="/images/take_06.png">
         <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
       </div>
       <p class="out">退出</p>
@@ -66,7 +66,7 @@
 
           <ul>
             <li ng-click="ignoreMessage(item)">忽略</li>
-            <li><a ng-href="{{item.link}}">查看</a></li>
+            <li><a ng-href="{{item.pcLink}}">查看</a></li>
           </ul>
             <div style="clear: both"></div>
         </li>
@@ -319,15 +319,15 @@
                 </div>
                 <div class="timeBtn">
                   <ul>
-                    <li ng-click="showList3()">确定</li>
-                    <li>取消</li>
+                    <li ng-click="showList3Enter()">确定</li>
+                    <li ng-click="showList3Cancel()">取消</li>
                   </ul>
                 </div>
               </div>
               <div class="time-right">
                 <div class="date">
                   <div class="dateTop">
-                    <span> < </span>
+                    <span ng-click="selectPrevMonth()"> < </span>
                     <div class="month">
                       <input readonly ng-click="showMonthList()" ng-model="currentMonthShow">
                       <div class="date-img"><img src="/images/xia_15.gif"></div>
@@ -342,7 +342,7 @@
                         <li ng-click="selectYear(year)" ng-repeat="year in yearList">{{year}}</li>
                       </ul>
                     </div>
-                    <span> > </span>
+                    <span ng-click="selectNextMonth()"> > </span>
                   </div>
                   <table cellpadding="0" cellspacing="0">
                     <thead>

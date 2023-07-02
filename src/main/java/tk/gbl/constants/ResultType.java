@@ -28,9 +28,11 @@ public enum ResultType {
   APPLY_REPEAT("414","重复申请"),
   FOLLOW_REPEAT("417","重复关注"),
   NOT_NULL("416","不能为空"),
-  EXCEED_STAR_POSITIONNUM("413","发布岗位数超出等级限定"),
   NO_AUTH("420", "没有权限"),
-  ERROR("500", "系统异常");
+  EXIST("421", "已存在"),
+  ERROR("500", "系统异常"),
+  OUT("501", "调用webservice失败")
+  ;
 
 
 

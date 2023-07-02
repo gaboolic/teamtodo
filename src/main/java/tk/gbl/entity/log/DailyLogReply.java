@@ -54,7 +54,7 @@ public class DailyLogReply {
   /**
    * 评论的内容
    */
-  @Column(name = "content")
+  @Column(name = "content",length = 3000)
   String content;
 
   public Integer getId() {

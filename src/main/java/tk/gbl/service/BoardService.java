@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import tk.gbl.constants.Resp;
 import tk.gbl.constants.ResultType;
 import tk.gbl.dao.BoardDao;
+import tk.gbl.dao.TeamDao;
 import tk.gbl.entity.User;
 import tk.gbl.entity.board.Board;
 import tk.gbl.pojo.BoardPojo;
@@ -31,6 +32,9 @@ public class BoardService {
   @Resource
   BoardDao boardDao;
 
+  @Resource
+  TeamDao teamDao;
+
   public BaseResponse addBoard(AddBoardRequest request) {
     User user = UserInfo.getUser();
     Board board = new Board();
@@ -50,7 +54,8 @@ public class BoardService {
     if (board == null) {
       return Resp.success;
     }
-    if (!board.getUser().getId().equals(user.getId())) {
+    User boardUser = board.getUser();
+    if (!boardUser.getTeam().getId().equals(user.getTeam().getId())) {
       return Resp.noAuth;
     }
     board.setName(request.getName());
@@ -65,7 +70,8 @@ public class BoardService {
     if (board == null) {
       return Resp.success;
     }
-    if (!board.getUser().getId().equals(user.getId())) {
+    User boardUser = board.getUser();
+    if (!boardUser.getTeam().getId().equals(user.getTeam().getId())) {
       return Resp.noAuth;
     }
     boardDao.delete(board);
@@ -77,6 +83,9 @@ public class BoardService {
     List<Board> boards = boardDao.allBoardOfTeam(user.getTeam());
     List<BoardPojo> boardList = new ArrayList<BoardPojo>();
     for(Board dbBoard:boards) {
+      if(dbBoard.getAuth().equals("-1") && !dbBoard.getUser().getId().equals(user.getId())) {
+        continue;
+      }
       boardList.add(TransUtil.gen(dbBoard,BoardPojo.class));
     }
     AllBoardResponse allBoardResponse = new AllBoardResponse(ResultType.SUCCESS);

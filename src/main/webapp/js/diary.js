@@ -254,6 +254,34 @@ app.controller("diaryController", function ($scope, $http, $sce) {
         $event.stopPropagation();
     };
 
+    $scope.replyOther = function (reply) {
+        $scope.replyContent = "回复 " + reply.name + ":";
+        document.getElementById("replyTextarea").focus();
+
+    };
+    $scope.cancelReply = function () {
+        $scope.replyContent = null;
+    };
+    $scope.submitReply = function () {
+        if( $scope.replyContent == null) {
+            return;
+        }
+        var reply = {};
+        reply.id = $scope.diary.id;
+        reply.content = $scope.replyContent;
+
+        $http.post("/dailyLog/reply.do", reply)
+            .success(function (data) {
+                reply.createTime = new Date().format("yyyy-MM-dd HH:mm:ss");
+                reply.name = data.name;
+                reply.headImage = data.headImage;
+                $scope.replyList.unshift(reply);
+
+                $scope.replyContent = null;
+            });
+        $scope.replyContent = null;
+    };
+
     //通知查看逻辑
     var hrefArr = window.location.href.split("?");
     if (hrefArr != null && hrefArr.length == 2) {

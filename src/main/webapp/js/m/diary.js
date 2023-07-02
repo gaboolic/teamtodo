@@ -201,11 +201,14 @@ app.controller('editController', function ($scope, $http, $routeParams, $sce) {
         var diary = {};
         diary.id = $scope.diary.id;
         diary.title = $scope.diary.title;
-        diary.content = $scope.diary.content;
+        diary.content = $scope.diary.replaceContent;
         $http.post("/dailyLog/update.do", diary)
             .success(function (data) {
                 location.href = "/log/m/index.html#/myDiaryDetail/" + date;
             })
+    };
+    $scope.deleteDiaryShow = function(){
+        $scope.isDeleteShow = !$scope.isDeleteShow;
     };
     $scope.deleteDiary = function () {//删除日志
         $http.get("/dailyLog/delete.do?id=" + $scope.diary.id)//
@@ -213,6 +216,9 @@ app.controller('editController', function ($scope, $http, $routeParams, $sce) {
                 $scope.diary = null;
                 location.href = "/log/m/index.html#/myDiary";
             });
+    };
+    $scope.cancel = function(){
+        $scope.isDeleteShow = false;
     };
 });
 app.controller('myDiaryDetailController', function ($scope, $http, $routeParams, $sce) {
@@ -269,16 +275,18 @@ app.controller('myDiaryDetailController', function ($scope, $http, $routeParams,
                 reply.name = data.name;
                 reply.headImage = data.headImage;
 
-                $scope.replyList.push(reply);
+                $scope.replyList.unshift(reply);
 
                 $scope.replyContent = null;
+                $scope.otherReplyContent = null;
             })
     }
 });
 app.controller('authController', function ($scope, $http) {
     $scope.pageClass = 'auth';
     init($scope, $http);
-    $scope.isTaskPublic = true;
+    $scope.isTaskPublic = false;
+    $scope.isTaskPrivate = false;
     $scope.isAuthPageShow = true;
     $scope.isIssuedShow = false;
 
@@ -313,7 +321,10 @@ app.controller('authController', function ($scope, $http) {
         }
         $http.get("/dailyLog/changeAuth.do?auth=" + auth)
             .success(function () {
+                $scope.isTaskPublic = false;
+                $scope.isTaskPrivate = false;
 
+                location.href = "/log/m/index.html#/myDiary";
             })
     };
 
@@ -511,7 +522,7 @@ app.controller('calendarController', function ($scope, $http, $routeParams) {
     $scope.cal = createDateCal();
     function createDateCal() {
         var startDate = new Date();
-        startDate.setYear($scope.currentDate.getYear() + 1900);
+        startDate.setYear($scope.currentDate.getFullYear());
         startDate.setMonth($scope.currentDate.getMonth());
         startDate.setDate(1);
         startDate.setDate(startDate.getDate() - startDate.getDay());

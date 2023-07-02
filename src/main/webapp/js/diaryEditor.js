@@ -61,6 +61,17 @@ app.controller('mainController', function ($scope, $http) {
         $http.get("/team/myColleagues.do").success(function (data) {
             $scope.members = data.members;
             $scope.departments = data.departments;
+
+            for (var i = 0; i < $scope.members.length; i++) {
+                if ($scope.currDiary.atList != null) {
+                    for (var j = 0; j < $scope.currDiary.atList.length; j++) {
+                        if ($scope.members[i].id == $scope.currDiary.atList[j].id) {
+                            $scope.members[i].on = true;
+                        }
+
+                    }
+                }
+            }
         });
     };
     $scope.initOrg();
@@ -70,18 +81,63 @@ app.controller('mainController', function ($scope, $http) {
 
             $scope.members = data.members;
             $scope.departments = data.departments;
+
+            for (var i = 0; i < $scope.members.length; i++) {
+                if ($scope.currDiary.atList != null) {
+                    for (var j = 0; j < $scope.currDiary.atList.length; j++) {
+                        if ($scope.members[i].id == $scope.currDiary.atList[j].id) {
+                            $scope.members[i].on = true;
+                        }
+
+                    }
+                }
+            }
         });
     };
-    var atMemberIdList = new Array();
+    var atMemberIdList = [];
     $scope.at = function (member) {
         $scope.simditor.focus();
+        member.on = !member.on;
 
-        if (atMemberIdList.indexOf(member.id) <= 0) {
+        if (member.on ) {
+            member.on = true;
             atMemberIdList.push(member.id);
             if ($scope.currDiary.atList == null) {
-                $scope.currDiary.atList = new Array();
+                $scope.currDiary.atList = [];
             }
             $scope.currDiary.atList.push(member);
+        } else {
+            for (var i = 0; i < atMemberIdList.length; i++) {
+                var item = atMemberIdList[i];
+                if (item.id == member.id) {
+                    atMemberIdList.splice(i, 1);
+                }
+            }
+            for (var i = 0; i < $scope.currDiary.atList.length; i++) {
+                var item = $scope.currDiary.atList[i];
+                if (item.id == member.id) {
+                    $scope.currDiary.atList.splice(i, 1);
+                }
+            }
+        }
+    };
+    $scope.clearJoin = function () {
+    console.log("清除")
+        atMemberIdList = [];
+        $scope.currDiary.atList = [];
+        for (var j = 0; j < $scope.members.length; j++) {
+            $scope.members[j].on = false;
+        }
+    };
+    $scope.selectAll = function () {
+        if ($scope.currDiary.atList == null) {
+            $scope.currDiary.atList = [];
+        }
+        for (var j = 0; j < $scope.members.length; j++) {
+            if ($scope.currDiary.atList.indexOf($scope.members[j]) == -1) {
+                $scope.members[j].on = true;
+                $scope.currDiary.atList.push($scope.members[j]);
+            }
         }
     };
 
@@ -168,6 +224,9 @@ app.controller("commonController", function ($scope, $http) {
             $http.get("/message/show.do")
                 .success(function (response) {
                     $scope.messageList = response.messageList;
+                    if ($scope.messageList.length == 0) {
+                        $scope.isShowMessage = false;
+                    }
                 });
         }
     };
@@ -180,12 +239,18 @@ app.controller("commonController", function ($scope, $http) {
                         $scope.messageList.splice(i, 1);
                     }
                 }
+                if ($scope.messageList.length == 0) {
+                    $scope.isShowMessage = false;
+                }
             });
     };
     $scope.refreshMessageList = function () {
         $http.get("/message/show.do")
             .success(function (response) {
                 $scope.messageList = response.messageList;
+                if ($scope.messageList.length == 0) {
+                    $scope.isShowMessage = false;
+                }
             });
     };
     $scope.refreshMessageList();

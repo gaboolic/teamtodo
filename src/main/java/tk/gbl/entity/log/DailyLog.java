@@ -37,6 +37,15 @@ public class DailyLog extends BaseEntity {
   @JoinColumn(name = "user_id")
   User user;
 
+  @Column(name = "username")
+  String username;
+
+  @Column(name = "head_image")
+  String headImage;
+
+  @Column(name = "star")
+  String star;
+
   /**
    * 用户所属Team
    */
@@ -53,7 +62,7 @@ public class DailyLog extends BaseEntity {
   /**
    * 备注 内容
    */
-  @Column(name = "content")
+  @Column(name = "content",length = 3000)
   String content;
 
   /**
@@ -63,10 +72,38 @@ public class DailyLog extends BaseEntity {
   Integer viewCount;
 
   /**
+   * 附件数
+   */
+  @Column(name = "file_count")
+  Integer fileCount = 0;
+
+  @Column(name = "at_names")
+  String atNames;
+
+  /**
    * 访问列表
    */
   @OneToMany(mappedBy = "dailyLog", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<DailyLogVisit> visits = new HashSet<DailyLogVisit>();
+
+  /**
+   * 评论列表
+   */
+  @OneToMany(mappedBy = "dailyLog", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OrderBy("id DESC")
+  private Set<DailyLogReply> replies = new HashSet<DailyLogReply>();
+
+  /**
+   * 艾特列表
+   */
+  @OneToMany(mappedBy = "dailyLog", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<DailyLogAt> ats = new HashSet<DailyLogAt>();
+
+  /**
+   * 附件列表
+   */
+  @OneToMany(mappedBy = "dailyLog", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<DailyLogFile> files;
 
   public Integer getId() {
     return id;
@@ -119,6 +156,9 @@ public class DailyLog extends BaseEntity {
   }
 
   public Integer getViewCount() {
+    if (viewCount == null) {
+      return 0;
+    }
     return viewCount;
   }
 
@@ -132,5 +172,69 @@ public class DailyLog extends BaseEntity {
 
   public void setTeam(Team team) {
     this.team = team;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getHeadImage() {
+    return headImage;
+  }
+
+  public void setHeadImage(String headImage) {
+    this.headImage = headImage;
+  }
+
+  public String getStar() {
+    return star;
+  }
+
+  public void setStar(String star) {
+    this.star = star;
+  }
+
+  public Set<DailyLogReply> getReplies() {
+    return replies;
+  }
+
+  public void setReplies(Set<DailyLogReply> replies) {
+    this.replies = replies;
+  }
+
+  public Set<DailyLogAt> getAts() {
+    return ats;
+  }
+
+  public void setAts(Set<DailyLogAt> ats) {
+    this.ats = ats;
+  }
+
+  public Set<DailyLogFile> getFiles() {
+    return files;
+  }
+
+  public void setFiles(Set<DailyLogFile> files) {
+    this.files = files;
+  }
+
+  public Integer getFileCount() {
+    return fileCount;
+  }
+
+  public void setFileCount(Integer fileCount) {
+    this.fileCount = fileCount;
+  }
+
+  public String getAtNames() {
+    return atNames;
+  }
+
+  public void setAtNames(String atNames) {
+    this.atNames = atNames;
   }
 }

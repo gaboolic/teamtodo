@@ -33,13 +33,14 @@ ul {
 	font-size: 13px;
 	border-bottom: 2px solid #e4e4e4;
 }
-.container ul {
+.container .selector ul {
 	overflow: hidden;
 }
-.container ul li {
+.container .selector ul li {
 	margin-right: 24px;
 	padding: 23px 0 13px 0;
 	cursor: pointer;
+    /*line-height: 35px;*/
 }
 .container ul li.selected {
 	border-bottom: 2px solid #69c2ec;

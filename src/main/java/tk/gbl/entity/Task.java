@@ -1,6 +1,7 @@
 package tk.gbl.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,12 +47,21 @@ public class Task extends BaseEntity {
   @Column(name = "date")
   String date;
 
+  @Column(name = "create_time")
+  Date createTime;
+
   /**
    * 所属用户(创建人)
    */
   @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   User user;
+
+  @Column(name = "head_image")
+  String headImage;
+
+  @Column(name = "username")
+  String username;
 
   /**
    * 负责人
@@ -72,14 +82,21 @@ public class Task extends BaseEntity {
 
   @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
   @JoinTable(name = "task_join",
-      joinColumns = { @JoinColumn(name = "task_id") },
-      inverseJoinColumns = { @JoinColumn(name = "user_id") })
+      joinColumns = {@JoinColumn(name = "task_id")},
+      inverseJoinColumns = {@JoinColumn(name = "user_id")})
   private Set<User> taskJoins = new HashSet<User>();
+
+  /**
+   * 参与人的名字
+   */
+  @Column(name = "join_names")
+  String joinNames;
 
   /**
    * 评论
    */
   @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OrderBy("id DESC")
   private Set<TaskReply> taskReplys = new HashSet<TaskReply>();
 
   /**
@@ -91,12 +108,12 @@ public class Task extends BaseEntity {
   /**
    * 备注 内容
    */
-  @Column(name = "content")
+  @Column(name = "content",length = 3000)
   String content;
 
   /**
    * 状态
-   *
+   * <p/>
    * 0未完成
    * 1完成
    */
@@ -107,7 +124,7 @@ public class Task extends BaseEntity {
    * 如果是卡片上的任务
    * 则有负责人 参与人 开始时间 结束时间
    */
-  @Column(name="card_id")
+  @Column(name = "card_id")
   Integer cardId;
 
   /**
@@ -125,7 +142,7 @@ public class Task extends BaseEntity {
   /**
    * 序号
    */
-  @Column(name="seq_no")
+  @Column(name = "seq_no")
   private Integer seqNo;
 
   /**
@@ -133,8 +150,17 @@ public class Task extends BaseEntity {
    * 1 下发
    * 0 未下发
    */
-  @Column(name="down_accept")
+  @Column(name = "down_accept")
   private Integer downAccept = 0;
+
+  /**
+   * task权限
+   * -1 仅自己
+   * 0 任何人
+   * 其他如 4,5,6
+   */
+  @Column(name = "auth")
+  private String auth = "0";
 
   public Integer getId() {
     return id;
@@ -228,7 +254,8 @@ public class Task extends BaseEntity {
   }
 
   public void setStartTime(String startTime) {
-    this.startTime = startTime;
+    if (startTime != null)
+      this.startTime = startTime;
   }
 
   public String getEndTime() {
@@ -236,7 +263,8 @@ public class Task extends BaseEntity {
   }
 
   public void setEndTime(String endTime) {
-    this.endTime = endTime;
+    if (endTime != null)
+      this.endTime = endTime;
   }
 
   public Set<TaskReply> getTaskReplys() {
@@ -252,7 +280,8 @@ public class Task extends BaseEntity {
   }
 
   public void setCardId(Integer cardId) {
-    this.cardId = cardId;
+    if (cardId != null)
+      this.cardId = cardId;
   }
 
   public Integer getSeqNo() {
@@ -269,5 +298,46 @@ public class Task extends BaseEntity {
 
   public void setTaskJoins(Set<User> taskJoins) {
     this.taskJoins = taskJoins;
+  }
+
+  public String getHeadImage() {
+    return headImage;
+  }
+
+  public void setHeadImage(String headImage) {
+    this.headImage = headImage;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getAuth() {
+    return auth;
+  }
+
+  public void setAuth(String auth) {
+    if (auth != null)
+      this.auth = auth;
+  }
+
+  public String getJoinNames() {
+    return joinNames;
+  }
+
+  public void setJoinNames(String joinNames) {
+    this.joinNames = joinNames;
+  }
+
+  public Date getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
   }
 }

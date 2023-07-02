@@ -18,10 +18,30 @@ public class UserInfo {
     UserTokenWrapper.getWrapper().setHttpSession(session);
   }
 
+  public static HttpSession getSession() {
+    return UserTokenWrapper.getWrapper().getHttpSession();
+  }
+
+  public static void setIp(String ip) {
+    UserTokenWrapper.getWrapper().setIp(ip);
+  }
+
+  public static String getIp() {
+    return UserTokenWrapper.getWrapper().getIp();
+  }
+
   public static User getUser() {
     HttpSession session = UserTokenWrapper.getWrapper().getHttpSession();
     if (session != null) {
       return (User) session.getAttribute("user");
+    }
+    return null;
+  }
+
+  public static User getAdmin() {
+    HttpSession session = UserTokenWrapper.getWrapper().getHttpSession();
+    if (session != null) {
+      return (User) session.getAttribute("admin");
     }
     return null;
   }

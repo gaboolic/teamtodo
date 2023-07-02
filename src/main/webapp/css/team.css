@@ -125,6 +125,9 @@ li:hover{
     margin-top: 5px;
     float: left;
 }
+.top .top-right .userDetail .user img:hover{
+    cursor: pointer;
+}
 .top .top-right .userDetail .out{
     color:#5dbcf2;
     float:left;
@@ -187,12 +190,13 @@ li:hover{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     text-align: left;
+    overflow-x: hidden;
     max-height: 280px;
 }
 .top .topNotice .topNoticeBox .mainBox .oneNotice{
     min-height:57px;
     padding:10px 0px;
-    width:244px;
+    width:234px;
     margin-left: 7px;
     border-bottom: 1px solid #e5e5e5;
     font-size: 12px;

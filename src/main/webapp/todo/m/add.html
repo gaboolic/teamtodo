@@ -2,7 +2,7 @@
   <div class="top2">
     <div ng-click="returnTodoList()" class="topLeft"><img src="/images/ll_03.png"><span>返回</span></div>
     <div class="topRight" ng-click="addTask()"><span>发布</span></div>
-    <span>创建任务</span>
+    <span class="edit">创建任务</span>
   </div>
   <div class="mainBox2">
     <div class="title2"><input placeholder="请填写任务标题" ng-model="title"></div>
@@ -63,14 +63,15 @@
 <div ng-show="isIssuedShow">
   <div class="top2">
     <div class="topLeft" ng-click="returnAdd()"><img src="/images/ll_03.png"><span>返回</span></div>
-    <div class="topRight"><span> 完成</span></div>
+    <div class="topRight" ng-click="returnAddEnter()"><span> 完成</span></div>
     <span></span>
   </div>
   <div class="topCheck">
-    <p>同事</p>
+    <p ng-click="initOrg()">同事</p>
 
     <div ng-click="toggleSelectAll()" class="topCheckRight" ng-class='{"check":isSelectAll}'>
       全选
+      <div></div>
     </div>
   </div>
   <div class="mainBox4">
@@ -87,7 +88,7 @@
 
         <div class="right">
           <span>{{member.name}}</span>
-          <img src="/images/wstr_06.png" class="star">
+          <img ng-show="member.star == 1" src="/images/wstr_06.png" class="star">
 
           <div class="gou"></div>
         </div>

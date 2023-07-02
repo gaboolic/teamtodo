@@ -46,7 +46,7 @@
 
       <div class="user">
         <p>{{self.name}}</p>
-        <img src="/images/take_06.png">
+        <img ng-click="showMessage()" src="/images/take_06.png">
         <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
 
       </div>
@@ -66,7 +66,7 @@
             {{item.fullDesc}}
           <ul>
             <li ng-click="ignoreMessage(item)">忽略</li>
-            <li><a ng-href="{{item.link}}">查看</a></li>
+            <li><a ng-href="{{item.pcLink}}">查看</a></li>
           </ul>
         </li>
 
@@ -78,7 +78,7 @@
   <div class="left">
     <ul>
       <li><a href="index.html"><img src="/images/hehe_03.png"> <span class="text">工作日志</span><span
-          class="count">1</span></a></li>
+          class="count"></span></a></li>
       <li class="on"><img src="/images/eye_03.png"><span class="text">谁能看我日志</span></li>
     </ul>
   </div>

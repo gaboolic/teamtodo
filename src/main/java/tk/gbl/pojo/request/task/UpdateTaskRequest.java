@@ -3,8 +3,6 @@ package tk.gbl.pojo.request.task;
 import tk.gbl.anno.ValidField;
 import tk.gbl.pojo.request.BaseRequest;
 
-import java.util.Date;
-
 /**
  * Date: 2015/4/1
  * Time: 14:32
@@ -35,9 +33,7 @@ public class UpdateTaskRequest extends BaseRequest {
   /**
    * 所属日期
    */
-  Date date;
-
-
+  String date;
 
 
   String title;
@@ -46,6 +42,15 @@ public class UpdateTaskRequest extends BaseRequest {
   String content;
 
   String status;
+
+  Integer ownerId;
+  String joinIds;
+  String joinTeamIds;
+
+  String startTime;
+  String endTime;
+  private String auth;
+  private Integer cardId;
 
   public Integer getId() {
     return id;
@@ -71,11 +76,11 @@ public class UpdateTaskRequest extends BaseRequest {
     this.type = type;
   }
 
-  public Date getDate() {
+  public String getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(String date) {
     this.date = date;
   }
 
@@ -101,5 +106,61 @@ public class UpdateTaskRequest extends BaseRequest {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  public Integer getOwnerId() {
+    return ownerId;
+  }
+
+  public void setOwnerId(Integer ownerId) {
+    this.ownerId = ownerId;
+  }
+
+  public String getJoinIds() {
+    return joinIds;
+  }
+
+  public void setJoinIds(String joinIds) {
+    this.joinIds = joinIds;
+  }
+
+  public String getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
+  }
+
+  public String getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
+  }
+
+  public String getJoinTeamIds() {
+    return joinTeamIds;
+  }
+
+  public void setJoinTeamIds(String joinTeamIds) {
+    this.joinTeamIds = joinTeamIds;
+  }
+
+  public String getAuth() {
+    return auth;
+  }
+
+  public void setAuth(String auth) {
+    this.auth = auth;
+  }
+
+  public Integer getCardId() {
+    return cardId;
+  }
+
+  public void setCardId(Integer cardId) {
+    this.cardId = cardId;
   }
 }

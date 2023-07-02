@@ -239,12 +239,12 @@ li:hover{
     line-height: 40px;
     color:#999999;
 }
-.main .mainBox2 .button .delete{
+.main .mainBox2 .button .deleteBtn{
     float: right;
     margin-right: 12px;
     margin-top: 10px;
 }
-.main .mainBox2 .button .delete img{
+.main .mainBox2 .button .deleteBtn img{
     width:20px;
     height: 22px;
 }
@@ -659,3 +659,49 @@ li:hover{
      text-decoration: underline;
 }
 /*******************/
+.main .delete{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background:rgba(55,55,55,0.45) ;
+}
+.main .delete .deleteBox{
+    position: absolute;
+    width: 270px;
+    height:155px;
+    background: #ffffff;
+    top:37%;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    border-radius: 5px;
+    text-align: center;
+}
+.main .delete .deleteBox .btn{
+    height:45px;
+    border-top: 1px solid #e5e5e5;
+    line-height: 45px;
+    margin-top: 35px;
+}
+.main .delete .deleteBox .btn li{
+    float: left;
+    display: block;
+    width: 49%;
+    height:45px;
+    text-align: center;
+    color:#568cc3;
+    letter-spacing: 2px;
+}
+.main .delete .deleteBox .btn li:first-child{
+    border-right:1px solid #e5e5e5 ;
+    color:#333333;
+}
+.main .delete .deleteBox p{
+    margin-top:54px;
+    font-size:15px;
+    color:#000000;
+    font-weight:bold;
+}

@@ -10,8 +10,8 @@ import tk.gbl.service.DailyLogService;
 
 import javax.annotation.Resource;
 
-/**8
- * 艾特、回复通知功能未完成
+/**
+ * 艾特通知 回复通知
  *
  * Date: 2015/4/1
  * Time: 15:04
@@ -24,6 +24,12 @@ public class DailyLogController {
 
   @Resource
   DailyLogService dailyLogService;
+
+  @RequestMapping("list")//
+  @ResponseBody
+  public String list(@ValidField ListDailyLogRequest request) {
+    return dailyLogService.listDailyLog(request).toString();
+  }
 
   @RequestMapping("add")//
   @ResponseBody
@@ -68,6 +74,18 @@ public class DailyLogController {
   @ResponseBody
   public String showStar(@ValidField ShowStarRequest request) {
     return dailyLogService.showStar(request).toString();
+  }
+
+  @RequestMapping("getAuth")//
+  @ResponseBody
+  public String getAuth(){
+    return dailyLogService.findAuth().toString();
+  }
+
+  @RequestMapping("canCreate")//
+  @ResponseBody
+  public String canCreate(){
+    return dailyLogService.canCreate().toString();
   }
 
   @RequestMapping("changeAuth")//

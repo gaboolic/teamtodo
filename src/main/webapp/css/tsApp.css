@@ -430,6 +430,9 @@ a{
     margin-top: 5px;
     margin-left: 13px;
     line-height: 25px;
+    max-height: 160px;
+    overflow-y: auto;
+    overflow-x: hidden;
     border-bottom: 1px solid #e5e5e5;
     padding-bottom: 12px;
     background: #ffffff;

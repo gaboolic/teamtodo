@@ -53,7 +53,7 @@
       <img class="head" src={{self.headImage}}>
       <div class="user">
         <p>{{self.name}}</p>
-        <img src="/images/take_06.png">
+        <img ng-click="showMessage()" src="/images/take_06.png">
         <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
 
       </div>
@@ -73,7 +73,7 @@
             {{item.fullDesc}}
           <ul>
             <li ng-click="ignoreMessage(item)">忽略</li>
-            <li><a ng-href="{{item.link}}">查看</a></li>
+            <li><a ng-href="{{item.pcLink}}">查看</a></li>
           </ul>
         </li>
 
@@ -84,7 +84,7 @@
 <div class="main">
   <div class="left">
     <ul>
-      <li class="on"><a href="index.html"><img src="/images/hehe_03.png"> <span class="text">工作日志</span><span class="count">1</span></a></li>
+      <li class="on"><a href="index.html"><img src="/images/hehe_03.png"> <span class="text">工作日志</span><span class="count"></span></a></li>
       <li><a href="setauth.html"><img src="/images/eye_03.png"><span class="text">谁能看我日志</span></a></li>
     </ul>
   </div>
@@ -118,20 +118,16 @@
                         </ul>
 
                         <div class="ulList"></div>
-                        <li class="on">
-                            <p>恍如隔世</p>
-                            <p></p>
-                        </li>
-                        <li ng-repeat="member in members" ng-click="at(member)">
-                            <p>{{member.name}}</p>
+                        <li ng-class='{"on":member.on}' ng-repeat="member in members" ng-click="at(member)">
+                            <p>{{member.name}}、</p>
                             <p></p>
                         </li>
                     </ul>
                 </div>
                 <div class="menuBottom">
                     <div>
-                        <div>全选</div>
-                        <div>清除</div>
+                        <div ng-click="selectAll()">全选</div>
+                        <div ng-click="clearJoin()">清除</div>
                     </div>
                 </div>
             </div>

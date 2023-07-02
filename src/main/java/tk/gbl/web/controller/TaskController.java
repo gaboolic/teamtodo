@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 
 /**8
  * 修改参与人负责人未完成
+ * 负责人参与人通知
+ * 回复通知
  *
  * Date: 2015/3/31
  * Time: 21:41

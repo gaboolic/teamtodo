@@ -164,7 +164,7 @@ app.filter('levelFilter', function () {//过滤0123
                 reply.createTime = new Date().format("yyyy-MM-dd HH:mm:ss");
                 reply.name = data.name;
                 reply.headImage = data.headImage;
-                $scope.taskDetail.replyList.push(reply);
+                $scope.taskDetail.replyList.unshift(reply);
                 $scope.replyContent = null;
 
             })
@@ -298,13 +298,13 @@ app.filter('levelFilter', function () {//过滤0123
             }
             task.joinIds = joinIds;
         }
-        console.log(task)
+        console.log(task);
         $http.post("/task/add.do", task)
             .success(function (data) {
                 task.id = data.id;
                 task.headImage = data.headImage;
                 task.username = data.username;
-                $scope.taskList.push(task);
+                $scope.taskList.unshift(task);
                 $scope.title = null;
                 $scope.content = null;
             })
@@ -313,6 +313,7 @@ app.filter('levelFilter', function () {//过滤0123
         console.log(":::::" + $scope.acceptTaskTitle);
         var task = {};
         task.type = 0;
+        task.date = new Date().format("yyyy-MM-dd");
         task.title = $scope.acceptTaskTitle;
         $http.post("/task/add.do", task)
             .success(function (data) {
@@ -320,7 +321,9 @@ app.filter('levelFilter', function () {//过滤0123
                 task.title = $scope.acceptTaskTitle;
                 task.id = data.id;
                 task.headImage = data.headImage;
-                $scope.acceptList.push(task);
+                task.username = data.username;
+
+                $scope.acceptList.unshift(task);
                 $scope.acceptTaskTitle = null;
             })
     };
@@ -399,6 +402,17 @@ app.filter('levelFilter', function () {//过滤0123
         $http.get("/team/myColleagues.do").success(function (data) {
             $scope.members = data.members;
             $scope.departments = data.departments;
+
+            for (var i = 0; i < $scope.members.length; i++) {
+                if ($scope.joinList != null) {
+                    for (var j = 0; j < $scope.joinList.length; j++) {
+                        if ($scope.members[i].id == $scope.joinList[j].id) {
+                            $scope.members[i].on = true;
+                        }
+
+                    }
+                }
+            }
         });
     };
     $scope.initOrg();
@@ -407,6 +421,17 @@ app.filter('levelFilter', function () {//过滤0123
 
             $scope.members = data.members;
             $scope.departments = data.departments;
+
+            for (var i = 0; i < $scope.members.length; i++) {
+                if ($scope.joinList != null) {
+                    for (var j = 0; j < $scope.joinList.length; j++) {
+                        if ($scope.members[i].id == $scope.joinList[j].id) {
+                            $scope.members[i].on = true;
+                        }
+
+                    }
+                }
+            }
         });
     };
     $scope.join = function (mem) {
@@ -440,7 +465,6 @@ app.filter('levelFilter', function () {//过滤0123
                 $scope.joinList.push($scope.members[j]);
             }
         }
-
     };
 
 
@@ -456,7 +480,7 @@ app.filter('levelFilter', function () {//过滤0123
                     console.log("!-nul")
                     for (var j = 0; j < $scope.taskDetail.joinList.length; j++) {
                         if ($scope.membersEdit[i].id == $scope.taskDetail.joinList[j].id) {
-                            $scope.membersEdit[i].on = true;
+                            $scope.membersEdit[i].onEdit = true;
                         }
                     }
                 }
@@ -469,6 +493,16 @@ app.filter('levelFilter', function () {//过滤0123
 
             $scope.membersEdit = data.members;
             $scope.departmentsEdit = data.departments;
+
+            for (var i = 0; i < $scope.membersEdit.length; i++) {
+                if ($scope.taskDetail.joinList != null) {
+                    for (var j = 0; j < $scope.taskDetail.joinList.length; j++) {
+                        if ($scope.membersEdit[i].id == $scope.taskDetail.joinList[j].id) {
+                            $scope.membersEdit[i].onEdit = true;
+                        }
+                    }
+                }
+            }
         });
     };
     $scope.joinEdit = function (mem) {
@@ -498,9 +532,10 @@ app.filter('levelFilter', function () {//过滤0123
         if ($scope.taskDetail.joinListEdit == null) {
             $scope.taskDetail.joinListEdit = [];
         }
+        console.log( $scope.membersEdit.length)
         for (var j = 0; j < $scope.membersEdit.length; j++) {
             if ($scope.taskDetail.joinListEdit.indexOf($scope.membersEdit[j]) == -1) {
-                $scope.membersEdit[j].on = true;
+                $scope.membersEdit[j].onEdit = true;
                 $scope.taskDetail.joinListEdit.push($scope.membersEdit[j]);
             }
         }
@@ -516,7 +551,7 @@ app.filter('levelFilter', function () {//过滤0123
             var index = $scope.acceptList.indexOf(task);
             if (index > -1) {
                 $scope.acceptList.splice(index, 1);
-                $scope.taskList.push(task);
+                $scope.taskList.unshift(task);
             }
         }
         task.type = 1;
@@ -539,7 +574,7 @@ app.filter('levelFilter', function () {//过滤0123
             var index = $scope.taskList.indexOf(task);
             if (index > -1) {
                 $scope.taskList.splice(index, 1);
-                $scope.acceptList.push(task);
+                $scope.acceptList.unshift(task);
             }
         }
         task.type = 0;

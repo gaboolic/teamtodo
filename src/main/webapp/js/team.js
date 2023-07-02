@@ -145,6 +145,7 @@ app.controller("teamController", function ($scope, $http, $sce) {
     };
     $scope.replyOther = function (reply) {
         $scope.replyContent = "回复 " + reply.name + ":";
+        document.getElementById("replyTextarea").focus();
     };
     $scope.cancelReply = function () {
         $scope.replyContent = null;
@@ -159,7 +160,7 @@ app.controller("teamController", function ($scope, $http, $sce) {
                 reply.createTime = new Date().format("yyyy-MM-dd HH:mm:ss");
                 reply.name = data.name;
                 reply.headImage = data.headImage;
-                $scope.replyList.push(reply);
+                $scope.replyList.unshift(reply);
 
                 $scope.replyContent = null;
             });
@@ -168,6 +169,8 @@ app.controller("teamController", function ($scope, $http, $sce) {
 
     $scope.otherReplyOther = function (reply) {
         $scope.otherReplyContent = "回复 " + reply.name + ":";
+        document.getElementById("otherReplyTextarea").focus();
+
     };
     $scope.cancelOtherReply = function () {
         $scope.otherReplyContent = null;
@@ -182,7 +185,7 @@ app.controller("teamController", function ($scope, $http, $sce) {
                 reply.createTime = new Date().format("yyyy-MM-dd HH:mm:ss");
                 reply.name = data.name;
                 reply.headImage = data.headImage;
-                $scope.replyList.push(reply);
+                $scope.replyList.unshift(reply);
 
                 $scope.otherReplyContent = null;
             });

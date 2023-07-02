@@ -1,5 +1,6 @@
 package tk.gbl.util;
 
+import tk.gbl.anno.ValidJump;
 import tk.gbl.pojo.BasePojo;
 import tk.gbl.util.log.LoggerUtil;
 
@@ -42,6 +43,9 @@ public class TransUtil {
         }
       }catch (Exception e){}
       for (Field field : to.getClass().getDeclaredFields() ) {
+        if(field.getAnnotation(ValidJump.class)!=null){
+          continue;
+        }
         field.setAccessible(true);
         //Field fromField = from.getClass().getDeclaredField(field.getName());
         Method getFromFieldMethod = from.getClass().getMethod("get"+ upFirst(field.getName()));

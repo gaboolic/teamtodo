@@ -19,7 +19,8 @@ import java.util.List;
 @Repository
 public class TaskDao extends SuperDao<Task> {
   public List<String> findDistinctDateOfUser(ShowStarRequest request, User user) {
-    List<String> dateList = this.findSql("SELECT distinct date FROM Task t where t.user = ?", user);
+    List<String> dateList = this.findSql("SELECT distinct date FROM Task t where t.user = ? " +
+        " and t.type = 1 and t.date like ?", user,request.getYearMonth()+"%");
     return dateList;
   }
 
@@ -33,7 +34,7 @@ public class TaskDao extends SuperDao<Task> {
   }
 
   public List<Task> getAllOfCard(Card dbCard) {
-    return find("from Task t where t.cardId = ?", dbCard.getId());
+    return find("from Task t where t.cardId = ? order by id desc", dbCard.getId());
   }
 
 //  public Task get(int id) {

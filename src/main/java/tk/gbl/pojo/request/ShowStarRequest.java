@@ -7,4 +7,13 @@ package tk.gbl.pojo.request;
  * @author Tian.Dong
  */
 public class ShowStarRequest extends BaseRequest {
+  String yearMonth;
+
+  public String getYearMonth() {
+    return yearMonth;
+  }
+
+  public void setYearMonth(String yearMonth) {
+    this.yearMonth = yearMonth;
+  }
 }

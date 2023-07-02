@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import tk.gbl.pojo.request.team.GetTeamOrgRequest;
 import tk.gbl.pojo.request.team.ShowOtherDailyLogRequest;
 import tk.gbl.service.DailyLogService;
 import tk.gbl.service.TeamService;
@@ -25,11 +26,33 @@ public class TeamController {
   @Resource
   DailyLogService dailyLogService;
 
+  /**
+   * 不包括自己
+   */
   @RequestMapping(value = "myColleagues", method = RequestMethod.GET) //
   @ResponseBody
-  public String myColleagues() {
-    return teamService.myColleagues().toString();
+  public String myColleagues(GetTeamOrgRequest request) {
+    return teamService.myColleagues(request).toString();
   }
+
+  /**
+   * 不包括自己
+   */
+  @RequestMapping(value = "myAuthColleagues", method = RequestMethod.GET) //
+  @ResponseBody
+  public String myAuthColleagues(GetTeamOrgRequest request) {
+    return teamService.myAuthColleagues(request).toString();
+  }
+
+  /**
+   * 包括自己
+   */
+  @RequestMapping(value = "org", method = RequestMethod.GET) //
+  @ResponseBody
+  public String org(GetTeamOrgRequest request) {
+    return teamService.org(request).toString();
+  }
+
 
   //公司动态 热门讨论列表
   @RequestMapping(value = "showHotDailyLog", method = RequestMethod.GET) //
@@ -50,5 +73,12 @@ public class TeamController {
   @ResponseBody
   public String showOtherDailyLog(ShowOtherDailyLogRequest request) {
     return teamService.showOtherDailyLog(request).toString();
+  }
+
+  //手机端 同事日志列表
+  @RequestMapping(value = "showOtherDailyLogList", method = RequestMethod.GET) //
+  @ResponseBody
+  public String showOtherDailyLogList(ShowOtherDailyLogRequest request) {
+    return teamService.showOtherDailyLogList(request).toString();
   }
 }

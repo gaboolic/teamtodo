@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * DailyRollingFileAppender extends {@link org.apache.log4j.FileAppender} so that the underlying file is rolled over
+ * DailyRollingFileAppender extends {@link FileAppender} so that the underlying file is rolled over
  * at a user chosen frequency.
  * <p/>
  * DailyRollingFileAppender has been observed to exhibit synchronization issues and data loss. The
@@ -20,7 +20,7 @@ import java.util.*;
  * <p/>
  * <p/>
  * The rolling schedule is specified by the <b>DatePattern</b> option. This pattern should follow
- * the {@link java.text.SimpleDateFormat} conventions. In particular, you <em>must</em> escape literal text
+ * the {@link SimpleDateFormat} conventions. In particular, you <em>must</em> escape literal text
  * within a pair of single quotes. A formatted version of the date pattern is used as the suffix for
  * the rolled file name.
  * <p/>
@@ -168,7 +168,7 @@ public class DailyRollingFileAppender extends FileAppender {
 
   /**
    * The <b>DatePattern</b> takes a string in the same format as expected by
-   * {@link java.text.SimpleDateFormat}. This options determines the rollover schedule.
+   * {@link SimpleDateFormat}. This options determines the rollover schedule.
    */
   public void setDatePattern(String pattern) {
     datePattern = pattern;

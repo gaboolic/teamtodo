@@ -1,6 +1,6 @@
 package tk.gbl.pojo.request.dailylog;
 
-import tk.gbl.pojo.request.BaseRequest;
+import tk.gbl.pojo.request.BaseIdRequest;
 
 /**
  * Date: 2015/4/10
@@ -8,7 +8,7 @@ import tk.gbl.pojo.request.BaseRequest;
  *
  * @author Tian.Dong
  */
-public class ChangeAuthRequest extends BaseRequest {
+public class ChangeAuthRequest extends BaseIdRequest {
   /**
    * -1
    * 0

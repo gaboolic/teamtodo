@@ -11,4 +11,5 @@ import tk.gbl.pojo.response.BaseResponse;
 public class Resp {
   public static BaseResponse success = new BaseResponse(ResultType.SUCCESS);
   public static BaseResponse noAuth = new BaseResponse(ResultType.NO_AUTH);
+  public static BaseResponse exist = new BaseResponse((ResultType.EXIST));
 }

@@ -42,7 +42,7 @@
 
       <div class="user">
         <p>{{self.name}}</p>
-        <img src="/images/take_06.png">
+        <img ng-click="showMessage()" src="/images/take_06.png">
         <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
 
       </div>
@@ -62,7 +62,7 @@
             {{item.fullDesc}}
           <ul>
             <li ng-click="ignoreMessage(item)">忽略</li>
-            <li><a ng-href="{{item.link}}">查看</a></li>
+            <li><a ng-href="{{item.pcLink}}">查看</a></li>
           </ul>
           <div style="clear: both"></div>
         </li>
@@ -133,14 +133,16 @@
             {{member.name}}
           </div>
         </div>
-        <img ng-show="member.type==1 || member.type==2" src="/images/star_03.png" class="star">
+        <img ng-show="member.star==1" src="/images/star_03.png" class="star">
       </li>
     </ul>
   </div>
 </div>
 <!--==================================================右边日志详情部分-->
 <div class="midRight" ng-show="showDiaryList">
-  <header>此日志基于<span>{{diary.username}}</span><span>{{diary.date}}</span>的工作日志<span>隐藏日志原文</span></header>
+  <header>此日志基于<span>{{diary.username}}</span><span>{{diary.date}}</span>的工作日志
+    <!--<span>隐藏日志原文</span>--><span></span>
+  </header>
   <div class="diaryDetail">
     <p ng-bind="diary.title"></p>
 
@@ -151,7 +153,7 @@
   </div>
   <div class="discuss">
     <div class="discussContent">
-      <textarea placeholder="写下讨论内容，按Ctrl+Enter发送" ng-model="replyContent"></textarea>
+      <textarea id="replyTextarea" placeholder="写下讨论内容，按Ctrl+Enter发送" ng-model="replyContent"></textarea>
       <ul>
         <li ng-click="cancelReply()">取消</li>
         <li ng-click="submitReply()">提交</li>
@@ -225,7 +227,7 @@
     </div>
     <div class="discuss">
       <div class="discussContent">
-        <textarea placeholder="写下讨论内容，按Ctrl+Enter发送" ng-model="otherReplyContent"></textarea>
+        <textarea id="otherReplyTextarea" placeholder="写下讨论内容，按Ctrl+Enter发送" ng-model="otherReplyContent"></textarea>
         <ul>
           <li ng-click="cancelOtherReply()">取消</li>
           <li ng-click="submitOtherReply()">提交</li>

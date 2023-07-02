@@ -16,10 +16,24 @@ import java.util.List;
 public class DetailTaskResponse extends BaseResponse {
   private TaskPojo task;
 
+  /**
+   * 创建人
+   */
   private UserPojo user;
 
+  /**
+   * 负责人
+   */
+  private UserPojo owner;
+
+  /**
+   * 参与人
+   */
   private List<UserPojo> joinList;
 
+  /**
+   * 评论列表
+   */
   private List<TaskReplyPojo> replyList;
 
 
@@ -57,5 +71,13 @@ public class DetailTaskResponse extends BaseResponse {
 
   public void setReplyList(List<TaskReplyPojo> replyList) {
     this.replyList = replyList;
+  }
+
+  public UserPojo getOwner() {
+    return owner;
+  }
+
+  public void setOwner(UserPojo owner) {
+    this.owner = owner;
   }
 }

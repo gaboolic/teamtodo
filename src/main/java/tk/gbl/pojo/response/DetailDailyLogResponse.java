@@ -1,8 +1,7 @@
 package tk.gbl.pojo.response;
 
 import tk.gbl.constants.ResultType;
-import tk.gbl.pojo.DailyLogPojo;
-import tk.gbl.pojo.DailyLogVisitPojo;
+import tk.gbl.pojo.*;
 
 import java.util.List;
 
@@ -18,6 +17,10 @@ public class DetailDailyLogResponse extends BaseResponse {
   Integer isHave;
 
   List<DailyLogVisitPojo> visitList;
+
+  List<DailyLogReplyPojo> replyList;
+  private List<DailyLogAtPojo> atList;
+  private List<DailyLogFilePojo> fileList;
 
   public DetailDailyLogResponse(ResultType type) {
     super(type);
@@ -45,5 +48,29 @@ public class DetailDailyLogResponse extends BaseResponse {
 
   public void setVisitList(List<DailyLogVisitPojo> visitList) {
     this.visitList = visitList;
+  }
+
+  public List<DailyLogReplyPojo> getReplyList() {
+    return replyList;
+  }
+
+  public void setReplyList(List<DailyLogReplyPojo> replyList) {
+    this.replyList = replyList;
+  }
+
+  public void setAtList(List<DailyLogAtPojo> atList) {
+    this.atList = atList;
+  }
+
+  public List<DailyLogAtPojo> getAtList() {
+    return atList;
+  }
+
+  public void setFileList(List<DailyLogFilePojo> fileList) {
+    this.fileList = fileList;
+  }
+
+  public List<DailyLogFilePojo> getFileList() {
+    return fileList;
   }
 }

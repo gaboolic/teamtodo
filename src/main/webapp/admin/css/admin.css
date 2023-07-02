@@ -565,6 +565,8 @@ iframe {
 }
 .unit-stuff .memberList li .diary .detail img{
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
     float: left;
     margin-top: 4px;
     margin-right: 10px;
@@ -623,6 +625,7 @@ iframe {
     border-bottom: 1px solid #666666;
 }
 .unit-stuff .right{
+    position: relative;
     /*width:348px;*/
     height:100%;
     overflow-y:auto;
@@ -630,7 +633,8 @@ iframe {
     float: left;
 }
 .unit-stuff .right .rightTitle{
-    width: 130px;
+     /*position: relative;*/
+    width: 145px;
     text-align: center;
     border-bottom: 1px solid #d3d3d3;
     color:#555555;
@@ -638,11 +642,13 @@ iframe {
     margin-top: 15px;
     margin-left: 10px;
     font-size: 16px;
+    overflow: hidden;
 }
 .unit-stuff .right table{
     margin-left: 10px;
     margin-top: 10px;
     max-width: 670px;
+    z-index: 0;
 }
 .unit-stuff .right table tr td{
     min-width: 90px;
@@ -650,3 +656,167 @@ iframe {
 /*.unit-stuff .right table tr td:first-child{*/
     /*width: 120px;*/
 /*}*/
+.right .rightTitle .titleContent{
+    width: 120px;
+    float: left;
+}
+.right .rightTitle span{
+    width: 20px;
+    height: 20px;
+    line-height: 25px;
+    display: block;
+    margin-top: 5px;
+    float: left;
+    font-size: 22px;
+    color:#555555;
+    /*line-height: 25px;*/
+}
+
+
+.power .personList{
+    position: absolute;
+    z-index: 5000;
+    /*top:200px;*/
+    /*left: 60px;*/
+}
+/*.power .personList .jiTou{*/
+    /*position: absolute;*/
+    /*top:105px;*/
+    /*left: 40px;*/
+    /*width:14px;*/
+    /*height:7px;*/
+    /*z-index: 200;*/
+    /*background:url("/images/backtop_03.png") no-repeat 0 0;*/
+/*}*/
+.menu{
+    position: absolute;
+    top:48px;
+    left:10px;
+    width:210px;
+    min-height: 70px;
+    /*background: #e5e5e5;*/
+    z-index: 2002;
+    border-radius: 5px;
+}
+.menu .menuTop{
+    height:35px;
+    width: 100%;
+    background:#6999c2 ;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 14px;
+    line-height: 35px;
+    color: #ffffff;
+}
+.menu .menuBottom{
+    height:35px;
+    width: 100%;
+    background:#e9ecf2 ;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    line-height: 35px;
+    color:#6999c2;
+    box-shadow:2px 2px 3px #cfd1d1;
+}
+.menu .person{
+    /*max-height: 271px;*/
+    width:208px;
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    background: #Ffffff;
+    color:#333333;
+    box-shadow:-3px 0px 3px #e8eaea;
+}
+.menu .person .person-top{
+    font-size: 14px;
+    color:#6999c2;
+    height: 35px;
+    line-height: 35px;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow:2px 0px 3px #e8eaea;
+}
+.menu .person .person-top div{
+    margin-left: 14px;
+}
+.menu .menuBottom div{
+    float:right;
+    margin-left: 3px;
+    margin-right: 10px;
+}
+.menu .menuBottom div:hover{
+    cursor: pointer;
+}
+.menu .person .listP{
+    width:100%;
+    box-shadow:3px 0px 4px #e8eaea;
+    max-height:235px;
+    overflow-y:auto ;
+    overflow-x:hidden ;
+}
+ .personList .menu .person .listP li{
+    display: block;
+    /*margin:0;*/
+    padding-top: 0;
+    clear: both;
+    border-radius: 100%;
+    background: none;
+    margin-left: 5px;
+    width: 100%;
+    height: 35px;
+    color:#000000;
+}
+.menu .person .listP li p:first-child{
+    float:left;
+    margin-left: 25px;
+}
+.menu .person .listP li p:last-child{
+    float:right;
+    margin-right: 15px;
+    width:14px;
+    height:14px;
+    background: url("/images/no_03.png") no-repeat;
+    margin-top: 10px;
+}
+.menu  .person .listP ul{
+    width:100%;
+    min-height: 35px;
+    line-height: 35px;
+    color:#000000;
+}
+.menu  .person .listP .ulList{
+    border-bottom: 1px solid #e5e5e5;
+    width:195px;
+    margin-left:11px;
+}
+.menu .person .listP ul p{
+    margin-left: 7px;
+    width: 98%;
+    text-align: left;
+}
+.menu .person .listP ul p:hover{
+    cursor: pointer;
+}
+.menu .person .listP ul li p{
+    margin-left: 25px;
+}
+.menu .person .listP ul .point{
+    display: block;
+    float:left;
+    font-size: 18px;
+    /*font-weight: bold;*/
+    color:#999999;
+    line-height: 35px;
+}
+.power .personList .menu .person .listP .on p:last-child{
+    background: url("/images/on_06.png") no-repeat;
+}
+.power .personList .menu .person .listP ul .on p:last-child{
+    background: url("/images/on_06.png") no-repeat;
+}
+.power .personList .menu .person ul li{
+    height:32px;
+    line-height: 32px;
+}

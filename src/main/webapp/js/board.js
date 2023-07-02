@@ -40,6 +40,18 @@ app.controller("todoController", function ($scope, $http) {
     $scope.showList3 = function () {//参与人下拉菜单
         $scope.isTimeShow = !$scope.isTimeShow;
     };
+    $scope.showList3Enter = function () {//参与人下拉菜单
+        $scope.isTimeShow = !$scope.isTimeShow;
+        $scope.taskDetail.task.startTime = $scope.startEndDay[0];
+        $scope.taskDetail.task.endTime = $scope.startEndDay[1];
+    };
+    $scope.showList3Cancel = function(){
+        $scope.isTimeShow = !$scope.isTimeShow;
+        $scope.taskDetail.task.startTime = null;
+        $scope.taskDetail.task.endTime = null;
+        $scope.startEndDay[0] = "";
+        $scope.startEndDay[1] = "";
+    };
     $scope.setBoard = function () {//设置看板
         $scope.isSetUpShow = true;
         $scope.boardName1 = $scope.boardName;
@@ -185,7 +197,7 @@ app.controller("todoController", function ($scope, $http) {
                 if (card.taskList == undefined) {
                     card.taskList = [];
                 }
-                card.taskList.push(task);
+                card.taskList.unshift(task);
 
                 $scope.isAddTaskShow = false;
             });
@@ -346,7 +358,28 @@ app.controller("todoController", function ($scope, $http) {
         });
     };
 
+    $scope.clearJoin = function () {
+        $scope.taskDetail.joinList = [];
+        for (var i = 0; i < $scope.departments.length; i++) {
+            $scope.departments[i].on = false;
+        }
+        for (var j = 0; j < $scope.members.length; j++) {
+            $scope.members[j].on = false;
+        }
+    };
+    $scope.selectAll = function () {
+        for (var i = 0; i < $scope.departments.length; i++) {
+            $scope.departments[i].on = true;
+            $scope.departments[i].type = 0;
+            $scope.taskDetail.joinList.push($scope.departments[i]);
+        }
+        for (var j = 0; j < $scope.members.length; j++) {
+            $scope.members[j].on = true;
+            $scope.members[j].type = 1;
+            $scope.taskDetail.joinList.push($scope.members[j]);
+        }
 
+    };
     $scope.join = function (mem) {
         mem.on = !mem.on;
         if (mem.on) {
@@ -404,7 +437,7 @@ app.controller("todoController", function ($scope, $http) {
     $scope.cal = createDateCal();
     function createDateCal() {
         var startDate = new Date();
-        startDate.setYear($scope.currentDate.getYear() + 1900);
+        startDate.setYear($scope.currentDate.getFullYear());
         startDate.setMonth($scope.currentDate.getMonth());
         startDate.setDate(1);
         startDate.setDate(startDate.getDate() - startDate.getDay());
@@ -441,6 +474,14 @@ app.controller("todoController", function ($scope, $http) {
 
         $scope.changeDate();
     };
+    $scope.selectPrevMonth = function () {
+        $scope.currentMonth -= 1;
+        $scope.selectMonth($scope.currentMonth);
+    };
+    $scope.selectNextMonth = function (month) {
+        $scope.currentMonth += 1;
+        $scope.selectMonth($scope.currentMonth);
+    };
     $scope.selectMonth = function (month) {
         $scope.currentMonth = month;
         if ($scope.currentMonth < 10) {
@@ -455,14 +496,19 @@ app.controller("todoController", function ($scope, $http) {
     $scope.changeDate = function () {
         var d = new Date();
         d.setYear($scope.currentYear);
-        d.setMonth($scope.currentMonth);
+        d.setMonth($scope.currentMonth-1);
 
-        var today = new Date();
-        var last = new Date(today.getFullYear(), today.getMonth() + 1, 0);//获取当前月最后一天时间
-        $scope.dayList = [];
-        for (var i = 1; i <= last.getDate(); i++) {
-            $scope.dayList.push(i);
-        }
+        $scope.currentDate = d;
+        console.log( $scope.currentDate)
+        $scope.cal = createDateCal();
+//        var today = d;
+//        var last = new Date(today.getFullYear(), today.getMonth() + 1, 0);//获取当前月最后一天时间
+//        console.log(last)
+//        $scope.dayList = [];
+//        for (var i = 1; i <= last.getDate(); i++) {
+//            $scope.dayList.push(i);
+//        }
+//        console.log($scope.dayList)
     };
 
     $scope.isSelectDay = function (day) {
@@ -475,8 +521,21 @@ app.controller("todoController", function ($scope, $http) {
 
     $scope.selectDay = function (day) {
         day = day.format("yyyy-MM-dd");
+        if($scope.startEndDay[0] == day) {
+            $scope.startEndDay[0] = "";
+            $scope.startEndDay[1] = "";
+            return;
+        }
+        if($scope.startEndDay[0] == ""){
+            $scope.startEndDay[0] = day;
+        }
+        if($scope.startEndDay[1] == ""){
+            $scope.startEndDay[1] = day;
+        }
+
         if ($scope.startEndDay.length == 0) {
-            $scope.startEndDay.push(day);
+            $scope.startEndDay[0] = day;
+            $scope.startEndDay[1] = day;
         } else if ($scope.startEndDay.length == 1) {
             if ($scope.startEndDay[0] > day) {
                 var temp = $scope.startEndDay[0];
@@ -548,7 +607,7 @@ app.controller("todoController", function ($scope, $http) {
                 reply.createTime = new Date().format("yyyy-MM-dd HH:mm:ss");
                 reply.name = data.name;
                 reply.headImage = data.headImage;
-                $scope.taskDetail.replyList.push(reply);
+                $scope.taskDetail.replyList.unshift(reply);
                 $scope.replyContent = null;
 
             });
@@ -574,7 +633,7 @@ app.controller("todoController", function ($scope, $http) {
                     var index = card.taskList.indexOf(task);
                     if (index > -1) {
                         card.taskList.splice(index, 1);
-                        cd.taskList.push(task);
+                        cd.taskList.unshift(task);
                     }
                 }
             });

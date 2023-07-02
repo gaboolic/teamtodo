@@ -1,5 +1,7 @@
 package tk.gbl.pojo;
 
+import tk.gbl.anno.ValidJump;
+
 import java.util.List;
 
 /**
@@ -16,6 +18,7 @@ public class CardPojo extends BasePojo {
    */
   private Integer seqNo;
 
+  @ValidJump
   List<TaskPojo> taskList;
 
   public String getName() {

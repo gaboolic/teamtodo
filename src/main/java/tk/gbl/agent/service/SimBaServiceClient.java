@@ -1,6 +1,11 @@
 package tk.gbl.agent.service;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import tk.gbl.agent.request.*;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * Date: 2015/4/16
@@ -15,41 +20,65 @@ public class SimBaServiceClient {
   private static String appId = "5730";
 
   static {
-    init();
+    try {
+      init();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-  public static void init() {
-    String address = "http://58.22.60.28:8080/AppCenter/services/AppCenterWS?wsdl";
+  public static void init() throws IOException {
+//    String address = "http://58.22.60.28:8080/AppCenter/services/AppCenterWS?wsdl";
+    Properties prop = new Properties();
+    InputStream is = SimBaServiceClient.class.getResourceAsStream("/simba.properties");
+    prop.load(is);
+    String address = prop.getProperty("webservice.url");
     factory.setServiceClass(SimBaService.class);
     factory.setAddress(address);
     service = (SimBaService) factory.create();
   }
 
-  public static String tokenLogin() {
-    String result = null;
-    String xml1 = "\"<request type=\\\"login\\\" subtype=\\\"checkedToken\\\" msid=\\\"\\\">\\n\" +\n" +
-        "        \"<message>  \\n\" +\n" +
-        "        \"  <user token=\\\"ee99d537-2d39-47ea-b250-df713fe3846a\\\" />\\n\" +\n" +
-        "        \"</message>\\n\" +\n" +
-        "        \"</request>\"";
-    String xml2 = "<request type=\"login\" subtype=\"accountLogin\" msid=\"\">\n" +
-        "<message>  \n" +
-        "  <user account=\"admin@abc.com\"  pwd=\"yITMxADM\" pwdtype=\"1\"/>\n" +
-        "</message>\n" +
-        "</request>";
+  public static String accountLogin(AccountLoginRequest request) {
+    String result = service.request(appId, request.toString());
+    return result;
+  }
 
-    String xml3 = "<request type=\"user\" subtype=\"getStatus\" msid=\"\">\n" +
-        "<token>A5F47EE701D742be8FA7AC5469CC4573</token>\n" +
-        "<message>  \n" +
-        "  <user acc_nbr=\"66220097\" />\n" +
-        "</message>\n" +
-        "</request>";
-    result = service.request(appId,xml1);
+  public static String tokenLogin(TokenLoginRequest request) {
+    String result = service.request(appId, request.toString());
+    return result;
+  }
+
+  public static String getCustNbrInfo(GetCustNbrInfoRequest request) {
+    String result = service.request(appId, request.toString());
+    return result;
+  }
+
+  public static String messageNotify(MessageNotifyRequest request) {
+    String result = service.request(appId, request.toString());
+    return result;
+  }
+
+  public static String orgService(OrgServiceRequest request) {
+    String result = service.request(appId, request.toString());
+    return result;
+  }
+
+  public static String orgServiceVersion(GetOrgVersionRequest request) {
+    String result = service.request(appId, request.toString());
+    return result;
+  }
+
+  public static String userStatus(UserStatusRequest request) {
+    String result = service.request(appId, request.toString());
     return result;
   }
 
   public static void main(String[] args) {
-   System.out.println(tokenLogin());
+    try {
+      init();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }

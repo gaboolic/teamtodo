@@ -127,7 +127,10 @@ app.controller('acceptController', function ($scope, $http) {
                 $scope.acceptTaskTitle = null;
             })
     };
-
+    $scope.editTask = function (item) {
+        localStorage.isReturnAccept = "1";
+        location.href = "/todo/m/index.html#/edit/"+item.id;
+    }
 });
 
 app.controller('todoController', function ($scope, $http, $routeParams) {
@@ -174,10 +177,12 @@ app.controller('todoController', function ($scope, $http, $routeParams) {
 
     $scope.createNewTask = function () {
         location.href = "/todo/m/index.html#/add/" + date;
+    };
+
+    $scope.editTask = function (item) {
+        localStorage.isReturnAccept = "0";
+        location.href = "/todo/m/index.html#/edit/"+item.id;
     }
-
-
-
 });
 
 app.controller('addController', function ($scope, $http, $routeParams) {
@@ -196,6 +201,10 @@ app.controller('addController', function ($scope, $http, $routeParams) {
         $scope.isIssuedShow = true;
     };
     $scope.returnAdd = function () {
+        $scope.isSelectShow = false;
+        $scope.isIssuedShow = false;
+    };
+    $scope.returnAddEnter = function () {
         $scope.isSelectShow = false;
         $scope.isIssuedShow = false;
     };
@@ -250,23 +259,47 @@ app.controller('addController', function ($scope, $http, $routeParams) {
                 location.href = "/todo/m/index.html#/todo/" + date;
             })
     };
-    $scope.returnTodoList = function(){
+    $scope.returnTodoList = function () {
         location.href = "/todo/m/index.html#/todo/" + date;
     };
 
 
     $scope.initOrg = function () {
+        $scope.isSelectAll = false;
         $http.get("/team/myColleagues.do").success(function (data) {
             $scope.members = data.members;
             $scope.departments = data.departments;
+
+            for (var i = 0; i < $scope.members.length; i++) {
+                if ($scope.joinList != null) {
+                    for (var j = 0; j < $scope.joinList.length; j++) {
+                        if ($scope.members[i].id == $scope.joinList[j].id) {
+                            $scope.members[i].on = true;
+                        }
+
+                    }
+                }
+            }
         });
     };
     $scope.initOrg();
     $scope.refreshDepartment = function (department) {
+        $scope.isSelectAll = false;
         $http.get("/team/myColleagues.do?depId=" + department.id).success(function (data) {
 
             $scope.members = data.members;
             $scope.departments = data.departments;
+
+            for (var i = 0; i < $scope.members.length; i++) {
+                if ($scope.joinList != null) {
+                    for (var j = 0; j < $scope.joinList.length; j++) {
+                        if ($scope.members[i].id == $scope.joinList[j].id) {
+                            $scope.members[i].on = true;
+                        }
+
+                    }
+                }
+            }
         });
     };
     $scope.join = function (mem) {
@@ -320,6 +353,9 @@ app.controller('editController', function ($scope, $http, $routeParams) {
         .success(function (response) {
             $scope.taskDetail = response;
             $scope.isTaskPublic = $scope.taskDetail.task.auth == "0";
+            $scope.joinList = $scope.taskDetail.joinList;
+            $scope.initOrg();
+
         });
 
     $scope.showReplyList = function () {
@@ -364,7 +400,9 @@ app.controller('editController', function ($scope, $http, $routeParams) {
 
         var task = $scope.taskDetail.task;
         task.auth = $scope.addTaskAuth;
-
+        if(task.level != null) {
+            task.type = 1;
+        }
 
         /* 修改参与人 */
         if ($scope.joinList != null && $scope.joinList.length != 0) {
@@ -380,7 +418,6 @@ app.controller('editController', function ($scope, $http, $routeParams) {
         } else {
             task.joinIds = "";
         }
-        console.log(task)
         $http.post("/task/update.do", task)
             .success(function (data) {
                 $scope.returnTaskList();
@@ -401,6 +438,10 @@ app.controller('editController', function ($scope, $http, $routeParams) {
     };
 
     $scope.returnTaskList = function () {
+        if (localStorage.isReturnAccept == "1") {
+            location.href = "/todo/m/index.html#/accept";
+            return;
+        }
         if ($scope.taskDetail.task.type == 1) {
             location.href = "/todo/m/index.html#/todo";
         } else {
@@ -418,7 +459,7 @@ app.controller('editController', function ($scope, $http, $routeParams) {
                 reply.createTime = new Date().format("yyyy-MM-dd HH:mm:ss");
                 reply.name = data.name;
                 reply.headImage = data.headImage;
-                $scope.taskDetail.replyList.push(reply);
+                $scope.taskDetail.replyList.unshift(reply);
                 $scope.replyContent = null;
 
             })
@@ -426,17 +467,41 @@ app.controller('editController', function ($scope, $http, $routeParams) {
 
 
     $scope.initOrg = function () {
+        $scope.isSelectAll = false;
         $http.get("/team/myColleagues.do").success(function (data) {
             $scope.members = data.members;
             $scope.departments = data.departments;
+
+
+            for (var i = 0; i < $scope.members.length; i++) {
+                if ($scope.joinList != null) {
+                    for (var j = 0; j < $scope.joinList.length; j++) {
+                        if ($scope.members[i].id == $scope.joinList[j].id) {
+                            $scope.members[i].on = true;
+                        }
+
+                    }
+                }
+            }
         });
     };
-    $scope.initOrg();
     $scope.refreshDepartment = function (department) {
+        $scope.isSelectAll = false;
         $http.get("/team/myColleagues.do?depId=" + department.id).success(function (data) {
 
             $scope.members = data.members;
             $scope.departments = data.departments;
+
+            for (var i = 0; i < $scope.members.length; i++) {
+                if ($scope.joinList != null) {
+                    for (var j = 0; j < $scope.joinList.length; j++) {
+                        if ($scope.members[i].id == $scope.joinList[j].id) {
+                            $scope.members[i].on = true;
+                        }
+
+                    }
+                }
+            }
         });
     };
     $scope.join = function (mem) {
@@ -511,11 +576,11 @@ app.controller('calendarController', function ($scope, $http, $routeParams) {
     $scope.returnTodo = function () {
         location.href = "/todo/m/index.html#/todo/" + $scope.currentDate.format("yyyy-MM-dd");
     };
-    $scope.returnTodoCancel = function(){
+    $scope.returnTodoCancel = function () {
         location.href = "/todo/m/index.html#/todo/" + new Date().format("yyyy-MM-dd");
     };
 
-    $scope.returnToday = function(){
+    $scope.returnToday = function () {
         $scope.selectDay(new Date());
     };
     $scope.selectDay = function (date) {
@@ -528,6 +593,18 @@ app.controller('calendarController', function ($scope, $http, $routeParams) {
     $scope.isSunday = function (date) {
         return date.getDay() == 0 || date.getDay() == 6;
     };
+    $scope.isStar = function (date) {
+        if ($scope.starList == null) {
+            return false;
+        }
+
+        for (var i = 0; i < $scope.starList.length; i++) {
+            if ($scope.starList[i] == date.format("yyyy-MM-dd")) {
+                return true;
+            }
+        }
+        return false;
+    };
     $scope.isNextMonth = function (date) {
         if (date.getMonth() != $scope.currentDate.getMonth()) {
             return true;
@@ -538,7 +615,7 @@ app.controller('calendarController', function ($scope, $http, $routeParams) {
     $scope.cal = createDateCal();
     function createDateCal() {
         var startDate = new Date();
-        startDate.setYear($scope.currentDate.getYear() + 1900);
+        startDate.setYear($scope.currentDate.getFullYear());
         startDate.setMonth($scope.currentDate.getMonth());
         startDate.setDate(1);
         startDate.setDate(startDate.getDate() - startDate.getDay());
@@ -564,10 +641,22 @@ app.controller('calendarController', function ($scope, $http, $routeParams) {
         $scope.currentDate.setDate(1);
         $scope.currentDate.setMonth($scope.currentDate.getMonth() - 1);
         $scope.cal = createDateCal();
+        $http.get("/task/showStar.do?yearMonth=" + $scope.currentDate.format("yyyy-MM"))
+            .success(function (response) {
+                $scope.starList = response.dateList;
+            });
     };
     $scope.calRight = function () {//向右一月
         $scope.currentDate.setDate(1);
         $scope.currentDate.setMonth($scope.currentDate.getMonth() + 1);
         $scope.cal = createDateCal();
+        $http.get("/task/showStar.do?yearMonth=" + $scope.currentDate.format("yyyy-MM"))
+            .success(function (response) {
+                $scope.starList = response.dateList;
+            });
     };
+    $http.get("/task/showStar.do?yearMonth=" + $scope.currentDate.format("yyyy-MM"))
+        .success(function (response) {
+            $scope.starList = response.dateList;
+        });
 });

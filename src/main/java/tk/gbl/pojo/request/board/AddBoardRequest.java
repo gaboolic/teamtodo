@@ -13,7 +13,7 @@ public class AddBoardRequest extends BaseRequest{
   @ValidField
   private String name;
 
-  @ValidField
+
   private String auth;
 
   public String getName() {

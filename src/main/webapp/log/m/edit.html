@@ -12,6 +12,19 @@
   <div class="button">
     <!--<div class="buttonLeft"><img src="/images/tu_03.png"></div>-->
     <!--<div class="buttonRight">@</div>-->
-    <div class="delete" ng-click="deleteDiary()"><img src="/images/de_03.png"></div>
+    <div class="deleteBtn" ng-click="deleteDiaryShow()"><img src="/images/de_03.png"></div>
+  </div>
+
+
+</div>
+
+
+<div class="delete" ng-show="isDeleteShow">
+  <div class="deleteBox">
+    <p>您要删除该任务吗？</p>
+    <ul class="btn">
+      <li ng-click="cancel()">取消</li>
+      <li ng-click="deleteDiary()">确定</li>
+    </ul>
   </div>
 </div>

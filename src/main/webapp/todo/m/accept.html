@@ -15,7 +15,6 @@
 <div class="mainBody">
   <ul>
     <li ng-repeat="item in acceptList" ng-click="editTask(item)">
-      <a href="#edit/{{item.id}}">
 
         <div class="left"><img src={{item.headImage}}></div>
         <div class="right">
@@ -29,7 +28,6 @@
           </p>
           <p class="content"><span>·</span><span>{{item.title}}</span></p>
         </div>
-      </a>
     </li>
   </ul>
 </div>

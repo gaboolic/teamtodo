@@ -125,6 +125,9 @@ li:hover{
     margin-top: 5px;
     float: left;
 }
+.top .top-right .userDetail .user img:hover{
+    cursor: pointer;
+}
 .top .top-right .userDetail .user span{
     display: block;
     margin-top:5px;
@@ -151,7 +154,7 @@ li:hover{
 }
 .top .topNotice{
     position: absolute;
-    z-index: 200;
+    z-index: 2000;
     right:10px;
     top:86px;
     width:260px;
@@ -1098,6 +1101,16 @@ li:hover{
     border:1px solid #e5e5e5;
     padding-left: 10px;
 }
+.diaryDetail .discuss .peopleInput textarea{
+    width: 92.34%;
+    height: 70px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #e5e5e5;
+    padding: 13px;
+    font-size: 14px;
+}
+
 .diaryDetail .discuss .peopleInput ul{
     float:right;
     margin-right: 12px;
@@ -1118,8 +1131,10 @@ li:hover{
     border-radius: 5px;
 }
 .diaryDetail .discuss .discussContent{
-    height:42px;
+    overflow: hidden;
+    height:50px;
     margin-top: 29px;
+    width: 100%;
 }
 .diaryDetail .discuss .discussContent img{
     display: block;
@@ -1155,11 +1170,18 @@ li:hover{
     margin-top: 2px;
     color:#999999;
 }
-.diaryDetail .discuss .discussContent .contentDetail .personName p:last-child{
+.diaryDetail .discuss .discussContent .contentDetail .personName .time{
     float:right;
     margin-top: 2px;
     color:#999999;
 }
+.diaryDetail .discuss .discussContent .contentDetail .personName .time span{
+    cursor: pointer;
+}
+/*.diaryDetail .discuss .discussContent .contentDetail .personName span{*/
+    /*float:right;*/
+    /*width: 30px;*/
+/*}*/
 #calendarBody .star {
     text-decoration: underline;
 }

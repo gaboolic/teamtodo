@@ -45,7 +45,7 @@
 
       <div class="user">
         <p>{{self.name}}</p>
-        <img src="/images/take_06.png">
+        <img ng-click="showMessage()" src="/images/take_06.png">
         <span ng-show="messageList.length>0" ng-click="showMessage()">{{messageList.length}}</span>
       </div>
       <p class="out">退出</p>
@@ -68,7 +68,7 @@
             <!--<span>{{item.toUserName}}</span>指派一条{{item.typeName}}任务</p>-->
           <ul>
             <li ng-click="ignoreMessage(item)">忽略</li>
-            <li><a ng-href="{{item.link}}">查看</a></li>
+            <li><a ng-href="{{item.pcLink}}">查看</a></li>
           </ul>
           <div style="clear: both"></div>
         </li>
@@ -203,6 +203,15 @@
   <div class="task-top">
     <p>新建任务</p>
     <ul>
+      <li>
+        <!--<img src="/images/s_03.png" ng-click="showAddTaskAuth()">-->
+
+        <div class="notice" ng-show="isAddTaskAuthShow">
+          <div ng-click="addTaskPublic()">公开</div>
+          <div ng-click="addTaskPrivate()">秘密</div>
+          <div></div>
+        </div>
+      </li>
       <li><img src="/images/t_03.png" ng-click="showAddTaskDown()">
 
         <div class="xia-notice" ng-show="isAddTaskDownShow">
@@ -243,14 +252,7 @@
           </div>
         </div>
       </li>
-      <li><img src="/images/s_03.png" ng-click="showAddTaskAuth()">
 
-        <div class="notice" ng-show="isAddTaskAuthShow">
-          <div ng-click="addTaskPublic()">公开</div>
-          <div ng-click="addTaskPrivate()">秘密</div>
-          <div></div>
-        </div>
-      </li>
       <li class="close" ng-click="cancel()">×</li>
     </ul>
   </div>
@@ -265,6 +267,15 @@
   <div class="task-top">
     <p> 编辑任务</p>
     <ul>
+      <li>
+        <!--<img src="/images/s_03.png" ng-click="authShow()">-->
+
+        <div class="notice" ng-show="isAuthShow">
+          <div ng-click="authPublic()">公开</div>
+          <div ng-click="authPrivate()">秘密</div>
+          <div></div>
+        </div>
+      </li>
       <li><img src="/images/t_03.png" ng-click="editDownShow()">
 
         <div class="xia-notice" ng-show="isDownShow">
@@ -306,14 +317,7 @@
           </div>
         </div>
       </li>
-      <li><img src="/images/s_03.png" ng-click="authShow()">
 
-        <div class="notice" ng-show="isAuthShow">
-          <div ng-click="authPublic()">公开</div>
-          <div ng-click="authPrivate()">秘密</div>
-          <div></div>
-        </div>
-      </li>
       <li><img src="/images/del_03.png" ng-click="deleteBtnShow()">
 
         <div class="delete" ng-show="isDeleteShow">

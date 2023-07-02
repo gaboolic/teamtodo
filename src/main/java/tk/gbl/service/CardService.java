@@ -5,6 +5,7 @@ import tk.gbl.constants.Resp;
 import tk.gbl.constants.ResultType;
 import tk.gbl.dao.CardDao;
 import tk.gbl.dao.TaskDao;
+import tk.gbl.dao.UserDao;
 import tk.gbl.entity.Task;
 import tk.gbl.entity.User;
 import tk.gbl.entity.board.Board;
@@ -33,6 +34,9 @@ import java.util.List;
  */
 @Service
 public class CardService {
+
+  @Resource
+  UserDao userDao;
 
   @Resource
   CardDao cardDao;
@@ -82,7 +86,8 @@ public class CardService {
     if (card == null) {
       return Resp.success;
     }
-    if (!card.getUser().getId().equals(user.getId())) {
+    User cardUser = userDao.get(card.getUser().getId());
+    if (!cardUser.getTeam().getId().equals(user.getTeam().getId())) {
       return Resp.noAuth;
     }
     cardDao.delete(card);
@@ -95,7 +100,8 @@ public class CardService {
     if (card == null) {
       return Resp.success;
     }
-    if (!card.getUser().getId().equals(user.getId())) {
+    User cardUser = userDao.get(card.getUser().getId());
+    if (!cardUser.getTeam().getId().equals(user.getTeam().getId())) {
       return Resp.noAuth;
     }
     card.setName(request.getName());

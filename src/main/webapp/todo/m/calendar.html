@@ -24,7 +24,7 @@
         <tbody>
         <tr ng-repeat="column in cal">
             <td ng-click="selectDay(day)" ng-repeat="day in column"  ng-class='{"sunday":isSunday(day),"nextMonth":isNextMonth(day)}'>
-                <span ng-class='{"today":isToday(day)}'>{{day.getDate()}}</span>
+                <span ng-class='{"today":isToday(day),"star":isStar(day)}'>{{day.getDate()}}</span>
             </td>
 
         </tr>

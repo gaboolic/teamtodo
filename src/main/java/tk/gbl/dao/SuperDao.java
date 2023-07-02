@@ -121,4 +121,7 @@ public class SuperDao<Entity> extends HibernateDaoSupport implements BaseDao<Ent
 	
   }
 
+  public void saveOrUpdate(Entity entity) {
+    getHibernateTemplate().saveOrUpdate(entity);
+  }
 }

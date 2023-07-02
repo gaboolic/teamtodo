@@ -984,4 +984,7 @@ a{
     bottom: 0;
     z-index: 100;
 }
-
+/****日历下划线*/
+.star {
+    text-decoration: underline;
+}

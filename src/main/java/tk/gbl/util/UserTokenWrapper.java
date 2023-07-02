@@ -5,6 +5,7 @@ import tk.gbl.entity.User;
 import javax.servlet.http.HttpSession;
 
 public class UserTokenWrapper {
+
   private UserTokenWrapper() {
   }
 
@@ -18,6 +19,7 @@ public class UserTokenWrapper {
   private String userToken;
   private User user;
   private HttpSession httpSession;
+  private String ip;
 
   public HttpSession getHttpSession() {
     return httpSession;
@@ -93,5 +95,13 @@ public class UserTokenWrapper {
    */
   public static void setWrapper(UserTokenWrapper wrapper) {
     localContext.set(wrapper);
+  }
+
+  public void setIp(String ip) {
+    this.ip = ip;
+  }
+
+  public String getIp() {
+    return ip;
   }
 }

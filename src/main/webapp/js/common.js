@@ -59,17 +59,23 @@ app.controller("commonController", function ($scope, $http) {
             $http.get("/message/show.do")
                 .success(function (response) {
                     $scope.messageList = response.messageList;
+                    if ($scope.messageList.length == 0) {
+                        $scope.isShowMessage = false;
+                    }
                 });
         }
     };
     $scope.ignoreMessage = function (message) {
-        $http.get("/message/ignore.do?id="+message.id)
-            .success(function(){
+        $http.get("/message/ignore.do?id=" + message.id)
+            .success(function () {
                 console.log("success")
-                for(var i=0;i<$scope.messageList.length;i++){
-                    if(message.id == $scope.messageList[i].id) {
-                        $scope.messageList.splice(i,1);
+                for (var i = 0; i < $scope.messageList.length; i++) {
+                    if (message.id == $scope.messageList[i].id) {
+                        $scope.messageList.splice(i, 1);
                     }
+                }
+                if ($scope.messageList.length == 0) {
+                    $scope.isShowMessage = false;
                 }
             });
     };
@@ -77,6 +83,9 @@ app.controller("commonController", function ($scope, $http) {
         $http.get("/message/show.do")
             .success(function (response) {
                 $scope.messageList = response.messageList;
+                if ($scope.messageList.length == 0) {
+                    $scope.isShowMessage = false;
+                }
             });
     };
     $scope.refreshMessageList();

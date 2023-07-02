@@ -44,7 +44,7 @@ public class Board {
    * 0 任何人
    */
   @Column(name = "auth")
-  private String auth;
+  private String auth = "0";
 
   public Integer getId() {
     return id;

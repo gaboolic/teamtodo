@@ -84,8 +84,8 @@ public class CustomStringHttpMessageConverter extends AbstractHttpMessageConvert
   }
 
   /**
-   * Return the list of supported {@link java.nio.charset.Charset}.
-   * <p>By default, returns {@link java.nio.charset.Charset#availableCharsets()}. Can be overridden in subclasses.
+   * Return the list of supported {@link Charset}.
+   * <p>By default, returns {@link Charset#availableCharsets()}. Can be overridden in subclasses.
    *
    * @return the list of accepted charsets
    */

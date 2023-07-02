@@ -61,7 +61,7 @@
     </div>
     <ul class="ulList6">
         <li ng-repeat="item in visitList">
-            <img src="/images/tt.png" class="head6">
+            <img ng-src="{{item.headImage}}" class="head6">
             <span class="name6">{{item.name}}</span>
             <span class="date6">{{item.createTime}}</span>
         </li>

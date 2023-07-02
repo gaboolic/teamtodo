@@ -21,15 +21,17 @@ public class AddDailyLogRequest extends BaseRequest{
    * 标题
    */
   @ValidField
-  String title;
+  String title = "工作日志";
 
   /**
    * 备注 内容
    */
   @ValidField
-  String content;
+  String content = "";
 
   String at;
+
+  String uploads;
 
   public String getDate() {
     return date;
@@ -61,5 +63,13 @@ public class AddDailyLogRequest extends BaseRequest{
 
   public void setAt(String at) {
     this.at = at;
+  }
+
+  public String getUploads() {
+    return uploads;
+  }
+
+  public void setUploads(String uploads) {
+    this.uploads = uploads;
   }
 }

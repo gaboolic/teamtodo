@@ -13,7 +13,6 @@
     </div>
     <ul class="taskUl" ng-show="isListOneShow">
       <li ng-repeat="item in taskList | levelFilter:3" ng-click="editTask(item)">
-        <a href="#edit/{{item.id}}">
 
           <p class="content"><span>·</span><span>{{item.title}}</span></p>
 
@@ -21,7 +20,6 @@
             <img src="/images/sc_03.png">
             <span >下发给{{item.joinNames}}</span>
           </div>
-        </a>
       </li>
     </ul>
   </div>

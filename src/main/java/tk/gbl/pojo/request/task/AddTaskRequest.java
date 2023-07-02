@@ -50,8 +50,12 @@ public class AddTaskRequest extends BaseRequest {
   String title;
 
 
-  @ValidField
   String content;
+
+  Integer cardId;
+  private String auth;
+
+  String joinIds;
 
   public Integer getLevel() {
     return level;
@@ -115,5 +119,29 @@ public class AddTaskRequest extends BaseRequest {
 
   public void setEndDate(String endDate) {
     this.endDate = endDate;
+  }
+
+  public Integer getCardId() {
+    return cardId;
+  }
+
+  public void setCardId(Integer cardId) {
+    this.cardId = cardId;
+  }
+
+  public String getAuth() {
+    return auth;
+  }
+
+  public void setAuth(String auth) {
+    this.auth = auth;
+  }
+
+  public String getJoinIds() {
+    return joinIds;
+  }
+
+  public void setJoinIds(String joinIds) {
+    this.joinIds = joinIds;
   }
 }

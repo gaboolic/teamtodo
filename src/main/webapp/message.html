@@ -9,12 +9,14 @@
 
 <ul class="message">
   <li ng-repeat="item in messageList">
+    <a ng-href="{{item.appLink}}">
     <div class="left"><img ng-src="{{item.headImage}}"></div>
     <div class="right">
       <p class="title"><span>{{item.fromUserName}}</span><span>{{item.createTime}}</span></p>
 
       <p class="content"><span>{{item.fullDesc}}</span></p>
     </div>
+    </a>
   </li>
 
 

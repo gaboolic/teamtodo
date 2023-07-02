@@ -59,7 +59,7 @@
                 <div class="creatRight">
                     <img ng-src="{{taskDetail.user.headImage}}">
                     <span class="name">{{taskDetail.user.name}}</span>
-                    <span class="date">{{taskDetail.task.date}}</span>
+                    <span class="date">{{taskDetail.task.createTime}}</span>
                 </div>
             </div>
             <div class="receiveList">
@@ -129,7 +129,7 @@
 
         <div ng-click="toggleSelectAll()" class="topCheckRight" ng-class='{"check":isSelectAll}'>
             全选
-            <div></div>
+          <div></div>
         </div>
     </div>
     <div class="mainBox4">
@@ -146,7 +146,7 @@
 
                 <div class="right">
                     <span>{{member.name}}</span>
-                    <img ng-show="member.type == 1 || member.type == 2" src="/images/wstr_06.png" class="star">
+                    <img ng-show="member.star == 1" src="/images/wstr_06.png" class="star">
 
                     <div class="gou"></div>
                 </div>

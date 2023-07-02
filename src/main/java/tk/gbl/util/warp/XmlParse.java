@@ -4,6 +4,7 @@ import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import tk.gbl.anno.ValidList;
 import tk.gbl.util.log.LoggerUtil;
 
 import java.lang.reflect.Field;
@@ -25,7 +26,7 @@ public class XmlParse {
     Document doc = null;
     try {
       doc = DocumentHelper.parseText(xml);
-    } catch(Exception e){
+    } catch (Exception e) {
       LoggerUtil.error("解析xml文档失败" + xml, e);
       return null;
     }
@@ -91,24 +92,70 @@ public class XmlParse {
 
   /*用一个节点赋值给Field */
   private static void setDefaultField(Object fieldObject, Element root) throws Exception {
+
     for (Object attr : root.attributes()) {
       Attribute item = (Attribute) attr;
-      Field field = fieldObject.getClass().getDeclaredField(item.getName());
-      field.setAccessible(true);
-      field.set(fieldObject, item.getText());
+      try {
+        Field field = fieldObject.getClass().getDeclaredField(item.getName());
+        field.setAccessible(true);
+        field.set(fieldObject, item.getText());
+      }catch (Exception e){
+        e.printStackTrace();
+      }
     }
-    if (root.isTextOnly()) {
+    if (root.isTextOnly() && root.getText()!=null && root.getText().length()>0) {
       Field field = fieldObject.getClass().getDeclaredField("data");
       field.setAccessible(true);
       field.set(fieldObject, root.getTextTrim());
       return;
     }
-
-    for (Object element : root.elements()) {
-      Element item = (Element) element;
-      Field field = fieldObject.getClass().getDeclaredField(item.getName());
+    for (Field field : fieldObject.getClass().getDeclaredFields()) {
       field.setAccessible(true);
-      setField(fieldObject, field, item);
+      if (field.getAnnotation(ValidList.class) != null) {
+        ValidList validList = field.getAnnotation(ValidList.class);
+        String name = validList.value();
+        List list = root.elements(name);
+        setListField(fieldObject, field, list);
+      }
+      if (root.element(field.getName()) != null) {
+        setField(fieldObject, field, root.element(field.getName()));
+      } else if (root.attribute(field.getName()) != null) {
+        setField(fieldObject, field, root.attribute(field.getName()));
+
+      }
+
     }
+//    for (Object element : root.elements()) {
+//      Element item = (Element) element;
+//      try {
+//        Field field = fieldObject.getClass().getDeclaredField(item.getName());
+//        field.setAccessible(true);
+//        setField(fieldObject, field, item);
+//      } catch (Exception e) {
+//        e.printStackTrace();
+//      }
+//    }
+  }
+
+  private static void setListField(Object fieldObject, Field rootField, List elementList) throws Exception {
+    CustomArrayList list = new CustomArrayList();
+    for (Object element : elementList) {
+      Element item = (Element) element;
+      //Object itemObj = Class.forName(getClassName(item.getName())).newInstance();
+      Object itemObj = null;
+      Type type = rootField.getGenericType();
+      if (type instanceof ParameterizedType) {
+        ParameterizedType paramType = (ParameterizedType) type;
+        Type[] actualTypes = paramType.getActualTypeArguments();
+        itemObj = ((Class) actualTypes[0]).newInstance();
+      }
+      list.add(itemObj);
+      setDefaultField(itemObj, item);
+    }
+    rootField.set(fieldObject,list);
+  }
+
+  private static void setField(Object obj, Field rootField, Attribute attribute) throws Exception {
+    rootField.set(obj, attribute.getValue());
   }
 }

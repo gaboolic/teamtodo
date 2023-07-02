@@ -16,6 +16,15 @@
   <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
   <aop:aspectj-autoproxy/>
   <task:annotation-driven/>
+
+  <bean id="taskExecutor"
+        class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+    <property name="corePoolSize" value="40" />
+    <property name="maxPoolSize" value="40" />
+    <property name="keepAliveSeconds" value="30" />
+    <property name="queueCapacity" value="1000" />
+  </bean>
+
   <bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
     <property name="driver">
       <value>${proxool.driver-class}</value>
@@ -53,8 +62,14 @@
     <property name="houseKeepingTestSql">
       <value>${proxool.house-keeping-test-sql}</value>
     </property>
+    <property name="houseKeepingSleepTime">
+      <value>10000</value>
+    </property>
     <property name="simultaneousBuildThrottle">
       <value>${proxool.simultaneous-build-throttle}</value>
+    </property>
+    <property name="testBeforeUse">
+      <value>true</value>
     </property>
   </bean>
 

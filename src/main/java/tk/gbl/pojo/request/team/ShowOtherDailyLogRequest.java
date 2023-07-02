@@ -1,5 +1,6 @@
 package tk.gbl.pojo.request.team;
 
+import tk.gbl.anno.ValidField;
 import tk.gbl.pojo.request.BaseRequest;
 
 /**
@@ -9,12 +10,14 @@ import tk.gbl.pojo.request.BaseRequest;
  * @author Tian.Dong
  */
 public class ShowOtherDailyLogRequest extends BaseRequest {
+  @ValidField
   Integer userId;
 
   /**
    * yyyy-MM
    * 如2015-04
    */
+  @ValidField
   String yearMonth;
 
   public Integer getUserId() {

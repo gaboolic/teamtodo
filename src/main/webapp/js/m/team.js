@@ -318,7 +318,7 @@ function init($scope, $http) {
                 reply.createTime = new Date().format("yyyy-MM-dd HH:mm:ss");
                 reply.name = data.name;
                 reply.headImage = data.headImage;
-                $scope.replyList.push(reply);
+                $scope.replyList.unshift(reply);
 
                 $scope.replyContent = null;
             })
@@ -335,9 +335,10 @@ function init($scope, $http) {
                 reply.name = data.name;
                 reply.headImage = data.headImage;
 
-                $scope.replyList.push(reply);
+                $scope.replyList.unshift(reply);
 
                 $scope.replyContent = null;
+                $scope.otherReplyContent = null;
             })
     };
 }

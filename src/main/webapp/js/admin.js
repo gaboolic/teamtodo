@@ -45,13 +45,53 @@ app = angular.module("app", [], function ($httpProvider) {
     }
 );
 app.controller("adminController", function ($scope, $http) {
+
+    $scope.username = localStorage.username;
+    $scope.password = localStorage.password;
+
+    $scope.login = function () {
+        var login = {};
+        login.username = $scope.username;
+        login.password = $scope.password;
+        login.verifyCode = $scope.verifyCode;
+
+        console.log(login)
+        $http.post("/admin/login.do", login)
+            .success(function (result) {
+                if (result.code != 0) {
+                    alert(result.desc);
+                } else {
+                    localStorage.username = $scope.username;
+                    localStorage.password = $scope.password;
+                    window.location.href = '/admin/index.html';
+                }
+            })
+            .error(function (result) {
+                alert("失败");
+            });
+    };
+
+
+    $http.get("/task/show.do?type=0")//收纳箱
+        .success(function (response) {
+            $scope.acceptList = response.taskList;
+        });
+    $scope.isDelayTask = function (task) {
+        if (task.date < $scope.currentDate.format("yyyy-MM-dd")) {
+            return true;
+        }
+        return false;
+    };
+});
+
+app.controller("adminLoginListController", function ($scope, $http) {
     $http.get("/admin/loginList.do")//收纳箱
         .success(function (response) {
             $scope.loginList = response.loginList;
         })
 });
 
-app.controller("adminUserController", function ($scope, $http) {
+app.controller("adminUserListController", function ($scope, $http) {
     $scope.initOrg = function () {
         $http.get("/admin/org.do").success(function (data) {
             $scope.members = data.members;
@@ -66,19 +106,10 @@ app.controller("adminUserController", function ($scope, $http) {
             $scope.departments = data.departments;
         });
     };
-    $scope.join = function (mem) {
-        mem.on = !mem.on;
-        if (mem.on) {
-            if ($scope.joinList == null) {
-                $scope.joinList = [];
-            }
-            $scope.joinList.push(mem);
-        } else {
-            for (var j = 0; j < $scope.joinList.length; j++) {
-                if (mem.id == $scope.joinList[j].id) {
-                    $scope.joinList.splice(j, 1);
-                }
-            }
-        }
+    $scope.showAuth = function (mem) {
+        $http.get("/admin/authList.do?id=" + mem.id)
+            .success(function(response){
+                $scope.authList = response.authList;
+            })
     };
 });

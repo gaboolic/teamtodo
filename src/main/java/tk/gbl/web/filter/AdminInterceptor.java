@@ -44,9 +44,15 @@ public class AdminInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handle) throws Exception {
 
+    if (request.getServletPath().endsWith("image.do")) {
+      return true;
+    }
+    if (request.getServletPath().endsWith("login.do")) {
+      return true;
+    }
     Object user = request.getSession().getAttribute("admin");
     if (user == null) {
-      response.sendRedirect(request.getContextPath() + "/index");
+      response.sendRedirect(request.getContextPath() + "/admin/login.html");
       return false;
     }
     return true;
